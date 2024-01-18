@@ -1,0 +1,2 @@
+<button *ngIf="_impersonateEmail" class="button-turq-default no-focus impersonate" mat-button (click)="impersonateUser()">Impersonate</button>
+<button *ngIf="!_impersonateEmail && adminToken" class="button-turq-default no-focus switch-admin" mat-button (click)="switchBackToAdmin()">Exit Impersonate Mode</button>

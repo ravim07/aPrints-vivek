@@ -1,0 +1,41 @@
+<div id="modal-overlay" class="modal-full">
+  <div class="modal-login modal-default">
+    <h3>Login</h3>
+    <span class="modal-close" (click)="closeModal(null)">
+      <img class="close-w" src="{{assetsUrl}}/icons/close.png" />
+      <img class="close-b" src="{{assetsUrl}}/icons/close-black.png" />
+    </span>
+    <div class="form {{formStatusClass}}">
+      <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+        <div *ngIf="errorLogin && !loginForm.get('email').invalid && !loginForm.get('password').invalid"
+          class="form-error-top form-error form-error-default">
+          <div>Email or Password is incorrect</div>
+        </div>
+        <input (click)="resetLoginError()" type="email" class="input-default input-s1" formControlName="email" placeholder="Email">
+        <div *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched" class="form-error form-error-default">
+          <div *ngIf="loginForm.get('email').hasError('required')">
+            Email is required
+          </div>
+        </div>
+        <input (click)="resetLoginError()" type="password" class="input-default input-s1" formControlName="password" placeholder="Password">
+        <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" class="form-error form-error-default">
+          <div *ngIf="loginForm.get('password').hasError('required')">
+            Password is required
+          </div>
+        </div>
+        <button type="submit" class="button-turq button-lg no-focus" mat-button>Login</button>
+        <a (click)="goToForgotPassword()" class="link-forgot link-grey">Forgot your Password?</a>
+      </form>
+      <span class="form-text-default">Or login with</span>
+      <button (click)="goToFacebookLogin()" type="submit" class="button-social button-face" mat-button>
+        <img class="face-icon" src="{{assetsUrl}}/facebook-logo.png" />Facebook
+      </button>
+      <button (click)="goToGoogleLogin()" type="submit" class="button-social button-google" mat-button>
+        <img class="google-icon" src="{{assetsUrl}}/google-logo.png" />Google
+      </button>
+      <button (click)="clickGetStarted()" type="submit" class="button-turq button-lg no-focus button-create" mat-button>
+        Create Account
+      </button>
+    </div>
+  </div>
+</div>

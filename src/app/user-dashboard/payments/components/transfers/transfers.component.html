@@ -1,0 +1,66 @@
+<div class="main-container">
+  <app-publication-header [publication]="publication"></app-publication-header>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-issues-sidebar [publication]="publication"></app-issues-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+
+      <div class="sub-header d-flex justify-content-between align-items-center">
+        <nav mat-tab-nav-bar>
+          <a mat-tab-link [routerLink]="['withdrawals']"
+             #withdrawalsLink="routerLinkActive"
+             routerLinkActive
+             [active]="withdrawalsLink.isActive"
+             [routerLinkActiveOptions]="{exact: true}">
+            WITHDRAWALS
+          </a>
+          <a mat-tab-link [routerLink]="['deposits']"
+             #depositLink="routerLinkActive"
+             routerLinkActive
+             [active]="depositLink.isActive"
+             [routerLinkActiveOptions]="{exact: true}">
+            DEPOSITS
+          </a>
+        </nav>
+
+        <div class="right-content d-flex align-items-center">
+          <div class="tabs-header-buttons">
+            <button *ngIf="withdrawalsLink.isActive &&
+             !stripeAccount" mat-button disableRipple
+                    (click)="addBankAccount()">Add Bank
+              Account
+            </button>
+            <button *ngIf="withdrawalsLink.isActive &&
+            !depositLink.isActive &&
+            stripeAccount && stripeAccount.status === 'verified'" mat-button
+                    disableRipple
+                    (click)="transfersFunds()">
+              Transfers Funds
+            </button>
+          </div>
+          <div class="account-container" *ngIf="withdrawalsLink.isActive && stripeAccount && stripeAccount.bankAccount">
+            <span class="label-header">Account Linked</span>
+            <a class="account-details" (click)="addBankAccount()">
+              <span class="">
+                {{stripeAccount?.bankAccount?.bank_name}}
+                <span>&nbsp;/&nbsp;****{{stripeAccount?.bankAccount.last4}}</span>
+              </span>
+            </a>
+            <span class="badge badge-pill badge-status" [ngClass]="{
+            'badge-warning':stripeAccount.status !== 'verified',
+            'badge-success':stripeAccount.status === 'verified'
+            }">
+                {{stripeAccount.status === 'verified' ? 'Verified' : 'Under Review'}}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+

@@ -1,0 +1,83 @@
+<header class="header-inner {{headerclass}}">
+  <div class="inner">
+    <button mat-button class="menuButton" (click)="showMobileMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <div class="logo">
+      <a href="/home"><img class="navbar-brand" src="{{assetsUrl}}/icons/aPrintis-b.svg" alt="aPrintis"
+          loading="lazy" /></a>
+    </div>
+    <nav class="nav d-none d-md-flex">
+      <div class="nav-left">
+        <a class="nav-link nav-link-t1 hidden-po" routerLink="/how-to">How-to Videos</a>
+        <!-- <a class="nav-link nav-link-t1 hidden-po" routerLink="/design">Design</a> -->
+        <a class="nav-link nav-link-t1 hidden-po" routerLink="/quote">Get a Quote</a>
+        <a class="nav-link nav-link-t1 hidden-po" [class.hide-1180]="!isHome" routerLink="/contact">Contact</a>
+        <!--<a class="nav-link nav-link-t1 hidden-po" routerLink="/about">About</a>-->
+        <a class="nav-link nav-link-t1 hidden-po" [class.hide-1180]="!isHome" target="_blank"
+          href="https://blog.aprintis.com">Blog</a>
+        <a class="nav-link nav-link-t1 hidden-po hide-1285" routerLink="/request-sample">Request a
+          sample</a>
+        <!-- <a class="nav-link nav-link-t1 hidden-po" routerLink="#">Search</a> -->
+        <!-- <div class="float-l input-search">
+          <input [(ngModel)]="textQuery" type="text" class="input-default input-s1" placeholder="Search">
+          <img src="{{assetsUrl}}/icons/search-64.png" />
+        </div> -->
+      </div>
+      <!-- <a class="nav-link nav-link-t1 hidden-po" href="/quote">Get a Quote</a> -->
+      <div class="nav-right">
+        <!-- <button class="nav-make-referral" (click)="makeReferral()" mat-button>
+          <div class="nav-make-referral-text">Refer and Win<sup>x</sup></div>
+          <mat-icon class="nav-get-started-icon">person_add</mat-icon>
+        </button> -->
+        <a *ngIf="!(isAuthenticated$ | async)" class="nav-link nav-link-t2 nav-link-b" (click)="goToLogin()">Login</a>
+        <button *ngIf="!(isAuthenticated$ | async)" class="nav-get-started" (click)="clickGetStarted()" mat-button>
+          <div class="nav-get-started-text">Get Started</div>
+          <!-- <mat-icon class="nav-get-started-icon">person_add</mat-icon> -->
+        </button>
+        <a *ngIf="!(isAuthenticated$ | async)" class="nav-link nav-link-t2 nav-link-b nav-mob nav-link-login"
+          (click)="goToLogin()">Login</a>
+        <a *ngIf="!(isAuthenticated$ | async)" class="nav-link nav-link-t2 nav-register" (click)="clickGetStarted()">Get
+          Started</a>
+        <a *ngIf="(isAuthenticated$ | async)" class="nav-link nav-link-t2 hide-1040" (click)="logout()">Logout</a>
+        <a *ngIf="(isAuthenticated$ | async) && !isAdmin" class="nav-link nav-link-t2 unhide-1040"
+          href="/dashboard">Dashboard</a>
+        <button *ngIf="(isAuthenticated$ | async) && !isAdmin" class="hide-1040 nav-get-started"
+          (click)="goToDashboard()" mat-button>
+          <div class="nav-get-started-text">Dashboard</div>
+          <!-- <mat-icon class="nav-get-started-icon">person_add</mat-icon> -->
+        </button>
+        <a *ngIf="(isAuthenticated$ | async) && isAdmin" class="nav-link nav-link-t2" href="/admin">Hi,
+          {{currentUser ? currentUser.name : ''}}</a>
+
+        <!-- <span class="nav-link nav-link-span" routerLink="/contact">1-800-510-6596</span> -->
+        <!-- <div class="social">
+          <a href="https://www.facebook.com/aPrintis/"><div class="fb-icon"><img src="{{assetsUrl}}/fb.svg" alt="Facebook"></div></a>
+          <a href="https://www.linkedin.com/company/aprintis"><div class="li-icon"><img src="{{assetsUrl}}/linkedin.svg" alt="LinkedIn"></div></a>
+          <a href="#"><div class="tw-icon"><img src="{{assetsUrl}}/tw.svg" alt="Twitter"></div></a>
+          <a href="#"><div class="instagram-icon"><img src="{{assetsUrl}}/instagram.svg" alt="Instagram"></div></a>
+        </div> -->
+      </div>
+    </nav>
+  </div>
+</header>
+
+<ng-template #mobileMenu>
+  <div class="modal-close" (click)="closePopup()">
+    <mat-icon>close</mat-icon>
+  </div>
+  <div class="h-menu">
+    <!--      <button mat-menu-item (click)="goToDashboard()">Dashboard</button>-->
+    <!--      <button mat-menu-item (click)="makeReferral()">Refer and Win</button>-->
+    <a (click)="menuItemClick($event)" mat-button routerLink="/how-to">How-to Videos</a>
+    <!-- <a (click)="menuItemClick($event)" mat-button routerLink="/design">Design</a> -->
+    <a (click)="menuItemClick($event)" mat-button routerLink="/quote">Get a Quote</a>
+    <a (click)="menuItemClick($event)" mat-button routerLink="/about">About</a>
+    <a (click)="menuItemClick($event)" mat-button routerLink="/contact">Contact Us</a>
+    <a (click)="menuItemClick($event)" mat-button routerLink="/request-sample">
+      Request a sample
+    </a>
+    <!--      <button mat-menu-item (click)="logout()">Logout</button>-->
+  </div>
+</ng-template>

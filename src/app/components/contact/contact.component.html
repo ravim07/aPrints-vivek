@@ -1,0 +1,65 @@
+<div class="main-wrapper">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="main-contact simple-page-form">
+    <div class="form-container {{formStatusClass}} form-cont">
+      <div class="contact-header" style="font-weight: 600;">Contact Us</div>
+        <b>
+          We're here to help
+        </b>
+     
+      <div class="desc"> Drop us a message below or call us directly on <b>1-800-510-6596</b>. We're here to help and answer any question you might have.  We look forward to hearing from you.
+      </div>
+      <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
+        <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+          <div>{{errorApi}}</div>
+        </div>
+        <div *ngIf="messageSent" class="alert-success-inline message-ok">
+          Your message has been successfully sent. We'll be in touch soon.
+        </div>
+        <div class="row row-form row-form-group group-publication">
+          <div class="row-item col-lg-6">
+            <input placeholder="Name of Publication/Publisher *" formControlName="publicationName" type="text" class="clean-input input-default input-s1">
+            <div *ngIf="formUtil.checkError(contactForm.get('publicationName'), 'required')" class="form-error form-error-default">Name of Publication/Publisher is required</div>
+          </div>
+          <div class="row-item col-lg-6">
+            <input placeholder="Email *" formControlName="email" type="text" class="clean-input input-default input-s1">
+            <div *ngIf="formUtil.checkError(contactForm.get('email'), 'required')" class="form-error form-error-default">Email is required</div>
+            <div *ngIf="formUtil.checkError(contactForm.get('email'), 'email')" class="form-error form-error-default">Please enter a valid email address</div>
+          </div>
+        </div>
+        <div class="row row-form-group row-form">
+          <div class="row-item col-lg-6">
+            <mat-form-field class="select-default select-s1">
+              <mat-select formControlName="publicationType" placeholder="Type of publication">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let option of formOptions.publicationTypes" value="{{option}}">{{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row-item col-lg-6">
+            <input placeholder="Phone Number" formControlName="phoneNumber" type="text" class="clean-input input-default input-s1">
+          </div>
+        </div>
+        <div class="row row-form-group row-form group-name">
+          <div class="row-item col-lg-6">
+            <input placeholder="Contact Name *" formControlName="fullName" type="text" class="clean-input input-default input-s1">
+            <div *ngIf="formUtil.checkError(contactForm.get('fullName'), 'required')" class="form-error form-error-default">Name is required</div>
+          </div>
+        </div>
+        <div class="row row-form group-message">
+          <div class="col-lg-12 clean-t">
+            <textarea placeholder="What can we help you with? *" formControlName="content" class="textarea-default textarea-s1"></textarea>
+            <div *ngIf="formUtil.checkError(contactForm.get('content'), 'required')" class="form-error form-error-default">Message is required</div>
+          </div>
+        </div>
+        <div class="row row-btn">
+          <div class="col-lg-12">
+            <button disableRipple type="submit" class="no-focus button-turq-default btn-save b-button" mat-button>Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+  <app-page-footer></app-page-footer>
+</div>

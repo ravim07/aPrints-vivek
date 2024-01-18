@@ -1,0 +1,15 @@
+.members-button{
+  button{
+    padding: 0.5rem;
+    svg{
+      // width: 24px;
+      height: 24px;
+      margin-right: 0.5rem;
+    }
+    ::ng-deep .mat-button-wrapper{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

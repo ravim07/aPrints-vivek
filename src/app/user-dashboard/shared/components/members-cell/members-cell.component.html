@@ -1,0 +1,61 @@
+<div class="members-cell-container" (click)="goToMembers($event)">
+  <ng-container *ngIf="_members" [ngTemplateOutlet]="members" [ngTemplateOutletContext]="{members: _members}">
+  </ng-container>
+  <ng-container *ngIf="!_members">
+    -
+  </ng-container>
+</div>
+<ng-template #members let-members='members'>
+  <ng-container *ngIf="members.length === 1">
+    <div class="member">
+      <app-profile-img [name]="members[0]" size="40" fontSize="20"></app-profile-img>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="members.length === 2">
+    <div class="member">
+      <app-profile-img [name]="members[0]" size="40" fontSize="20"></app-profile-img>
+    </div>
+    <div class="member">
+      <app-profile-img [name]="members[1]" size="40" fontSize="20"></app-profile-img>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="members.length === 3">
+    <div class="member">
+      <app-profile-img [name]="members[0]" size="40" fontSize="20"></app-profile-img>
+    </div>
+    <div class="member">
+      <app-profile-img [name]="members[1]" size="40" fontSize="20"></app-profile-img>
+    </div>
+    <div class="member">
+      <app-profile-img [name]="members[2]" size="40" fontSize="20"></app-profile-img>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="members.length === 4">
+    <div class="member">
+      <app-profile-img [name]="members[0]" size="40" fontSize="20"></app-profile-img>
+    </div>
+    <div class="member">
+      <app-profile-img [name]="members[1]" size="40" fontSize="20"></app-profile-img>
+    </div>
+    <div class="member">
+      <app-profile-img [name]="members[2]" size="40" fontSize="20"></app-profile-img>
+    </div>
+    <div class="member">
+      <app-profile-img [name]="members[3]" size="40" fontSize="20"></app-profile-img>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="members.length > 4">
+    <div class="member">
+      <app-profile-img [name]="members[0]" size="40" fontSize="20"></app-profile-img>
+    </div>
+    <div class="member">
+      <app-profile-img [name]="members[1]" size="40" fontSize="20"></app-profile-img>
+    </div>
+    <div class="member">
+      <app-profile-img [name]="members[2]" size="40" fontSize="20"></app-profile-img>
+    </div>
+    <div class="more-placeholder">
+      {{members.length - 3}} more
+    </div>
+  </ng-container>
+</ng-template>

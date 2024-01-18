@@ -1,0 +1,24 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+
+.main-contact {
+  min-height: 100vh;
+}
+.request-header{
+  @include flexbox();
+  justify-content: space-between;
+  h1{
+    margin-bottom: 0;
+  }
+  h5{
+    @include typography-lvl(1rem, 1rem, 300, 'Montserrat', normal);
+    margin-top: 0.5rem;
+    color: black;
+  }
+}
+.request-desc{
+  margin-bottom: 2.5rem;
+  p{
+    line-height: 1.5rem;
+  }
+}

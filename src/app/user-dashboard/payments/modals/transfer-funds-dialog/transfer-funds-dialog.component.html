@@ -1,0 +1,50 @@
+<button mat-icon-button class="close-dialog"
+        matTooltip="Close this dialog"
+        mat-dialog-close
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <form [formGroup]="transferForm" autocomplete="off" (ngSubmit)="transfer()">
+    <div mat-dialog-title>Transfer to Bank</div>
+    <div mat-dialog-content>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <p class="popup-text-message">
+              Transfers could take 2 business days to be reflected in your available balance.
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <mat-form-field>
+<!--              <mat-label>Deposit Amount</mat-label>-->
+              <input type="number"
+                     matInput
+                     required
+                     placeholder="Deposit Amount"
+                     formControlName="amount"
+                     [min]="0">
+              <span matPrefix>$</span>
+            </mat-form-field>
+          </div>
+          <div class="col-12">
+            <mat-form-field>
+              <textarea rows="5" matInput placeholder="Description" formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button class="save" type="submit" [disabled]="transferForm.invalid">
+        Transfer
+      </button>
+      <button mat-button type="button" mat-dialog-close>
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

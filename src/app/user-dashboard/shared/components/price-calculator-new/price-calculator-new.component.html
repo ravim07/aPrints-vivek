@@ -1,0 +1,48 @@
+<div class="price-calculator-wrapper">
+  <div class="price-calculator">
+    <div class="ul">
+      <div class="li title border-bottom-thick">
+        Price Calculator
+      </div>
+      <div class="li print border-bottom">
+        <div>Print</div>
+        <div *ngIf="prices.print" class="amount">${{prices.print}}</div>
+        <div *ngIf="!prices.print" class="amount">TBD</div>
+        <ul class="summary">
+          <li>{{trimString}}</li>
+          <li>{{insidePagesString}} pages</li>
+          <li>{{numberOfCopiesString}}{{_numberOfCopies > 1 ? ' copies' : 'copy'}}</li>
+          <li>{{colorString}}</li>
+          <li>Cover {{coverString}}</li>
+          <li>{{bindingString}} Binding</li>
+        </ul>
+      </div>
+      <div class="li border-bottom">
+        Average Shipping
+        <!--<div (click)="editShipping()" class="link-action">edit zip</div>-->
+        <!-- <div *ngIf="prices.shipping" class="amount">${{prices.shipping}}</div> -->
+        <div class="amount">TBD</div>
+      </div>
+      <div class="li border-bottom-thick">
+        Sales Tax (if applicable)
+        <div *ngIf="prices.tax != null" class="amount">TBD</div>
+        <div *ngIf="prices.tax == null" class="amount">TBD</div>
+      </div>
+      <div class="li total">
+        <div class="total-txt">Total</div>
+        <div class="amount">
+          <div *ngIf="prices.total">${{prices.print}}</div>
+          <div *ngIf="!prices.total">TBD</div>
+          <div *ngIf="!prices.tax && prices.total" class="tax-text">
+            +&nbsp;Sales Tax<br>
+            +&nbsp;Shipping
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showQuoteMessage" id="txt-custom-quote">
+    <mat-icon>live_help</mat-icon>
+    Custom <a (click)="goToGetQuote()">quote</a> can be provided
+  </div>
+</div>

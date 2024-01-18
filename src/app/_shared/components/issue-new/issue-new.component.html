@@ -1,0 +1,26 @@
+<div class="flat-dialog-main">
+  <div *ngIf="!data.edit" mat-dialog-title>New Issue</div>
+  <div *ngIf="data.edit" mat-dialog-title>My Issue</div>
+  <div mat-dialog-content>
+    <form [formGroup]="newIssueForm">
+      <mat-form-field>
+        <input matInput formControlName="name" placeholder="Issue Name" cdkFocusInitial>
+      </mat-form-field>
+      <app-calculator #calculator (form)="onCalcForm($event)" (requestCustomQuote)="onRequestCustomQuote()"></app-calculator>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="save" (click)="save()" [disabled]="!newIssueForm.valid">
+      <ng-container *ngIf="!data.edit">Set up</ng-container>
+      <ng-container *ngIf="data.edit">Save</ng-container>
+    </button>
+    <button mat-button (click)="completeLater()"
+      *ngIf="!data.publication.publicationIssues || data.publication.publicationIssues.length === 0">
+      Skip, I'll do it later
+    </button>
+    <button mat-button (click)="onCancelClick()"
+      *ngIf="data.publication.publicationIssues && data.publication.publicationIssues.length > 0">
+      Cancel
+    </button>
+  </div>
+</div>

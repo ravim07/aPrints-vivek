@@ -1,0 +1,66 @@
+<app-landing-header></app-landing-header>
+
+<div class="preview-container">
+
+  <div class="pdf-viewer-container">
+    <div class="pdf-viewer" id="pdfViewer" #pdfViewer></div>
+  </div>
+
+  <div class="preview-issue-details" [ngClass]="{'sidebar-close': !sidebarDetailsOpen}">
+
+    <div class="sidebar-button">
+      <a (click)="toggleSideDetails()" class="btn-side-action">
+        <mat-icon *ngIf="sidebarDetailsOpen">keyboard_arrow_right</mat-icon>
+        <mat-icon *ngIf="!sidebarDetailsOpen">keyboard_arrow_left</mat-icon>
+      </a>
+    </div>
+    <span class="badge badge-pill badge-warning">Issue Details</span>
+
+    <div class="current-issue">
+
+      <div class="issue-name">{{issue?.name}}</div>
+      <div class="issue-creation">Created {{issue?.createdAt | date: 'MM/dd/yyyy'}}</div>
+
+      <div class="related-publication">
+        <span class="font-weight-bold">{{issue?.publicationName}}</span> from {{publication?.organization}}
+      </div>
+
+    </div>
+
+    <div class="more-issues">
+      More issues of this Publication
+    </div>
+
+    <div class="issues-related" *ngIf="publication && issuesRelated.length">
+
+      <a class="issue-item" [routerLink]="['/p', publication.id, 'i', i.id]"
+         *ngFor="let i of issuesRelated">
+        <div class="d-flex">
+
+          <div class="issue-image">
+            <img [src]="i.coverImage?.publicUrl" alt="" width="60" height="75" loading="lazy">
+          </div>
+
+          <div class="issue-details d-flex flex-column justify-content-center">
+            <span class="font-weight-bold">{{i.name}}</span>
+            {{i.createdAt | date:'MM/dd/yyyy'}}
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="issue-support">
+      <p>
+        Do you want support this publication?
+      </p>
+
+      <a *ngIf="publication" [routerLink]="['/p', publication?.id]" mat-button class="btn-outline-dark">Support Magazine</a>
+    </div>
+
+    <div class="contact-managing-editor">
+      <span>Problems to see the content? <a class="font-weight-bold" target="_blank" href="mailto:{{publication?.managingEditorEmail}}">Contact Managing Editor</a></span>
+    </div>
+  </div>
+
+
+</div>

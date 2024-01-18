@@ -1,0 +1,124 @@
+<div class="search-publication-content-container">
+  <div [formGroup]="searchForm" class="search-input-container">
+    <mat-form-field>
+      <input #searchBox type="text" matInput formControlName="searchTerm" placeholder="Publication Name"
+        (keyup)="searchTerm$.next($event.target.value); refreshSearchBox($event.target.value);">
+      <button class="reset-search"
+        *ngIf="searchForm.value.searchTerm && searchForm.value.searchTerm.length >= 3 && !searching" mat-icon-button
+        (click)="resetForm()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button class="reset-search" *ngIf="searchForm.value.searchTerm && searchForm.value.searchTerm.length < 3"
+        mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="search-container" *ngIf="searchForm.value.searchTerm && searchForm.value.searchTerm.length >= 3">
+    <div class="search-container-top-info">
+      <ng-container [ngTemplateOutlet]="topInfo" [ngTemplateOutletContext]="{publications: publications}">
+      </ng-container>
+    </div>
+    <div class="search-content-container">
+      <form [formGroup]="searchResults" *ngIf="publications && publications.length > 0">
+        <div class="mat-form-field radio-button-group">
+          <mat-radio-group formControlName="publications">
+            <div class="option-container" *ngFor="let pub of publications">
+              <mat-radio-button [value]="pub" (change)="selectPublication($event)">
+                <div class="publication-info">
+                  <div class="publication-name">{{pub.name}}</div>
+                  <div class="publication-description">{{pub.description}}</div>
+                  <div class="last-updated"></div>
+                </div>
+                <div class="publication-covers">
+                  <ng-container [ngTemplateOutlet]="covers" [ngTemplateOutletContext]="{covers: pub.covers}">
+                  </ng-container>
+                </div>
+              </mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </div>
+      </form>
+      <div class="search-content-loading" *ngIf="!publications">
+        <div class="search-content-searching" *ngIf="searching">
+          <div class="loading-container">
+            <mat-spinner></mat-spinner>
+            <div class="description">Searching...</div>
+          </div>
+        </div>
+        <div class="search-content-not-found" *ngIf="!searching">
+          <app-pdf-placeholder></app-pdf-placeholder>
+          <div class="title">Oops!</div>
+          <div class="description">No matches found.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="search-actions-container" *ngIf="searchForm.value.searchTerm && searchForm.value.searchTerm.length >= 3">
+    <button mat-button [disabled]="!currentPublication" (click)="continue()"
+      class="request-access">{{continueText}}</button>
+    <button mat-button class="cancel" (click)="resetForm()">Cancel</button>
+  </div>
+</div>
+
+<ng-template #topInfo let-publications='publications'>
+  <ng-container *ngIf="publications && publications.length > 0">
+    <ng-container *ngIf="publications.length === 1">
+      {{publications.length}} publication found
+    </ng-container>
+    <ng-container *ngIf="publications.length > 1">
+      {{publications.length}} publications found
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="!publications && searching">
+    <ng-container>
+      Searching
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="!publications && !searching">
+    <ng-container>
+      No publications found
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #covers let-covers='covers'>
+  <ng-container *ngIf="covers.length === 1">
+    <div class="cover">
+      <img [src]="covers[0]" (error)="errorHandler($event)">
+    </div>
+  </ng-container>
+  <ng-container *ngIf="covers.length === 2">
+    <div class="cover">
+      <img [src]="covers[0]" (error)="errorHandler($event)">
+    </div>
+    <div class="cover">
+      <img [src]="covers[1]" (error)="errorHandler($event)">
+    </div>
+  </ng-container>
+  <ng-container *ngIf="covers.length === 3">
+    <div class="cover">
+      <img [src]="covers[0]" (error)="errorHandler($event)">
+    </div>
+    <div class="cover">
+      <img [src]="covers[1]" (error)="errorHandler($event)">
+    </div>
+    <div class="cover">
+      <img [src]="covers[2]" (error)="errorHandler($event)">
+    </div>
+  </ng-container>
+  <ng-container *ngIf="covers.length > 3">
+    <div class="cover">
+      <img [src]="covers[0]" (error)="errorHandler($event)">
+    </div>
+    <div class="cover">
+      <img [src]="covers[1]" (error)="errorHandler($event)">
+    </div>
+    <div class="cover">
+      <img [src]="covers[2]" (error)="errorHandler($event)">
+    </div>
+    <div class="more-placeholder">
+      +{{covers.length - 3}}
+    </div>
+  </ng-container>
+</ng-template>

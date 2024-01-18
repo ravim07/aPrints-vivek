@@ -1,0 +1,166 @@
+@import "~scss/_variables";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_responsive";
+
+.advertising {
+  //justify-content: center;
+  //align-items: center;
+
+  .content-title {
+    @include typography-lvl(1.438rem, 1.3rem, 600, 'Averta', normal);
+    color: #FFF;
+    text-align: center;
+    margin-bottom: 2.625rem;
+
+    .content-title-accent {
+      font-weight: 800;
+    }
+
+    @include for-tablet-only {
+      color: #393939;
+      margin-bottom: 74px;
+    }
+  }
+
+  .content-form {
+    @include flexbox();
+    justify-content: center;
+
+    @include for-tablet-only {
+      margin-top: 0;
+    }
+
+    @include for-phone-only {
+      margin-top: 0;
+    }
+
+    .form {
+      margin: 0 auto;
+      position: relative;
+
+      @include for-max-1480 {
+        min-width: 75%;
+      }
+
+      @include for-tablet-only {
+        width: 75%;
+        max-width: 320px;
+      }
+
+      @include for-phone-only {
+        width: 85%;
+      }
+
+      .lbl {
+        @include typography-lvl(0.8125rem, normal, 600, 'Averta', normal);
+        width: 100%;
+        display: block;
+        margin-bottom: 0.625rem;
+        color: black;
+        padding: 0 0.5rem;
+      }
+
+      .table-row {
+        margin-top: 1rem;
+
+        table {
+          caption {
+            @include typography-lvl(0.85rem, normal, 600, 'Averta', normal);
+            vertical-align: bottom;
+            text-align: center;
+            color: #FFF;
+            padding: 0.875rem 0;
+            border: none;
+            caption-side: bottom;
+          }
+
+          thead {
+            text-align: center;
+
+            .th-colspan {
+            }
+
+            .th-issue-colspan {
+              text-align: center;
+            }
+
+            .th-type {
+              text-align: center;
+            }
+
+            .th-issues {
+              text-align: center;
+            }
+          }
+
+          tbody {
+            text-align: center;
+
+            td {
+              height: 5px;
+
+              div.selectedAdType {
+                height: 100%;
+                width: 100%;
+                background-color: #1d7f81;
+                color: white;
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .input-default {
+      border: none;
+      margin-bottom: 0 !important;
+      color: #484848;
+
+      @include for-tablet-only {
+        // border: 1px solid rgba(151, 151, 151, 0.36);
+        border: 1px solid $primary-color;
+        // background: #dadfe3;
+      }
+    }
+
+    .input-result-found {
+      border-radius: 0.25rem 0.25rem 0 0 !important;
+
+      @include for-tablet-only {
+        border-bottom: 0;
+        // border-bottom: 2px solid rgba(39, 39, 39, .27);
+      }
+    }
+
+    .button-orange-default {
+      width: 100%;
+      @include transition(opacity 0.2s ease-in-out);
+    }
+
+    .form-text-default {
+      color: #FFF;
+
+      @include for-tablet-only {
+        color: #393939;
+      }
+    }
+
+    .form-btn {
+      padding: 21px 15px;
+
+      .form-col {
+        width: 100%;
+        @include flexbox();
+        justify-content: center;
+
+        button {
+          background: #1d7f81 !important;
+          width: 100%;
+          max-width: 312px;
+        }
+      }
+    }
+  }
+}

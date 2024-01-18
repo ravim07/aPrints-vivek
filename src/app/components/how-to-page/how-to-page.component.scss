@@ -1,0 +1,344 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+:host {
+  color: #333333;
+
+  .text-warning {
+    color: #ffd137 !important;
+  }
+
+  .text-primary {
+    color: #0dd4db !important;
+  }
+
+  .container {
+    @include min-width(1400px) {
+      max-width: 1320px;
+      
+    }
+    @include max-width(1440px) {
+      max-width: 80vw;
+    }
+
+    @include min-width(1600px) {
+      max-width: 1520px;
+    }
+  }
+  .but{
+    @include max-width(1440px) {
+    font-size: 75%;
+    }
+  }
+  .gr{
+    @include max-width(1440px) {
+    width: 75%;
+    }
+  }
+}
+
+
+::ng-deep .video-dialog {
+  margin: 0 auto !important;
+
+  &.mat-dialog-container {
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: #ffffff;
+
+    mat-card {
+      padding: 2.5rem 2rem 3rem;
+    }
+
+    mat-card-header {
+      .mat-card-header-text {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.header {
+  margin-top: 4.375rem;
+  margin-bottom: 2.875rem;
+  text-align: center;
+  @include typography-lvl(1.25rem, normal, 300, 'Averta', normal);
+
+  .title {
+    @include typography-lvl(2rem, 1.5, bold, 'Averta', normal);
+    margin: 0;
+
+    @include min-width(768px) {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+.video-preview {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  &:hover {
+    .video-text {
+      opacity: 1;
+    }
+  }
+
+  .video-text {
+    @include transition(opacity 200ms ease-in-out);
+    opacity: 0;
+    position: absolute;
+    color: #ffffff;
+    z-index: 999;
+
+    .btn-play {
+      //width: 90px;
+      background: transparent;
+      padding: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 4.688rem;
+      opacity: 0.5;
+
+      mat-icon {
+        font-size: 1em;
+        height: auto;
+        width: auto;
+      }
+    }
+  }
+}
+
+.top-video-container {
+  //width: 90rem;
+  min-height: 35.625rem;
+  border-radius: 3px;
+  border: solid 1px #e1e1e1;
+  margin-top: 2.875rem;
+  margin-bottom: 9.062rem;
+  overflow: hidden;
+
+  .video-preview {
+    border-radius: 3px 3px 0 0;
+    min-height: 35.625rem;
+    flex-grow: 1;
+    background-image: url("https://d1atm7a2stxxbt.cloudfront.net/how-to/video-poster.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    @include min-width(960px) {
+      border-radius: 3px 0 0 3px;
+    }
+  }
+
+  .watch-video {
+    width: 14.375rem;
+    max-width: 100%;
+  }
+
+  .video-details {
+    max-width: 27.625rem;
+    padding: 4.375rem 2.5rem;
+    margin: 0 auto;
+  }
+
+  .title-header {
+
+    .video-title, .video-subtitle {
+      @include typography-lvl(2rem, normal, normal, 'Averta', normal);
+      margin: 0;
+
+      @include min-width(768px) {
+        font-size: 2.188rem;
+      }
+
+    }
+
+    .video-subtitle {
+      font-weight: bold;
+    }
+  }
+
+  .description {
+    margin-top: 5.625rem;
+    margin-bottom: 2.188rem;
+    @include typography-lvl(1.125rem, normal, normal, 'Averta', 0.18px);
+    color: #6c6c6c;
+  }
+}
+
+.videos-container {
+  margin-bottom: 6rem;
+}
+
+
+.video-title {
+  @include typography-lvl(1rem, 0.86, bold, 'Averta', normal);
+  margin-bottom: 0.5rem;
+
+  @include min-width(768px) {
+    font-size: 1.5rem;
+  }
+}
+
+.video-column {
+  //padding: 0 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.video-box {
+  //width: 28.375rem;
+  min-height: 37rem;
+  height: 100%;
+  border-radius: 3px;
+  border: solid 1px #e1e1e1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  @include typography-lvl(0.938rem, normal, 300, 'Averta', normal);
+
+  .video-preview {
+    height: 19.938rem;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: rgba(#fff, 0.1);
+
+    img {
+      width: 56.188rem;
+      max-width: 100%
+    }
+  }
+
+  .video-description {
+    margin-bottom: 1.438rem;
+  }
+
+  .video-title {
+    margin-top: 1.438rem;
+  }
+
+  .video-details {
+    padding: 3rem 1.812rem 5rem 1.938rem;
+    flex: 1;
+  }
+
+  .watch-video {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2.5rem;
+    padding: 0 1.812rem 0 1.938rem;
+  }
+}
+
+.btn-outline-dark {
+  border-radius: 2px;
+  border: solid 1px #333333;
+  text-align: center;
+  @include typography-lvl(1rem, 2.5rem, 600, 'Averta', 0.43px);
+}
+
+.sect-4{
+  background-color: #E7E0C3;
+  height: 326px;
+  width: 99.6vw;
+  padding: 4em 8em;
+  color: #171717;
+  text-align: center;
+  font-family: "Helvetica";
+  h1{
+    margin: 0;
+  }
+  p{
+    font-size: 36px;
+    margin: 0.5em;
+  }
+}
+.go-button{
+
+  border: #000 1px solid;
+  background-color: transparent;
+  padding: 1em 2em;
+  font-size: 1.2em;
+  a{
+    text-decoration: none;
+    color: #000;
+  }
+}
+
+.sect-5{
+  height: 50em;
+  background-image: url("https://d1atm7a2stxxbt.cloudfront.net/images/2023/cropdcoll.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  }
+.how-container{
+  .gr{
+    margin: 5em 15vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    .d1{
+      justify-content: end;
+      img{
+        position: absolute;
+        right: 60em;
+        top: 22em;
+        transform: rotateY(180deg);
+        width: 10em;
+      }
+    }
+  }
+}
+.gr-card{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  .desc{
+    margin:3em;
+    font-family: Helvetica, sans-serif;
+    h1{
+      font-size: 24px;
+    }
+  }
+  background: #FFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.but{
+  border: none;
+  padding: 1em;
+  font-size: 1.2em;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  a{
+    text-decoration: none;
+    color: #000;
+  }
+}
+.text{
+  text-align: center;
+  font-family: 'Helvetica';
+  font-size: 36px;
+  margin: 2.5em 0 0;
+
+  p{
+    font-weight: 700;
+    margin: 0;
+  }
+}

@@ -1,0 +1,75 @@
+@import "../../../../scss/mixins/responsive";
+@import "../../../../scss/mixins/typography";
+@import "../../../../scss/mixins/utils";
+@import "../../../../scss/variables";
+
+:host {
+  .funds-summary-popup__title {
+    opacity: 0.5;
+    @include typography-lvl(0.8125rem, normal, normal, 'AvertaLight', 0.22px);
+    color: #333333;
+    text-transform: uppercase;
+  }
+
+  .funds-summary-popup__list {
+    margin: 0.9375rem 0;
+    border-bottom: solid 1px #e1e1e1;
+
+    .funds-summary-popup__list__item {
+      border-top: solid 1px #e1e1e1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 1.2185rem 0.625rem;
+
+      &:nth-child(odd) {
+        background-color: #f8fdff;
+      }
+
+      .funds-summary-popup__list__item__detail {
+        display: flex;
+        justify-content: space-between;
+        width: 6.25rem;
+      }
+
+      .funds-summary-popup__list__item__number {
+        @include typography-lvl(1.063rem, normal, 300, 'Averta', 0.29px);
+        color: #333333;
+      }
+
+      .funds-summary-popup__list__item__icon {
+        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        margin-right: 0.625rem;
+
+        .mat-icon {
+          opacity: 0.5;
+          font-size: 1.063rem;
+          height: auto;
+          width: auto;
+        }
+      }
+
+      .funds-summary-popup__list__item__label {
+        @include typography-lvl(1.063rem, normal, 600, 'Averta', 0.29px);
+        color: #333333;
+        display: flex;
+        align-items: center;
+      }
+
+      .funds-summary-popup__list__item__subtotal {
+        @include typography-lvl(0.9375rem, normal, 600, 'Averta', 0.26px);
+        text-align: right;
+        color: #0cc8cb;
+      }
+    }
+  }
+
+  .funds-summary-popup__total {
+    @include typography-lvl(1.563rem, normal, 600, 'Averta', 0.43px);
+    color: rgba(#0cc8cb, 0.5);
+    text-align: right;
+  }
+}

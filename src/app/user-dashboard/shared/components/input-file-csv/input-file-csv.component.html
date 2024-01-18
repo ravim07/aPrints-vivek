@@ -1,0 +1,21 @@
+<div class="input-file-csv">
+  <div class="input-group-btn">
+    <input (click)="openDialog()" type="text" class="input-default input-s1" [(ngModel)]="filename"
+           placeholder="Click to change CSV">
+    <span (click)="openDialog()" class="btn">
+      <span *ngIf="!fileItem">Select File</span>
+      <span *ngIf="fileItem">Change File</span>
+    </span>
+  </div>
+
+  <p *ngIf="loading" class="loading">Processing, please wait...</p>
+  <input  #fileUpload class="file-uploader" type="file" name="file" (change)="onChangeUploadFile($event.target.files)">
+</div>
+<div class="text-center">
+  <button
+    *ngIf="!!fileItem"
+    mat-button (click)="importCSV()" class="button-turq-default save mt-4"
+          [disabled]="loading">
+    Add Addresses
+  </button>
+</div>

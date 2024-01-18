@@ -1,0 +1,104 @@
+<div class="funds-summary-popup__title">funds summary</div>
+<div class="funds-summary-popup__list">
+  <div class="funds-summary-popup__list__item">
+    <div class="funds-summary-popup__list__item__label">
+              <span class="funds-summary-popup__list__item__icon">
+                <mat-icon>contact_mail</mat-icon>
+              </span>
+      Subscriptions
+    </div>
+    <div class="funds-summary-popup__list__item__detail">
+      <div
+        class="funds-summary-popup__list__item__number">{{availableFunds.subscriptionsQuantity}}</div>
+      <div
+        class="funds-summary-popup__list__item__subtotal">{{availableFunds.totalSubs || 0 | currency:'USD':'symbol':'1.0-2'}}</div>
+    </div>
+
+  </div>
+  <div class="funds-summary-popup__list__item">
+
+    <div class="funds-summary-popup__list__item__label">
+              <span class="funds-summary-popup__list__item__icon">
+              <mat-icon>grade</mat-icon>
+            </span>
+      Sponsors
+    </div>
+    <div class="funds-summary-popup__list__item__detail">
+      <div class="funds-summary-popup__list__item__number">
+        {{availableFunds.donationsQuantity}}
+      </div>
+      <div class="funds-summary-popup__list__item__subtotal">
+        {{availableFunds.totalDons || 0 | currency:'USD':'symbol':'1.0-2'}}
+      </div>
+    </div>
+
+  </div>
+  <div class="funds-summary-popup__list__item">
+
+    <div class="funds-summary-popup__list__item__label">
+      <span class="funds-summary-popup__list__item__icon">
+        <mat-icon>business_center</mat-icon>
+      </span>
+      Advertisements
+    </div>
+    <div class="funds-summary-popup__list__item__detail">
+      <div class="funds-summary-popup__list__item__number">
+        {{availableFunds.adPaymentsQuantity}}
+      </div>
+      <div class="funds-summary-popup__list__item__subtotal">
+        {{availableFunds.totalAdPayments || 0 | currency:'USD':'symbol':'1.0-2'}}
+      </div>
+    </div>
+  </div>
+  <!--<div class="funds-summary-popup__list__item">
+    <div class="funds-summary-popup__list__item__icon">
+      <mat-icon>attach_money</mat-icon>
+    </div>
+    <div class="funds-summary-popup__list__item__label">transfer funds</div>
+    <div class="funds-summary-popup__list__item__number"></div>
+    <div class="funds-summary-popup__list__item__subtotal">${{availableFunds.totalTransfers}}</div>
+  </div>-->
+  <div class="funds-summary-popup__list__item">
+
+    <div class="funds-summary-popup__list__item__label">
+      <span class="funds-summary-popup__list__item__icon">
+        <mat-icon>account_balance</mat-icon>
+      </span>
+      Withdrawals
+    </div>
+    <div class="funds-summary-popup__list__item__detail">
+      <div class="funds-summary-popup__list__item__number">
+        {{availableFunds.withdrawalsQuantity}}
+      </div>
+      <div class="funds-summary-popup__list__item__subtotal text-danger">
+        -{{(availableFunds.totalWithdrawals) || 0 | currency:'USD':'symbol':'1.0-2'}}
+      </div>
+    </div>
+  </div>
+  <div class="funds-summary-popup__list__item">
+
+    <div class="funds-summary-popup__list__item__label">
+      <span class="funds-summary-popup__list__item__icon">
+        <mat-icon>attach_money</mat-icon>
+      </span>
+      Already Used
+    </div>
+    <div class="funds-summary-popup__list__item__detail">
+      <div class="funds-summary-popup__list__item__number">
+        {{availableFunds.numberOfUsedFunds}}
+      </div>
+      <div class="funds-summary-popup__list__item__subtotal text-danger">
+        -{{ (availableFunds.usedFromFunds) || 0 | currency:'USD':'symbol':'1.0-2' }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center">
+  <div class="funds-summary-popup__title">
+    TOTAL
+  </div>
+  <div class="funds-summary-popup__total">
+    {{totalAvailable | currency:'USD':'symbol':'1.0-2'}}
+  </div>
+</div>

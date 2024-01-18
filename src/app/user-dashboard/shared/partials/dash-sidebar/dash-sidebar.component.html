@@ -1,0 +1,214 @@
+<nav class="dash-sidebar">
+  <div *ngIf="!loading && !mobile" class="sidebar-user">
+    <div class="logo">
+      <a href="/home">
+        <img class="navbar-brand" src="{{assetsUrl}}/logov2.svg" alt="aPrintis" />
+      </a>
+    </div>
+    <div class="user">
+      <img class="profile-img" (click)="popupProfileEdit()" src="{{assetsUrl}}/profile.png" matTooltip="Edit your user profile"/>
+      <span class="username" (click)="popupProfileEdit()" matTooltip="Edit your user profile">{{currentUser.name}} {{currentUser.lastName}}</span>
+      <!-- <button disableRipple (click)="popupProfileEdit()" class="btn-profile" mat-button>
+        <span class="btn-text">Edit Profile</span>
+      </button> -->
+      <a class="username link-logout" (click)="logout()" matTooltip="Logout from aPrintis">Logout</a>
+    </div>
+    <div *ngIf="this.managingEditor || this.editorialStaff || this.noRoles" class="btns">
+      <button disableRipple (click)="goToCreatePublication()" type="submit" class="btn-pub" mat-button>
+        <span class="btn-icon">
+          <img src="{{assetsUrl}}/icons/001-add-copy.svg" />
+        </span>
+        <span class="btn-text">New Publication</span>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!loading && !mobile" class="sidebar-menu">
+    <div *ngFor="let menuItem of menu" class="menu-item {{menuItem.menuClass}}">
+      <div class="submenu submenu-pub">
+        <div class="submenu-tit" (click)="toggleMenuPublication(menuItem, $event)">
+          <span *ngIf="menuItem.show.issueMenu" class="icon-l icon-arrow"></span>
+          <span class="lbl">{{menuItem.publication.name}}</span>
+          <div *ngIf="menuItem.show.subscriber" class="subscribe-but" (click)="showSubscription(menuItem, $event)">
+            SUBSCRIPTION
+          </div>
+          <!-- <img *ngIf="menuItem.show.showEditPub" (click)="goToEditPublication(menuItem.publication, $event)" class="icon-r icon-edit" src="{{assetsUrl}}/icons/004-edit-copy-6.svg" /> -->
+        </div>
+      </div>
+      <div *ngIf="menuItem.show.issueMenu" class="submenu submenu-issues {{menuItem.issuesMenuClass}}">
+        <ul>
+          <li class="{{(currentIssueId == issue.id) ? 'active' : ''}}" *ngFor="let issue of menuItem.publication.publicationIssues">
+            <ng-container *ngTemplateOutlet="advertiser; context:issue">
+           </ng-container>
+            <ng-container #advertiser *ngIf="advertiser === true; else elseTemplate">
+              <a class="link-sub-menu" (click)="goToAdResources(menuItem.publication, issue.id)">
+                <span class="number">#{{issue.number}}</span> {{issue.name}}
+              </a>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <a class="link-sub-menu" (click)="goToIssue(menuItem.publication, issue.id)">
+                <span class="number">#{{issue.number}}</span> {{issue.name}}
+                <!-- <img *ngIf="menuItem.show.showEditIssue" (click)="goToEditIssue(menuItem.publication, issue.id, $event)"
+                  class="icon-r icon-edit {{issue.status}}" src="{{assetsUrl}}/icons/004-edit-copy-6.svg" /> -->
+              </a>
+            </ng-template>
+          </li>
+          <li *ngIf="menuItem.show.showCreateIssue">
+            <a class="link-sub-menu new-issue" (click)="goToAddIssue(menuItem.publication)">
+              <!-- <span class="plus"> +</span> -->
+              <mat-icon>add</mat-icon>
+              <span>New Issue</span>
+            </a>
+          </li>
+          <!-- <li *ngIf="menuItem.show.showCreateIssue" class="li-create"> -->
+            <!-- <button *ngIf="menuItem.show.showCreateIssue" disableRipple (click)="goToAddIssue(menuItem.publication)" class="btn-pub btn-pub--issue" mat-button>
+              <span class="btn-icon">
+                <img src="{{assetsUrl}}/icons/001-add-copy.svg" />
+              </span>
+              <span class="btn-text">New Issue</span>
+            </button> -->
+            <!-- <a (click)="goToAddIssue(menuItem.publication)" class="link-sub-menu">Create New</a> -->
+          <!-- </li> -->
+        </ul>
+      </div>
+    </div>
+    <div *ngFor="let menuItem of menuPendingRequests" class="menu-item {{menuItem.menuClass}}">
+      <div class="submenu submenu-pub">
+        <div class="submenu-tit">
+          <span class="lbl">{{menuItem.request.publicationName}}</span>
+          <span class="lbl-pending">PENDING</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div *ngIf="!loading && mobile" class="sidebar-user">
+    <div class="logo">
+      <a href="/home">
+        <img class="navbar-brand" src="{{assetsUrl}}/logov2.svg" alt="aPrintis" />
+      </a>
+    </div>
+    <div class="user">
+      <img class="profile-img" (click)="popupProfileEdit()" src="{{assetsUrl}}/profile.png" (click)="popupProfileEdit()"/>
+      <span class="username" (click)="popupProfileEdit()">{{currentUser.name}} {{currentUser.lastName}}</span>
+      <a class="username link-logout" (click)="logout()">Logout</a>
+    </div>
+    <div *ngIf="this.managingEditor || this.editorialStaff" class="btns">
+      <button disableRipple (click)="goToCreatePublication()" type="submit" class="btn-pub" mat-button>
+        <span class="btn-icon">
+          <img src="{{assetsUrl}}/icons/001-add-copy.svg" />
+        </span>
+        <span class="btn-text">New Publication</span>
+      </button>
+    </div>
+  </div> -->
+  <mat-accordion *ngIf="mobile">
+    <mat-expansion-panel #expansionPanel [expanded]="false" (closed)="closedExpansion()" hideToggle (opened)="openedExpansion()" class="expansion-panel">
+      <mat-expansion-panel-header collapsedHeight="4rem">
+        <mat-panel-title class="expansion-panel-title" (click)="$event.stopPropagation();">
+          <div class="logo">
+            <a href="/home">
+              <img class="navbar-brand" src="{{assetsUrl}}/logov2.svg" alt="aPrintis" />
+            </a>
+          </div>
+        </mat-panel-title>
+        <mat-panel-description class="expansion-panel-description">
+          <!-- {{actionWord}} Publications -->
+          <app-notifications color="white"></app-notifications>
+          <mat-icon *ngIf="!opened">menu</mat-icon>
+          <mat-icon *ngIf="opened">close</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngIf="!loading" class="sidebar-user">
+        <div class="user">
+          <div class="profile">
+            <img (click)="popupProfileEdit()" class="profile-img" src="{{assetsUrl}}/profile.png"/>
+            <span (click)="popupProfileEdit()" class="username">{{currentUser.name}} {{currentUser.lastName}}</span>
+            <button mat-button disableRipple class="username link-logout" (click)="logout()">
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </div>
+          <!-- <button disableRipple (click)="popupProfileEdit()" class="btn-profile" mat-button>
+            <span class="btn-text">Edit Profile</span>
+          </button> -->
+        </div>
+        <div *ngIf="this.managingEditor || this.editorialStaff" class="btns">
+          <button disableRipple (click)="goToCreatePublication()" type="submit" class="btn-pub" mat-button>
+            <span class="btn-icon">
+              <img src="{{assetsUrl}}/icons/001-add-copy.svg" />
+            </span>
+            <span class="btn-text">New Publication</span>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="!loading" class="sidebar-menu">
+        <div *ngFor="let menuItem of menu" class="menu-item {{menuItem.menuClass}}">
+          <div class="submenu submenu-pub">
+            <div class="submenu-tit" (click)="toggleMenuPublication(menuItem, $event)">
+              <span *ngIf="menuItem.show.issueMenu" class="icon-l icon-arrow"></span>
+              <span class="lbl">{{menuItem.publication.name}}</span>
+              <div *ngIf="menuItem.show.subscriber" class="subscribe-but" (click)="showSubscription(menuItem, $event)">
+                SUBSCRIPTION
+              </div>
+              <!-- <img *ngIf="menuItem.show.showEditPub" (click)="goToEditPublication(menuItem.publication, $event)" class="icon-r icon-edit" src="{{assetsUrl}}/icons/004-edit-copy-6.svg" /> -->
+            </div>
+          </div>
+          <div *ngIf="menuItem.show.issueMenu" class="submenu submenu-issues {{menuItem.issuesMenuClass}}">
+            <ul>
+              <li class="{{(currentIssueId == issue.id) ? 'active' : ''}}" *ngFor="let issue of menuItem.publication.publicationIssues">
+                <ng-container *ngTemplateOutlet="advertiser; context:issue">
+               </ng-container>
+                <ng-container #advertiser *ngIf="advertiser === true; else elseTemplate">
+                  <a class="link-sub-menu" (click)="goToAdResources(menuItem.publication, issue.id)">
+                    <span class="number">#{{issue.number}}</span> {{issue.name}}
+                  </a>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <a class="link-sub-menu" (click)="goToIssue(menuItem.publication, issue.id)">
+                    <span class="number">#{{issue.number}}</span> {{issue.name}}
+                    <!-- <img *ngIf="menuItem.show.showEditIssue" (click)="goToEditIssue(menuItem.publication, issue.id, $event)"
+                      class="icon-r icon-edit {{issue.status}}" src="{{assetsUrl}}/icons/004-edit-copy-6.svg" /> -->
+                  </a>
+                </ng-template>
+              </li>
+              <li *ngIf="menuItem.show.showCreateIssue">
+                <a class="link-sub-menu new-issue" (click)="goToAddIssue(menuItem.publication)">
+                  <!-- <span class="plus"> +</span> -->
+                  <mat-icon>add</mat-icon>
+                  <span>New Issue</span>
+                </a>
+              </li>
+              <!-- <li *ngIf="menuItem.show.showCreateIssue" class="li-create"> -->
+                <!-- <button *ngIf="menuItem.show.showCreateIssue" disableRipple (click)="goToAddIssue(menuItem.publication)" class="btn-pub btn-pub--issue" mat-button>
+                  <span class="btn-icon">
+                    <img src="{{assetsUrl}}/icons/001-add-copy.svg" />
+                  </span>
+                  <span class="btn-text">New Issue</span>
+                </button> -->
+                <!-- <a (click)="goToAddIssue(menuItem.publication)" class="link-sub-menu">Create New</a> -->
+              <!-- </li> -->
+            </ul>
+          </div>
+        </div>
+        <div *ngFor="let menuItem of menuPendingRequests" class="menu-item {{menuItem.menuClass}}">
+          <div class="submenu submenu-pub">
+            <div class="submenu-tit">
+              <span class="lbl">{{menuItem.request.publicationName}}</span>
+              <span class="lbl-pending">PENDING</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-extra">
+        <button (click)="goToCreatePublication()" type="submit" class="btn-pub button-turq-rounded-lg" mat-button>
+          <span class="btn-icon">
+            <img src="{{assetsUrl}}/icons/001-add-copy.svg" />
+          </span>
+          <span class="btn-text">New Publication</span>
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</nav>
+<app-profile-edit (triggerUpdate)="triggerUpdate($event)"
+                  [showPopup]="showPopupProfileEdit"
+                  (popupEvent)="onPopupProfileEditEvent($event)"></app-profile-edit>

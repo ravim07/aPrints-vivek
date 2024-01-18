@@ -1,0 +1,35 @@
+<div class="main-container">
+  <app-publication-header [publication]="publication" context="issues" (triggerReload)="onEvent($event)">
+  </app-publication-header>
+  <app-issue-header [publication]="publication" [issue]="issue" [draft]="draft" (triggerReload)="onEvent($event)">
+  </app-issue-header>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-issue-sidebar [publication]="publication" [issue]="issue">
+      </app-issue-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <div class="messages-container">
+        <div class="header">
+          <h1>Timeline / Messages</h1>
+          <div class="table-header-buttons">
+            <button *ngIf="!issue.completed" mat-button disableRipple (click)="newArticle()">Add New Article</button>
+          </div>
+        </div>
+        <app-issue-discussion [publicationId]="publication.id" [issueId]="issue.id"></app-issue-discussion>
+      </div>
+      <div class="draft-upload-container">
+        <app-draft-upload-panel [publication]="publication" [issue]="issue" [draft]="draft"
+                                [fileUploaderEvent]="fileUploaderEvent"
+                                (fileDropped)="onFileDropped($event)"
+                                (viewPdfEvent)="viewPdfEvent($event)"
+                                (triggerReload)="onEvent($event)">
+        </app-draft-upload-panel>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+<app-upload-file #uploadComponent [issue]="issue" [openDialog]="openDialogUploadFile"
+                 (fileUploaderEvent)="onFileUploaderEvent($event)">
+</app-upload-file>

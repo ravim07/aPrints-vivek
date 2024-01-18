@@ -1,0 +1,20 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.members-cell-container {
+  @include flexbox();
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 1rem;
+
+  .member:not(:first-of-type) {
+    margin-left: -15px;
+  }
+
+  .more-placeholder {
+    margin-left: 1rem;
+    @include typography-lvl(1.0625rem, normal, 600, Averta, normal);
+    color: #616161;
+  }
+}

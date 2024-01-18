@@ -1,0 +1,59 @@
+<div class="hero-comp">
+  <div class="hero-wrapp">
+    <div #firstRow [ngStyle]="rowStyles" class="hero-row">
+      <!-- <div class="hero-row-container firstRow" [@SlowLeftEnter]="oddRowState" *ngIf="oddRowState"> -->
+      <div class="hero-row-container firstRow">
+        <div *ngFor="let img of rows.first" class="box-img">
+        <img src="{{assetsUrl + img}}.png" (click)="openPdf(img)" loading="lazy"/>
+        </div>
+      </div>
+    </div>
+    <div [ngStyle]="rowStyles" class="hero-row">
+      <!-- <div class="hero-row-container hero-row-central" [@listFadeInAnimation]="evenRowState"> -->
+      <div class="hero-row-container hero-row-central">
+        <div *ngFor="let img of rows.second" class="box-img">
+          <img #imgElem loading="lazy"
+            [class.hide]="checkIfOverlaps(textContainer, imgElem) || isMobile"
+            src="{{assetsUrl + img}}.png" (click)="openPdf(img, textContainer, imgElem, isMobile)" />
+        </div>
+      </div>
+    </div>
+    <div #thirdRow [ngStyle]="rowStyles" class="hero-row">
+      <!-- <div class="hero-row-container thirdRow" [@SlowRightEnter]="oddRowState" *ngIf="oddRowState"> -->
+      <div class="hero-row-container thirdRow">
+        <div *ngFor="let img of rows.third" class="box-img">
+          <img src="{{assetsUrl + img}}.png" (click)="openPdf(img)" loading="lazy"/>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="rows.fourth.length > 0" [ngStyle]="rowStyles" class="hero-row">
+      <div class="hero-row-container">
+        <div *ngFor="let img of rows.fourth" class="box-img">
+          <img src="{{assetsUrl + img}}.png" (click)="openPdf(img)" loading="lazy"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div [ngStyle]="textContainerStyles" class="hero-text" #textContainer>
+    <div #firstText class="text" *ngIf="firstStateText" @movieCreditsSlide (@movieCreditsSlide.done)="onTextAnimationEvent( $event )">
+      <span class="text-1">The home of school and small community</span>
+      <span class="text-2"><span>PRINT </span>JOURNALISM</span>
+    </div>
+    <div #secondText class="text" *ngIf="secondStateText" @movieCreditsSlide (@movieCreditsSlide.done)="onTextAnimationEvent( $event )">
+      <span class="text-1">Full color, glossy magazines</span>
+      <span class="text-2">AS LOW AS <span>1$ EACH</span></span>
+    </div>
+    <div #thirdText class="text" *ngIf="thirdStateText" @movieCreditsSlide (@movieCreditsSlide.done)="onTextAnimationEvent( $event )">
+        <span class="text-2 smaller">Collaborate <span>+</span> Fund Raise <span>+</span> Print</span>
+      <!-- <span class="text-1">Collaborate</span>
+      <span class="text-2 smaller"><span>+</span></span>
+      <span class="text-1">Fund Raise</span>
+      <span class="text-2 smaller"><span>+</span></span>
+      <span class="text-1">Print</span> -->
+    </div>
+    <div #fourthText class="text" *ngIf="fourthStateText" @movieCreditsSlide (@movieCreditsSlide.done)="onTextAnimationEvent( $event )">
+      <span class="text-1 smaller">Great for schools, colleges, non-profits, senior centers, churches, clubs</span>
+      <span class="text-2"><span>THE LIST GOES ON!</span></span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+:host {
+  @include min-width(1110px) {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .post-item {
+    //margin: 0 auto 0.938rem;
+    margin: 0 1rem 0.938rem;
+    @include min-width(1110px) {
+      flex: 1;
+      height: 100%;
+    }
+  }
+}

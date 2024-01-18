@@ -1,0 +1,16 @@
+.content-container {
+  height: 90%;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.close-container {
+  height: 6%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}

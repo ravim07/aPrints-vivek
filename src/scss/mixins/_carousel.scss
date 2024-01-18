@@ -1,0 +1,69 @@
+@mixin carousel(){
+
+  carousel {
+    //width: 25.75rem;
+    //height: 34.063rem;
+    z-index: auto !important;
+  }
+
+  carousel::ng-deep {
+    .carousel-cell {
+      display: flex;
+    }
+
+    .carousel-arrow {
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    .carousel-arrow-prev, .carousel-arrow-next {
+      background-image: none !important;
+      color: #292929;
+      font-family: 'Material Icons';
+      text-align: center;
+      font-size: 2.25rem;
+      line-height: 2.25rem;
+    }
+
+
+    .carousel-arrow-prev {
+      @include min-width(768px) {
+        left: -3.75rem;
+      }
+
+      &:before {
+        content: 'keyboard_arrow_left';
+      }
+    }
+
+    .carousel-arrow-next {
+      @include min-width(768px) {
+        right: -3.75rem;
+      }
+
+      &:before {
+        content: 'keyboard_arrow_right';
+      }
+    }
+
+    .carousel-dots {
+      @include min-width(768px) {
+        bottom: -2rem;
+      }
+
+      .carousel-dot {
+        width: 0.438rem !important;
+        height: 0.438rem !important;
+        background-color: #0dd4db;
+        border-radius: 50%;
+        border: none !important;
+        cursor: pointer;
+      }
+
+      .carousel-dot-active {
+        background-color: rgba(#333333, 0.1) !important;
+      }
+    }
+  }
+
+}

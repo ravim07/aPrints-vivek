@@ -1,0 +1,68 @@
+// Assets
+$assets-path-img: "https://d1atm7a2stxxbt.cloudfront.net";
+
+// General
+$primary-color: #0CC8CB;
+$primary-color-text: #35CCD1;
+$primary-color-bg: $primary-color;
+$primary-color-link: #35CCD1;
+$secondary-color: #ffd137;
+$link-btn-simple-color: #484848;
+$title-color: #484848;
+$font-color: #484848;
+
+// Layout
+$page-padding: 2%;
+$page-padding-phone: 4%;
+
+// Btn
+$remove-button-bg: #DF0101;
+$dark-button-bg: #383838;
+$dark-button-color: #FFF;
+
+// Forms
+$form-border-radius: 0.25rem;
+$form-button-default-border-radius: 0.3125rem;
+
+$form-default-border-color: rgba(151, 151, 151, 0.36);
+$form-default-color: #495057;
+$form-default-icon-color: #484848;
+
+$form-default-disabled-border-color: #979797;
+$form-default-disabled-bg-color: #ededed;
+$form-default-disabled-color: #484848;
+
+$form-text-color: #484848;
+$form-error-default-color: #DC143C;
+
+// Table
+$table-header-bg: #0CC8CB;
+$table-border-radius: 3px;
+$table-font-color: #1a1a1a;
+$table-row-bg: #eaeaea;
+$table-row-bg-odd: #f9f9f9;
+
+// Text / Link
+$text-grey-color: #919191;
+$link-grey-color: #999999;
+
+// User Dashboard
+$dashboard-dark-bg: #202020;
+$dashboard-dark-bg-color-font: #FFF;
+$dashboard-menu-color-font: #ececec;
+$dashboard-menu-color-l1: #202020;
+$dashboard-menu-color-l2: #202020;
+$dashboard-menu-open: #414141;
+$dashboard-grey: #f9f9f9;
+
+// Alert
+$alert-success-bg: #d4edda;
+$alert-success-border-color: #c3e6cb;
+$alert-success-color: #155724;
+$alert-danger-bg: #f8d7da;
+$alert-danger-border-color: #f5c6cb;
+$alert-danger-color: #721c24;
+
+// Admin
+$admin-font-color: #484848;
+$admin-link-default-color: #484848;

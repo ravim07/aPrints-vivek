@@ -1,0 +1,711 @@
+<div [hidden]="!_showPopup">
+  <div id="modal-overlay" class="modal-fade {{popupClass}}">
+    <div class="modal-admin-issue modal912 modal-default">
+      <div *ngIf="!loading">
+        <div class="modal-header">
+          <div class="modal-title">
+            <h3>{{issue.publicationName}} - {{issue.name ? issue.name : issue.deliveryDate}}</h3>
+          </div>
+          <div class="modal-close" (click)="closePopup()">
+            <img class="close-w" src="{{assetsUrl}}/icons/close.png"/>
+            <img class="close-b" src="{{assetsUrl}}/icons/close-black.png"/>
+          </div>
+        </div>
+        <mat-tab-group [(selectedIndex)]="_selectedTab" disableRipple>
+          <mat-tab label="Issue Details">
+            <div class="tab-content">
+              <div class="modal-issue">
+                <div class="row row-status">
+                  <div class="box-status col-lg-4 col-md-4">
+                    <span class="lbl">Status</span>
+                    <span class="lbl-status">{{showStatus(issue.status)}}</span>
+                  </div>
+                  <div class="box-status col-lg-4 col-md-4">
+                    <span class="lbl">Issue Name</span>
+                    <span class="lbl-status">{{issue.name ? issue.name : issue.deliveryDate | date:'MM/dd/yyyy'}}</span>
+                  </div>
+                  <div class="box-status col-lg-4 col-md-4">
+                    <span class="lbl">Organization Name</span>
+                    <span
+                      class="lbl-status">{{(publication.organization) ? publication.organization : '&nbsp;'}}</span>
+                  </div>
+                </div>
+
+                <div class="row row-data">
+                  <div class="col-lg-4 col-md-5 issue-file">
+                    <span class="lbl">Issue File</span>
+                    <div *ngIf="currentDraft && currentDraft.thumbPublicUrl">
+                      <div class="pdf-preview">
+                        <div>
+                          <button class="button-orange button-orange-default no-focus pdf-viewer" (click)="openPdf()"
+                                  mat-button>Open PDF
+                          </button>
+                          <img src="{{currentDraft.thumbPublicUrl}}">
+                        </div>
+                      </div>
+                      <button class="button-orange button-orange-default no-focus" (click)="downloadFile()"
+                              mat-button>Download File
+                      </button>
+                      <button class="button-orange button-orange-default no-focus" (click)="dynamicDownloadTxt()"
+                              mat-button>Download Text
+                      </button>
+                      <a class="download-pdf-link" #downloadPdfLink></a>
+                    </div>
+                    <div *ngIf="!currentDraft || !currentDraft.thumbPublicUrl" class="pdf-placeholder"></div>
+                  </div>
+                  <div class="col-lg-8 col-md-7 issue-specs specs">
+                    <span class="lbl lbl-specs">Issue Specs</span>
+                    <div class="container-fluid">
+                      <admin-printing-specs-form [issue]="issue">
+                      </admin-printing-specs-form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab *ngIf="true" label="Messages">
+            <app-issue-discussion class="app-issue-discussion" [publicationId]="publication.id" [issueId]="issue.id">
+            </app-issue-discussion>
+          </mat-tab>
+          <mat-tab *ngIf="showAddCommentSection" label="Comments & Approval">
+            <div class="tab-content">
+              <span class="lbl">Comments</span>
+              <div class="modal-issue">
+                <div class="row row-comments">
+                  <div *ngIf="hasComments" class="row-overflow col-lg-12 col-md-12">
+                    <cdk-virtual-scroll-viewport itemSize="20" class="virtual-scroll">
+                      <div *cdkVirtualFor="let comment of feedbackArr" class="comment-box">
+                        <div *ngIf="comment.msg" class="comment-user">
+                          <img src="{{assetsUrl}}/profile.png"/>
+                          <span *ngIf="comment.byType != 'admin'">{{comment.name}}</span>
+                          <span *ngIf="comment.byType == 'admin'">aprintis ({{comment.name}})</span>
+                        </div>
+                        <div *ngIf="comment.msg" class="comment-text">
+                          <span class="comment-date">{{comment.date | date:'MM/dd/yyyy h:mm a'}} Draft
+                            v{{comment.draftVersion}} </span>
+                          <div [innerHtml]="comment.msg"></div>
+                        </div>
+                      </div>
+                    </cdk-virtual-scroll-viewport>
+                  </div>
+                </div>
+                <div *ngIf="showAddCommentSection" class="row row-add-comment">
+                  <div class="col-lg-12 col-md-12">
+                    <div class="form">
+                      <ckeditor #editor *ngIf="isBrowser" [editor]="Editor" [(ngModel)]="commentObj.msg">
+                      </ckeditor>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                    <mat-form-field class="mat-form-field select-default select-s1">
+                      <mat-select [(ngModel)]="commentObj.status" placeholder="Status">
+                        <mat-option *ngFor="let option of statusList" value="{{option.id}}">{{option.value}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-btn">
+                    <button (click)="submitReviewForm()" class="button-turq-default btn-save no-focus"
+                            mat-button>Save
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab class="tab-shipping" label="Mailing Address &amp; Shipping">
+            <div class="tab-content">
+              <div class="modal-issue">
+                <div class="row row-data row-mailing-address specs">
+                  <div class="col-lg-12 col-md-12 row-address">
+                    <admin-shipping-addresses [publication]="publication" [issue]="issue"></admin-shipping-addresses>
+                  </div>
+                  <div *ngIf="showFormShipping" class="col-lg-12 col-md-12 row-shipping-details">
+                    <span class="lbl lbl-specs">Shipping Details</span>
+                    <form class="form-shipping" [formGroup]="shippingForm" (ngSubmit)="submitShippingForm()">
+                      <div class="row row-add-comment">
+                        <div class="col-lg-12 col-md-12">
+                          <div class="form">
+                            <textarea formControlName="trackingUrl" class="textarea-default textarea-s1"
+                                      placeholder="Tracking URL"></textarea>
+                            <div *ngIf="formUtil.checkError(shippingForm.get('trackingUrl'), 'pattern')"
+                                 class="form-error form-error-default">Please enter a valid URL.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                          <mat-form-field class="mat-form-field select-default select-s1">
+                            <mat-select (selectionChange)="onChangeStatusShipping($event.value)"
+                                        formControlName="status" placeholder="Status">
+                              <mat-option *ngFor="let option of statusList" value="{{option.id}}">{{option.value}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-btn">
+                          <button type="submit" class="button-turq-default btn-save no-focus" mat-button>Save</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab *ngIf="issue.pricingRequest || issue.status === issueStatusOptions.draftAccepted " class="tab-shipping" label="Pricing &amp; payment details">
+            <div class="tab-content">
+              <div class="modal-issue">
+                <div class="row row-data row-mailing-address specs">
+                  <div *ngIf="showFormPricing" class="col-lg-12 col-md-12 row-address">
+                    <span class="lbl lbl-specs">Pricing
+                      <mat-icon *ngIf="this.issue.pricingRequest" class="check-ok">check_circle</mat-icon>
+                    </span>
+                    <form class="form-pricing" [formGroup]="pricingForm" (ngSubmit)="submitPricingForm()">
+                      <div class="row">
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <span class="lbl lbl-s lbl-center">Bill To</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <input formControlName="billTo"
+                                 class="input-default input-s1" placeholder="Bill To">
+                          <div *ngIf="formUtil.checkError(pricingForm.get('billTo'), 'required')"
+                               class="form-error form-error-default">Bill to is required
+                          </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 group-spec"></div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <span class="lbl lbl-s lbl-center">Price</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <input type="number" min="0" max="1000000" formControlName="price"
+                                 class="input-default input-s1" placeholder="Price" (change)="calculateTotals()">
+                          <div *ngIf="formUtil.checkError(pricingForm.get('price'), 'required')"
+                               class="form-error form-error-default">Price is required
+                          </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 group-spec"></div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <span class="lbl lbl-s lbl-center">Shipping Rate</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <input type="number" min="0" max="1000000" formControlName="shipping"
+                                 class="input-default input-s1" placeholder="Shipping" (change)="calculateTotals()">
+                          <div *ngIf="formUtil.checkError(pricingForm.get('shipping'), 'required')"
+                               class="form-error form-error-default">Shipping is required
+                          </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 group-spec"></div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <span class="lbl lbl-s lbl-center">Tax Rate</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <input type="number" min="0" max="1000000" formControlName="tax"
+                                 class="input-default input-s1" placeholder="Tax" (change)="calculateTotals()">
+                          <div *ngIf="formUtil.checkError(pricingForm.get('tax'), 'required')"
+                               class="form-error form-error-default">Tax is required
+                          </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 group-spec"></div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <span class="lbl lbl-s lbl-center">Used from funds</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <input type="number" min="0" max="1000000" formControlName="discount"
+                                 class="input-default input-s1" placeholder="Used from funds"
+                                 (change)="calculateTotals()">
+                          <div *ngIf="formUtil.checkError(pricingForm.get('discount'), 'required')"
+                               class="form-error form-error-default">Used from funds is required
+                          </div>
+                          <div *ngIf="formUtil.checkError(pricingForm.get('discount'), 'max')"
+                               class="form-error form-error-default">The value shouldn't be greater than your total funds
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 group-spec flex-div">
+                          <div>
+                            <a class="total" (click)="showSummaryAvailableFunds()">TOTAL FUNDS AVAILABLE
+                              <span>{{totalAvailable | currency:'USD':'symbol':'1.0-2'}}</span></a>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 group-spec"></div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <span class="lbl lbl-s lbl-center">Discount</span>
+                        </div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <input type="number" min="0" max="1000000" formControlName="invoiceDiscount"
+                                 class="input-default input-s1" (change)="calculateTotals()">
+                        </div>
+                        <div class="col-lg-8 col-md-8 group-spec"></div>
+                        <div class="col-lg-2 col-md-2 group-spec">
+                          <span class="lbl lbl-s lbl-center">Invoice notes</span>
+                        </div>
+                        <div class="col-lg-10 col-md-10 group-spec">
+                          <input type="text" formControlName="notes" class="input-default input-s1"
+                                 placeholder="Additional notes/reason for discount">
+                        </div>
+                        <div class="row-status col-lg-2 col-md-2">
+                          <div class="box-status group-spec">
+                            <span class="lbl lbl-s lbl-center">Total Amount</span>
+                          </div>
+                        </div>
+                        <div class="row-status col-lg-2 col-md-2">
+                          <div class="box-status group-spec">
+                            <span class="lbl-status s-value lbl-w lbl-total">$ {{(flatAmount) | number:'1.0-2'}}</span>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 group-spec">
+                          <span class="lbl lbl-s lbl-center">Invoice Due Date</span>
+                        </div>
+                        <div class="col-lg-4 col-md-4 group-spec">
+                          <div class="simple-datepicker">
+                            <mat-form-field (click)="picker.open()" class="mat-form-field input-default input-s1">
+                              <input [min]="minDate" formControlName="dueDate" readonly autocomplete="off" matInput
+                                     (dateInput)="addDate('input', $event)" [matDatepicker]="picker"
+                                     cdkTextareaAutosize="false">
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker disabled="false"></mat-datepicker>
+                            </mat-form-field>
+                            <div *ngIf="formUtil.checkError(pricingForm.get('dueDate'), 'required')"
+                                 class="form-error form-error-default">Due Date is required
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 group-spec"></div>
+                      </div>
+                      <div class="row row-btn">
+                        <div class="col-auto col-btn">
+                          <button type="submit" class="button-turq-default no-focus"
+                                  [disabled]="pricingForm.invalid || issue?.invoice?.status === 'paid'"
+                                  mat-button>{{btnPaymentLabel}}</button>
+                        </div>
+                        <div class="col-auto col-btn">
+                          <button class="button-orange-default no-focus" type="button"
+                                  [disabled]="pricingForm.invalid || issue?.invoice?.status === 'paid'"
+                                  (click)="previewInvoice($event)" mat-button>
+                            Preview Invoice
+                          </button>
+                        </div>
+                        <div class="col-auto col-btn">
+                          <button
+                            [disabled]="pricingForm.invalid || issue?.invoice?.status === 'paid'"
+                            class="button-orange-default no-focus" type="button" (click)="sendInvoice($event)"
+                                  mat-button>
+                            Send Invoice
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div *ngIf="showFormPayment" class="col-lg-12 col-md-12">
+                    <span class="lbl lbl-pricing">Change Payment Details</span>
+                    <form class="form-payment" [formGroup]="paymentForm" (ngSubmit)="submitPaymentForm()">
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12">
+                          <app-payment-info #paymentInfo [issueId]="_issueId" [isAdmin]="true"></app-payment-info>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-btn">
+                          <button type="submit" class="button-turq-default btn-save no-focus" mat-button>Save</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div *ngIf="showFormConfirmPayment" class="col-lg-12 col-md-12">
+                    <span class="lbl lbl-pricing">Confirm Payment</span>
+                    <form class="form-payment" [formGroup]="paymentForm" (ngSubmit)="confirmPayment()">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-btn">
+                          <button type="submit" class="button-turq-default btn-save no-focus"
+                                  mat-button>Confirm
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-lg-12 col-md-12" *ngIf="issue.payment.paymentMetadata.method">
+                    <span class="lbl lbl-pricing">Payment Details</span>
+                    <ng-container [ngSwitch]="issue.payment.paymentMetadata.method">
+                      <ng-container *ngSwitchCase="'Other'">
+                        <div class="row">
+                          <div class="col-lg-4 col-md-4">
+                            <div class="group-spec">
+                              <span class="lbl lbl-s">Method</span>
+                              <span class="s-value">
+                                {{issue.payment.paymentMetadata.method}} ---
+                                {{issue.payment.paymentMetadata.otherDetail}}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <!-- <ng-container *ngSwitchCase="'Credit Card'">
+                        <div class="row">
+                          <div class="col-lg-4 col-md-4">
+                            <div class="group-spec">
+                              <span class="lbl lbl-s">Method</span>
+                              <span class="s-value">
+                                {{issue.payment.paymentMetadata.method}} ---
+                                {{issue.payment.paymentMetadata.brand}} {{issue.payment.paymentMetadata.lastFour}}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container> -->
+                      <ng-container *ngSwitchCase="'ACH'">
+                        <div class="row">
+                          <div class="col-lg-4 col-md-4">
+                            <div class="group-spec">
+                              <span class="lbl lbl-s">Method</span>
+                              <span class="s-value">{{issue.payment.paymentMetadata.method}}</span>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4">
+                            <div class="group-spec">
+                              <span class="lbl lbl-s">Account Number</span>
+                              <span class="s-value">{{issue.payment.paymentMetadata.accountNumber}}</span>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4">
+                            <div class="group-spec">
+                              <span class="lbl lbl-s">Routing Number</span>
+                              <span class="s-value">{{issue.payment.paymentMetadata.routingNumber}}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-4 col-md-4">
+                            <div class="group-spec">
+                              <span class="lbl lbl-s">Account Holder Name</span>
+                              <span class="s-value">
+                                {{issue.payment.paymentMetadata.name}} {{issue.payment.paymentMetadata.lastName}}
+                              </span>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4">
+                            <div class="group-spec">
+                              <span class="lbl lbl-s">Account Type</span>
+                              <span class="s-value">{{issue.payment.paymentMetadata.accountHolderType}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab *ngIf="issue.invoice" class="tab-shipping" label="Invoice details">
+            <div class="tab-content">
+              <span class="lbl">Last invoice sent</span>
+              <div *ngIf="issue.invoice as invoice" class="modal-issue">
+                <div class="row row-data row-mailing-address specs">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <div class="col-lg-12 table-wrapper">
+                        <table class="table-default invoice-table">
+                          <thead>
+                          <th class="width-100">Invoice #</th>
+                          <th>Description</th>
+                          <th class="width-170">Number of copies</th>
+                          <th class="width-100">Sent date</th>
+                          <th class="width-100">Due Date</th>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>{{invoice.numberId}}</td>
+                            <td>{{publication.printingPreferences.trim}} Cover
+                              {{publication.printingPreferences.color}}
+                              {{publication.printingPreferences.insidePages}}-page
+                              {{publication.printingPreferences.color}},
+                              {{publication.printingPreferences.binding}}</td>
+                            <td>{{invoice.pricingRequest.numberOfCopies}}</td>
+                            <td>{{invoice.createdAt | date:'MM/dd/yyyy'}}</td>
+                            <td>{{invoice.dueDate | date:'MM/dd/yyyy'}}</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="invoice-details">
+                        <div class="discount-reason">
+                          <div>Notes :</div>
+                          {{invoice.notes}}
+                          <div class="status"></div>
+                        </div>
+                        <div class="total-details">
+                          <div class="total-item">
+                            <div class="total-item-label">Total</div>
+                            <div class="total-number"><span>$</span><span>{{invoice.pricingRequest.price}}</span></div>
+                          </div>
+                          <div class="total-item">
+                            <div class="total-item-label">Discount</div>
+                            <div class="total-number"><span>$</span><span>{{invoice.invoiceDiscount}}</span></div>
+                          </div>
+                          <div class="total-item">
+                            <div class="total-item-label">Used from funds</div>
+                            <div class="total-number"><span>$</span><span>{{invoice.pricingRequest.discount}}</span>
+                            </div>
+                          </div>
+                          <div class="total-item">
+                            <div class="total-item-label">Taxes</div>
+                            <div class="total-number"><span>$</span><span>{{invoice.pricingRequest.tax}}</span></div>
+                          </div>
+                          <div class="total-item">
+                            <div class="total-item-label">Shipping</div>
+                            <div class="total-number"><span>$</span><span>{{invoice.pricingRequest.shipping}}</span>
+                            </div>
+                          </div>
+                          <div class="total-item">
+                            <div class="total-item-label">Total due</div>
+                            <div class="total-number">
+                              <span>$</span>{{invoice.pricingRequest.flatAmount - invoice.invoiceDiscount}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row flex-div">
+                      <div class="invoice-status col-auto">
+                        <div class="label">
+                          Invoice Status
+                        </div>
+                        <div class="status">
+                          <span class="open" *ngIf="invoice.dueStatus !== 'overdue' && invoice.status === 'open'">
+                            Open
+                          </span>
+                          <span class="overdue" *ngIf="invoice.dueStatus === 'overdue' && invoice.status === 'open'">
+                            Overdue
+                          </span>
+                          <span class="open" *ngIf="invoice.status === 'paid'">
+                            Paid
+                          </span>
+                        </div>
+                        <div class="value" *ngIf="invoice.status === 'open'"
+                             [ngClass]="{'value': true, 'overdue' : invoice.dueStatus === 'overdue', 'open': invoice.dueStatus !== 'overdue'}">
+                          <span class="days">
+                            Days<span *ngIf="invoice.dueStatus !== 'overdue'">&nbsp;remaining</span><span
+                            *ngIf="invoice.dueStatus === 'overdue'">&nbsp;due</span>: {{invoice.invoiceDaysUntilDue}}
+                          </span>
+                        </div>
+                      </div>
+                      <div *ngIf="invoice.status === 'open'" class="invoice-mark-paid col-auto">
+                        <button class="button-orange button-orange-default no-focus"
+                                (click)="markInvoiceAsPaid($event)" mat-button>Mark as Paid
+                        </button>
+                      </div>
+                      <div class="invoice-download col-auto">
+                        <button class="button-orange button-orange-default no-focus" (click)="downloadInvoice()"
+                                mat-button>Download Invoice PDF
+                        </button>
+                        <a class="download-pdf-link" #downloadInvoiceLink></a>
+                      </div>
+                      <div *ngIf="invoice.status !== 'paid'" class="invoice-download col-6">
+                        <button class="button-orange button-orange-default no-focus" (click)="sendDueReminder($event)"
+                                mat-button>Send Invoice Reminder
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab *ngIf="donations" class="tab-shipping" label="Sponsorship details">
+            <div class="tab-content">
+              <div class="modal-issue">
+                <div class="row row-data row-mailing-address specs">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <div class="row-top-stats col-lg-12">
+                        <span>
+                          <span class="item item1">
+                            <span class="title"># Of Foundraisers</span>
+                            <span class="number">{{donations.summary.sponsorsCount}}</span>
+                          </span>
+                          <span class="item item2">
+                            <span class="title">Total Raised</span>
+                            <span class="number">$ {{donations.summary.totalAmount | amount}}</span>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 table-wrapper">
+                        <table class="table-default">
+                          <thead>
+                          <th>Level</th>
+                          <th>Price</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th class="hidden-xs">Mailing address</th>
+                          <th class="th-date">Date</th>
+                          </thead>
+                          <tbody *ngIf="donations.donations.length > 0">
+                          <tr *ngFor="let donation of donations.donations">
+                            <td>{{donation.donationLevelDetails.name}}</td>
+                            <td>{{donation.amount}}</td>
+                            <td>{{donation.sponsor.name}}</td>
+                            <td>{{donation.sponsor.email}}</td>
+                            <td class="hidden-xs">
+                              {{donation.sponsor.mailingAddress.address1}}<span
+                              *ngIf="donation.sponsor.mailingAddress.address2">
+                                  {{donation.sponsor.mailingAddress.address2}}</span>,
+                              {{donation.sponsor.mailingAddress.city}}, {{donation.sponsor.mailingAddress.state}}
+                              {{donation.sponsor.mailingAddress.zip}}
+                            </td>
+                            <td>{{donation.createdAt | date:'MM/dd/yyyy'}}</td>
+                          </tr>
+                          </tbody>
+                          <tbody *ngIf="donations.donations.length == 0">
+                          <tr>
+                            <td colspan="6" style="text-align: center">No Results</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab *ngIf="subscriptions" class="tab-shipping" label="Subscription details">
+            <div class="tab-content">
+              <div class="modal-issue">
+                <div class="row row-data row-mailing-address specs">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <div class="row-top-stats col-lg-12">
+                        <span>
+                          <span class="item item1">
+                            <span class="title"># Of Subscribers</span>
+                            <span class="number">{{subscriptions.summary.subscribersCount}}</span>
+                          </span>
+                          <span class="item item2">
+                            <span class="title">Total Raised</span>
+                            <span class="number">$ {{subscriptions.summary.totalAmount | amount}}</span>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 table-wrapper">
+                        <table class="table-default">
+                          <thead>
+                          <th>Level</th>
+                          <th>Price</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th class="hidden-xs">Mailing address</th>
+                          <th class="th-date">Date</th>
+                          </thead>
+                          <tbody *ngIf="subscriptions.subscriptions.length > 0">
+                          <tr *ngFor="let subscription of subscriptions.subscriptions">
+                            <td>{{subscription.subscriptionTypeDetails.name}}</td>
+                            <td>{{subscription.amount}}</td>
+                            <td>{{subscription.subscriber.name}}</td>
+                            <td>{{subscription.subscriber.email}}</td>
+                            <td class="hidden-xs">
+                              {{subscription.subscriber.mailingAddress.address1}}<span
+                              *ngIf="subscription.subscriber.mailingAddress.address2">
+                                  {{subscription.subscriber.mailingAddress.address2}}</span>,
+                              {{subscription.subscriber.mailingAddress.city}},
+                              {{subscription.subscriber.mailingAddress.state}}
+                              {{subscription.subscriber.mailingAddress.zip}}
+                            </td>
+                            <td>{{subscription.createdAt | date:'MM/dd/yyyy'}}</td>
+                          </tr>
+                          </tbody>
+                          <tbody *ngIf="subscriptions.subscriptions.length == 0">
+                          <tr>
+                            <td colspan="6" style="text-align: center">No Results</td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab *ngIf="members.length > 0" class="tab-shipping" label="Team">
+            <div class="tab-content">
+              <div class="modal-issue">
+                <div class="row row-data row-mailing-address specs">
+                  <div class="col-lg-12">
+                    <div class="row">
+                      <div class="col-lg-12 table-wrapper">
+                        <table class="table-default">
+                          <thead>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Role</th>
+                          <th></th>
+                          </thead>
+                          <tbody *ngIf="members.length > 0">
+                          <tr *ngFor="let member of members">
+                            <td>{{member.name}} {{member.lastName}}
+                              {{ currentDraft ? (member.id === currentDraft.uploaderId ? '(Uploader)' : '') : ''  }}
+                            </td>
+                            <td>{{member.email}}</td>
+                            <td>{{role.getStrRole(member.role)}}</td>
+                            <td>
+                              <app-impersonate [publication]="this.issue.publicationId" [issue]="_issueId"
+                                               [impersonateEmail]="member.email"></app-impersonate>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dialogConfirmInvoiceSend>
+  <mat-dialog-content>
+    <p>Are you sure you want to send an invoice?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button disableRipple [mat-dialog-close]="true" class="button-turq-default" mat-button>Yes</button>
+    <button disableRipple [mat-dialog-close]="false" class="button-turq-default" mat-button>No</button>
+  </mat-dialog-actions>
+</ng-template>
+<ng-template #dialogConfirmMarkInvoiceAsPaid>
+  <mat-dialog-content>
+    <p>Are you sure you want to mark this invoice as paid?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button disableRipple [mat-dialog-close]="true" class="button-turq-default" mat-button>Yes</button>
+    <button disableRipple [mat-dialog-close]="false" class="button-turq-default" mat-button>No</button>
+  </mat-dialog-actions>
+</ng-template>
+<ng-template #dialogConfirmSendDueReminder>
+  <mat-dialog-content>
+    <p>Are you sure you want to send an due invoice reminder?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button disableRipple [mat-dialog-close]="true" class="button-turq-default" mat-button>Yes</button>
+    <button disableRipple [mat-dialog-close]="false" class="button-turq-default" mat-button>No</button>
+  </mat-dialog-actions>
+</ng-template>
+
+
+<ng-template #availableFundsSummaryPopup>
+  <mat-dialog-content>
+    <!--    <h1 mat-dialog-title>Funds Summary</h1>-->
+    <app-funds-summary [availableFunds]="publication.availableFunds"
+                       [totalAvailable]="totalAvailable"></app-funds-summary>
+  </mat-dialog-content>
+  <mat-dialog-actions class="mt-2" align="end">
+    <button disableRipple [mat-dialog-close]="true" class="button-turq-default" mat-button>Close</button>
+  </mat-dialog-actions>
+</ng-template>

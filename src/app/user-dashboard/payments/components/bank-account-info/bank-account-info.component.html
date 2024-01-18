@@ -1,0 +1,53 @@
+<div class="form-wrapper">
+  <div class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form">
+    <form [formGroup]="bankAccountInfoForm" class="group-edit-issue-form">
+      <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+        <div>{{errorApi}}</div>
+      </div>
+
+      <div class="group-mailing-address" formGroupName="paymentInfo">
+        <div class="row">
+          <div class="col form-col">
+            <span class="lbl lbl-s">Account Holder Type</span>
+            <mat-form-field class="select-default select-s1">
+              <mat-select formControlName="accountHolderType" placeholder="Account Holder Type">
+                <mat-option
+                  *ngFor="let accountHolderType of accountHolderTypes" 
+                  value="{{accountHolderType}}">
+                    {{accountHolderType}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="formUtil.checkError(bankAccountInfoGroup.get('accountHolderType'), 'required')" class="form-error form-error-default">Account Holder Type is required</div>
+          </div>
+        </div>
+        <div>
+          <div class="row">
+            <div class="col form-col">
+              <span class="lbl lbl-s">First Name</span>
+              <input placeholder="First Name *" formControlName="firstName" type="text" class="input-default input-s1">
+              <div *ngIf="formUtil.checkError(bankAccountInfoGroup.get('firstName'), 'required')" class="form-error form-error-default">First Name is required</div>
+            </div>
+            <div class="col form-col">
+              <span class="lbl lbl-s">Last Name</span>
+              <input placeholder="Last Name *" formControlName="lastName" type="text" class="input-default input-s1">
+              <div *ngIf="formUtil.checkError(bankAccountInfoGroup.get('lastName'), 'required')" class="form-error form-error-default">Last Name is required</div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col form-col">
+                <span class="lbl lbl-s">Account Number</span>
+                <input type="text" formControlName="accountNumber" class="input-default input-s1" placeholder="Account Number">
+                <div *ngIf="formUtil.checkError(bankAccountInfoGroup.get('accountNumber'), 'required')" class="form-error form-error-default">Account Number is required</div>
+              </div>
+              <div class="col form-col">
+                <span class="lbl lbl-s">Routing Number</span>
+                <input type="text" formControlName="routingNumber" class="input-default input-s1" placeholder="Routing Number">
+                <div *ngIf="formUtil.checkError(bankAccountInfoGroup.get('routingNumber'), 'required')" class="form-error form-error-default">Routing Number is required</div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

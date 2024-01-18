@@ -1,0 +1,27 @@
+<div class="show search-popup">
+  <div class="search-content">
+    <h3>Search Results</h3>
+    <div class="results">
+      <ul class="result-list">
+        <li *ngFor="let i of index">
+          <div class="img">
+            <div style="display:none" class="pdf-placeholder"></div>
+            <div class="img-content">
+              <img src="{{assetsUrl}}/Hardin valley May 2015 cover.png" />
+            </div>
+          </div>
+          <div class="description">
+            <span class="title">School Illustrated</span>
+            <span class="organization">Paradise Publications</span>
+            <div class="description-txt">
+              <p>{{description | truncateText:315:315 }}</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="view-more">
+      <a>View More Results</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+@import "~scss/mixins/_typography";
+@import "~scss/_variables";
+@import "~scss/mixins/_utils";
+
+::ng-deep .multiple-datepicker {
+  .list {
+    min-height: 44px;
+    width: 100%;
+    padding: .4224rem 0.5625rem 0.15rem;
+    .btn-date {
+      background: $dashboard-grey;
+      padding: 0.5rem 0.5rem;
+      margin: 0 0.3125rem 0.3125rem 0;
+      border-radius: $form-border-radius;
+      display: inline-block;
+      @include typography-lvl(0.75rem, normal, 400, 'Montserrat', normal);
+      cursor: pointer;
+      .delete {
+        display: inline-block;
+        margin: 0 0 0 5px;
+        img {
+          width: 14px;
+          height: 14px;
+          position: relative;
+          top: 2px;
+        }
+      }
+    }
+    &.invalid {
+      border-color: $form-error-default-color;
+    }
+  }
+  .form-error.form-error-default {
+    margin: 0px;
+    position: relative;
+    top: -15px;
+  }
+  .ctrl {
+    background: $primary-color;
+    border-radius: $form-border-radius;
+    width: 8.438rem;
+    color: #FFF;
+    @include flexbox();
+    align-items:center;
+    padding: 0 0 0 1.25rem;
+    float: right;
+    cursor: pointer;
+    &:hover {
+      background: darken($primary-color, 5%);
+    }
+    .lbl {
+      @include typography-lvl(0.8125rem, normal, 400, 'Montserrat', normal);
+    }
+    .mat-form-field.mdatepicker {
+      .mat-form-field-wrapper {
+        padding: 0px;
+        margin: 0px;
+      }
+      .mat-form-field-infix {
+        display: none !important;
+      }
+      .mat-form-field-underline  {
+        display: none !important;
+      }
+      .mat-icon-button {
+        width: 44px;
+        height: 44px;
+        .mat-datepicker-toggle-default-icon {
+          width: 28px !important;
+          height: 28px !important;
+          color: #FFF;
+        }
+        .mat-button-ripple,
+        .mat-button-focus-overlay {
+          display: none !important;
+        }
+      }
+    }    
+  }
+}

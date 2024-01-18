@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [{
+    "name": "Launch Angular Client",
+    "type": "chrome",
+    "request": "launch",
+    "url": "http://localhost:4200",
+    "runtimeArgs": [
+      "--user-data-dir",
+      "--remote-debugging-port=9222"
+    ],
+    "sourceMaps": true,
+    "trace": true,
+    "webRoot": "${workspaceRoot}/client/",
+    "userDataDir": "${workspaceRoot}/.vscode/chrome"
+  }, ]
+}

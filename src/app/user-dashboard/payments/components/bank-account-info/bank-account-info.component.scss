@@ -1,0 +1,22 @@
+@import "../../../../../scss/mixins/typography";
+.stripe-elements {
+  border: 1px solid rgba(151, 151, 151, 0.36);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  line-height: normal;
+  font-weight: 400;
+  font-family: "Montserrat";
+  letter-spacing: normal;
+  padding: .714rem 1.125rem;
+  margin-bottom: 0.625rem;
+  margin-top: 0.875rem;
+}
+.hidden{
+  display: none;
+}
+.lbl {
+  @include typography-lvl(0.8125rem, normal, 600, 'Montserrat', normal);
+  width: 100%;
+  display: block;
+  margin-bottom: 0.625rem;
+}

@@ -1,0 +1,19 @@
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_typography";
+
+:host {
+  .flat-dialog-main {
+    justify-content: inherit !important;
+  }
+
+  .popup-text-message {
+    color: #616161;
+    @include typography-lvl(0.938rem, normal, 300, Averta, 0.26px);
+  }
+
+  .mat-dialog-content::ng-deep {
+    .mat-form-field-prefix {
+      bottom: 0.35rem;
+    }
+  }
+}

@@ -1,0 +1,118 @@
+<button mat-icon-button class="close-dialog" (click)="onCancelClick()" matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title class="no-bottom-margin smaller">Delivery Details</div>
+  <div mat-dialog-content class="content">
+    <div class="print-specs mb-3">
+      <div class="print-specs-header">
+        <div class="print-specs-header-title">
+          Print Specs
+        </div>
+        <div class="print-specs-header-action">
+          <button mat-icon-button (click)="editPrintingPrefs()">
+            <mat-icon>
+              edit
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="print-specs-content">
+        {{printSpecsStr}}
+      </div>
+    </div>
+    <ng-container *ngIf="loading">
+      <div class="loading-container">
+        <app-loading-animation-table></app-loading-animation-table>
+      </div>
+    </ng-container>
+    <ng-container>
+      <div class="container-fluid" *ngIf="!loading && addressList?.length && addressListDataSource">
+        <div class="mb-2 d-flex justify-content-between w-100 header-table">
+
+          <div class="div">
+            {{selectionAddress.selected.length}}&nbsp;Addresses
+          </div>
+
+          <button class="text-bold" mat-button (click)="addShippingAddress()">Add Shipping Address</button>
+        </div>
+        <div class="mb-2 row">
+
+          <div class="col-6">
+            <mat-form-field>
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Search Address" #input>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="shipping-address-list table-content">
+          <table [width]="'100%'" class="table-element table-address" mat-table [dataSource]="addressListDataSource"
+                 matSort
+                 #tableSort="matSort" matSortActive="addressTo" matSortDirection="asc" matSortDisableClear>
+
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterSelectionToggle() : null"
+                              [checked]="selectionAddress.hasValue() && addressList.length === selectionAddress.selected.length"
+                              [indeterminate]="selectionAddress.hasValue() && addressList.length !== selectionAddress.selected.length">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selectionAddress.toggle(row.id) : null"
+                              [checked]="selectionAddress.isSelected(row.id)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="addressTo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Address To</th>
+              <td mat-cell *matCellDef="let row">
+                <span>{{row.addressTo}}</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fullAddress">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+              <td mat-cell *matCellDef="let row">
+                <span>{{row.fullAddress}} / Phone {{row.phone}}</span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+        </div>
+        <mat-paginator
+          *ngIf="addressList?.length > 10"
+          #paginator
+          [pageSizeOptions]="[10, 25, 100]"
+          [length]="addressList?.length"
+          [pageSize]="10"
+          showFirstLastButtons></mat-paginator>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!loading && !addressList?.length">
+      <div class="empty-list">
+        <app-empty-list-placeholder></app-empty-list-placeholder>
+        <div class="description mt-2">No shipping address added yet.</div>
+        <div class="actions mt-5">
+          <button class="rounded-0 button-turq-default" mat-button disableRipple (click)="addShippingAddress()">
+            Add Shipping Address
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div mat-dialog-actions align="center" class="mt-5">
+    <button
+      *ngIf="addressList?.length && addressListDataSource"
+      mat-button class="save" (click)="save()" [disabled]="!(selectionAddress.changed | async)">
+      Submit
+    </button>
+  </div>
+</div>

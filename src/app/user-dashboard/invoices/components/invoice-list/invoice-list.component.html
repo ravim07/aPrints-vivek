@@ -1,0 +1,89 @@
+<div class="main-container">
+  <app-publication-header [publication]="publication"></app-publication-header>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-issues-sidebar [publication]="publication"></app-issues-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+      <ng-container *ngIf="loading">
+        <app-loading-animation-table></app-loading-animation-table>
+      </ng-container>
+
+      <ng-container *ngIf="!loading">
+        <div class="header">
+          <h1>Invoices</h1>
+        </div>
+        <div class="table-content invoices-table">
+          <table *ngIf="dataSource && invoices.length" class="table-element" mat-table [dataSource]="dataSource"
+                 matSort
+                 #TableSort="matSort" matSortActive="dueDate" matSortDirection="desc" matSortDisableClear>
+            <ng-container matColumnDef="issue">
+              <th mat-header-cell *matHeaderCellDef>Issue</th>
+              <td mat-cell *matCellDef="let row">{{row.issue?.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="flatAmount">
+              <th mat-header-cell *matHeaderCellDef>Amount</th>
+              <td mat-cell
+                  *matCellDef="let row">
+                {{row.pricingRequest?.flatAmount | currency:'USD':'symbol':'1.0-2'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="chargeAmount">
+              <th mat-header-cell *matHeaderCellDef>Charge Amount</th>
+              <td mat-cell
+                  *matCellDef="let row">
+                {{row.pricingRequest?.chargeAmount | currency:'USD':'symbol':'1.0-2'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="createdAt">
+              <th mat-header-cell *matHeaderCellDef>Creation Date</th>
+              <td mat-cell *matCellDef="let row">{{row.createdAt | date:'MM/dd/yyyy'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="dueDate">
+              <th mat-header-cell *matHeaderCellDef>Expiration Date</th>
+              <td mat-cell *matCellDef="let row">{{row.dueDate | date:'MM/dd/yyyy'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let row">
+                <span
+                  *ngIf="row.dueStatus !== 'overdue'"
+                  [ngClass]="{
+                'text-success': row.status ==='paid',
+                'text-warning': row.status === 'open'
+                }">
+                  {{row.status | titlecase}}
+                </span>
+                <span class="text-danger" *ngIf="row.dueStatus === 'overdue' && row.status === 'open'">Overdue</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let row">
+                <a mat-button class="download-pdf" [href]="row.filePublicUrl" download>
+                  Download&nbsp;<mat-icon>cloud_download</mat-icon>
+                </a>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+          </table>
+
+          <div *ngIf="!dataSource || invoices.length === 0" class="empty-list">
+            <app-empty-list-placeholder></app-empty-list-placeholder>
+            <div class="description">No invoices generated yet</div>
+          </div>
+
+          <mat-paginator
+            *ngIf="dataSource && invoices.length"
+            [length]="invoices?.length"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </ng-container>
+
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

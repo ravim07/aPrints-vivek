@@ -1,0 +1,99 @@
+<div *ngIf="!loading" class="dash-main-content dash-referrals">
+    <h3 class="dash-title w-sub">
+      Refer aPrintis to a Publisher
+    </h3>
+    <!-- <h4 class="dash-sub-title">Publication: {{publication.name}}</h4> -->
+    <div class="dash-content-default">
+      <div class="row">
+        <div class="col-lg-11">
+          <form [formGroup]="newReferralForm" (ngSubmit)="addReferral()" class="form {{formStatusClass}}">
+            <!-- <div class="lbl-default">Refer a publisher</div> -->
+            <div class="row">
+              <div class="col-form col-lg-3">
+                <input type="text" formControlName="name" class="input-default input-s1" placeholder="Fullname">
+                <div *ngIf="formUtil.checkError(newReferralForm.get('name'), 'required')" class="form-error form-error-default">Fullname
+                  is required</div>
+              </div>
+              <div class="col-form col-lg-3">
+                <input type="text" formControlName="email" class="input-default input-s1" placeholder="Email">
+                <div *ngIf="formUtil.checkError(newReferralForm.get('email'), 'required')" class="form-error form-error-default">Email
+                  is required</div>
+                <div *ngIf="formUtil.checkError(newReferralForm.get('email'), 'email')" class="form-error form-error-default">Please
+                  enter a valid email</div>
+              </div>
+              <div class="col-form col-lg-2">
+                <button type="submit" class="button-turq-default no-focus" mat-button>Send</button>
+              </div>
+            </div>
+          </form>
+          <div class="pricings-table">
+            <div class="row">
+              <div class="col-lg-11 header">
+                Make $10 from <span>EVERY FUTURE</span> job that they print and <span>SAVE THEM 100s of dollars</span>
+              </div>
+            </div>
+            <hr class="row divider"/>
+            <div class="row">
+              <div class="col-lg-5 margin-zero">
+                <div class="ul-header">Why refer aPrintis to Publishers?</div>
+                <div class="ul-desc">If you publish with us - you already know why!</div>
+                <ul>
+                  <li>Savings of as much as 50% on print costs</li>
+                  <li>3 easy ways of fund raising</li>
+                  <li>High octane community interest via collaboration and promotion</li>
+                </ul>
+              </div>
+              <div class="col-lg-6 grid-wrapper">
+                <div class="ul-desc align-center">How much you earn as the referrer on average <span>every year</span></div>
+                <div class="image"><img src="{{assetsUrl}}/img2.png" alt="Table"></div>
+                <div class="ul-desc footer">*Jobs printed with aPrintis</div>
+              </div>
+            </div>
+          </div>
+          <div class="referrals-table">
+            <h4 class="referrals-title w-sub">
+              Your Referral list
+            </h4>
+            <div class="row">
+              <div class="col-lg-12 table-wrapper">
+                <table class="table-default">
+                  <thead>
+                    <th>Fullname</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Acceptance Date</th>
+                    <!-- <th>Role</th> -->
+                  </thead>
+                  <tbody *ngIf="referrals.length > 0">
+                    <tr *ngFor="let item of referrals">
+                      <td *ngIf="item.name">{{item.name}} {{item.lastName}}</td>
+                      <td *ngIf="!item.name">-</td>
+                      <td>{{item.email}}</td>
+                      <td class="{{item.status}}" *ngIf="item.status === 'pending'">Pending</td>
+                      <td class="{{item.status}}" *ngIf="item.status === 'accepted'">Accepted</td>
+                      <td *ngIf="item.dateAccepted">{{item.dateAccepted | date:'MM/dd/yyyy'}}</td>
+                      <td *ngIf="!item.dateAccepted">-</td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="referrals.length === 0">
+                    <tr>
+                      <td class="example">John Doe</td>
+                      <td class="example">email@email.com</td>
+                      <td class="example">Accepted</td>
+                      <td class="example">06/05/2018</td>
+                      <!-- <td class="example">Editor</td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="go-back-but">
+      <button (click)="goBack()" class="button-turq-default no-focus" mat-button>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div> -->
+  </div>

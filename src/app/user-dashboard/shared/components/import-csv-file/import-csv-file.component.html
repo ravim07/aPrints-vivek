@@ -1,0 +1,29 @@
+<button mat-icon-button class="close-dialog" (click)="close()" matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title class=" no-bottom-margin">{{data.title}}</div>
+  <div class="container-fluid">
+    <div class="text-below-title">
+      Need an example?
+      <a class="" href="{{data.exampleLink}}" download matTooltip="{{data.linkTooltip}}">Download here</a>
+    </div>
+    <div mat-dialog-content class="align-items-center">
+      <app-input-file-emails-csv *ngIf="data.inputType === 'normal'" (fileChanged)="fileCsvChanged($event)"
+                                 matTooltip="{{data.inputTooltip}}">
+      </app-input-file-emails-csv>
+      <app-subscriber-import-csv *ngIf="data.inputType === 'manual'" (fileChanged)="fileCsvChanged($event)"
+                                 matTooltip="{{data.inputTooltip}}">
+      </app-subscriber-import-csv>
+
+      <app-input-file-csv *ngIf="data.inputType === 'csv'" (fileChanged)="fileCsvChanged($event)"
+                          matTooltip="{{data.inputTooltip}}">
+      </app-input-file-csv>
+    </div>
+
+  </div>
+  <div *ngIf="data.inputType !== 'csv'" class="footer">
+    or <a (click)="goBack()">Go back</a>
+  </div>
+</div>

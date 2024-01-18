@@ -1,0 +1,61 @@
+<div class="issues-sidebar-buttons">
+  <div class="main">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard/publication/{{publicationId}}" routerLinkActive="selected-button"
+        [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>apps</mat-icon>
+        Issues
+      </a>
+      <a mat-list-item routerLink="/dashboard/publication/{{publicationId}}/members" routerLinkActive="selected-button"
+        [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>group</mat-icon>
+        Team
+      </a>
+      <a mat-list-item *ngIf="canManageSubscriptions"
+        routerLink="/dashboard/publication/{{publicationId}}/subscriptions" routerLinkActive="selected-button"
+        [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>contact_mail</mat-icon>
+        Subscriptions
+      </a>
+      <a mat-list-item *ngIf="canManageSponsorships" routerLink="/dashboard/publication/{{publicationId}}/sponsorships"
+        routerLinkActive="selected-button" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>grade</mat-icon>
+        Sponsorships
+      </a>
+      <a mat-list-item *ngIf="canManageAdvertising" routerLink="/dashboard/publication/{{publicationId}}/advertising"
+        routerLinkActive="selected-button" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>business_center</mat-icon>
+        Advertising
+      </a>
+       <a mat-list-item *ngIf="canManageTransfers"
+        routerLink="/dashboard/publication/{{publicationId}}/transfers/withdrawals"
+        routerLinkActive="selected-button" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>attach_money</mat-icon>
+        Bank Account
+      </a>
+       <a mat-list-item *ngIf="canManageInvoices && _publication.hasInvoices"
+        routerLink="/dashboard/publication/{{publicationId}}/invoices"
+        routerLinkActive="selected-button" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>receipt</mat-icon>
+        Invoices
+      </a>
+      <a mat-list-item *ngIf="canEditIssue" routerLink="/dashboard/publication/{{publicationId}}/shipping"
+        routerLinkActive="selected-button" [routerLinkActiveOptions]="{exact:true}">
+        <mat-icon>markunread_mailbox</mat-icon>
+        Shipping
+      </a>
+    </mat-nav-list>
+  </div>
+  <!-- <div class="tools">
+    <mat-nav-list>
+      <a mat-list-item routerLinkActive="selected-button">
+        <mat-icon>settings</mat-icon>
+        Settings
+      </a>
+      <a mat-list-item routerLinkActive="selected-button">
+        <mat-icon>help</mat-icon>
+        Help
+      </a>
+    </mat-nav-list>
+  </div> -->
+</div>

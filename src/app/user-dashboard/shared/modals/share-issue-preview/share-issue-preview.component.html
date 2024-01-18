@@ -1,0 +1,21 @@
+<button mat-icon-button class="close-dialog" mat-dialog-close matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title>Share Issue</div>
+  <div mat-dialog-content>
+    <div class="publication-issue-container">
+      <div class="issue-preview" [ngStyle]="{backgroundImage: 'url('+issue.coverImage.publicUrl+')' }"></div>
+      <div class="issue-details">
+        <h3 class="issue-name">{{issue.name}}</h3>
+        <div>Created {{issue.createdAt | date:'MM/dd/yy'}}</div>
+        <div class="publication-reference"><span class="font-weight-bold">{{publication.name}}</span> from {{publication.organization}}</div>
+      </div>
+    </div>
+    <div class="link-preview-container">
+      <span class="link-url">{{previewUrl}}</span>
+      <button class="button-turq copy-btn" mat-button (click)="copyUrl()">Copy</button>
+    </div>
+  </div>
+</div>

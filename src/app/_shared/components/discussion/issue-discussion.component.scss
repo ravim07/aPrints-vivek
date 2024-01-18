@@ -1,0 +1,578 @@
+@import "~scss/_variables";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_responsive";
+
+// ::ng-deep .mat-sidenav {
+//   width: 30vw;
+// }
+
+@mixin action-style($color, $bgColor) {
+  background: $bgColor;
+  border-left: 3px solid $color;
+  border-radius: 3px;
+
+  .icon {
+    .mat-icon {
+      color: $color;
+    }
+  }
+
+  .link-box {
+    .link {
+      color: $color;
+    }
+  }
+}
+
+%onhover {
+  &:hover {
+    transform: scale(1.025);
+    transition: 0.2s ease;
+    cursor: pointer;
+  }
+}
+
+%actionDesc {
+  .action-desc {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+
+    .time-ago {
+      flex-basis: 15%;
+
+      span.issue-name {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+%user {
+  .user {
+    @include flexbox();
+    align-items: center;
+    width: 100%;
+
+    &.not-action {
+      margin: 0 0 -5px 0;
+    }
+
+    .profile-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #d8d8d8;
+      color: #969696;
+      @include flexbox();
+      justify-content: center;
+      align-items: center;
+      @include typography-lvl(1.5rem, normal, 600, 'Montserrat', normal);
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .icon {
+      @include flexbox();
+      justify-content: center;
+
+      svg {
+        height: 50px;
+        width: 50px;
+      }
+    }
+
+    .text {
+      margin: 0 0.75rem 0 1rem;
+    }
+  }
+}
+
+:host {
+  flex: 1 1 75%;
+  @include flexbox();
+  justify-content: center;
+  align-items: flex-start;
+  // background: #f3f3f3;
+  border-radius: 5px;
+  // margin: 0 1rem;
+}
+
+.submenu-tit,
+.username,
+.time-ago {
+  color: #616161;
+  @include typography-lvl(0.9375rem, normal, 600, 'Averta', normal);
+}
+
+.time-ago {
+  font-size: 13px;
+  font-weight: normal;
+  font-family: AvertaLight;
+  margin-left: auto;
+  flex-basis: 35%;
+  text-align: right;
+
+  span.issue-name {
+    text-decoration: underline;
+  }
+}
+
+.lbl-default {
+  font-weight: 600;
+  margin: 0;
+}
+
+.comments-container {
+  @include flexbox();
+  flex-direction: column;
+  width: 100%;
+}
+
+.comments-toolbox {
+  @include max-width(680px) {
+    display: none;
+  }
+}
+
+.comments-box-header {
+  @include flexbox();
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1rem;
+  color: #616161;
+  @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+
+  .title {
+    opacity: 0.5;
+  }
+
+  .filter {
+    @include flexbox();
+    justify-content: space-between;
+    align-items: center;
+
+    .mat-form-field {
+      margin-left: 1.25rem;
+    }
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+
+      .mat-form-field-flex {
+        .mat-form-field-infix {
+          border-top: none;
+          width: 110px;
+        }
+      }
+    }
+
+    .mat-select {
+      @include typography-lvl(0.9375rem, normal, 600, 'Averta', normal);
+      color: #333333;
+    }
+  }
+}
+
+.comments-box {
+  // margin: 0 0 0 1rem;
+  margin: 0 1rem 0 1rem;
+
+  .loading-container {
+    width: 100%;
+    height: 40vh;
+    margin: auto;
+    @include flexbox();
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    ::ng-deep {
+
+      .mat-progress-spinner circle,
+      .mat-spinner circle {
+        stroke: $primary-color;
+      }
+    }
+
+    .description {
+      margin: 2rem 0;
+      opacity: 0.5;
+      @include typography-lvl(1.0625rem, normal, normal, 'AvertaLight', normal);
+      text-align: center;
+      color: #292929;
+    }
+  }
+}
+
+.status-bar {
+  padding: 1rem 0;
+}
+
+.comments {
+  @include flexbox();
+  flex-direction: column;
+  align-items: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  margin: 1rem 0;
+
+  cdk-virtual-scroll-viewport {
+    height: 46.8vh;
+    width: 100%;
+  }
+
+  // @include min-height(820px){
+  //   max-height: calc(100vh - 390px);
+  // }
+  // @include max-height(819px){
+  //   max-height: 50vh;
+  // }
+
+  .text-content,
+  .action-content {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    color: #484848;
+    border-radius: 3px;
+    @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+
+    .msg {
+      opacity: 0.75;
+    }
+
+    &.textarea-default.textarea-s1 {
+      padding: .845rem 1.125rem;
+
+      &:disabled {
+        border-color: #f9f9f9;
+        background: #f9f9f9;
+      }
+    }
+
+    .attachments {
+      @include flexbox();
+      // justify-content: center;
+      align-items: center;
+      // margin: 1rem 0;
+      word-break: break-all;
+
+      div.item {
+        div {
+          @include flexbox();
+          justify-content: center;
+          align-items: center;
+
+          a {
+            margin-left: 0.25rem;
+          }
+
+          .mat-icon {
+            transform: rotate(-45deg);
+          }
+
+          img {
+            height: auto;
+            width: 100%;
+          }
+        }
+
+        div:not(:first) {
+          margin-top: 1rem;
+        }
+
+        &.image {
+          margin: 1rem auto 0;
+        }
+      }
+    }
+  }
+
+  .comment {
+    margin-bottom: 0.8125rem;
+    width: 100%;
+
+    @extend %user;
+
+    .msg,
+    .attachments {
+      margin: 0 0 0 3.5rem;
+      word-break: break-word;
+    }
+
+    .text-content {
+      padding: 1.25rem 2rem;
+      background: #fafafa;
+    }
+  }
+
+  .action {
+    margin-bottom: 1rem;
+    width: 100%;
+
+    .action-content {
+      @include flexbox();
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 0.625rem 2rem;
+      background: unset !important;
+      transition: 0.2s ease;
+
+      @extend %user;
+
+      .space {
+        margin: 0 0.1rem;
+      }
+
+      .icon {
+        @include flexbox();
+        justify-content: center;
+
+        svg {
+          height: 24px;
+          width: 24px;
+        }
+
+        svg.admin-svg {
+          height: 50px;
+          width: 50px;
+          margin-left: -0.45rem;
+        }
+      }
+
+      .action-desc {
+        @include flexbox();
+        justify-items: center;
+        align-content: flex-start;
+        flex-direction: column;
+        color: $font-color;
+        padding-left: 0.75rem;
+        @include typography-lvl(0.875rem, normal, 500, 'Montserrat', normal);
+
+        span.fullname {
+          font-weight: 600;
+        }
+      }
+
+      .feedback-msg {
+        flex-basis: 100%;
+        margin: 1rem auto;
+        padding: 0 1.5rem;
+        word-break: break-word;
+        width: fit-content;
+        @include flexbox();
+        justify-content: center;
+        flex-direction: column;
+
+        div {
+          width: fit-content;
+          align-self: center;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .link-box {
+        @include flexbox();
+        align-items: center;
+
+        .link {
+          @include typography-lvl(0.875rem, normal, 500, 'Montserrat', normal);
+        }
+
+        button {
+          opacity: 0.75;
+          height: 40px;
+          @include typography-lvl(0.9375rem, normal, 600, 'Averta', normal);
+          color: #292929;
+        }
+      }
+
+      .comment-notes {
+        margin: 0 0 0 3.5rem;
+
+        &::ng-deep {
+          p:first-child {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .submission {
+    @include action-style(#1352c1, rgba(19, 82, 193, 0.05));
+    @extend %onhover;
+  }
+
+  .statusChange {
+    @include action-style(#FF6732, rgba(255, 103, 50, 0.05));
+    @extend %actionDesc;
+    @extend %onhover;
+  }
+
+  .admin-action {
+    @include action-style($primary-color, rgba(12, 200, 203, 0.05));
+    @extend %actionDesc;
+    @extend %onhover;
+  }
+
+  .newMember {
+    @include action-style(#929292, rgba(146, 146, 146, 0.05));
+    @extend %actionDesc;
+    @extend %onhover;
+  }
+
+  .newPayment {
+    @include action-style(#8DD077, rgba(141, 208, 119, 0.05));
+    @extend %actionDesc;
+  }
+
+  .newIssue {
+    @include action-style(#FFC132, rgba(255, 193, 50, 0.05));
+    @extend %actionDesc;
+    @extend %onhover;
+  }
+
+  .comments-placeholder {
+    align-self: stretch;
+    justify-self: stretch;
+    text-align: center;
+    vertical-align: middle;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal;
+      @include typography-lvl(0.9rem, normal, 400, 'Montserrat', normal);
+      color: #999999;
+    }
+  }
+}
+
+.upload-wait {
+  @include flexbox();
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 0.5rem;
+
+  span {
+    @include typography-lvl(0.875rem, normal, 600, 'Montserrat', normal);
+    // margin-left: 0.5rem;
+    color: #484848;
+  }
+}
+
+.textarea-msg {
+  resize: vertical;
+  width: 100%;
+  @include typography-lvl(0.75rem, normal, 400, 'Montserrat', normal);
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(151, 151, 151, 0.36);
+  outline: none;
+  color: black;
+}
+
+.edit-form-link {
+  display: block;
+  float: right;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.btn-close {
+  margin-left: 5px;
+  padding: .25rem;
+}
+
+.attachment-list {
+  padding: 20px 0;
+  @include flexbox();
+  flex: 1;
+  flex-direction: row;
+  overflow: auto;
+
+  .attachment {
+    height: 100px;
+    position: relative;
+
+    img {
+      max-height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+.padding-zero {
+  padding: 0;
+}
+
+.form > form {
+  @include flexbox();
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+
+  .textarea {
+    flex: 1;
+    width: 100%;
+    @include flexbox();
+    align-items: center;
+    background-color: white;
+    border: 1px solid #e1e1e1;
+
+    textarea {
+      resize: none;
+      border: none;
+    }
+  }
+
+  .but-panel {
+    @include flexbox();
+    width: fit-content;
+    margin: 1rem 0 2rem 0;
+
+    .button {
+      margin: 0 1rem 0 0;
+
+      button {
+        padding: 0.625rem 1.5rem;
+        border-radius: 2px;
+        font-weight: 600;
+
+        &.sending-text {
+          padding: 0.47rem 0.8rem !important;
+          @include flexbox();
+          justify-content: center;
+          align-items: center;
+        }
+
+        .progress-spinner {
+          height: 24px;
+          width: 24px;
+          margin: 0;
+
+          ::ng-deep circle {
+            stroke: white;
+          }
+        }
+      }
+    }
+
+    .attachment {
+    }
+  }
+}
+
+.progress-bar {
+  margin: 1rem;
+}

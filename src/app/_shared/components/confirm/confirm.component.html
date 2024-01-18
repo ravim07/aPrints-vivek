@@ -1,0 +1,20 @@
+<button mat-icon-button class="close-dialog" (click)="onCancelClick(false)" matTooltip="Close this dialog"
+  aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title class="confirmation-title">
+    {{data.title ? data.title : 'Confirmation'}}
+  </div>
+  <div mat-dialog-content>
+    <div class="confirmation-msg">
+      {{data.msg}}
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="save" [mat-dialog-close]="true">
+      <ng-container *ngIf="true">{{data.okBtnTxt}}</ng-container>
+    </button>
+    <button mat-button (click)="onCancelClick(true)">{{data.cancelBtnTxt}}</button>
+  </div>
+</div>

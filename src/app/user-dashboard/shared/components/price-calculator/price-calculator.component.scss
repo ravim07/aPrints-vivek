@@ -1,0 +1,77 @@
+@import "~scss/mixins/_typography";
+@import "~scss/_variables";
+
+.price-calculator-wrapper {
+  position: relative;
+  #form-error-shipping {
+    position: absolute;
+  }
+  #txt-custom-quote {
+    position: absolute;
+    @include typography-lvl(0.75rem, 0.875rem, 600, 'Montserrat', normal);
+    top: -20px;
+    a {
+      cursor: pointer;
+      color: $primary-color;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  .price-calculator {
+    background: #f9f9f9;
+    padding: 1.25rem 1.875rem;
+    @include typography-lvl(0.75rem, normal, 400, 'Montserrat', normal);
+    .ul, .li {
+      margin: 0;
+      padding: 0;
+    }
+    .li {
+      padding-bottom: 0.875rem;
+      display: flex;
+      justify-content: space-between;
+      .amount {
+        font-size: 14px;
+      }
+      .link-action {
+        font-size: 0.625rem;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-left: -10%;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+      .input-small {
+        width: 60px;
+        margin-left: 10px;
+      }
+      .btns {
+        margin-left: 10px;
+        .link-action {
+          margin-right: 5px;
+        }
+      }
+      &.total {
+        border-top: 1px solid rgba(151, 151, 151, 0.19);
+        padding: 1.188rem 0 0;
+        .total-txt {
+          font-weight: 600;
+          font-size: 0.75rem;
+        }
+        .amount {
+          color: $primary-color;
+          font-weight: 600;
+          flex-direction: column;
+          text-align: right;
+          .tax-text {
+            color: #484848;
+            font-weight: 400;
+            font-size: 0.8125rem;
+          }
+        }
+      }
+    }
+  }
+}

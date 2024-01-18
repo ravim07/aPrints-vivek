@@ -1,0 +1,9 @@
+<div class="input-file-csv">
+  <div class="input-group-btn">
+    <input (click)="openDialog()" type="text" class="input-default input-s1" [(ngModel)]="filename"
+      placeholder="Click to change CSV">
+    <span (click)="importCSV()" class="btn">{{buttonText}}</span>
+  </div>
+  <p *ngIf="loading" class="loading">Processing, please wait...</p>
+  <input #fileUpload class="file-uploader" type="file" name="file" (change)="onChangeUploadFile($event.target.files)">
+</div>

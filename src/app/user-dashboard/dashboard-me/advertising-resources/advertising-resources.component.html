@@ -1,0 +1,82 @@
+<div [hidden]="loading" class="dash-main-content dash-main-content-no-margin dash-articles-issue">
+    <h3 class="dash-title w-sub">
+      {{publication.name}}
+    </h3>
+    <h4 class="dash-sub-title">Issue #{{issue.number}}: {{issue.name}}</h4>
+    <h5 class="dash-h5">Ads added</h5>
+    <div class="dash-content-default">
+      <div class="row">
+        <div class="col-lg-12 table-wrapper">
+          <table class="table-default ad-resources-table">
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Updated</th>
+              <!--
+              <th>Status</th>
+              -->
+              <th class="hiddenx-xs th-actions"></th>
+            </tr>
+            </thead>
+            <tbody *ngIf="issue._adResources.length > 0">
+            <tr *ngFor="let adResource of issue._adResources">
+              <td>{{ adResource.title }}</td>
+              <td>{{ adResource.createdAt | date:'shortDate' }}</td>
+              <td>{{ adResource.updatedAt | timeAgo }}</td>
+              <!--
+              <td>{{ adResource.status | titlecase }}</td>
+              -->
+              <td class="link-action">
+                <a (click)="viewAdResource(adResource)">VIEW</a>
+              </td>
+            </tr>
+            </tbody>
+            <tbody *ngIf="issue._adResources.length === 0">
+              <tr>
+                <td class="text-center">-</td>
+                <td class="example">Example Title</td>
+                <td class="example">05/19/1955</td>
+                <td class="example">{{ 05/19/1955 | timeAgo }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+    </div>
+    <!-- <div class="go-back-but">
+      <button (click)="goBack()" class="button-turq-default no-focus" mat-button>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div> -->
+  </div>
+  
+  
+  <app-pop-up [(showPopup)]="showAdResourcePopUp">
+    <div class="modal-header">
+      <div class="row">
+        <div class="col-6">
+          <div class="user">
+            <img class="profile-img" src="{{assetsUrl}}/profile.png" width="50" height="50"/>
+            <span *ngIf="currentAdResource" class="username">{{currentAdResource.advertiser.name}}</span>
+          </div>
+        </div>
+        <div class="col-6 text-right pub-date">
+          {{ publication.dateCreated | date: 'shortDate' }}
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="modal-body">
+        <app-ad-resource-form
+        *ngIf="showAdResourcePopUp"
+        [issueId]="issue.id"
+        [adResource]="currentAdResource">
+      </app-ad-resource-form>
+    </div>
+  
+  </app-pop-up>
+  
+  

@@ -1,0 +1,265 @@
+// Forms
+.input-default,
+.textarea-default {
+  padding: .375rem .75rem;
+  border-radius: $form-border-radius;
+  font-size: 1rem;
+  border: 1px solid $form-default-border-color;
+  line-height: 1.5;
+  outline: none;
+  color: black;
+  &.input-s1,
+  &.textarea-s1 {
+    width: 100%;
+    @include typography-lvl(0.875rem, normal, 400, 'Averta', normal);
+    padding: .845rem 1.125rem;
+    margin-bottom: 0.625rem;
+    &:disabled {
+     background: $form-default-disabled-bg-color;
+     border-color: $form-default-disabled-border-color;
+     color: $form-default-disabled-color;
+    }
+  }
+  &.input-small {
+    font-size: 0.6875rem;
+    padding: 0.1875rem 0.5rem;
+  }
+  .dash-form-layout-default &.ng-invalid.ng-touched {
+    border-color: $form-error-default-color;
+  }
+  // &::placeholder{
+  //   color: black;
+  // }
+}
+
+.checkbox-default {
+  @include typography-lvl(0.875rem, normal, 400, 'Averta', normal);
+  &.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+  &.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background: $primary-color;
+  }
+  .mat-checkbox-frame {
+    border-width: 1px;
+    border-color: $form-default-border-color;
+  }
+}
+
+.lbl-default {
+  display: inline-block;
+  @include typography-lvl(0.9375rem, normal, 400, 'Averta', normal);
+  color: black;
+  padding: 0;
+  margin: 0 0 1.625rem 0;
+  width: 100%;
+  .req {
+    color: $primary-color-text;
+  }
+  .edit-icon {
+    position: absolute;
+    right: 12px;
+    top: -2px;
+  }
+  @include for-phone-only {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.form-text-default {
+  display: inline-block;
+  width: 100%;
+  color: black;
+  text-align: center;
+  margin: 0.8125rem 0px;
+  @include typography-lvl(0.875rem, 0.875rem, 400, 'Averta', normal);
+}
+
+.form-error {
+  @include typography-lvl(0.875rem, 0.875rem, 600, 'Averta', normal);
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  &.form-error-default {
+    color: $form-error-default-color;
+    display: inline-block;
+    margin: 0.845rem 0;
+  }
+}
+
+// Select
+@mixin form-select-typo() {
+  @include typography-lvl(0.875rem, normal, 400, 'Averta', normal);
+  color: black;
+}
+
+.default-paginator .mat-paginator-page-size-select,
+.mat-form-field.select-default {
+  
+  box-shadow: #000 0px 2px;
+  font-size: 1rem;
+  .mat-form-field-wrapper {
+    border: none;
+    border-radius: 0;
+    // border: 1px solid $form-default-border-color;
+    // border-radius: $form-border-radius;
+    padding: 0;
+    .mat-form-field-underline {
+      display: none !important;
+    }
+    .mat-form-field-label {
+      display: none !important;
+    }
+  }
+  &.mat-paginator-page-size-select,
+  &.select-s1 {
+    width: 100%;
+    @include form-select-typo();
+    .mat-form-field-infix {
+      padding: .845rem 1.125rem;
+      border: none;
+      .mat-select-value {
+        @include form-select-typo();
+        .mat-select-placeholder {
+          color: black;
+          -webkit-text-fill-color: $form-default-color;
+          @include form-select-typo();
+        }
+      }
+      .mat-select-arrow-wrapper {
+        .mat-select-arrow {
+          color: #000;
+          border-left-width: 7px;
+          border-right-width: 7px;
+          border-top-width: 7px;
+          margin-top: 2px;
+        }
+      }
+    }
+    &.mat-form-field-disabled {
+      .mat-form-field-wrapper {
+        background: $form-default-disabled-bg-color;
+        border-color: $form-default-disabled-border-color;
+        color: $form-default-disabled-color;
+      }
+    }
+  }
+  .dash-form-layout-default &.ng-invalid.ng-touched {
+    .mat-form-field-wrapper {
+      border-color: $form-error-default-color;
+      .mat-select-arrow-wrapper {
+        .mat-select-arrow {
+          color: $form-error-default-color;
+        }
+      }
+    }
+  }
+}
+
+.mat-select-panel .mat-option .mat-option-text {
+  @include form-select-typo();
+}
+
+.mat-optgroup .mat-option .mat-option-text {
+  @include form-select-typo();
+}
+
+.mat-optgroup .mat-optgroup-label{
+  display: none;
+}
+
+// DatePicker
+@mixin datepicker-typo() {
+  @include typography-lvl(0.875rem, normal, 400, 'Averta', normal);
+  color: black;
+}
+
+.simple-datepicker {
+  .input-default.input-s1 {
+    @include datepicker-typo();
+    padding: .70rem 1.125rem;
+    height: 44px;
+    &.mat-form-field-disabled {
+      background: $form-default-disabled-bg-color;
+      border-color: $form-default-disabled-border-color;
+      color: $form-default-disabled-color;
+    }
+    .mat-form-field-wrapper {
+      padding: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      left: 0;
+      padding-left: 1.125rem;
+      .mat-form-field-infix {
+        padding: 0;
+        margin: 0;
+        border: none;
+      }
+      .mat-form-field-underline {
+        display: none !important;
+      }
+      .mat-form-field-label-wrapper {
+        display: none !important;
+      }
+      .mat-input-element {
+        @include datepicker-typo();
+        &:disabled {
+          @include datepicker-typo();
+        }
+      }
+    }
+    .mat-icon-button {
+      width: 44px;
+      height: 44px;
+      .mat-datepicker-toggle-default-icon {
+        width: 18px !important;
+        height: 18px !important;
+        color: $form-default-icon-color;
+      }
+      .mat-button-ripple,
+      .mat-button-focus-overlay {
+        display: none !important;
+      }
+    }
+    .dash-form-layout-default &{
+      &.ng-invalid.ng-touched {
+        border-color: $form-default-border-color;
+      }
+    }
+  }
+  &.datepicker-error {
+    .input-default.input-s1 {
+      border-color: $form-error-default-color;
+      &.ng-invalid.ng-touched {
+        border-color: $form-error-default-color;
+      }
+      .mat-icon-button {
+        .mat-datepicker-toggle-default-icon {
+          color: $form-error-default-color;
+        }
+      }
+    }
+  }
+}
+
+.form-center {
+  max-width: 450px;
+  margin: 5rem auto;
+  h3 {
+    @include typography-lvl(1.5rem, normal, 600, 'Averta', normal);
+    margin: 0 0 2rem;
+    text-align: center;
+    padding: 0;
+    color: black;
+  }
+  p {
+    @include typography-lvl(0.875rem, normal, 400, 'Averta', normal);
+    color: $font-color;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    line-height: 1.15rem;
+  }
+  .row-btn {
+    margin: 2rem 0;
+    text-align: right;
+  }
+}

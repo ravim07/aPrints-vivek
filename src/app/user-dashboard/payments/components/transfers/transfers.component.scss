@@ -1,0 +1,120 @@
+@import "../../../../../scss/mixins/responsive";
+@import "../../../../../scss/mixins/typography";
+@import "../../../../../scss/mixins/utils";
+@import "../../../../../scss/variables";
+
+.tabs-header-buttons {
+  //height: 100%;
+  button {
+    height: 100%;
+    margin: 0 0.5rem;
+    @include typography-lvl(0.937rem, normal, 600, 'Averta', normal);
+  }
+
+  height: 50px;
+}
+
+.mat-tab-link {
+  font-weight: 600;
+
+  &.mat-tab-label-active {
+    opacity: 1;
+  }
+}
+
+.content {
+  overflow: inherit !important;
+}
+
+.sub-header {
+  @include flexbox();
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px #e1e1e1;
+  margin-bottom: 0.562rem;
+  flex-wrap: wrap;
+
+  .mat-tab-header, .mat-tab-nav-bar {
+    border-bottom: none;
+  }
+}
+
+.account-container {
+  margin-left: 3.75rem;
+  @include typography-lvl(0.938rem, normal, 300, Averta, normal);
+  color: #292929;
+
+  .label-header {
+    margin-right: 1.25rem;
+    opacity: 0.5;
+  }
+
+  .account-details {
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .badge-status {
+    margin-left: 1.25rem;
+    font-weight: 600;
+    font-size: 0.75rem;
+  }
+
+}
+
+.main-container {
+
+  .content {
+    .table-content {
+      border-top: none;
+
+      .table-element {
+
+        .name-h {
+          width: 65%;
+        }
+
+        .amount-h,
+        .total-h {
+          min-width: 55px;
+          max-width: 55px;
+        }
+
+        .subscriptions-h {
+          min-width: 131px;
+          max-width: 131px;
+        }
+
+        td {
+          height: 68.5px;
+          text-align: start;
+
+          &.mat-footer-cell {
+            height: 40px;
+            padding: 10px 0;
+            background-color: rgba(13, 212, 219, 0.2);
+            padding-right: 1.4rem;
+          }
+
+          &:first-of-type {
+            padding-left: 24px;
+          }
+
+          &.mat-footer-cell:not(.total-name) {
+            text-align: center;
+          }
+
+          &.amount,
+          &.subscriptions,
+          &.total {
+            text-align: center;
+          }
+        }
+
+        tr.mat-footer-row {
+          margin: 10px 0;
+        }
+      }
+    }
+  }
+}

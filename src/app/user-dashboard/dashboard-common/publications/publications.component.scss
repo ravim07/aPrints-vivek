@@ -1,0 +1,83 @@
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.main-container {
+
+  .sidenav-container {
+    // margin-top: 1rem;
+  }
+
+  .content {
+    .table-content.pubs-table {
+
+      .table-element {
+
+        .publications-name {
+          width: 20%;
+          padding-left: 1.4rem;
+        }
+
+        .total-funds,
+        .num-issues {
+          width: 105px;
+        }
+
+        .description {
+          // max-width: 55%;
+          // min-width: 220px;
+        }
+
+        .menu-column {
+          width: 64px;
+        }
+
+        td {
+          height: 93px;
+
+          &.description {
+            line-break: anywhere;
+
+            div {
+              height: 87px;
+              overflow: hidden;
+            }
+          }
+
+          &.status-invite {
+            @include typography-lvl(0.75rem, normal, 600, 'Averta', normal);
+            text-align: center;
+            color: #ffffff;
+            text-transform: capitalize;
+
+            .status-container {
+              width: 90px;
+              height: 21px;
+              @include flexbox();
+              justify-content: center;
+              align-items: center;
+              border-radius: 10px;
+
+              &.active {
+                background-color: #94c08d;
+              }
+
+              &.pending {
+                background-color: #ffdb62;
+              }
+
+              .mat-icon {
+                font-size: 14px;
+                width: 14px;
+                height: 14px;
+                line-height: 14px;
+                margin-right: 4px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

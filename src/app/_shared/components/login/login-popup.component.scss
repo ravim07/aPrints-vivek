@@ -1,0 +1,112 @@
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_typography";
+
+.login-dialog-main {
+  justify-content: flex-start !important;
+
+  form {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+}
+
+.login-main-action {
+  width: 100%;
+  height: 40px;
+  margin-top: 16px;
+
+  button {
+    width: 100%;
+  }
+
+  .login-main-action__login-error {
+    padding-top: 0.5rem;
+    @include typography-lvl(0.875rem, normal, normal, 'AvertaLight', 0.29px);
+  }
+}
+
+.login-other-actions {
+  width: 100%;
+  margin: 45px 0 0 0;
+  @include flexbox();
+  flex-direction: column;
+
+  .margin-top {
+    margin-top: 10px;
+  }
+
+  .login-other-actions-title {
+    opacity: 0.5;
+    @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+    text-align: center;
+    color: #333333;
+  }
+
+  .actions {
+    .login-button-social {
+      width: 400px;
+      height: 40px;
+      border-radius: 2px;
+      border: solid 2px #e1e1e1;
+      background-color: #ffffff;
+      @include flexbox();
+      align-items: center;
+      margin-left: 0 !important;
+
+      .mat-button-wrapper {
+        width: 100%;
+        height: 40px;
+        @include flexbox();
+        align-items: center;
+      }
+
+      svg {
+        justify-self: flex-start;
+      }
+
+      .button-caption {
+        justify-self: center;
+        @include typography-lvl(1rem, normal, 600, 'Averta', normal);
+        text-align: center;
+        color: #292929;
+        width: 100%;
+      }
+    }
+  }
+
+  .login-action {
+    height: 40px;
+    margin-top: 4rem;
+    border: none !important;
+
+    .mat-button-wrapper {
+      @include flexbox();
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+      color: #292929;
+    }
+
+    .login-action-accent {
+      font-family: Averta;
+      font-weight: 600;
+      margin-left: 12px;
+    }
+  }
+}
+
+.link-forgot {
+  font-family: Averta;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
+  color: #333333;
+  cursor: pointer;
+}

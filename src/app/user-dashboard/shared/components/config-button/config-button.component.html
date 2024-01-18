@@ -1,0 +1,15 @@
+<button *ngIf="canEditPub || canEditIssue" mat-icon-button [matMenuTriggerFor]="menu"
+  matTooltip="Configuration options for Publication and Issue"
+  aria-label="Configuration options for Publication and Issue">
+  <mat-icon>settings</mat-icon>
+</button>
+<mat-menu class="config-menu" #menu="matMenu">
+  <button *ngIf="canEditPub" mat-menu-item [routerLink]="['/dashboard','publication','edit', pubId]"
+    [queryParams]="{issueId: issueId}">
+    <span>Edit Publication</span>
+  </button>
+  <button *ngIf="canEditIssue" mat-menu-item
+    [routerLink]="['/dashboard', 'publication', pubId, 'issue','edit', issueId]">
+    <span>Edit Issue</span>
+  </button>
+</mat-menu>

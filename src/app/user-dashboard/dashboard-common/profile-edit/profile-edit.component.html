@@ -1,0 +1,67 @@
+<div *ngIf="_showPopup">
+  <div id="modal-overlay" class="modal-fade {{popupClass}}">
+    <div class="modal900 modal-default">
+      <span class="modal-close" (click)="closePopup()">
+        <img class="close-w" src="{{assetsUrl}}/icons/close.png" />
+        <img class="close-b" src="{{assetsUrl}}/icons/close-black.png" />
+      </span>
+
+      <div class="form-wrapper">
+        <h3 class="dash-title w-sub">Profile Edit</h3>
+        <div class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form">
+          <form [formGroup]="userForm" (ngSubmit)="save($event)" autocomplete="off" class="group-edit-issue-form">
+            <div *ngIf="errorApi || email.errors || repeatEmail.errors || password.errors || repeatPassword.errors"
+              class="form-error form-error-top form-error-default">
+              Please check: 
+              <ul>
+                <li *ngIf="errorApi">{{errorApi}}</li>
+                <li *ngIf="email.errors && email.errors.required">Email is required</li>
+                <li *ngIf="email.errors && email.errors.pattern">Invalid email</li>
+                <li *ngIf="password.errors && password.errors.minlength">Password must have at least 10 characters</li>
+                <li *ngIf="password.errors && password.errors.maxlength">Password must can have a maximum of 128 characters.</li>
+                <li *ngIf="repeatEmail.errors && repeatEmail.errors.missmatch">Emails must match</li>
+                <li *ngIf="repeatPassword.errors && repeatPassword.errors.missmatch">Passwords must match</li>
+              </ul>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 form-col form-col-title lbl-default lbl-large">First Name</div>
+              <div class="col-lg-6 form-col form-col-title lbl-default lbl-large">Last Name</div>
+              <div class="col-lg-6 form-col form-col-title lbl-default lbl-mobile">First Name</div>
+              <div class="col-lg-6 form-col">
+                <input type="text" formControlName="name" class="input-default input-s1" placeholder="First Name">
+              </div>
+              <div class="col-lg-6 form-col form-col-title lbl-default lbl-mobile">Last Name</div>
+              <div class="col-lg-6 form-col">
+                <input type="text" formControlName="lastName" class="input-default input-s1" placeholder="Last Name">
+              </div>
+              <div class="col-lg-6 form-col form-col-title lbl-default">Email</div>
+              <div class="col-lg-6 form-col form-col-title lbl-default lbl-large"></div>
+              <div class="col-lg-6 form-col">
+                <input type="text" formControlName="email" class="input-default input-s1" placeholder="Enter email">
+              </div>
+              <div class="col-lg-6 form-col">
+                <input type="text" formControlName="repeatEmail" class="input-default input-s1" placeholder="Repeat email">
+              </div>
+              <div class="col-lg-6 form-col form-col-title lbl-default">Password</div>
+              <div class="col-lg-6 form-col form-col-title lbl-default lbl-large"></div>
+              <div class="col-lg-6 form-col">
+                <input type="password" class="input-default input-s1" placeholder="Enter new password"
+                  autocomplete="new-password" formControlName="password" value=""
+                >
+              </div>
+              <div class="col-lg-6 form-col">
+                <input type="password" class="input-default input-s1" placeholder="Repeat new password"
+                  autocomplete="new-password" formControlName="repeatPassword" value="">
+              </div>
+            </div>
+            <div class="row form-btn">
+              <div class="col-lg-12 form-col">
+                <button type="submit" class="button-turq-default no-focus btn-save" mat-button>Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

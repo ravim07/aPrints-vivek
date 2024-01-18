@@ -1,0 +1,89 @@
+<div class="cover-container">
+  <app-page-header  appStickybits></app-page-header>
+  <main role="main">
+    <div class="main-p main-left">
+      <div class="col-img">
+        <p class="preview-desc" *ngIf="invitationData">PDF Preview of <strong>{{invitationData.publication}}</strong></p>
+        <div class="pdf-preview" *ngIf="!showPdfPreview">
+          <!-- <span>No file uploaded yet</span> -->
+          <img src="{{assetsUrl}}/NF2.png">
+        </div>
+        <!-- <div class="col-img" [hidden]="!showPdfPreview">
+          <svg xmlns="http://www.w3.org/2000/svg" width="79" height="86" viewBox="0 0 80 84">
+            <g fill="#FFF" fill-rule="evenodd">
+                <path fill-rule="nonzero" d="M79.544 22.732L57.914.495A1.642 1.642 0 0 0 56.739 0H24.502c-3.608 0-6.543 2.903-6.543 6.471v22.606H4.895c-2.7 0-4.895 2.172-4.895 4.842v24.24C0 60.827 2.196 63 4.895 63H17.96v14.54c0 3.562 2.935 6.46 6.543 6.46h48.955C77.065 84 80 81.104 80 77.544V23.852c0-.417-.164-.819-.456-1.12zM57.143 4.361l17.755 18.254H57.143V4.361zM4.895 59.769c-.899 0-1.63-.722-1.63-1.61v-24.24c0-.888.732-1.611 1.63-1.611h44.088c.898 0 1.63.723 1.63 1.61v24.24c0 .889-.732 1.611-1.63 1.611H4.895zm71.84 17.775c0 1.778-1.47 3.225-3.278 3.225H24.502c-1.807 0-3.278-1.448-3.278-3.228V63h27.759c2.699 0 4.895-2.172 4.895-4.842v-24.24c0-2.669-2.196-4.841-4.895-4.841H21.224V6.471c0-1.787 1.47-3.24 3.278-3.24h29.375v21c0 .892.732 1.615 1.633 1.615h21.225v51.698z"/>
+                <path fill-rule="nonzero" d="M19.167 41.58c-.555-.703-1.244-1.16-2.066-1.37-.536-.14-1.685-.21-3.448-.21H9v14h2.9v-5.281h1.89c1.312 0 2.315-.067 3.007-.2.51-.109 1.01-.33 1.504-.664.493-.335.899-.795 1.219-1.38.32-.586.48-1.309.48-2.168 0-1.114-.278-2.023-.833-2.727zm-2.483 3.854c-.218.312-.52.541-.906.687-.385.147-1.15.22-2.292.22H11.9v-3.973H13.3c1.045 0 1.74.032 2.086.096.47.083.859.29 1.166.62.307.332.46.752.46 1.261 0 .414-.11.777-.328 1.089zM34.531 43.825c-.312-.895-.768-1.65-1.367-2.268a4.807 4.807 0 0 0-2.157-1.29c-.625-.178-1.533-.267-2.725-.267H23v14h5.439c1.067 0 1.92-.099 2.558-.296.853-.267 1.53-.64 2.03-1.117.665-.63 1.176-1.455 1.534-2.474.293-.834.439-1.827.439-2.98 0-1.31-.156-2.414-.469-3.308zm-2.812 5.749c-.195.627-.447 1.077-.756 1.351-.31.274-.699.468-1.167.582-.358.09-.94.134-1.748.134H25.89v-9.273h1.299c1.178 0 1.969.045 2.372.134.54.115.987.334 1.338.66.352.324.625.776.82 1.355.196.58.293 1.41.293 2.493 0 1.082-.097 1.937-.293 2.564z"/>
+                <path d="M46 42.368V40h-9v14h2.65v-5.95h5.481v-2.368h-5.48v-3.314z"/>
+            </g>
+          </svg>
+        </div> -->
+        <div *ngIf="!loading && showPdfPreview" class="pdf-preview">
+          <div>
+            <button class="button-orange button-orange-default no-focus pdf-viewer"
+              (click)="openPdf()" mat-button>Open PDF
+            </button>
+            <!-- <button class="button-orange button-orange-default no-focus"
+                    (click)="downloadFile()" mat-button>Download
+            </button> -->
+            <a class="download-pdf-link" target="_blank" #downloadPdfLink></a>
+            <img src="{{currentDraft.thumbPublicUrl}}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-p main-right">
+      <div class="content-form {{invitationData ? 'from-invitation' : ''}}">
+          <div *ngIf="!loading" class="form {{formStatusClass}}">
+            <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+              <p class="invitation-intro" *ngIf="invitationData">
+                You've been invited to be{{invitationData.role === 'Editor' ? ' an ' : ' a '}}{{invitationData.role}} of
+                <strong>{{invitationData.publication}}</strong>
+              </p>
+              <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+                <div>{{errorApi}}</div>
+              </div>
+              <input (click)="resetRegisterError()" type="text" class="input-default input-s1" formControlName="fullname" placeholder="Full Name">
+              <div *ngIf="registerForm.get('fullname').invalid && registerForm.get('fullname').touched" class="form-error form-error-default">
+                <div *ngIf="registerForm.get('fullname').hasError('required')">
+                  Full Name is required
+                </div>
+                <div *ngIf="registerForm.get('fullname').hasError('minlength')">
+                  Full Name must be at least 6 characters long
+                </div>
+              </div>
+              <input (click)="resetRegisterError()" type="email" class="input-default input-s1" formControlName="email" placeholder="Main Contact Email">
+              <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched" class="form-error form-error-default">
+                <div *ngIf="registerForm.get('email').hasError('required')">
+                    Email is required
+                </div>
+                <div *ngIf="registerForm.get('email').hasError('email')">
+                    Please enter a valid email address
+                </div>
+              </div>
+              <input (click)="resetRegisterError()" type="password" class="input-default input-s1" formControlName="password" placeholder="Password">
+              <div *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched" class="form-error form-error-default">
+                <div *ngIf="registerForm.get('password').hasError('required')">
+                  Password is required
+                </div>
+                <div *ngIf="registerForm.get('password').hasError('minlength')">
+                  The password must have at least {{registerForm.controls.password.errors['minlength'].requiredLength}} characters.
+                </div>
+              </div>
+              <button type="submit" class="button-orange button-lg no-focus" mat-button>Sign Up</button>
+              <div class="link-login">Already have an account? <a (click)="goToLogin()">Login</a></div>
+            </form>
+            <span class="form-text-default">Or register with</span>
+            <button (click)="goToFacebookLogin()" class="button-social button-face" mat-button>
+              <img class="face-icon" src="{{assetsUrl}}/facebook-logo.png" />Facebook
+            </button>
+            <button (click)="goToGoogleLogin()" class="button-social button-google" mat-button>
+              <img class="google-icon" src="{{assetsUrl}}/google-logo.png" />Google
+            </button>
+          </div>
+      </div>
+    </div>
+  </main>
+  <app-page-footer></app-page-footer>
+</div>
+
+<app-pdf-viewer *ngIf="isBrowser" [showPopup]="showPopupPdfViewer" (popupEvent)="onPdfViewerPopupEvent($event)" [clickedCover]="clickedCover"></app-pdf-viewer>

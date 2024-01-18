@@ -1,0 +1,111 @@
+@import "../../../../scss/variables";
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+
+.dash-articles-issue{
+  margin: 0 2rem;
+}
+
+.dash-title-main-div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  // margin-right: 6%;
+  .dash-title-div{
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-grow: 1;
+    // .dash-title-div-div{
+      // flex-grow: 1;
+    // }
+    .share-button{
+      flex-grow: 0.96;
+      margin: 0;
+    }
+  }
+}
+
+.modal-header {
+  .user {
+    @include flexbox();
+    align-items: center;
+    .profile-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .username {
+      margin-left: 20px;
+    }
+  }
+}
+
+.col-img {
+  @include min-width(1200px) {
+    flex: 0 0 21%;
+    max-width: 21%;
+  }
+  .button-orange-default,
+  .button-progress-default,
+  .button-dark-default-disabled {
+    width: 100%;
+    margin: 0.6875rem 0 0.5625rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    &.pdf-viewer{
+      top: 30%;
+      @include max-width(1400px){top: 25%;}
+      @include max-width(992px){top: 40%;}
+      @include max-width(480px){top: 35%;}
+    }
+  }
+  .link {
+    text-align: center;
+    a {
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      @include max-width(992px) {
+        display: block;
+      }
+    }
+  }
+  &:not(.col-dash){
+    flex: 1 1 25%;
+    h5.dash-h5{
+      margin: 0 0 0.5rem 0.5rem !important;
+    }
+    .status{
+      color: $primary-color;
+      @include typography-lvl(1.125rem, normal, 400, 'Montserrat', normal);
+      margin: 0 0 0.5rem 0.5rem !important;
+    }
+  }
+}
+
+table.ad-resources-table {
+  margin-bottom: 20px;
+  
+  .icon-column {
+    text-align: center;
+    width: 50px;
+    padding: .5rem;
+    color: #f9ce5e;
+    background-color: darken($table-header-bg, 10%);
+  }
+ 
+  .th-actions {
+    width: 120px;
+  }
+
+  .link-action {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .example{
+    color: lightgray;
+  }
+}

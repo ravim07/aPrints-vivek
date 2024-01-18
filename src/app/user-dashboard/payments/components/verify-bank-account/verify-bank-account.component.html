@@ -1,0 +1,27 @@
+<div class="form-wrapper">
+  <div class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form">
+    <form [formGroup]="verifyBankAccountForm" class="group-edit-issue-form">
+      <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+        <div>{{errorApi}}</div>
+      </div>
+      <div class="form-wrapper">
+        <div class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form">                               
+          <div class="group-mailing-address" formGroupName="verificationInfo">
+            <div class="row">
+              <div class="col-lg-{{numberOfColsWidth / 2}} form-col">
+                <span class="lbl lbl-s">First Amount</span>
+                <input placeholder="First Amount *" formControlName="firstAmount" type="number" class="input-default input-s1">
+                <div *ngIf="formUtil.checkError(verifyAmountsGroup.get('firstAmount'), 'required')" class="form-error form-error-default">First Amount is required</div>
+              </div>
+              <div class="col-lg-{{numberOfColsWidth / 2}} form-col">
+                <span class="lbl lbl-s">Second Amount</span>
+                <input placeholder="Second Amount *" formControlName="secondAmount" type="number" class="input-default input-s1">
+                <div *ngIf="formUtil.checkError(verifyAmountsGroup.get('secondAmount'), 'required')" class="form-error form-error-default">Second Amount is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

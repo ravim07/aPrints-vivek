@@ -1,0 +1,71 @@
+<app-onboarding-header printisColor="#FFF" appStickybits></app-onboarding-header>
+<main role="main">
+  <div class="register-container">
+    <div class="register-cover-container">
+      <img src="{{assetsUrl}}/bg/image.jpg">
+    </div>
+    <div class="register-form-container">
+      <div class="register-header">
+        <div class="register-over-title-text">
+          Great! Just one more step...
+        </div>
+        <div class="register-title">
+          <h1>Create your account</h1>
+        </div>
+      </div>
+      <div class="register-form">
+        <form [formGroup]="registerForm" (ngSubmit)="registerUser()" autocomplete="off">
+          <mat-form-field>
+            <input type="text" matInput formControlName="fullname" placeholder="Full Name">
+          </mat-form-field>
+          <mat-form-field>
+            <input autocomplete="off" type="email" matInput formControlName="email" placeholder="Main Contact Email">
+          </mat-form-field>
+          <mat-form-field>
+            <input autocomplete="new-password" type="password" matInput formControlName="password"
+                   placeholder="Password">
+            <mat-error *ngIf="registerForm.controls.password?.errors && registerForm.controls.password?.errors['minlength']">
+              The password must have at least {{registerForm.controls.password?.errors['minlength'].requiredLength}}
+              characters.
+            </mat-error>
+          </mat-form-field>
+          <button type="submit" [disabled]="!registerForm.valid" class="register-form-submit" mat-button>
+            Sign Up
+          </button>
+        </form>
+      </div>
+
+      <div class="register-form-other-actions">
+        <div class="register-form-other-actions-title">or register with</div>
+        <div class="actions margin-top">
+          <button (click)="goToFacebookLogin()" class="button-social" mat-button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="20" viewBox="0 0 11 20">
+              <path fill="#3C5A9A"
+                    d="M6.753 19.992v-9.083h3.049l.456-3.54H6.753v-2.26c0-1.025.285-1.723 1.754-1.723l1.875-.001V.219C10.057.176 8.945.079 7.65.079c-2.702 0-4.552 1.65-4.552 4.68v2.61H.04v3.54h3.057v9.083h3.655z"/>
+            </svg>
+            <div class="button-caption">Facebook</div>
+          </button>
+          <button (click)="goToGoogleLogin()" class="button-social margin-top" mat-button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+              <g fill="none">
+                <path fill="#4285F4"
+                      d="M19.755 10.126c0-.824-.067-1.425-.211-2.05H10.14v3.721h5.52c-.112.925-.712 2.317-2.048 3.252l-.019.125 2.974 2.305.206.021c1.892-1.749 2.982-4.322 2.982-7.374"/>
+                <path fill="#34A853"
+                      d="M10.24 20c2.703 0 4.973-.895 6.63-2.439l-3.16-2.46c-.845.592-1.98 1.006-3.47 1.006-2.649 0-4.896-1.756-5.697-4.184l-.118.01-3.09 2.405-.041.113C2.94 17.741 6.323 20 10.239 20"/>
+                <path fill="#FBBC05"
+                      d="M4.37 11.909c-.207-.623-.326-1.291-.326-1.98 0-.69.12-1.358.316-1.981l-.006-.133-3.067-2.43-.1.048C.52 6.791.14 8.315.14 9.928s.381 3.138 1.047 4.495L4.37 11.91"/>
+                <path fill="#EB4335"
+                      d="M10.201 3.893c1.872 0 3.135.817 3.856 1.5l2.814-2.775C15.142.996 12.893 0 10.2 0c-3.9 0-7.268 2.26-8.907 5.549l3.224 2.528c.808-2.428 3.046-4.184 5.683-4.184"/>
+              </g>
+            </svg>
+            <div class="button-caption">Google</div>
+          </button>
+        </div>
+        <button mat-button (click)="goToLogin()" class="login-action margin-top">
+          Already have an account?
+          <span class="login-action-accent">Login</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</main>

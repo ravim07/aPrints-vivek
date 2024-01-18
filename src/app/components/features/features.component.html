@@ -1,0 +1,285 @@
+<div class="main-wrapper">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12 col-md-12">
+        <!-- <div class="section-title">
+          <h1>aPrintis <span>Features</span></h1>
+        </div> -->
+        <mat-tab-group disableRipple>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+                <path
+                  d="M24.762 1.238a4.242 4.242 0 0 0-5.99 0L1.8 18.208c-.008.008-.013.018-.02.026l-.027.036a.458.458 0 0 0-.059.113l-.014.035-.005.014L.012 25.42a.467.467 0 0 0-.01.095L0 25.533a.468.468 0 0 0 .045.19.47.47 0 0 0 .092.14.474.474 0 0 0 .441.124l6.989-1.663c.012-.003.024-.01.036-.014a.435.435 0 0 0 .141-.077c.011-.008.023-.015.034-.025l.012-.01 16.971-16.97a4.24 4.24 0 0 0 0-5.99zm-.666.665a3.297 3.297 0 0 1 .306 4.3l-4.606-4.605a3.297 3.297 0 0 1 4.3.305zm-2.33 6.989l-4.658-4.66.665-.665 4.66 4.66-.666.665zM2.336 23.665a.47.47 0 0 0-.666 0l-.356.356 1.202-5.049 2.08-.23-.267 2.41c-.002.017.005.034.005.051 0 .018-.007.034-.005.052.002.016.01.028.013.043a.478.478 0 0 0 .116.223.472.472 0 0 0 .236.134c.018.004.032.014.05.016a.462.462 0 0 0 .052.003h.001c.018 0 .035-.001.052-.003l2.41-.268-.23 2.081-5.05 1.202.357-.356a.47.47 0 0 0 0-.665zm5.906-2.579l10.53-10.53a.47.47 0 1 0-.665-.666L7.576 20.42l-2.247.25.25-2.246L16.11 7.894a.47.47 0 1 0-.665-.666L4.913 17.758l-1.498.167L16.442 4.898l4.66 4.659L8.073 22.584l.167-1.498zM23.098 7.561l-4.66-4.659.667-.666 4.658 4.659-.665.666z" />
+              </svg>
+              Editorial Staff
+            </ng-template>
+            <div class="mid-section sect3">
+              <div class="inner-container img-right">
+                <div class="text">
+                  <div class="section-title"><span>Collaborate</span> with your community</div>
+                  <div class="section-content">
+                    What’s the best way to get your community excited about your magazine?
+                    Make your readers part of the production! Invite them to share photos,
+                    stories through our while you still manage the content and design.
+                  </div>
+                  <div *ngIf="!isContributor" class="button">
+                    <button class="inverted" (click)="inviteMembers()" mat-button>Invite contributors</button>
+                    <button class="inverted play-button" (click)="editorialStaffVideo()" mat-button>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="img img-3">
+                  <img src="{{assetsUrl}}/M3.png" loading="lazy" />
+                </div>
+              </div>
+            </div>
+            <div class="mid-section gray-section sect4">
+              <div class="inner-container img-left">
+                <div class="text">
+                  <div class="section-title">Set up <span>Sponsorships, Subscriptions and Advertising</span></div>
+                  <div class="section-content">
+                    The people most excited about your publication are your own community members. 
+                    Create sponsorship levels, subscriptions and your own ad rate sheet. 
+                    Invite sponsors directly or share sign up link by social media. 
+                    Promote a sneak preview  of your forthcoming magazine. 
+                    <span>And meet your fund raising goals instantly ...</span>
+                  </div>
+                  <div *ngIf="!isEditor && !isContributor" class="button">
+                    <button (click)="setSponsorship()" mat-button>Start Fundraising ...</button>
+                  </div>
+                </div>
+                <div class="img img-4">
+                  <img src="{{assetsUrl}}/M2.png" loading="lazy" />
+                </div>
+              </div>
+            </div>
+            <div class="mid-section sect1">
+              <div class="inner-container img-right">
+                <div class="text">
+                  <div class="section-title"><span>Track</span> production at every stage</div>
+                  <div class="section-content">
+                    Upload your magazine PDF created from your preferred software (e.g. Adobe Creative Cloud),
+                    get pre-press review feedback from aPrintis support and track production of your magazine until
+                    delivery.
+                  </div>
+                  <div *ngIf="!isEditor && !isContributor" class="button">
+                    <button class="inverted big-text" (click)="startManaging()" mat-button>Track your magazine production</button>
+                  </div>
+                </div>
+                <div class="img img-1">
+                  <img src="{{assetsUrl}}/M1.png" loading="lazy" />
+                </div>
+              </div>
+            </div>
+            <!-- <div class="mid-section gray-section sect2">
+              <div class="inner-container img-left" (click)="clickGetStarted()">
+                <div class="text">
+                  <div class="section-title"><span>Manage</span> the production process</div>
+                  <div class="section-content">
+                    Get pre-press review feedback from aPrintis support and track production 
+                    of your magazine until delivery.
+                  </div>
+                </div>
+                <div class="img img-2">
+                  <img src="{{assetsUrl}}/group-8.png"/>
+                </div>
+              </div>          
+            </div> -->
+            <div class="footer-section">
+              <div class="inner-container row">
+                <div class="text">
+                  <div class="section-title">
+                    <span>
+                      <div *ngIf="innerWidth > 470">Invite/Collaborate</div>
+                      <div *ngIf="innerWidth <= 470">Invite & Collaborate</div>
+                    </span> with other editors
+                  </div>
+                  <div class="section-content">
+                    Ever run into coordination challenges when working with multiple writers,
+                    photographers? Now you have a single point of communication that ensures
+                    that nothing falls through the cracks.
+                  </div>
+                </div>
+                <div class="button-get-started">
+                  <button (click)="goToArticles()" mat-button>Get Started Now</button>
+                  <button class="inverted play-button" (click)="firstPublicationVideo()" mat-button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24">
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path
+                        d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="img">
+                  <img src="{{assetsUrl}}/group-2.png" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 19 25">
+                <g>
+                  <path
+                    d="M2.648 16.265C.4 12.373 1.68 7.411 5.5 5.205 9.32 3 14.257 4.374 16.504 8.266c1.378 2.387 1.47 5.309.27 7.732l1.283 2.224c1.227 2.125.528 4.833-1.557 6.037-2.085 1.204-4.78.455-6.006-1.67l-.722-1.249-.562-.975c-2.7-.171-5.184-1.712-6.562-4.099zm9.181 5.552c.794 1.375 2.536 1.86 3.885 1.08 1.35-.778 1.801-2.53 1.007-3.904l-.328-.57-4.892 2.826.328.568zm-2.18-3a.788.788 0 0 1 .676.396l.39.675 1.778-1.027-2.031-3.519a2.545 2.545 0 0 1-2.706-1.233.779.779 0 0 1 .275-1.066.779.779 0 0 1 1.06.295.966.966 0 0 0 1.315.366.966.966 0 0 0 .341-1.322.779.779 0 0 1 .275-1.066.779.779 0 0 1 1.06.295 2.545 2.545 0 0 1-.284 2.96l2.031 3.519 1.778-1.027-.39-.675a.788.788 0 0 1-.005-.783c1.148-2.017 1.131-4.533-.044-6.569-1.814-3.142-5.799-4.25-8.882-2.47-3.084 1.781-4.117 5.786-2.303 8.928 1.175 2.035 3.346 3.308 5.667 3.322zM3.5 1.742c.478-.276 1.045-.19 1.265.191l.702 1.215c.22.382.011.916-.467 1.192-.478.276-1.045.19-1.265-.192l-.702-1.215c-.22-.382-.011-.915.467-1.191zM6.217 2.35L5.951.94c-.083-.443.19-.849.612-.906.422-.058.832.254.916.697l.266 1.408a.767.767 0 0 1-.352.818.712.712 0 0 1-.26.089c-.422.058-.832-.255-.916-.698zM.49 3.541c.26-.336.75-.37 1.091-.077l1.087.935c.341.294.407.805.146 1.141a.712.712 0 0 1-.207.181.767.767 0 0 1-.884-.104L.636 4.682C.294 4.39.23 3.878.49 3.542z" />
+                </g>
+              </svg>
+              Contributors
+            </ng-template>
+            <div class="mid-section sect5">
+              <div class="inner-container img-right">
+                <div class="text">
+                  <div class="section-title">Be featured in an awesome <span>magazine</span></div>
+                  <div class="section-content">
+                    How cool would it be to see your photos or article in a pro-quality
+                    magazine that is shared within your community? Here’s your chance!
+                    Find your community magazine or click on the link, if you received
+                    an invitation from the editorial staff to contribute.
+                  </div>
+                  <div *ngIf="(!isManager && !isEditor) || !loggedIn" class="button">
+                    <button class="inverted big-text" (click)="contributor()" mat-button>Get your article published</button>
+                    <button class="inverted play-button" (click)="contributorVideo()" mat-button>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="img img-5">
+                  <img src="{{assetsUrl}}/hgfds.png" loading="lazy" />
+                </div>
+              </div>
+            </div>
+            <div class="mid-section gray-section sect6">
+              <div class="inner-container img-left">
+                <div class="text">
+                  <div class="section-title"><span>Share</span> photos/stories/articles</div>
+                  <div class="section-content">
+                    Help create a publication that is truly about you! Share content
+                    and send in your photos, stories and articles.
+                  </div>
+                  <div *ngIf="(!isManager && !isEditor) || !loggedIn" class="button">
+                    <button (click)="contributor()" mat-button>Share pictures, articles</button>
+                  </div>
+                </div>
+                <div class="img img-6">
+                  <img src="{{assetsUrl}}/E1.png" loading="lazy" />
+                </div>
+              </div>
+            </div>
+            <div class="mid-section sect7">
+              <div class="inner-container img-right">
+                <div class="text">
+                  <div class="section-title">Get feedback from <span>editors</span></div>
+                  <div class="section-content">
+                    Share your ideas with the magazine editors, discuss
+                    and get feedback from them.
+                  </div>
+                  <div *ngIf="(!isManager && !isEditor) || !loggedIn" class="button">
+                    <button class="inverted" (click)="contributor()" mat-button>Collaborate with the editors</button>
+                  </div>
+                </div>
+                <div class="img img-7">
+                  <img src="{{assetsUrl}}/E3.png" loading="lazy" />
+                </div>
+              </div>
+            </div>
+            <div class="mid-section gray-section sect8">
+              <div class="inner-container img-left">
+                <div class="text">
+                  <div class="section-title"><span>Be</span> a Sponsor</div>
+                  <div class="section-content">
+                    Why not also sponsor the magazine that you are contributing
+                    content to? Your support will go a long way towards creating
+                    a long-lived publication that brings your community together
+                  </div>
+                  <div class="button">
+                    <button (click)="goToSponsorSearch()" mat-button>Find a publication to donate</button>
+                  </div>
+                </div>
+                <div class="img img-8">
+                  <img src="{{assetsUrl}}/E2.png" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 23 26">
+                <g>
+                  <path
+                    d="M11.865 15.836h-1.477a.978.978 0 0 1-.972-.984c0-.544.435-.985.972-.985h2.6a.65.65 0 0 0 .645-.653.65.65 0 0 0-.645-.653h-1.22v-.908a.65.65 0 0 0-.644-.653.65.65 0 0 0-.644.653v.908h-.092c-1.246 0-2.261 1.029-2.261 2.29 0 1.263 1.015 2.29 2.261 2.29h1.477c.538 0 .973.442.973.986a.978.978 0 0 1-.973.984H9.217a.65.65 0 0 0-.644.653c0 .36.29.653.644.653h1.268v.93c0 .36.29.653.645.653a.65.65 0 0 0 .644-.653v-.93h.124c1.235-.016 2.229-1.04 2.229-2.29 0-1.263-1.015-2.29-2.262-2.29z" />
+                  <path
+                    d="M20.86 14.849a18.64 18.64 0 0 0-2.769-4.508 20.755 20.755 0 0 0-3.546-3.422l2.715-5.114a.647.647 0 0 0-.117-.767C16.44.34 15.695 0 14.864 0c-.76 0-1.458.292-2.065.551-.48.2-.932.395-1.3.395a.798.798 0 0 1-.303-.054C9.929.422 8.955.13 8.012.13c-1.193 0-2.21.486-3.205 1.524a.66.66 0 0 0-.075.81l2.929 4.493a21.104 21.104 0 0 0-3.498 3.384c-1.166 1.421-2.098 2.94-2.769 4.508a15.529 15.529 0 0 0-1.267 6.119C.127 23.74 2.352 26 5.084 26H17.17c2.731 0 4.957-2.26 4.957-5.032 0-2.087-.426-4.146-1.267-6.12zM6.095 2.195c.618-.54 1.209-.779 1.917-.779.756 0 1.608.26 2.742.687.234.086.485.13.74.13.623 0 1.22-.25 1.79-.492.548-.233 1.07-.455 1.575-.455.245 0 .591.044 1.028.357L13.33 6.465H8.88l-2.785-4.27zM17.17 24.703H5.084c-2.029 0-3.68-1.676-3.68-3.735 0-3.465 1.252-6.752 3.712-9.768A19.657 19.657 0 0 1 8.73 7.762h4.781c.485.34 2.06 1.53 3.615 3.438 2.465 3.016 3.711 6.297 3.711 9.768.011 2.059-1.64 3.735-3.668 3.735z" />
+                </g>
+              </svg>
+              Sponsors
+            </ng-template>
+            <div class="mid-section sect9">
+              <div class="inner-container img-right">
+                <div class="text">
+                  <div class="section-title">
+                    <span>Support</span> your community publication with pride
+                  </div>
+                  <div class="section-content">
+                    A small contribution from you will go a long way
+                    towards creating a slick publication that would
+                    create a indelible brand for your community that
+                    you will be proud of. You can even contribute
+                    content for the publication - share your photos,
+                    articles and stories by being a “Contributor”.
+                    <br><br>
+                    The process is simple. Find your magazine of
+                    interest or click on the link if you received
+                    a sponsorship invitation from the editorial
+                    staff, check out the sponsorship levels and
+                    pay right here. All of your payment aside of
+                    the credit charge transaction cost goes to
+                    the publication account.
+                  </div>
+                  <div class="button">
+                    <button class="inverted very-big-text" (click)="goToSponsorSearch()" mat-button>Find a publication to donate</button>
+                    <button class="inverted play-button" (click)="sponsorVideo()" mat-button>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path
+                          d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="img img-5">
+                  <img src="{{assetsUrl}}/C1.png" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+    <div *ngIf="showVideoPopup">
+      <div #modal id="modal-overlay" class="modal-fade {{popupVideoClass}}">
+        <div class="modal900 modal-default">
+          <span class="modal-close" (click)="closeVideoPopup()">
+            <img class="close-w" src="{{assetsUrl}}/icons/close.png" loading="lazy" />
+            <img class="close-b" src="{{assetsUrl}}/icons/close-black.png" loading="lazy" />
+          </span>
+          <video preload="metadata" class="video-fluid" autoplay playsinline controls type='video/mp4' crossorigin>
+            <source src="{{videoSrc}}" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+  </main>
+  <app-page-footer></app-page-footer>
+</div>

@@ -1,0 +1,26 @@
+<div *ngIf="!isAdmin" class="profile-img" [style.height]="size+'px'" [style.width]="size+'px'"
+  [style.font-size]="fontSize+'px'" [style.color]="color" [style.background]="bgColor">{{_name | firstLetter}}</div>
+<div *ngIf="isAdmin" class="icon">
+  <svg class="admin-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    [attr.width]="size+'px'" [attr.height]="size+'px'" viewBox="0 0 37 37" version="1.1">
+    <defs>
+      <polygon id="path-1" points="0 0.0002 16.8816 0.0002 16.8816 16.4091675 0 16.4091675" />
+    </defs>
+    <g id="Page-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Messages-Copy-2" transform="translate(-827.000000, -1786.000000)">
+        <g id="Group-4" transform="translate(827.000000, 1786.000000)">
+          <circle id="Oval-Copy-2" fill="#28CDD0" cx="18.5" cy="18.5" r="18.5" />
+          <g id="Group-3" transform="translate(10.000000, 10.000000)">
+            <mask id="mask-2" fill="white">
+              <use xlink:href="#path-1" />
+            </mask>
+            <g id="Clip-2" />
+            <path
+              d="M3.8496,8.1419 C3.8496,11.1079 5.9006,12.8749 8.4566,12.8749 C14.5156,12.8749 14.5156,3.4399 8.4566,3.4399 C5.9006,3.4399 3.8496,5.1759 3.8496,8.1419 L3.8496,8.1419 Z M13.1896,0.3789 L16.8816,0.3789 L16.8816,15.9359 L13.2536,15.9359 L13.0636,13.6639 C12.1806,15.4939 9.7506,16.3779 8.0156,16.4089 C3.4086,16.4409 -0.0004,13.6009 -0.0004,8.1419 C-0.0004,2.7769 3.5656,-0.0311 8.1096,-0.0001 C10.1926,-0.0001 12.1806,0.9789 13.0636,2.5249 L13.1896,0.3789 Z"
+              id="Fill-1" fill="#FFFFFF" mask="url(#mask-2)" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</div>

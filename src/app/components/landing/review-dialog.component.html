@@ -1,0 +1,13 @@
+<mat-card class="review" (click)="close()">
+  <mat-card-header>
+    <mat-card-title class="review-fullname">-{{data.fullname}}</mat-card-title>
+    <mat-card-subtitle class="review-position">{{data.position}}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!data.position" class="review-profession">{{data.profession}}</mat-card-subtitle>
+    <mat-card-subtitle class="review-desc">{{data.description}}</mat-card-subtitle>
+    <mat-card-subtitle class="review-org-loc">{{data.organization}}<span *ngIf="data.location">, </span>
+      {{data.location}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="review-comment">
+    <div [innerHTML]="data.comment"></div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,44 @@
+@import "~scss/mixins/_typography";
+@import "~scss/_variables";
+
+.pages-dropdownlist {
+  margin-left: 0.937rem;
+  margin-top: 3.1rem;
+  min-width: 100% !important;
+  padding: 1rem 0;
+
+  .mat-option {
+    .mat-icon {
+      color: $primary-color;
+      line-height: 17px;
+      height: 17px;
+      width: 17px;
+      font-size: 17px;
+      visibility: hidden;
+      margin-right: 0;
+    }
+  }
+
+  .mat-option .mat-option-text {
+    @include typography-lvl(1.062rem !important, 2.06 !important, normal, 'Averta', 0.29px);
+    color: #333333 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mat-option.mat-selected:not(.mat-option-multiple) {
+    background-color: #f9f9f9;
+
+    .mat-icon {
+      visibility: visible;
+    }
+  }
+}
+
+.text-over-calculator {
+  margin-top: 2rem;
+  @include typography-lvl(0.8125rem, normal, normal, 'Averta', 0.22px);
+  opacity: 0.5;
+  color: #333333;
+}

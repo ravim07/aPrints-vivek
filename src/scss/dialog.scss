@@ -1,0 +1,896 @@
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.flat-dialog {
+  @include setClass(330, 'height', '&');
+  @include setClass(450, 'height', '&');
+  @include setClass(600, 'height', '&');
+  @include setClass(650, 'height', '&');
+  @include setClass(660, 'height', '&');
+  @include setClass(700, 'height', '&');
+  @include setClass(750, 'height', '&');
+  @include setClass(800, 'height', '&');
+  @include setClass(850, 'height', '&');
+  @include setClass(550, 'width', '&');
+  @include setClass(700, 'width', '&');
+  @include setClass(720, 'width', '&');
+  @include setClass(750, 'width', '&');
+  @include setClass(800, 'width', '&');
+  @include setClass(810, 'width', '&');
+  @include setClass(1100, 'width', '&');
+
+  &.normal {
+    .mat-dialog-container {
+      padding: 6.75rem 4.6875rem;
+    }
+  }
+
+  &.normal-with-footer {
+    .mat-dialog-container {
+      padding: 6.75rem 4.6875rem 40px;
+    }
+  }
+
+  &.normal-wide {
+    .mat-dialog-container {
+      padding: 5.812rem 7rem 5.187rem 4.6875rem;
+    }
+  }
+
+  &.confirmation {
+    .mat-dialog-container {
+      padding: 4.5rem 9.375rem;
+    }
+  }
+
+  &.manual-subscriber {
+    .mat-dialog-container {
+      padding: 6.75rem 10.9375rem 40px;
+    }
+  }
+
+  &.csv-import {
+    .mat-dialog-container {
+      padding: 6.75rem 6.75rem 40px;
+    }
+  }
+
+  &.report {
+    height: 85vh;
+
+    .mat-dialog-container {
+      padding: 4.6875rem;
+    }
+  }
+
+  &.submit-to-review {
+    .mat-dialog-container {
+      padding: 6.75rem 4.6875rem 4.3125rem;
+    }
+  }
+
+  &.login-dialog {
+    .mat-dialog-container {
+      padding-bottom: 30px;
+    }
+  }
+
+  &.normal,
+  &.normal-with-footer,
+  &.normal-wide,
+  &.confirmation,
+  &.manual-subscriber,
+  &.csv-import,
+  &.submit-to-review,
+  &.report {
+    .mat-dialog-container {
+      .flat-dialog-main {
+        @include flexbox();
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+    }
+  }
+
+  &.space-around {
+    .mat-dialog-container {
+      .flat-dialog-main {
+        justify-content: space-around;
+      }
+    }
+  }
+
+  .mat-dialog-container {
+    border-radius: 0;
+    position: relative;
+
+    .close-dialog {
+      position: absolute;
+      top: 28px;
+      right: 35px;
+
+      .mat-icon {
+        line-height: 30px;
+        height: 30px;
+        width: 30px;
+        font-size: 30px;
+      }
+    }
+
+    .flat-dialog-main {
+      .mat-dialog-title {
+        align-self: center;
+        margin: 0 auto 1.75rem;
+        @include typography-lvl(2.1875rem, normal, normal, 'AvertaExtraBold', 0.6px);
+        text-align: center;
+        color: #333333;
+        border-bottom: 7px solid #ffd137;
+        padding-bottom: 0.25rem;
+        width: fit-content;
+
+        &.start-align {
+          align-self: flex-start;
+        }
+
+        &.half-bottom-margin {
+          margin-bottom: 0.75rem;
+        }
+
+        &.no-bottom-margin {
+          margin-bottom: 0;
+        }
+
+        &.smaller {
+          font-size: 1.875rem;
+        }
+      }
+
+      .mat-dialog-title.confirmation-title {
+        border: none;
+        margin: 0;
+        padding-bottom: 0;
+        align-self: flex-start;
+      }
+
+      .mat-dialog-content {
+        //@include flexbox();
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        overflow: hidden;
+        font-family: 'Averta', serif;
+
+        form {
+          width: 100%;
+        }
+
+        .table-header-buttons {
+          @include flexbox();
+          justify-content: flex-end;
+          align-items: flex-end;
+          width: 100%;
+          height: 50px;
+          margin-bottom: 0.5rem;
+
+          button {
+            height: 100%;
+            margin: 0 0.5rem;
+            @include typography-lvl(0.937rem, normal, 600, 'Averta', normal);
+          }
+        }
+
+        &.align-items-center {
+          align-items: center;
+        }
+
+        &.no-pad-right {
+          padding-right: 0;
+        }
+
+        .copies-pages {
+          @include flexbox();
+          justify-content: space-between;
+        }
+
+        .mat-form-field {
+          width: 100%;
+
+          &.no-padding-infix {
+            .mat-form-field-infix {
+              padding: 0;
+            }
+          }
+
+          &.std-padding-infix {
+            .mat-form-field-infix {
+              padding: 0.6rem 1rem;
+            }
+
+            .mat-select {
+              @include typography-lvl(1.062rem, normal, normal, 'Averta', 0.29px);
+              color: #292929;
+            }
+          }
+
+          &.radio-button-group {
+            padding: 1.25rem 0 1.75rem;
+
+            .group-label {
+              display: block;
+              transform: translateY(-0.58125em) scale(0.75) perspective(100px) translateZ(0.001px) translateX(-120px);
+              width: 133.33333333%;
+            }
+
+            .mat-radio-label {
+              opacity: 1;
+            }
+
+            .mat-radio-label-content {
+              @include typography-lvl(0.9375rem, normal, 600, 'Averta', 0.26px);
+            }
+
+            .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+              border-color: #292929;
+            }
+
+            .mat-radio-button.mat-accent .mat-radio-inner-circle {
+              color: #292929;
+              background-color: #292929;
+            }
+
+            .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+              background-color: #292929;
+            }
+
+            .mat-radio-container {
+              transform: scale(0.85);
+            }
+          }
+
+          &.half-width {
+            width: 47.5%;
+          }
+
+          &.extra-padding-top {
+            .mat-form-field-infix {
+              padding-top: 1.15rem
+            }
+          }
+
+          label {
+            padding-left: 1.25rem;
+            opacity: 0.45;
+            @include typography-lvl(1.062rem, normal, normal, 'AvertaLight', 0.29px);
+            color: #333333;
+          }
+
+          input,
+          textarea {
+            @include typography-lvl(1.062rem, normal, normal, 'Averta', 0.29px);
+            color: #333333;
+            padding-left: 1.25rem;
+            height: 30px;
+            width: 100%;
+
+            &.font-smaller {
+              font-size: 0.9375rem;
+              height: 35px;
+            }
+
+            &.no-padding-left {
+              padding-left: 0;
+            }
+          }
+
+          textarea {
+            height: auto;
+          }
+
+          &.mat-focused {
+            .mat-form-field-ripple {
+              background-color: $primary-color !important;
+            }
+          }
+
+          .mat-select {
+            .mat-select-placeholder {
+              opacity: 0.3;
+              @include typography-lvl(1.062rem, normal, normal, 'Averta', 0.29px);
+              color: #333333;
+              padding-left: 1rem;
+            }
+          }
+
+          .mat-form-field-underline.mat-focused {
+            background-color: $primary-color;
+          }
+
+          .mat-placeholder-required {
+            color: $primary-color;
+            float: left;
+            margin-left: -15px;
+            font-weight: bold;
+          }
+
+          .copy-button {
+            position: absolute;
+            bottom: 15%;
+            right: 0;
+            width: 150px;
+            height: 40px;
+            border-radius: 2px;
+            border: solid 1px $primary-color;
+            @include typography-lvl(0.9375rem, normal, 600, 'Averta', 0.4px);
+            text-align: center;
+            background-color: $primary-color; //0dd4db
+            border-color: $primary-color; //0dd4db
+            color: #ffffff;
+          }
+
+          .mat-select-panel {
+            padding: 1rem 0;
+
+            .mat-option {
+              .mat-icon {
+                color: $primary-color;
+                line-height: 17px;
+                height: 17px;
+                width: 17px;
+                font-size: 17px;
+                visibility: hidden;
+                margin-right: 0;
+              }
+            }
+
+            .mat-option .mat-option-text {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+
+            .mat-option.mat-selected:not(.mat-option-multiple) {
+              background-color: #f9f9f9;
+
+              .mat-icon {
+                visibility: visible;
+              }
+            }
+          }
+        }
+
+        .calculator {
+          border-radius: 3px;
+          background-color: #f8fdff;
+          margin-left: auto;
+          margin-right: auto;
+          min-height: unset;
+          text-align: center;
+          padding: 1rem;
+          padding-bottom: 0.5rem !important;
+          width: 550px;
+          max-width: 100%;
+          //height: 150px;
+          margin-top: 0.5rem;
+          box-shadow: none;
+
+          .mat-card-content {
+            padding: 0;
+          }
+
+          .fields-container {
+            padding: 0 1.25rem;
+          }
+
+          form {
+            @include flexbox();
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .mat-form-field-label {
+            padding-left: 0;
+            opacity: 0.6;
+            @include typography-lvl(0.5875rem, normal, normal, 'AvertaLight', normal);
+            color: #777777;
+          }
+
+          .input-total {
+            padding-top: 10px;
+            min-width: auto;
+
+            .label {
+              @include typography-lvl(0.5875rem, normal, normal, 'AvertaLight', normal);
+              font-size: 0.5875rem;
+            }
+          }
+
+          .total.accent,
+          .per-copy.accent,
+          {
+            @include typography-lvl(1.5562rem, normal, 600, 'Averta', normal);
+            color: #0dd4db;
+            padding: 0;
+            margin: 0;
+          }
+
+          .mat-select {
+            padding: 0;
+
+            .mat-select-value {
+              @include typography-lvl(1.5562rem, normal, 600, 'Averta', normal);
+              color: #cccccc;
+            }
+          }
+
+          .color,
+          .copies {
+            max-width: 90px;
+          }
+
+          .input-pages {
+            max-width: 55px;
+          }
+
+          .mat-select-panel {
+            padding: 1rem 0;
+
+            .mat-option {
+              .mat-icon {
+                color: $primary-color;
+                line-height: 17px;
+                height: 17px;
+                width: 17px;
+                font-size: 17px;
+                visibility: hidden;
+                margin-right: 0;
+              }
+            }
+
+            .mat-option .mat-option-text {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+
+            .mat-option.mat-selected:not(.mat-option-multiple) {
+              background-color: #f9f9f9;
+
+              .mat-icon {
+                visibility: visible;
+              }
+            }
+          }
+        }
+
+        .input-row2 {
+          max-width: 72px;
+        }
+
+        .total-footer {
+          opacity: 0.7;
+          @include typography-lvl(0.5rem, normal, normal, 'AvertaLight', normal);
+          color: #909090;
+        }
+
+        .confirmation-msg {
+          @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', 0.26px);
+          color: #333333;
+        }
+
+        .link-container {
+          width: 100%;
+          height: 140px;
+          margin: 1.5rem 0 0.25rem;
+          box-shadow: none;
+          background: #f8fdff;
+          padding: 16px 0;
+
+          .copy-icon {
+            position: absolute;
+            bottom: 75%;
+            right: 0;
+            color: #333333;
+            opacity: 0.8;
+
+            .mat-icon {
+              line-height: 20px;
+              height: 20px;
+              width: 20px;
+              font-size: 20px;
+            }
+          }
+        }
+
+        .table-content {
+          width: 100%;
+          padding: 0.4rem;
+          margin-top: 0.5rem;
+          position: relative;
+          max-height: 400px;
+          overflow: auto;
+
+          &.no-max-height {
+            max-height: unset;
+          }
+
+          .table-element {
+            width: 100%;
+
+            th {
+              background: #f9f9f9;
+              border-bottom: none;
+
+              .mat-sort-header-button {
+                @include typography-lvl(0.6875rem, normal, normal, 'Averta', normal);
+                opacity: .52;
+                color: rgba(41, 41, 41, 0.52) !important;
+                text-transform: uppercase !important;
+              }
+
+              .mat-sort-header-arrow {
+                opacity: .52;
+                color: rgba(41, 41, 41, 0.52) !important;
+              }
+            }
+
+            .name-h {
+              width: 160px;
+            }
+
+            .description-h {
+              min-width: 300px;
+            }
+
+            .price-h {
+              width: 110px;
+              padding-right: 1.4rem;
+
+              .mat-sort-header-container {
+                justify-content: flex-end;
+              }
+            }
+
+            .status-h {
+              width: 110px;
+            }
+
+            tr.mat-header-row {
+              height: 32px;
+            }
+
+            tr.edit-active {
+              background-color: #f9f9f9;
+            }
+
+            .menu-column {
+              min-width: 64px;
+              max-width: 64px;
+            }
+
+            td,
+            .td {
+              @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+              color: #292929;
+              padding: 1rem 1.4rem 1rem 0rem;
+              height: 81px;
+
+              &:first-of-type {
+                padding-left: 24px;
+              }
+
+              &.bold {
+                font-family: Averta;
+                font-weight: 600;
+              }
+
+              &.align-center {
+                text-align: center;
+              }
+
+              &.align-right {
+                text-align: right;
+              }
+
+              &.align-left {
+                text-align: left;
+              }
+
+              &.menu {
+                height: 89px;
+              }
+
+              &.report {
+                padding: 0.5rem 0.75rem 0.5rem 0rem;
+              }
+
+              &.actions {
+                @include flexbox();
+                justify-content: space-around;
+                align-items: center;
+              }
+
+              .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+                background-color: white;
+              }
+
+              .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+                background-color: $primary-color;
+              }
+
+              .mat-slide-toggle.mat-checked .mat-ripple-element {
+                background-color: $primary-color;
+              }
+
+              .mat-slide-toggle-content {
+                @include typography-lvl(0.9375rem, normal, normal, 'Averta', 0.26px);
+              }
+
+              .mat-slide-toggle.active {
+                opacity: 1;
+              }
+
+              &.status {
+                .td.mat-form-field {
+                  .mat-form-field-infix {
+                    border-top-width: 0px;
+                  }
+                }
+              }
+            }
+
+            .td.mat-form-field {
+              padding: 0;
+              height: unset;
+
+              .mat-form-field-infix {
+                padding: 0;
+                width: unset;
+              }
+
+              .mat-form-field-prefix {
+                top: -13.5px;
+              }
+
+              .mat-form-field-wrapper {
+                margin: 0;
+                padding: 0;
+              }
+
+              .mat-slide-toggle-label {
+                opacity: 1;
+                padding-left: 0;
+              }
+
+              input {
+                padding-left: 0rem;
+                margin-bottom: 0.5rem;
+                @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+              }
+
+              .mat-input-element {
+                caret-color: $secondary-color;
+              }
+
+              &.status {
+                .mat-form-field-infix {
+                  border-top-width: 0px;
+                }
+              }
+            }
+
+            .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+              color: $primary-color;
+            }
+
+            td.name-fc {
+              width: 100px;
+            }
+          }
+        }
+      }
+
+      .mat-dialog-actions {
+        width: 100%;
+        @include flexbox();
+        justify-content: space-between;
+        align-items: center;
+
+        &.center {
+          justify-content: center;
+        }
+
+        .mat-button {
+          flex: 1;
+          height: 40px;
+          border-radius: 2px;
+          border: solid 1px #333333;
+          @include typography-lvl(0.9375rem, normal, 600, 'Averta', 0.4px);
+          text-align: center;
+          color: #333333;
+
+          &.save {
+            background-color: $primary-color; //0dd4db
+            border-color: $primary-color; //0dd4db
+            color: #ffffff;
+          }
+
+          &.done {
+            flex: 0 0 156px;
+          }
+
+          &[disabled][disabled] {
+            color: rgba(0, 0, 0, 0.26);
+            background: rgba(0, 0, 0, 0.26);
+            border: 0;
+          }
+        }
+
+        .mat-button-base + .mat-button-base {
+          margin-left: 5%;
+        }
+      }
+
+      .text-below-title {
+        margin-bottom: 2rem;
+
+        a {
+          color: #292929;
+          text-decoration: none;
+        }
+
+        &.report {
+          margin-bottom: 0rem;
+          width: fit-content;
+          align-self: flex-end;
+
+          .item {
+            margin-right: 3.5rem;
+
+            @include max-width(768px) {
+              display: block;
+              margin-right: 0;
+
+              &.item1 {
+                margin-bottom: 10px;
+              }
+            }
+
+            &.item2 {
+              margin-right: 0;
+            }
+          }
+
+          .title {
+            @include typography-lvl(1.063rem, normal, 400, 'Averta', normal);
+            margin-right: 0.875rem;
+          }
+
+          .number {
+            @include typography-lvl(1.063rem, normal, 600, 'Averta', normal);
+            color: $primary-color;
+          }
+        }
+      }
+
+      .text-below-title,
+      .footer {
+        text-align: center;
+        @include typography-lvl(1.0625rem, normal, normal, 'AvertaLight', 0.29px);
+        color: #333333;
+
+        a {
+          font-weight: 600;
+          font-family: Averta;
+          cursor: pointer;
+        }
+      }
+
+      .description {
+        color: #616161;
+        @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', 0.26px);
+
+        a {
+          font-weight: 600;
+          font-family: Averta;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+
+      .empty-list {
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .print-specs {
+        width: 97.5%;
+        align-self: center;
+        background-color: #f8fdff;
+        padding: 20px 32px;
+
+        .print-specs-header {
+          @include flexbox();
+          justify-content: space-between;
+          align-items: center;
+
+          .print-specs-header-title {
+            @include typography-lvl(0.8125rem, normal, 600, 'Averta', 0.22px);
+            color: #333333;
+          }
+
+          .print-specs-header-action {
+            .mat-icon {
+              line-height: 14px;
+              height: 14px;
+              width: 14px;
+              font-size: 14px;
+            }
+          }
+        }
+
+        .print-specs-content {
+          opacity: 0.5;
+          @include typography-lvl(0.8125rem, normal, normal, 'AvertaLight', 0.22px);
+          color: #333333;
+        }
+      }
+
+      .footer {
+        margin-top: 3rem;
+      }
+    }
+  }
+}
+
+.loading-dialog {
+  margin: 0 auto !important;
+
+  .mat-dialog-container {
+    margin: 0 auto;
+    padding: 3rem;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+.mobile-support {
+
+  @include max-width(768px) {
+
+    .mat-dialog-content {
+      max-height: 400px;
+      overflow-y: auto !important;
+      //display: block !important;
+      justify-content: flex-start !important;
+    }
+
+    .mat-dialog-title {
+      font-size: 1.5rem !important;
+    }
+
+    .mat-dialog-container .close-dialog {
+      right: 10px;
+    }
+
+    .mat-dialog-container {
+      padding: 1.5rem !important;
+      padding-top: 4rem !important;
+    }
+  }
+}
+
+.cdk-overlay-pane.dark {
+  .mat-dialog-container {
+    background-color: #292929;
+  }
+}

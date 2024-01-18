@@ -1,0 +1,253 @@
+<div class="main-wrapper">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12 col-md-12">
+        <section id="main" class="mid-section gray-section">
+          <div class="inner-container text-center justify-center">
+            <div class="text full-width display-flex-column">
+              <div class="section-title-inv">Collaborate + Sponsor + Print</div>
+              <div class="section-subtitle">Create a Magazine that your Community not only <span
+                  class="color">loves</span> but also
+                <span class="color">Contributes to</span>...
+              </div>
+              <div class="section-content full-width text-center">
+                Whether you are a <a class="content-link" (click)="goTo('editors')">graphics designer</a>,
+                an <a class="content-link" (click)="goTo('editors')">editor</a>,
+                a <a class="content-link" (click)="goTo('contributors')">content contributor</a>
+                or seek to <a class="content-link" (click)="goTo('sponsors')">sponsor</a>
+                <br>
+                the publication - you will create a publication that truly represents your community
+              </div>
+              <div class="box-container">
+                <div class="box" (click)="clickPrintNow()">
+                  <div class="img">
+                    <img src="{{assetsUrl}}/pdf.png" alt="" loading="lazy">
+                  </div>
+                  <div class="list">
+                    <ul>
+                      <li>Already have a PDF ready to print?</li>
+                    </ul>
+                  </div>
+                  <div class="button">
+                    <button class="call-action" mat-button>Print now</button>
+                  </div>
+                </div>
+                <div class="box-separator"></div>
+                <div class="box" (click)="clickGetStarted()">
+                  <div class="list margin-top">
+                    <ul>
+                      <li>Collaborate with content contributors</li>
+                      <li>Raise money for your magazine</li>
+                      <li>Sponsor, subscribe to or advertise in your community magazine</li>
+                      <li>Schedule printing of your publication</li>
+                    </ul>
+                  </div>
+                  <div class="button">
+                    <button class="call-action" mat-button>Collaborate, Sponsor or Print</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="editors" class="mid-section">
+          <div class="inner-container img-left">
+            <div class="text">
+              <div class="section-title">Editors/Designers</div>
+              <div class="section-subtitle">Aggregate content + Raise funds + PRINT stunning publications at amazing
+                prices</div>
+              <div class="section-content">
+                <ol>
+                  <li>Create a new publication or join an existing publication</li>
+                  <li><span class="content-bold">Invite folks in your community to contribute content</span> to the
+                    magazine</li>
+                  <li>Evaluate and
+                    <span class="content-bold">add those contributions to your Adobe InDesign publication</span>
+                    workflow (or other graphics software)
+                  </li>
+                  <li>
+                    <span class="content-bold">Raise funding for your magazine</span> from your community at sponsorship
+                    levels
+                    that you set up. Use in-platform promotions including magazine previews
+                  </li>
+                  <li>Communicate with other editorial staff</li>
+                  <li>
+                    <span class="content-bold">Upload your PDF for print</span>, pay for print and track status until
+                    delivery
+                  </li>
+                  <li>Wow your community with your creation</li>
+                </ol>
+              </div>
+              <div class="button">
+                <button class="inverted adjust" (click)="startManaging()" mat-button>Proceed to your
+                  publication</button>
+              </div>
+            </div>
+            <div class="video-container">
+              <div class="video-poster {{!videoData.es ? 'show' : ''}}">
+                <img src="{{assetsUrl}}/content-funds-print.png" loading="lazy">
+                <div class="video-text">
+                  <div class="btn-play" (click)="playVideo('es')">
+                    <img src="{{assetsUrl}}/icons/play-button-1-copy.svg" loading="lazy">
+                  </div>
+                </div>
+              </div>
+              <div class="video {{videoData.es ? 'show' : ''}}">
+                <video preload="metadata" class="video-fluid" controls="true" playsinline #esVideo type='video/mp4'
+                  crossorigin>
+                  <source src="{{assetsUrl}}/videos/content-funds-print.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="contributors" class="mid-section gray-section">
+          <div class="inner-container img-right">
+            <div class="text">
+              <div class="section-title">Contributors</div>
+              <div class="section-subtitle">Get your article or picture featured in your community<br> magazine!</div>
+              <div class="section-content">
+                <ol>
+                  <li>Search for your community magazine or respond to an invitation to contribute from your community
+                    magazine editors</li>
+                  <li>Login and <span class="content-bold">send images, articles to the magazine
+                      editors/designers</span></li>
+                  <li>Respond to feedback from the editors</li>
+                  <li>Congratulations if your article made it - <span class="content-bold">you are a published author!!
+                      Savor the publication with pride for the rest of your life</span></li>
+                </ol>
+              </div>
+              <div class="button">
+                <button (click)="goToArticles()" mat-button>Go to Articles</button>
+              </div>
+            </div>
+            <div class="video-container">
+              <div class="video-poster {{!videoData.con ? 'show' : ''}}">
+                <img src="{{assetsUrl}}/contribute-magazine.png" loading="lazy">
+                <div class="video-text">
+                  <div class="btn-play" (click)="playVideo('con')">
+                    <img src="{{assetsUrl}}/icons/play-button-1-copy.svg" loading="lazy">
+                  </div>
+                </div>
+              </div>
+              <div class="video {{videoData.con ? 'show' : ''}}">
+                <video preload="metadata" class="video-fluid" controls="true" playsinline #conVideo type='video/mp4'
+                  crossorigin>
+                  <source src="{{assetsUrl}}/videos/contribute-magazine.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="sponsors" class="mid-section">
+          <div class="inner-container img-left">
+            <div class="text">
+              <div class="section-title">Sponsors</div>
+              <div class="section-subtitle">Support the community that means so much to you!</div>
+              <div class="section-content">
+                <ol>
+                  <li>We have made gorgeous print extremely affordable but can’t make it free :(. Your community still
+                    needs your support</li>
+                  <li>Search for your community’s magazine or respond to a sponsorship request from the editorial staff
+                  </li>
+                  <li>Review the available sponsorship levels</li>
+                  <li><span class="content-bold">Pay online and send a powerful message of support to your
+                      community</span></li>
+                </ol>
+              </div>
+              <div class="button">
+                <button class="inverted" (click)="goToSponsorSearch()" mat-button>Sponsor a Publication</button>
+              </div>
+            </div>
+            <div class="video-container">
+              <div class="video-poster {{!videoData.sp ? 'show' : ''}}">
+                <img src="{{assetsUrl}}/sponsor-publication.png" loading="lazy">
+                <div class="video-text">
+                  <div class="btn-play" (click)="playVideo('sp')">
+                    <img src="{{assetsUrl}}/icons/play-button-1-copy.svg" loading="lazy">
+                  </div>
+                </div>
+              </div>
+              <div class="video {{videoData.sp ? 'show' : ''}}">
+                <video preload="metadata" class="video-fluid" controls="true" playsinline #spVideo type='video/mp4'
+                  crossorigin>
+                  <source src="{{assetsUrl}}/videos/sponsor-publication.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="table" class="mid-section gray-section">
+          <div class="inner-container column">
+            <div class="section-title-inv table-title">
+              What do you need to create your <span class="color">community magazine?</span>
+            </div>
+            <div class="section-table">
+              <div class="table-container-left">
+                <div class="table-header">
+                  <div class="text">
+                    Nuts and Bolts
+                  </div>
+                </div>
+                <div class="table-row">
+                  <div class="text">
+                    1-2 graphics designers with access to Adobe Creative Cloud or other software.
+                  </div>
+                </div>
+                <div class="table-row">
+                  <div class="text">
+                    Financing to pay for the highly affordable yet gorgeous printing through sponsorship or optionally
+                    local advertising
+                  </div>
+                </div>
+                <div class="table-row">
+                  <div class="text">
+                    A community full of members who have stories to share and/or an editorial staff who cover community
+                    events
+                  </div>
+                </div>
+                <div class="table-row">
+                  <div class="text">
+                    Readers! - members of the community who beam with pride when they read their own creation
+                  </div>
+                </div>
+              </div>
+              <div class="table-separator">
+                <img src="{{assetsUrl}}/table-separator.png" loading="lazy">
+              </div>
+              <div class="table-container-right">
+                <div class="table-header">
+                  <div class="text">How aPrintis helps</div>
+                </div>
+                <div class="table-row">
+                  <div class="text">Raise funds for your magazine using our community sponsorship feature and reduce the
+                    amount needed with the affordable print pricing we offer</div>
+                </div>
+                <div class="table-row">
+                  <div class="text">Tap into your community's pulse with our collaboration features</div>
+                </div>
+                <div class="table-row">
+                  <div class="text">Expand your readership and enhance your publication brand with the standout print
+                    quality of your publication</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="footer" class="footer-section">
+          <div class="inner-container row">
+            <div class="text">
+              <div class="section-title">What's a community?</div>
+            </div>
+            <div class="img">
+              <img src="{{assetsUrl}}/cm1.png" loading="lazy">
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <app-page-footer></app-page-footer>
+</div>

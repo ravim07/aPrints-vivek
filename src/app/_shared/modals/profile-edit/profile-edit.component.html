@@ -1,0 +1,66 @@
+<button mat-icon-button class="close-dialog" (click)="closePopup()" matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <h3 class="dash-title w-sub" mat-dialog-title>Profile</h3>
+  <div class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form"
+       mat-dialog-content>
+    <form [formGroup]="userForm" (ngSubmit)="save($event)" autocomplete="off" class="group-edit-issue-form">
+      <div *ngIf="errorApi || email.errors || password.errors || repeatPassword.errors"
+           class="form-error form-error-top form-error-default">
+        Please check:
+        <ul>
+          <li *ngIf="errorApi">{{errorApi}}</li>
+          <li *ngIf="email.errors && email.errors.required">Email is required</li>
+          <li *ngIf="email.errors && email.errors.pattern">Invalid email</li>
+          <li *ngIf="password.errors && password.errors.minlength">Password must have at least 10 characters</li>
+          <li *ngIf="password.errors && password.errors.maxlength">Password must can have a maximum of 128
+            characters.
+          </li>
+          <li *ngIf="repeatPassword.errors && repeatPassword.errors.missmatch">Passwords must match</li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <mat-form-field>
+            <input type="text" formControlName="name" matInput placeholder="First Name">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+          <mat-form-field>
+            <input type="text" formControlName="lastName" matInput placeholder="Last Name">
+          </mat-form-field>
+        </div>
+
+        <div class="col-lg-12">
+          <mat-form-field>
+            <input type="text" formControlName="email" matInput placeholder="Enter email">
+          </mat-form-field>
+        </div>
+
+        <!--        <div class="col-lg-6 form-col form-col-title lbl-default">Password</div>-->
+        <div class="col-lg-6" *ngIf="formEditable">
+          <mat-form-field>
+            <input type="password" matInput placeholder="Password"
+                   autocomplete="new-password" formControlName="password">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-6" *ngIf="formEditable">
+          <mat-form-field>
+            <input type="password" matInput placeholder="Repeat password"
+                   autocomplete="new-password" formControlName="repeatPassword">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div mat-dialog-actions align="center" *ngIf="formEditable">
+        <!--        <div class="row form-btn">-->
+        <!--          <div class="col-lg-12 form-col">-->
+        <button class="save" color="primary" type="submit" mat-button>Save</button>
+        <!--          </div>-->
+        <!--        </div>-->
+      </div>
+    </form>
+  </div>
+</div>

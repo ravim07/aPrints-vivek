@@ -1,0 +1,51 @@
+<div class="form-wrapper">
+  <div class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form charge-layout">
+    <form [formGroup]="chargeAccountForm" class="group-edit-issue-form">
+      <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+        <div>{{errorApi}}</div>
+      </div>
+      <div class="form-wrapper">
+        <div class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form charge-layout">                               
+          <div class="group-mailing-address" formGroupName="chargeInfo">
+            <div class="row">
+              <div class="col form-col">
+                <span class="lbl lbl-s">Deposit Amount</span>
+                <input placeholder="Deposit Amount *" formControlName="chargeAmount" (input)="calculateTotalAndFees($event)" type="number" class="input-default input-s1">
+                <div *ngIf="formUtil.checkError(chargeAccountGroup.get('chargeAmount'), 'required')" class="form-error form-error-default">Deposit Amount is required</div>
+                <div *ngIf="formUtil.checkError(chargeAccountGroup.get('chargeAmount'), 'max')" class="form-error form-error-default">Deposit Amount cannot be more than 1995</div>
+                <span class="lbl lbl-s">Description</span>
+                <textarea type="text" formControlName="description" class="textarea-default textarea-s1"></textarea>
+                <div *ngIf="formUtil.checkError(chargeAccountGroup.get('description'), 'required')" class="form-error form-error-default">Description is required</div>
+              </div>
+              <div class="col">
+                  <div class="price-calculator-wrapper">
+                      <div class="price-calculator sp-padding">
+                        <ul>
+                          <li>Price<span class="amount">${{amount}}</span></li>
+                          <li>
+                            Transfer Fee
+                            <span class="amount">${{(chargeFee) | number:'1.0-2'}}</span>
+                          </li>
+                          <!-- <li class="total">
+                            <span class="total-txt">TOTAL</span> 
+                            <span class="amount">
+                              <span class="flat-amount-text">${{amount}}</span>
+                            </span>
+                          </li> -->
+                          <li class="total total-no-border">
+                            <span class="total-txt">TOTAL WITH TRANSFER FEE</span> 
+                            <span class="amount">
+                              <span class="charge-amount-text">${{(chargeAmount) | number:'1.0-2'}}</span>
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

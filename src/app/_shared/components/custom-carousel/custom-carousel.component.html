@@ -1,0 +1,27 @@
+<div class="carousel-container">
+  <!-- <div class="carousel-wrapper" [ngStyle]="carouselWrapperStyle"> -->
+    <div class="carousel-wrapper" >
+    <ul class="carousel-inner" #appCarousel>
+      <li *ngFor="let item of items;" appCarouselItemElement>
+        <ng-container [ngTemplateOutlet]="item.tpl"></ng-container>
+      </li>
+    </ul>
+  </div>
+  <div class="carousel-indicators">
+    <ul>
+      <li class="indicator" [class.active]="i === currentSlide" *ngFor="let item of items;let i = index"
+          (click)="goTo(i)"></li>
+    </ul>
+  </div>
+
+  <!--<div class="custom-carousel-arrows">
+    <a class="arrow-left" (click)="prev()">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </a>
+    <a class="arrow-right" (click)="next()">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </a>
+  </div>-->
+</div>
+
+

@@ -1,0 +1,154 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/variables";
+@import "~scss/mixins/_utils";
+
+.page-dashboard {
+  margin: 1rem 0 0rem;
+  @include max-width(768px) {
+    margin-top: 3rem;
+  }
+  .tab-content{
+    padding-top: 1rem;
+  }
+  .status-select{
+    width: 220px;
+    margin-left: 1rem;
+  }
+  .table-content{
+    overflow: auto;
+    width: 100%;
+  }
+  .table-default{
+    .view-column{
+      width: 75px;
+    }
+    .download-column{
+      width: 110px;
+    }
+    .number-date{
+      width: 120px;
+    }
+    .pub-name-column{
+      // width: 300px;
+    }
+    .info-column{
+      // width: 130px;
+    }
+
+    span{
+      &.first-capital{
+        text-transform: capitalize;
+        font-weight: bold;
+      }
+      &.overdue{
+        color: red;
+      }
+      &.open{
+        color: orange;
+      }
+      &.paid{
+        color: green;
+      }
+    }
+
+  }
+  .table-header {
+    .filters {
+      @include max-width(768px) {
+        margin-bottom: 1.5rem;
+      }
+      a {
+        @include typography-lvl(0.875rem, normal, 400, 'Montserrat', normal);
+        color: $admin-link-default-color;
+        text-decoration: none;
+        position: relative;
+        cursor: pointer;
+        margin-right: 30px;
+        @include max-width(768px) {
+          display: inline-block;
+          margin-bottom: 0.75rem;
+        }
+        &:last-child {
+          margin-right: 0px;
+        }
+        span {
+          position: absolute;
+          left: 0px;
+          bottom: -5px;
+          width: 30px;
+          height: 3px;
+          background: $primary-color;
+          display: inline-block;
+          opacity: 0;
+          @include transition(opacity .15s ease-in-out);
+        }
+        &:first-child {
+          span {
+            width: 10px;
+          }
+        }
+        &.active {
+          font-weight: 600;
+          cursor: default;
+          span {
+            opacity: 1;
+          }
+        }
+        &:hover {
+          color: lighten($admin-link-default-color, 35%);
+        }
+      }
+    }
+    .sortby {
+      @include max-width(768px) {
+        margin-bottom: 1.5rem;
+      }
+      text-align: right;
+      .select-default {
+        position: relative;
+        top: -15px;
+        max-width: 250px;
+        @include max-width(768px) {
+          top: 0;
+        }
+      }
+    }
+  }
+  .table-paginator {
+    margin: 2rem 0;
+  }
+  ::ng-deep mat-tab-group {
+    @include max-width(768px) {
+      margin-top: 1rem;
+    }
+    .mat-tab-label{
+      opacity: 1;
+    }
+    .mat-tab-label-active > div.mat-tab-label-content{
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .mat-tab-label-content {
+      @include typography-lvl(0.8125rem, normal, 600, 'Montserrat', normal);
+      text-transform: uppercase;
+      color: #3a3a3a;
+    }
+    .mat-tab-body.mat-tab-body-active {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        .mat-tab-body-content {
+          overflow: hidden;
+          @include typography-lvl(0.8125rem, normal, 400, 'Montserrat', normal);
+        }
+    }
+    @include min-width(1128px){
+      .mat-tab-list{
+        transform: none !important;
+      }
+    }
+    &.mat-primary .mat-ink-bar {
+      background: $primary-color;
+    }
+  }
+}

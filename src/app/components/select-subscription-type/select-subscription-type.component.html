@@ -1,0 +1,25 @@
+<button mat-icon-button class="close-dialog" (click)="onCancelClick()" matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title>Choose a Subscription Type</div>
+  <mat-dialog-content>
+    <div class="subscription">
+      <div *ngIf="subscriptions" class="row donation-levels">
+        <div *ngFor="let itemSummary of subscriptions.summary.perType"
+             class="col-sm-4 donation-box {{itemSummary.subscriptionType.isPublished() ? 'show' : 'disabled'}}">
+          <div class="donation-level">
+            <div><span class="name">{{itemSummary.subscriptionType.name}}</span> <span
+              class="amount">${{itemSummary.subscriptionType.amount}}</span></div>
+            <p>{{itemSummary.subscriptionType.content}}</p>
+            <div class="sponsors">{{itemSummary.subscribersCount}} subscribers</div>
+          </div>
+          <div class="donation-level-select" (click)="selectSubscription(itemSummary.subscriptionType)">
+            <p>Select this Level</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

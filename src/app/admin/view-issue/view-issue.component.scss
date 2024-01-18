@@ -1,0 +1,443 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/variables";
+@import "~scss/mixins/_utils";
+
+%flexbox-center{
+  @include flexbox();
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-tab-body-content {
+  overflow: visible !important;
+}
+
+.mat-form-field {
+  margin-bottom: 0.625rem;
+}
+
+.app-issue-discussion{
+  margin-top: 2rem;
+  .comments-container{
+    width: 100% !important;
+  }
+  .comments{
+    overflow-y: scroll !important;
+    height: 64vh;
+  }
+
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.pdf-preview:hover div button {
+  top: 40%;
+}
+
+.modal-default .modal-close {
+  top: unset;
+  right: unset;
+  position: static;
+}
+
+.modal-default .modal-close .close-w {
+  display: none;
+}
+
+.modal-default .modal-close .close-b {
+  display: block;
+}
+
+.ck-editor__editable {
+  min-height: 160px;
+  margin-bottom: 1rem;
+}
+
+.modal-admin-issue {
+  // padding: 3.5rem 0rem 1rem;
+  padding: 0;
+  min-height: calc(100vh - 100px);
+  height: 89%;
+  width: 75% !important;
+  //min-width: 912px;
+  overflow: auto;
+  color: $admin-font-color;
+  .modal-header{
+    @include flexbox();
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 1rem 1rem 2rem;
+    .modal-title{
+      h3{
+        margin: 0;
+      }
+    }
+  }
+  h3 {
+    font-size: 1.188rem;
+    margin-bottom: 0.875rem;
+    color: $admin-font-color;
+  }
+  h4 {
+    margin: 0px;
+    @include typography-lvl(1.063rem, normal, 600, 'Montserrat', normal);
+    color: $admin-font-color;
+    margin-bottom: 1.875rem;
+  }
+  .lbl {
+    @include typography-lvl(0.9375rem, normal, 600, 'Montserrat', normal);
+    width: 100%;
+    display: block;
+    margin-bottom: 1.188rem;
+  }
+
+  .tab-content {
+    padding: 1rem 0 0;
+  }
+
+  .modal-issue {
+    .lbl {
+      @include typography-lvl(0.9375rem, normal, 600, 'Montserrat', normal);
+      width: 100%;
+      display: block;
+      margin-bottom: 1.188rem;
+    }
+    .row-mailing-address {
+      .row-shipping-details {
+        margin-top: 4.375rem;
+      }
+      @include max-width(768px) {
+        .row-address {
+          margin-top: 3rem;
+        }
+        .row-shipping-details {
+          margin-top: 3rem;
+        }
+      }
+    }
+    .row-status {
+      margin-bottom: 2.25rem;
+      @include max-width(768px) {
+        margin-bottom: 0;
+      }
+      .lbl-status {
+        display: block;
+        background-color: #ededed;
+        font-size:  0.75rem;
+        color: #484848;
+        width: 12.5rem;
+        padding: 0.9375rem 1rem;
+        border-radius: 0.25rem;
+      }
+      @include max-width(768px) {
+        .box-status {
+          margin-top: 1.5rem;
+        }
+      }
+    }
+    .row-data {
+      @include max-width(768px) {
+        margin-bottom: 0;
+        .issue-specs,
+        .issue-file {
+          margin-top: 3rem;
+        }
+      }
+      .button-orange {
+        width: 100%;
+        margin: 0.5rem 0
+      }
+    }
+    .specs {
+      .lbl-specs {
+        align-items: center;
+        @include flexbox();
+        margin-bottom: 2.875rem;
+        @include max-width(768px) {
+          margin-bottom: 1.4rem;
+        }
+        .check-ok{
+          color: green;
+          margin-left: 5px;
+        }
+      }
+      .lbl-pricing {
+        margin-top: 1.5rem;
+        @include max-width(768px) {
+          margin-top: 1.4rem;
+        }
+      }
+      .group-spec {
+        margin-bottom: 1.188rem;
+        font-size: 0.8125rem;
+        .lbl-s {
+          font-size: 0.8125rem;
+          margin-bottom: 0.625rem;
+        }
+        .lbl-w {
+          width: unset;
+        }
+        .lbl-total{
+          background-color: #82E0AA;
+        }
+        .lbl-center {
+          text-align: center;
+          height: 44px;
+          line-height: 44px;
+        }
+        .total {
+          color: #484848;
+          @include typography-lvl(0.8125rem, normal, 600, 'Montserrat', normal);
+          border-radius: 0.3125rem;
+          padding: 0.845rem 1rem;
+          background: #eaeaea;
+          cursor: pointer;
+          text-decoration: none;
+          span {
+            color: $primary-color;
+          }
+        }
+      }
+      .flex-div{
+        @extend %flexbox-center;
+      }
+      .row-top-stats {
+        text-align: right;
+        margin-bottom: 1.813rem;
+        .item {
+          margin-right: 3.5rem;
+          @include max-width(768px) {
+            display: block;
+            margin-right: 0;
+            &.item1 {
+              margin-bottom: 10px;
+            }
+          }
+          &.item2 {
+            margin-right: 0;
+          }
+        }
+        .title {
+          @include typography-lvl(1.063rem, normal, 400, 'Montserrat', normal);
+          margin-right: 0.875rem;
+        }
+        .number {
+          @include typography-lvl(1.063rem, normal, 600, 'Montserrat', normal);
+          color: $primary-color;
+        }
+      }
+      .invoice-table{
+        .width-170{
+          width: 170px;
+        }
+        .width-100{
+          width: 100px;
+        }
+      }
+      .invoice-details, .invoice-status{
+        @include flexbox();
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        margin: 1rem;
+        word-wrap: break-word;
+        background-color: #F3F3F3;
+        color: #484848;
+        border-radius: 0.25rem;
+      }
+      .invoice-status{
+        width: 50%;
+        padding: 0;
+        height: 50px;
+        .label, .status, .value{
+          height: 100%;
+          @extend %flexbox-center;
+        }
+        .label{
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        .status{
+          span{
+            width: 100px;
+            height: 75%;
+            @extend %flexbox-center;
+            &.overdue, &.open{
+              font-weight: bold;
+              color: white;
+              border-radius: 5px;
+            }
+            &.overdue{
+              background: #da0000;
+            }
+            &.open{
+              background: green;
+            }
+          }
+        }
+        .value{
+          height: 100%;
+          @extend %flexbox-center;
+          span.days{
+            height: 75%;
+            width: 160px;
+            @extend %flexbox-center;
+            font-weight: bold;
+            color: white;
+            border-radius: 5px;
+          }
+          &.overdue span.days{
+            background: #da0000;
+          }
+          &.open span.days{
+            background: green;
+          }
+        }
+        .download{
+          @extend %flexbox-center;
+        }
+      }
+      .invoice-download{
+        @include flexbox();
+        height: auto;
+        button{
+          margin: 0;
+        }
+      }
+      .invoice-details{
+        .discount-reason{
+          flex: 3;
+          align-self: flex-start;
+          @include typography-lvl(0.875rem, normal, normal, 'Montserrat', normal);
+          div{
+            font-weight: 600;
+          }
+        }
+        .total-details{
+          flex: 1;
+          @include flexbox();
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          @include typography-lvl(0.875rem, normal, normal, 'Montserrat', normal);
+          .total-item{
+            @include flexbox();
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            .total-item-label{
+              width: 70%;
+              @include flexbox();
+              justify-content: flex-start;
+              align-items: center;
+              // font-weight: 600;
+            }
+            .total-number{
+              width: 30%;
+              @include flexbox();
+              justify-content: space-between;
+              align-items: center;
+              font-weight: 600;
+              color: $primary-color;
+              span{
+                color: #484848;
+              }
+            }
+          }
+        }
+      }
+    }
+    .row-comments {
+      @include max-width(768px) {
+        margin-top: 3rem;
+      }
+      .virtual-scroll{
+        height: 40vh;
+      }
+      .comment-box {
+        .comment-user {
+          @include flexbox();
+          align-items:center;
+          img {
+            width: 40px;
+            border-radius: 50%;
+          }
+          span {
+            font-weight: 600;
+            margin-left: 0.75rem;
+          }
+        }
+        .comment-text {
+          font-size: 0.75rem;
+          background-color: #ededed;
+          color: #484848;
+          padding: 0.9375rem 1.313rem;
+          border-radius: 0.25rem;
+          margin: 1rem 0 1.75rem;
+          position: relative;
+          .comment-date {
+            font-size: 0.75rem;
+            position: absolute;
+            top: -25px;
+            right: 0;
+          }
+        }
+      }
+      .row-overflow{
+        margin-bottom: 1.5rem;
+      }
+    }
+    .row-add-comment {
+      .select-s1 {
+        max-width: 240px;
+      }
+      .col-btn {
+        text-align: right;
+        @include max-width(768px) {
+          margin-top: 1rem;
+          text-align: left;
+        }
+      }
+    }
+    .form-shipping {
+      .form-error {
+        margin-top: 0;
+      }
+      .textarea-s1 {
+        min-height: 4.625rem;
+      }
+    }
+    .row-btn {
+      .col-btn{
+        margin-bottom: 2rem;
+        @include max-width(768px) {
+          margin: 2rem auto 2rem auto;
+        }
+      }
+    }
+  }
+  .mat-tab-group {
+    @include max-width(768px) {
+      margin-top: 2.5rem;
+    }
+    .mat-tab-label-content {
+      @include typography-lvl(0.8125rem, normal, 400, 'Montserrat', normal);
+    }
+    .mat-tab-body.mat-tab-body-active {
+      overflow-x: hidden;
+      padding: 0 2rem;
+      .mat-tab-body-content {
+        overflow: hidden;
+        @include typography-lvl(0.8125rem, normal, 400, 'Montserrat', normal);
+        height: unset;
+      }
+    }
+    &.mat-primary .mat-ink-bar {
+      background: $primary-color;
+    }
+  }
+}

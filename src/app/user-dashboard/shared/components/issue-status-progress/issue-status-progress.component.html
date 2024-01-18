@@ -1,0 +1,32 @@
+<div class="issue-status-progress">
+  <div class="status-container">
+    <ng-container [ngTemplateOutlet]="statusContainer"
+      [ngTemplateOutletContext]="{data:{done: step > 0, str: 'PDF', inProgress: false, next: step === 0}}">
+    </ng-container>
+    <ng-container *ngTemplateOutlet="separator"></ng-container>
+    <ng-container [ngTemplateOutlet]="statusContainer"
+      [ngTemplateOutletContext]="{data:{done: step > 2, str: 'Review', inProgress: step === 2, next: step === 1}}">
+    </ng-container>
+    <ng-container *ngTemplateOutlet="separator"></ng-container>
+    <ng-container [ngTemplateOutlet]="statusContainer"
+      [ngTemplateOutletContext]="{data:{done: step > 4, str: 'Print', inProgress: step === 4, next: step === 4}}">
+    </ng-container>
+    <ng-container *ngTemplateOutlet="separator"></ng-container>
+    <ng-container [ngTemplateOutlet]="statusContainer"
+      [ngTemplateOutletContext]="{data:{done: step > 5, str: 'Delivery', inProgress: step === 5, next: step === 5}}">
+    </ng-container>
+  </div>
+  <div class="status-progress-bar">
+    <div class="progress step-{{step}}"></div>
+  </div>
+</div>
+<ng-template #separator>
+  <div class="separator">/</div>
+</ng-template>
+<ng-template #statusContainer let-data='data'>
+  <div class="status">
+    <mat-icon *ngIf="data.done" [ngClass]="['done']">done</mat-icon>
+    <mat-icon *ngIf="data.inProgress" [ngClass]="['schedule']">schedule</mat-icon>
+    <span [ngClass]="{'bold': data.next, 'done': data.done}">{{data.str}}</span>
+  </div>
+</ng-template>

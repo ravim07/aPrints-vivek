@@ -1,0 +1,36 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+.main-policy {
+  min-height: 100vh;
+  &.h3{ font-size: 1.4rem; }
+  line-height: 1.42857143;
+  &.p {
+    text-indent: 1cm;
+  }
+  @include typography-lvl(0.85rem, normal, 400, 'Montserrat', normal);
+  .policy-header{
+    @include typography-lvl(1.5rem, normal, 600, 'Montserrat', normal);
+    &.h1{ font-size: 1.5rem; }
+    &.h2{ margin: 0 0 4.5rem; font-size: 1.6rem; }
+    span{ color: $primary-color; }
+  }
+  .policy-text{
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    margin-bottom: 5rem;
+    text-align: justify;
+    .bold{
+      font-weight: bold;
+    }
+    .policy-text-title{
+      font-weight: bold;
+    }
+  }
+}
+
+.simple-page h1{
+  margin: 2rem 0 3rem;
+  font-size: 1.8rem;
+}

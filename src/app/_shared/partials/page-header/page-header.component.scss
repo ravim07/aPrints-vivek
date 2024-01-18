@@ -1,0 +1,66 @@
+@import "~scss/_variables";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+
+:host {
+  z-index: 1000;
+}
+
+.header-inner {
+  background: #202121;
+  height: 60px;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  position: sticky;
+  transform : translate3d(0, 0, 0);
+  // &.fixed-header {
+  //   position: fixed;
+  //   top: 0;
+  // }
+  .inner {
+    padding: 0px $page-padding;
+    @include for-phone-only{
+      padding: 0px $page-padding-phone;
+    }
+    .logo {
+        padding: 16px 0px 0px;
+        float: left;
+        margin: 0;
+        width: 118px;
+        a > img { width: 100%; }
+    }
+    .nav {
+      float: right;
+      @include flexbox();
+      flex-wrap: wrap;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+      padding: 12px 0px;
+      .nav-link {
+        @include typography-lvl(0.875rem, 0.875rem, 400, 'Montserrat', normal);
+        text-decoration: none;
+        padding: 10px 0;
+        margin-left: 38px;
+        cursor: pointer;
+        @include for-phone-only{
+          margin-left: 15px;
+        }
+        &.nav-link-t1 {
+          color: #FFF;
+          &:hover {
+            color: darken(#FFF, 10%);
+          }
+        }
+        &.nav-link-t2 {
+          color: $primary-color-link;
+          &:hover {
+            color: darken($primary-color-link, 10%);
+          }
+        }
+      }
+    }
+  }
+}

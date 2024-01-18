@@ -1,0 +1,93 @@
+<div class="main-container">
+  <app-publication-header [publication]="publication" context="publications"
+    (triggerReload)="onPublicationHeaderEvent($event)">
+  </app-publication-header>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-issues-sidebar [publication]="publication"></app-issues-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+      <ng-container *ngIf="loading">
+        <app-loading-animation-table></app-loading-animation-table>
+      </ng-container>
+      <ng-container *ngIf="!loading">
+        <div class="header">
+          <h1>Team</h1>
+          <div class="table-header-buttons" *ngIf="canManageContributors">
+            <button mat-button disableRipple (click)="newMember()">Add New Member</button>
+          </div>
+        </div>
+        <div class="table-content table-content-members">
+          <table *ngIf="dataSource && members.length > 0" class="table-element" mat-table [dataSource]="dataSource"
+            matSort #TableSort="matSort" matSortActive="status" matSortDirection="asc" matSortDisableClear>
+
+            <ng-container matColumnDef="avatar">
+              <th mat-header-cell *matHeaderCellDef class="avatar"></th>
+              <td mat-cell *matCellDef="let row" class="avatar">
+                <app-profile-img [name]="row.name" size="60" fontSize="20">
+                </app-profile-img>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="members-name"> name </th>
+              <td mat-cell *matCellDef="let row" class="bold"> {{row.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="roleLiteral">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="role"> role </th>
+              <td mat-cell *matCellDef="let row" class="role">
+                {{row.roleLiteral}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="email"> email </th>
+              <td mat-cell *matCellDef="let row" class="email"> {{row.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status" *ngIf="canManageContributors">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="status-invite"> status </th>
+              <td mat-cell *matCellDef="let row" class="member-status">
+                <div class="status-container {{row.status}} {{row.daysSinceInvite >= 30 ? 'expired' : '' }}">
+                  <ng-container *ngIf="row.status === 'pending'">
+                    <ng-container *ngIf="row.daysSinceInvite < 30">
+                      <mat-icon *ngIf="row.daysSinceInvite < 30">schedule</mat-icon>
+                      pending
+                    </ng-container>
+                    <ng-container *ngIf="row.daysSinceInvite >= 30">
+                      <mat-icon *ngIf="row.daysSinceInvite >= 30">warning</mat-icon>
+                      expired
+                    </ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="row.status === 'active'">
+                    <mat-icon *ngIf="row.status === 'active'">visibility</mat-icon>
+                    {{row.status}}
+                  </ng-container>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="menu" *ngIf="canDeleteMembers">
+              <th mat-header-cell *matHeaderCellDef class="menu-column"></th>
+              <td mat-cell *matCellDef="let row" class="menu">
+                <button *ngIf="!row.owner && row.email !== currentUser.email"
+                  [disabled]="publication.role !== roleModel.managingEditor"
+                  mat-icon-button (click)="handleDelete(row)" matTooltip="Delete member">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+        </div>
+        <mat-paginator #paginator *ngIf="members.length > 0" [pageSizeOptions]="[10, 20, 40]" showFirstLastButtons>
+        </mat-paginator>
+      </ng-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

@@ -1,0 +1,219 @@
+<div class="main-wrapper">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="main-faq simple-page container">
+    <div class="row">
+      <!--
+      <div class="col-lg-3 faq-menu">
+        <div class="menu-wrapper">
+          <h2>Topics</h2>
+          <ul>
+            <li (click)="showPanel('general')" class="{{panel.general.show  ? 'active' : ''}}">General</li>
+            <li (click)="showPanel('services')" class="{{panel.services.show ? 'active' : ''}}">Services</li>
+            <li (click)="showPanel('billing')" class="{{panel.billing.show ? 'active' : ''}}">Billing</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-8 faq-content">
+      -->
+      <div class="offset-lg-2 col-lg-8 simple-page-content faq-content">
+        <h1 class="w-sub">Frequently Asked Questions</h1>
+        <h3 class="subtitle">Can't find a answer?
+          <a href="/contact">Contact us</a>
+        </h3>
+        <div class="panel-container">
+
+          <div class="panel panel-general {{panel.general.show ? 'show' : ''}}">
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>What are the minimum resources needed to create an awesome magazine?
+              </div>
+              <div class="q-answer">
+                <p>All that is needed is eager content contributors from your community and one individual (student, teacher
+                  or parent) who is familiar with graphics design tools such as Adobe Creative Cloud and aPrintis can help
+                  with graphics design if the community doesn’t have a single individual with graphics expertise.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>What graphics software should we use?
+              </div>
+              <div class="q-answer">
+                <p>Adobe Cloud that includes Adobe Creative Suite, Adobe Photoshop and Illustrator is used by the vast majority
+                  of communities. However. some have used Microsoft Publisher as well.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>What page counts do we print?
+              </div>
+              <div class="q-answer">
+                <p>We use offset printing for orders sizes of 1000 and more and digital printing for order sizes less than
+                  1000. For offset printing the page counts that we print are 16, 24, 32 and 48. For digital printing, we
+                  print page counts of 8, 12, 16, 20, 24, 28, 32 and 48. If you have a need for a different page count and
+                  order size, please let us know and we will try to find you a solution that works for you.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>What is the minimum quantity that you order?
+              </div>
+              <div class="q-answer">
+                <p>We offer only those formats that we believe are standard and which we can provide publishers with a great
+                  price and quality proposition. Since aPrintis is focused on serving small communities rather than individual
+                  on-demand orders, the minimum order quantity that we serve is 100.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>What is the typical turnaround?
+              </div>
+              <div class="q-answer">
+                <p>Our turnaround to any location in mainland US is 7 calendar days after the job has been approved for
+                  print - barring uncontrollable weather delays or other emergency/catastrophes. Often, the job is delivered
+                  a day or two before then.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>How long does it take to get a job approved for print
+              </div>
+              <div class="q-answer">
+                <p>Depending on the print-readiness, a typical job might require an iteration or two before it is deemed
+                  ready to print.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>What paper stock does aPrintis use?
+              </div>
+              <div class="q-answer">
+                <p>70# for offset and 80# for digital.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>What are the most common elements that need to changed for print readiness?
+              </div>
+              <div class="q-answer">
+                <p>Bleed on every page, fonts that haven't been embedded in the document, image resolutions tend to be the most common issues with initial submission of jobs.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>Can we do other formats?
+              </div>
+              <div class="q-answer">
+                <p>As mentioned earlier, we focus on common formats and order sizes. However, even if our ad rate sheet doesn’t include your desired option, please let us know and we can see if we can still get you a good offer.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>Does aPrintis operate outside the US?
+              </div>
+              <div class="q-answer">
+                <p>No. aPrintis operates in mainland US - not in Hawaii, Puerto Rico, Alaska.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-services {{panel.services.show ? 'show' : ''}}">
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>Lorem ipsum dolor sit amet s?</div>
+              <div class="q-answer">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lorem urna, tincidunt ac laoreet in, bibendum
+                  non urna. Maecenas urna turpis, aliquam sit amet dui id, ullamcorper eleifend metus. In in justo ut urna
+                  scelerisque congue. Vivamus iaculis odio at ex ultrices imperdiet. Donec tempus ante sed dolor rhoncus,
+                  nec gravida mi molestie. Phasellus quis nunc quis ante accumsan malesuada sit amet ut risus. Donec scelerisque
+                  turpis vitae lacus bibendum, et aliquet dui convallis. Sed vel aliquet orci.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>Lorem ipsum dolor sit amet?</div>
+              <div class="q-answer">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lorem urna, tincidunt ac laoreet in, bibendum
+                  non urna. Maecenas urna turpis, aliquam sit amet dui id, ullamcorper eleifend metus. In in justo ut urna
+                  scelerisque congue. Vivamus iaculis odio at ex ultrices imperdiet. Donec tempus ante sed dolor rhoncus,
+                  nec gravida mi molestie. Phasellus quis nunc quis ante accumsan malesuada sit amet ut risus. Donec scelerisque
+                  turpis vitae lacus bibendum, et aliquet dui convallis. Sed vel aliquet orci.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>Lorem ipsum dolor sit amet?</div>
+              <div class="q-answer">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lorem urna, tincidunt ac laoreet in, bibendum
+                  non urna. Maecenas urna turpis, aliquam sit amet dui id, ullamcorper eleifend metus. In in justo ut urna
+                  scelerisque congue. Vivamus iaculis odio at ex ultrices imperdiet. Donec tempus ante sed dolor rhoncus,
+                  nec gravida mi molestie. Phasellus quis nunc quis ante accumsan malesuada sit amet ut risus. Donec scelerisque
+                  turpis vitae lacus bibendum, et aliquet dui convallis. Sed vel aliquet orci.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>Lorem ipsum dolor sit amet?</div>
+              <div class="q-answer">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lorem urna, tincidunt ac laoreet in, bibendum
+                  non urna. Maecenas urna turpis, aliquam sit amet dui id, ullamcorper eleifend metus. In in justo ut urna
+                  scelerisque congue. Vivamus iaculis odio at ex ultrices imperdiet. Donec tempus ante sed dolor rhoncus,
+                  nec gravida mi molestie. Phasellus quis nunc quis ante accumsan malesuada sit amet ut risus. Donec scelerisque
+                  turpis vitae lacus bibendum, et aliquet dui convallis. Sed vel aliquet orci.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-billing {{panel.billing.show ? 'show' : ''}}">
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>Lorem ipsum dolor sit amet b?</div>
+              <div class="q-answer">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lorem urna, tincidunt ac laoreet in, bibendum
+                  non urna. Maecenas urna turpis, aliquam sit amet dui id, ullamcorper eleifend metus. In in justo ut urna
+                  scelerisque congue. Vivamus iaculis odio at ex ultrices imperdiet. Donec tempus ante sed dolor rhoncus,
+                  nec gravida mi molestie. Phasellus quis nunc quis ante accumsan malesuada sit amet ut risus. Donec scelerisque
+                  turpis vitae lacus bibendum, et aliquet dui convallis. Sed vel aliquet orci.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>Lorem ipsum dolor sit amet?</div>
+              <div class="q-answer">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lorem urna, tincidunt ac laoreet in, bibendum
+                  non urna. Maecenas urna turpis, aliquam sit amet dui id, ullamcorper eleifend metus. In in justo ut urna
+                  scelerisque congue. Vivamus iaculis odio at ex ultrices imperdiet. Donec tempus ante sed dolor rhoncus,
+                  nec gravida mi molestie. Phasellus quis nunc quis ante accumsan malesuada sit amet ut risus. Donec scelerisque
+                  turpis vitae lacus bibendum, et aliquet dui convallis. Sed vel aliquet orci.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>Lorem ipsum dolor sit amet?</div>
+              <div class="q-answer">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lorem urna, tincidunt ac laoreet in, bibendum
+                  non urna. Maecenas urna turpis, aliquam sit amet dui id, ullamcorper eleifend metus. In in justo ut urna
+                  scelerisque congue. Vivamus iaculis odio at ex ultrices imperdiet. Donec tempus ante sed dolor rhoncus,
+                  nec gravida mi molestie. Phasellus quis nunc quis ante accumsan malesuada sit amet ut risus. Donec scelerisque
+                  turpis vitae lacus bibendum, et aliquet dui convallis. Sed vel aliquet orci.</p>
+              </div>
+            </div>
+            <div class="q-box collapse">
+              <div class="q-title" (click)="showQuestion($event)">
+                <span class="icon"></span>Lorem ipsum dolor sit amet?</div>
+              <div class="q-answer">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lorem urna, tincidunt ac laoreet in, bibendum
+                  non urna. Maecenas urna turpis, aliquam sit amet dui id, ullamcorper eleifend metus. In in justo ut urna
+                  scelerisque congue. Vivamus iaculis odio at ex ultrices imperdiet. Donec tempus ante sed dolor rhoncus,
+                  nec gravida mi molestie. Phasellus quis nunc quis ante accumsan malesuada sit amet ut risus. Donec scelerisque
+                  turpis vitae lacus bibendum, et aliquet dui convallis. Sed vel aliquet orci.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+  <app-page-footer></app-page-footer>
+</div>

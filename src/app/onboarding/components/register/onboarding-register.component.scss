@@ -1,0 +1,185 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.register-container {
+  display: inline-flex;
+  width: 100%;
+  height: calc(100vh - 70px);
+  // justify-content: center;
+  align-items: center;
+
+  .register-cover-container,
+  .register-form-container {
+    display: inline-flex;
+  }
+
+  .register-cover-container {
+    flex-basis: 738px;
+    height: calc(100vh - 70px);
+
+    img {
+      position: absolute;
+      top: 0px;
+      left: 0;
+      z-index: -1;
+    }
+  }
+
+  .register-form-container {
+    flex: 1;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .register-over-title-text {
+      opacity: 0.75;
+      @include typography-lvl(1.25rem, 1.75, normal, 'AvertaLight', normal);
+      text-align: center;
+      color: #333333;
+    }
+
+    .register-title {
+      h1 {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        @include typography-lvl(2.5rem, 1.5, bold, 'Averta', normal);
+        text-align: center;
+        color: #292929;
+      }
+    }
+
+    .register-form form {
+      margin-top: 44px;
+      @include flexbox();
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .mat-form-field {
+        width: 100%;
+
+        label {
+          padding-left: 1.25rem;
+          opacity: 0.45;
+          @include typography-lvl(1.062rem, normal, normal, 'AvertaLight', 0.29px);
+          color: #333333;
+        }
+
+        input {
+          @include typography-lvl(1.062rem, normal, normal, 'Averta', 0.29px);
+          color: #333333;
+          padding-left: 1.25rem;
+          height: 30px;
+          width: 100%;
+        }
+
+        &.mat-focused {
+          .mat-form-field-ripple {
+            background-color: $primary-color !important;
+          }
+        }
+
+        .mat-form-field-underline.mat-focused {
+          background-color: $primary-color;
+        }
+
+        .mat-placeholder-required {
+          color: $primary-color;
+          float: left;
+          margin-left: -15px;
+          font-weight: bold;
+        }
+      }
+
+      .register-form-submit {
+        margin-top: 24px;
+        width: 400px;
+        height: 40px;
+        border-radius: 2px;
+        background-color: #0cc8cb;
+        @include typography-lvl(0.9375rem, normal, 600, 'Averta', 0.09px);
+        text-align: center;
+        color: #ffffff;
+
+        &[disabled][disabled] {
+          color: rgba(0, 0, 0, 0.26);
+          background: rgba(0, 0, 0, 0.26);
+          border: 0;
+        }
+      }
+    }
+
+    .register-form-other-actions {
+      margin-top: 46px;
+      @include flexbox();
+      flex-direction: column;
+
+      .margin-top {
+        margin-top: 10px;
+      }
+
+      .register-form-other-actions-title {
+        opacity: 0.5;
+        @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+        text-align: center;
+        color: #333333;
+      }
+
+      .actions {
+        .button-social {
+          width: 400px;
+          height: 40px;
+          border-radius: 2px;
+          border: solid 2px #e1e1e1;
+          background-color: #ffffff;
+          @include flexbox();
+          align-items: center;
+
+          .mat-button-wrapper {
+            width: 100%;
+            height: 40px;
+            @include flexbox();
+            align-items: center;
+          }
+
+          svg {
+            margin-left: 20px;
+            justify-self: flex-start;
+          }
+
+          .button-caption {
+            justify-self: center;
+            @include typography-lvl(1rem, normal, 600, 'Averta', normal);
+            text-align: center;
+            color: #292929;
+            width: 100%;
+            position: absolute;
+          }
+        }
+      }
+
+      .login-action {
+        margin-top: 1rem;
+        height: 40px;
+        @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+        color: #292929;
+
+        .mat-button-wrapper {
+          @include flexbox();
+          justify-content: center;
+          align-items: center;
+        }
+
+        .login-action-accent {
+          font-family: Montserrat;
+          font-weight: 600;
+          margin-left: 12px;
+        }
+      }
+    }
+  }
+}

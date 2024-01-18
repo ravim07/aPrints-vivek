@@ -1,0 +1,39 @@
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_typography";
+
+:host {
+  .mat-dialog-content {
+    display: block !important;
+    overflow: auto !important;
+  }
+
+  .popup-text-message {
+    color: #616161;
+    @include typography-lvl(0.938rem, normal, 300, Averta, 0.26px);
+  }
+
+  .label-group {
+    @include typography-lvl(1.25rem, 3, 600, Averta, normal);
+  }
+
+  .label-sub-group {
+    @include typography-lvl(0.875rem, 4.29, 300, Averta, normal);
+  }
+
+  &::ng-deep {
+
+    .mat-dialog-content::ng-deep {
+
+      .mat-form-field.mat-form-field-type-mat-select .mat-form-field-ripple {
+        height: 1px !important;
+      }
+
+      .mat-form-field.mat-form-field-type-mat-select .mat-form-field-flex {
+        padding-top: 0.625rem !important;
+      }
+    }
+  }
+
+}
+
+

@@ -1,0 +1,22 @@
+<div class="main-container">
+  <div class="search-publication-container">
+    <div class="search-publication-header-container">
+      <div class="search-publication-go-back">
+        <button routerLink="/dashboard" mat-button>
+          <mat-icon>arrow_back</mat-icon>
+          Go Back
+        </button>
+      </div>
+      <div class="search-publication-header-title">
+        <div class="register-over-title-text">
+          Ready to be {{connector}} <span>{{roleStr}}</span>?
+        </div>
+        <div class="register-title">
+          <h1>Search a publication</h1>
+        </div>
+      </div>
+    </div>
+    <app-search-publication continueText="Request Access" [role]="role"
+      (selectedPublicationEvent)="onPublicationSelect($event)" (continueEvent)="onContinue()"></app-search-publication>
+  </div>
+</div>

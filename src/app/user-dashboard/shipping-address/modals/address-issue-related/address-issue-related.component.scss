@@ -1,0 +1,11 @@
+:host {
+  .cover img {
+    height: 90px;
+  }
+
+  app-empty-list-placeholder::ng-deep {
+    svg {
+      height: 250px;
+    }
+  }
+}

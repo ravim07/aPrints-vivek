@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://localhost:4200/</loc>
+  </url>
+  <url>
+    <loc>http://localhost:4200/home</loc>
+  </url>
+  <url>
+    <loc>http://localhost:4200/features</loc>
+  </url>
+  <url>
+    <loc>http://localhost:4200/design</loc>
+  </url>
+  <url>
+    <loc>http://localhost:4200/quote</loc>
+  </url>
+  <url>
+    <loc>http://localhost:4200/contact</loc>
+  </url>
+  <url>
+    <loc>http://localhost:4200/request-sample</loc>
+  </url>
+  <url>
+    <loc>http://localhost:4200/about</loc>
+  </url>
+  <url>
+    <loc>http://localhost:4200/faq</loc>
+  </url>
+  <url>
+    <loc>http://localhost:4200/privacy-policy</loc>
+  </url>
+</urlset>

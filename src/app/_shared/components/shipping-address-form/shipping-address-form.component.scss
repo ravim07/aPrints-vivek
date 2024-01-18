@@ -1,0 +1,94 @@
+@import "../../../../scss/mixins/responsive";
+@import "../../../../scss/mixins/typography";
+@import "../../../../scss/mixins/utils";
+@import "../../../../scss/variables";
+
+
+.city-zip {
+  @include flexbox();
+  justify-content: space-between;
+  width: 100%;
+}
+
+form .mat-form-field {
+  width: 100%;
+
+  .mat-form-field-wrapper {
+    padding-bottom: 1.3125rem;
+  }
+
+  &.no-padding-infix {
+    .mat-form-field-infix {
+      padding: 0;
+    }
+  }
+
+  &.half-width {
+    width: 45%;
+  }
+
+  .mat-form-field-label {
+    padding-left: 1.75rem;
+    opacity: 0.45;
+    @include typography-lvl(1.062rem, normal, normal, 'AvertaLight', 0.29px);
+    color: #333333;
+  }
+
+  input,
+  .mat-select {
+    @include typography-lvl(1.062rem, normal, normal, 'Averta', 0.29px);
+    color: #333333;
+    padding-left: 1.25rem;
+    height: 30px;
+    width: 100%;
+
+    &.font-smaller {
+      font-size: 0.9375rem;
+      height: 35px;
+    }
+
+    .mat-select-placeholder {
+      opacity: 0.3;
+      @include typography-lvl(1.062rem, normal, normal, 'Averta', 0.29px);
+      color: #333333;
+      padding-left: 1rem;
+    }
+  }
+
+  &.mat-focused {
+    .mat-form-field-ripple {
+      background-color: $primary-color !important;
+    }
+  }
+
+  .mat-select {
+    .mat-select-placeholder {
+      opacity: 0.3;
+      @include typography-lvl(1.062rem, normal, normal, 'Averta', 0.29px);
+      color: #333333;
+      padding-left: 1rem;
+    }
+  }
+
+  .mat-form-field-underline.mat-focused {
+    background-color: $primary-color;
+  }
+
+  .mat-placeholder-required {
+    color: $primary-color;
+    float: left;
+    margin-left: -15px;
+    font-weight: bold;
+  }
+
+  .mat-form-field-subscript-wrapper {
+    text-align: right;
+
+    .mat-error {
+      line-height: normal;
+      font-weight: normal;
+      font-family: "AvertaLight";
+      letter-spacing: 0.29px;
+    }
+  }
+}

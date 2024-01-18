@@ -1,0 +1,110 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_responsive";
+@import "~scss/_variables";
+
+.user-notif {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // margin: 0rem 1.375rem 0;
+  cursor: pointer;
+  position: relative;
+  height: 70px;
+
+  .mat-badge-small.mat-badge-above .mat-badge-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // width: 18px;
+    // height: 18px;
+    background: #d0021b;
+    @include typography-lvl(0.625rem, normal, 600, 'Averta', normal);
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+
+    &.normal {
+      color: #000;
+    }
+
+    &.white {
+      color: #fff;
+    }
+  }
+}
+
+.notifications-menu-panel {
+  max-width: 550px !important;
+  display: flex;
+  flex-direction: column;
+
+  .mat-menu-content {
+    padding: 0 !important;
+
+    .title {
+      padding-top: 24px;
+      padding-left: 36px;
+      @include typography-lvl(0.8125rem, normal, normal, 'AvertaLight', normal);
+      color: #616161;
+      text-transform: uppercase;
+    }
+
+    .notifications-list {
+      margin: 24px 0;
+
+      .notification-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0.5rem 1.5rem;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.04);
+          cursor: pointer;
+        }
+
+        .notification-avatar {
+          margin-right: 1rem;
+        }
+
+        .notification-content {
+          @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+          color: #616161;
+
+          span.role {
+            font-family: Averta;
+            font-weight: 600;
+          }
+
+          span.pub-name {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .notificacions-view-all,
+    .notifications-empty {
+      height: 40px;
+      margin: 0.5rem 0;
+      width: 100%;
+      @include typography-lvl(0.9375rem, normal, normal, 'Averta', normal);
+      color: #616161;
+    }
+
+    .notifications-empty {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0.5rem 1.5rem;
+      @include typography-lvl(0.9375rem, normal, normal, 'Averta', normal);
+      color: #616161;
+    }
+  }
+}

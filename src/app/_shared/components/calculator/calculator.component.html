@@ -1,0 +1,68 @@
+<div class="calculator">
+  <!-- <mat-card-title>
+    Stunning quality that you can <span class="accent">actually afford</span>
+  </mat-card-title> -->
+
+  <mat-card-content>
+    <div class="d-md-flex fields-container align-items-center">
+      <div class="d-flex form-container">
+        <form class="d-lg-flex" [formGroup]="calcForm">
+          <mat-form-field class="input input-row1 color">
+            <mat-label>Options</mat-label>
+            <mat-select (selectionChange)="setPricing()" disableRipple panelClass="pages-dropdownlist"
+              formControlName="color">
+              <mat-option *ngFor="let color of colorOpts" [value]="color.id">
+                {{ color.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="input input-row1 input-pages">
+            <mat-label>Pages</mat-label>
+            <mat-select (selectionChange)="setPricing()" disableRipple panelClass="pages-dropdownlist"
+              formControlName="numPages">
+              <mat-option *ngFor="let number of numberPages" [value]="number.id">
+                {{ number.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="input input-row1 copies">
+            <mat-label>Copies</mat-label>
+            <mat-select (selectionChange)="setPricing()" disableRipple panelClass="pages-dropdownlist"
+              formControlName="numCopies">
+              <mat-option *ngFor="let number of numberOfCopies" [value]="number.id">
+                {{ number.value }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>  
+      </div>
+      
+    </div>
+    <div class="total-summary">
+      <div class="d-flex flex-wrap flex-md-nowrap justify-content-between total-content">
+        <div class="input-total">
+          <div class="label">Total</div>
+          <div class="total accent">
+            <span *ngIf="total else nonCalculatedPrice">{{ total | currency:'USD':'symbol':'1.0-2'}}</span>
+          </div>
+          <!--        <input matInput formControlName="total" class="total">-->
+          <div class="total-footer d-none d-md-block">Shipping & tax not incl.</div>
+          <span *ngIf="showCustomQuote" class="custom-quote">*</span>
+        </div>
+        <div class="input-per-copy input-total">
+          <div class="label">Per Copy</div>
+          <div class="per-copy accent">
+            <span *ngIf="perCopy else nonCalculatedPrice">{{ perCopy | currency:'USD':'symbol':'1.0-2'}}</span>
+          </div>
+          <!--        <input matInput formControlName="perCopy" class="per-copy">-->
+          <span *ngIf="showCustomQuote" class="custom-quote">*</span>
+        </div>
+      </div>
+      <!--        <div class="total-footer d-none d-sm-block">Shipping & tax not incl.</div>-->
+    </div>
+  </mat-card-content>
+</div>
+
+<ng-template #nonCalculatedPrice>
+  <span>$-</span>
+</ng-template>

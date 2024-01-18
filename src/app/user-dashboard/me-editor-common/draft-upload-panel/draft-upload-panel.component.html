@@ -1,0 +1,93 @@
+<div class="draft-upload-panel">
+  <div [ngClass]="{'header': true, 'more-padding': !canUpload && !inProgress}">
+    <div class="title">Issue Preview</div>
+
+
+    <div class="download d-flex align-items-center">
+      <button type="button" mat-button (click)="openSharePreviewIssue()"
+              *ngIf="showViewerButtonValidStatus.includes(issue?.status)">
+        <span class="align-middle d-flex align-items-center">
+          <mat-icon>public</mat-icon>&nbsp;<span class="font-weight-bold">Viewer</span>
+        </span>
+      </button>
+      <ng-container *ngIf="!canUpload && !inProgress">
+        <span class="divider">|</span>
+        <button mat-icon-button (click)="downloadFile()">
+          <mat-icon>get_app</mat-icon>
+        </button>
+      </ng-container>
+    </div>
+  </div>
+  <div *ngIf="canUpload && !inProgress && hasPublicationFlowPerms" appDragDropFileUpload
+       (fileDropped)="fileDroppedEvent($event)" class="upload-drag-zone">
+    <div class="inner-container">
+      <div class="placeholder">
+        <app-pdf-placeholder></app-pdf-placeholder>
+      </div>
+      <div class="text-pre-action">Drag & Drop PDF</div>
+      <button mat-button class="action" (click)="action()">Upload PDF</button>
+    </div>
+  </div>
+  <div *ngIf="canUpload && !inProgress && !hasPublicationFlowPerms" class="upload-drag-zone">
+    <div class="inner-container">
+      <div class="placeholder">
+        <app-pdf-placeholder></app-pdf-placeholder>
+      </div>
+      <div class="text-pre-action">No Draft uploaded yet</div>
+    </div>
+  </div>
+  <div *ngIf="!canUpload && !inProgress" class="draft-cover-zone">
+    <div class="inner-container">
+      <!-- <div class="cancel-panel">
+        <button *ngIf="isCancelable" mat-icon-button (click)="cancelReview()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div> -->
+      <div class="action-panel">
+        <button *ngIf="hasPublicationFlowPerms && issue.status === issueStatusDef.draftUploaded" mat-button
+                class="action"
+                (click)="sendForReview()">Send for Review
+        </button>
+        <button *ngIf="hasPublicationFlowPerms && issue.status === issueStatusDef.draftAccepted" mat-button
+                class="action"
+                (click)="submitToPrint()">Submit to Print
+        </button>
+        <button mat-button class="action" (click)="openPdf()">
+          View PDF
+        </button>
+        <button mat-button class="action" (click)="openSharePreviewIssue()"
+                *ngIf="showViewerButtonValidStatus.includes(issue?.status)">
+          Preview Public Issue
+        </button>
+        <button *ngIf="isCancelable && hasPublicationFlowPerms" mat-button class="action"
+                (click)="replacePdf()">Replace
+        </button>
+        <button *ngIf="isFirstUpload && hasPublicationFlowPerms" mat-button class="action"
+                (click)="reuploadDraft()">Replace
+        </button>
+      </div>
+    </div>
+    <img src="{{draft.thumbPublicUrl}}">
+  </div>
+  <div *ngIf="inProgress" class="in-progress-zone">
+    <div class="inner-container">
+      <div class="progress-label">{{inProgressLabel}}<span>{{inProgressBarWidthStyle}}</span></div>
+      <div class="progress">
+        <div class="progress-bar-fill" [ngStyle]="{width: inProgressBarWidthStyle}"></div>
+      </div>
+    </div>
+  </div>
+  <div [ngClass]="{
+    'footer-button-panel': true,
+    'more-padding': !canUpload && !inProgress,
+    'left-align': !canUpload && !inProgress
+  }">
+    <a *ngIf="canUpload" mat-button target="_blank" class="guidelines"
+       href="{{pdfFolder}}Print_Ready_PDF_Submission_-_aPrintis.pdf" download>Print
+      Guidelines</a>
+    <div *ngIf="!canUpload && !inProgress" class="last-updated">
+      Last Draft {{draft.dateAdded | date:'MM/dd/yyyy'}}
+    </div>
+  </div>
+</div>
+<a class="download-pdf-link" target="_blank" #downloadPdfLink></a>

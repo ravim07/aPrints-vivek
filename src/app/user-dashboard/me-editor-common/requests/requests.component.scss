@@ -1,0 +1,24 @@
+@import "~scss/mixins/_responsive";
+
+.dash-requests {
+  margin: 0 2rem;
+  .table-wrapper {
+    padding-right: 0px;
+    @include max-width(768px) {
+      padding-right: 15px;
+    }
+    .table-default tbody td {
+      vertical-align: middle;
+    }
+  }
+  .icon-action {
+    cursor: pointer;
+    margin-left: 0.75rem;
+    width: 27px;
+    height: 27px;
+  }
+  .th-actions {
+    width: 100px;
+    text-align: center;
+  }
+}

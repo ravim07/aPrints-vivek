@@ -1,0 +1,27 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+
+%flexbox-center {
+  @include flexbox();
+  justify-content: center;
+  align-items: center;
+}
+
+.open-menu {
+  @extend %flexbox-center;
+}
+
+.issue-menu {
+  @extend %flexbox-center;
+  height: 64px;
+}
+
+.menu-button {
+  @include typography-lvl(1.062rem, 2.06, normal, 'Averta', normal);
+  color: #333333;
+}
+
+.pub-menu-panel {
+  margin-top: 0 !important;
+}

@@ -1,0 +1,121 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+:host {
+  .blog_container {
+    display: flex;
+    width: 100%;
+    border: solid 1px #e1e1e1;
+    border-radius: 3px;
+    @include min-width(1110px) {
+      flex-direction: column;
+      //width: 22rem;
+      min-height: 30rem;
+      height: 100%;
+    }
+
+    @include min-width(1400px) {
+      min-height: 36.75rem;
+    }
+
+    @include min-width(1600px) {
+      width: 28.375rem;
+      min-height: 36.75rem;
+    }
+  }
+
+  .post-details {
+    padding: 0.562rem 0.438rem 0.625rem 0.688rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @include min-width(1110px) {
+      //border: solid 1px #e1e1e1;
+      //border-top: none;
+      padding: 1.75rem 1.438rem 1.75rem 1.938rem;
+    }
+  }
+
+  .post_title {
+    text-align: left;
+    @include typography-lvl(0.938rem, normal, 600, 'Averta', normal);
+    letter-spacing: normal;
+    //max-height: calc(0.938rem * 4);
+    overflow: hidden;
+    //text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    @include min-width(1110px) {
+      @include typography-lvl(1.5rem, normal, bold, 'Averta', normal);
+      margin-bottom: 1.875rem;
+      //height: 5.438rem;
+      max-height: 5.438rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: #333333;
+    }
+  }
+
+  .feature_image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .feature_image_container {
+    width: 10rem;
+    height: 6.875rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    @include min-width(1110px) {
+      width: 100%;
+      height: 14rem;
+    }
+
+    @include min-width(1400px) {
+      height: 16rem;
+    }
+
+    @include min-width(1600px) {
+      height: 19.938rem;
+    }
+
+    box-shadow: 5px 0 3px 0 #e1e1e1;
+    @include min-width(1110px) {
+      box-shadow: 0 5px 10px -1px #e1e1e1;
+    }
+  }
+
+  .post-content {
+    font-family: Averta;
+    font-size: 0.938rem;
+    font-weight: 300;
+    color: #333333;
+
+  }
+
+  .post-metadata {
+    font-family: Averta;
+    font-size: 0.875rem;
+
+    mat-icon {
+      width: 0.875rem;
+      height: 0.875rem;
+      font-size: 0.875rem;
+      margin-right: 0.188rem;
+    }
+
+  }
+
+  .post_date, .post_author {
+    display: flex;
+    align-items: center;
+    margin-right: 1.25rem
+  }
+}

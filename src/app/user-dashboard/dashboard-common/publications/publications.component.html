@@ -1,0 +1,115 @@
+<div class="main-container">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-publications-sidebar></app-publications-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+      <ng-container *ngIf="loading">
+        <app-loading-animation-table></app-loading-animation-table>
+      </ng-container>
+      <ng-container *ngIf="!loading">
+        <div class="header">
+          <h1>My Publications</h1>
+          <div class="table-header-buttons">
+            <button mat-button disableRipple *ngIf="canCreatePublication" (click)="newPublication()">
+              Add New Publication
+            </button>
+            <button mat-button disableRipple *ngIf="!canCreatePublication" (click)="searchPublication()">
+              Search Publication
+            </button>
+          </div>
+        </div>
+
+        <div class="table-content pubs-table">
+          <table *ngIf="dataSource && publicationsList.length > 0" class="table-element" mat-table
+            [dataSource]="dataSource" matSort #TableSort="matSort" matSortActive="name" matSortDirection="asc"
+            matSortDisableClear>
+
+            <ng-container matColumnDef="cover">
+              <th mat-header-cell *matHeaderCellDef class="cover"></th>
+              <td mat-cell *matCellDef="let row;" [ngClass]="{'cover': true, 'pdf-placeholder-container': !row.cover}">
+                <img *ngIf="row.cover" src="{{row.cover}}" alt="cover image">
+                <app-pdf-placeholder *ngIf="!row.cover" width="71" height="100"></app-pdf-placeholder>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="publications-name"> name </th>
+              <td mat-cell *matCellDef="let row" class="button">
+                <span>{{row.name}}</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="description"> description </th>
+              <td mat-cell *matCellDef="let row" class="description">
+                <div *ngIf="row.description && row.description.length > 120" [matTooltip]="row.description">
+                  {{row.description}}</div>
+                <div *ngIf="row.description && row.description.length <= 120">{{row.description}}</div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="numIssues">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="num-issues"> total issues </th>
+              <td mat-cell *matCellDef="let row" class="bold align-right"> {{row.numIssues}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalFunds" *ngIf="canCreatePublication">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="total-funds"> total funds </th>
+              <td mat-cell *matCellDef="let row" class="bold align-right"> {{row.totalFunds | currency:'USD':'symbol':'1.0-2' }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="members">
+              <th mat-header-cell *matHeaderCellDef class="members"> members </th>
+              <td mat-cell *matCellDef="let row">
+                <app-members-cell [pubId]="row.id" [members]="row.members"></app-members-cell>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status" *ngIf="canSeeOwnPendingRequests">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="status-invite"> status </th>
+              <td mat-cell *matCellDef="let row" class="status-invite">
+                <div class="status-container {{row.status}}">
+                  <ng-container>
+                    <mat-icon *ngIf="row.status === 'active'">visibility</mat-icon>
+                    <mat-icon *ngIf="row.status === 'pending'">schedule</mat-icon>
+                    {{row.status}}
+                  </ng-container>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="menu">
+              <th mat-header-cell *matHeaderCellDef class="menu-column"></th>
+              <td mat-cell *matCellDef="let row" class="menu" (click)="$event.stopPropagation()">
+                <app-publication-menu *ngIf="row.status !== 'pending'" [publication]="row.publication"
+                  (triggerReload)="onPublicationMenuEvent($event)">
+                </app-publication-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClick(row)">
+            </tr>
+          </table>
+          <div *ngIf="!dataSource || publicationsList.length === 0" class="empty-list">
+            <app-empty-list-placeholder></app-empty-list-placeholder>
+            <div class="description">No publications yet</div>
+            <div class="actions">
+              <button mat-button *ngIf="canCreatePublication" disableRipple (click)="newPublication()">
+                Create New Publication
+              </button>
+              <button mat-button *ngIf="canCreatePublication" disableRipple (click)="searchPublication()">
+                Search Publication
+              </button>
+            </div>
+          </div>
+        </div>
+        <mat-paginator #paginator [pageSizeOptions]="[10, 20, 40]" showFirstLastButtons
+          *ngIf="publicationsList.length > 10">
+        </mat-paginator>
+      </ng-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

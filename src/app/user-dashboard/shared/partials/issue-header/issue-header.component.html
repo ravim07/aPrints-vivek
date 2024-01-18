@@ -1,0 +1,47 @@
+<mat-toolbar class="issue-header">
+  <div class="left-section">
+    <ng-container *ngIf="!issueNameEdit">
+      <div class="issue-name">{{issueName}}</div>
+      <button *ngIf="canEditIssue" mat-icon-button (click)="editIssue()" matTooltip="Edit issue name">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="issueNameEdit">
+      <form [formGroup]="editIssueForm" (ngSubmit)="saveIssue()">
+        <mat-form-field class="issue-name-edit" floatLabel="never">
+          <input matInput #name formControlName="name" cdkFocusInitial>
+          <div matSuffix class="actions">
+            <button type="submit" mat-icon-button>
+              <mat-icon>done</mat-icon>
+            </button>
+          </div>
+        </mat-form-field>
+      </form>
+    </ng-container>
+  </div>
+  <div class="center-section">
+    <app-issue-status-progress [status]="issueStatus"></app-issue-status-progress>
+  </div>
+  <div class="right-section">
+    <div class="status-panel">
+      <div class="label">status</div>
+      <div
+        [ngClass]="{'status-component': true, 'no-cancel' : !isCancelable || !hasPublicationFlowPerms || !isFirstUpload}">
+        <app-issue-status [status]="issueStatus"></app-issue-status>
+      </div>
+      <div *ngIf="isCancelable && hasPublicationFlowPerms" class="cancel-action">
+        <button mat-icon-button (click)="action()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="isFirstUpload && hasPublicationFlowPerms" class="cancel-action">
+        <button mat-icon-button (click)="reuploadDraft()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div *ngIf="hasAction && hasPublicationFlowPerms" class="action-panel">
+      <button mat-button (click)="action()">{{actionCaption}}</button>
+    </div>
+  </div>
+</mat-toolbar>

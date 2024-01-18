@@ -1,0 +1,120 @@
+@import "~scss/mixins/_utils";
+// Modal
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1000;
+  overflow-x: hidden;
+  overflow-y: auto;
+  &.modal-full {
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    display: flex;
+  }
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal-fade {
+  opacity: 0;
+  @include transition(opacity .15s linear);
+  .modal-default {
+    @include transition(-webkit-transform .3s ease-out);
+    @include transform(translate(0,-25%));
+  }
+
+  &.modal-show {
+    @include flexbox();
+    opacity: 1;
+    .modal-default {
+      @include transform(translate(0,0));
+    }
+  }
+}
+
+@mixin mobile-modal {
+  width: 96%;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  .modal-close {
+    z-index: 2;
+    right: 20px;
+    top: 20px;
+    .close-b {
+      display: block;
+    }
+    .close-w {
+      display: none;
+    }
+  }
+}
+
+.modal-default {
+  position: relative;
+  margin: 10rem auto;
+  width: 440px;
+  background: #FFF;
+  z-index: 100;
+  min-height: 300px;
+  border-radius: 8px;
+  padding: 2.375rem 4.25rem;
+  align-self: center;
+  justify-self: center;
+  h3 {
+    margin: 0;
+    @include typography-lvl(1.75rem, normal, 600, 'Montserrat', normal);
+    color: #484848;
+    margin-bottom: 1.875rem;
+  }
+  .modal-close {
+    position: absolute;
+    top: 0;
+    right: -54px;
+    cursor: pointer;
+    .close-b {
+      display: none;
+    }
+  }
+  @include for-phone-only {
+    & {
+      @include mobile-modal();
+    }
+  }
+
+  &.modal912 {
+    width: 912px;
+    margin: 5rem auto auto;
+    @include max-width(1000px) {
+      @include mobile-modal();
+    }
+  }
+
+  &.modal900 {
+    width: 900px;
+    margin: 10rem auto auto;
+    @include max-width(1000px) {
+      @include mobile-modal();
+    }
+  }
+  &.modal600 {
+    width: 600px;
+    padding: 2.375rem 2.375rem;
+    @include max-width(1000px) {
+      @include mobile-modal();
+    }
+  }
+  &.modal500 {
+    width: 500px;
+    padding: 2.75rem 3rem;
+    @include max-width(1000px) {
+      @include mobile-modal();
+    }
+  }
+}

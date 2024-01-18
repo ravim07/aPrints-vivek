@@ -1,0 +1,21 @@
+<div class="share-button">
+  <button mat-button class="button-turq-default no-focus"
+          matTooltip="Get a public link you can share with your sponsors and subscribers"
+          [mdePopoverTriggerFor]="appPopover" mdePopoverTriggerOn="click">
+    <mat-icon>share</mat-icon>
+    <div>Share</div>
+  </button>
+</div>
+<mde-popover #appPopover="mdePopover" [mdePopoverCloseOnClick]="false" [mdePopoverOverlapTrigger]="false">
+  <mat-card class="apopover share-button-popover">
+    <span class="modal-close" (click)="closePopup()">
+      <img class="close-b" src="{{assetsUrl}}/icons/close-black.png" />
+    </span>
+    <mat-card-content>
+      Link: <input type="text" class="input-default input-s1" readonly value="{{link}}" />
+      <div class="btn">
+        <button ngxClipboard mat-button class="button-orange-default no-focus" [cbContent]="link" (click)="copyLink()">Copy Link</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mde-popover>

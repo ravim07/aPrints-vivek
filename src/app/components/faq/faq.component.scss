@@ -1,0 +1,130 @@
+@import "~scss/_variables";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_responsive";
+
+.main-faq {
+  min-height: 100vh;
+  @include typography-lvl(0.875rem, normal, 400, 'Montserrat', normal);
+  color: black;
+  .faq-content {
+    .subtitle {
+      //margin-left: 4.6rem;
+      @include max-width(768px){
+        text-align: center;
+        margin: 0 0 2rem;
+      }
+    }
+    .panel-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .panel {
+      width: 100%;
+      padding: 2.5rem 0 0;
+      z-index: 0;
+      opacity: 0;
+      display: none;
+      &.show {
+        display: block;
+        z-index: 100;
+        opacity: 1;
+      }
+      .q-box {
+        padding: 1rem 0 1.2rem;
+        border-bottom: 1px solid lighten(#919191, 20%);
+        .q-title {
+          cursor: pointer;
+          font-size: 0.9375rem;
+          padding: 0;
+          .icon {
+            pointer-events: none;
+            font-size: 1.3rem;
+            position: relative;
+            top: 2px;
+            width: 20px;
+            display: inline-block;
+            &:after {
+              content: '+';
+            }
+          }
+        }
+        .q-answer {
+          margin-left: 20px;
+          opacity: 0;
+          @include transition(opacity 0.5s ease-in-out);
+          height: 0;
+          overflow: hidden;
+          p {
+            padding: 0;
+            margin: 0.625rem 0 0;
+            color: black;
+          }
+        }
+        &.collapse {
+          .q-title {
+            color: black;
+          }
+          &.show {
+            .q-title {
+              color: $font-color;
+              .icon {
+                &:after {
+                  content: '-';
+                }
+              }
+            }
+            .q-answer {
+              opacity: 1;
+              height: auto;
+              overflow: visible;
+            }
+          }
+        }
+      } 
+    }
+  }
+  .faq-menu {
+    margin: 16.5rem 0 0;
+    @include max-width(768px){
+      margin: 4rem 0 0;
+      position: absolute;
+      top: 160px;
+      z-index: 100;
+    }
+    .menu-wrapper {
+      margin-left: 5rem;
+      @include max-width(768px){
+        margin-left: 0;
+      }
+    }
+    h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      @include max-width(768px){
+        display: none;
+      }
+    }
+    ul, li {
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      font-size: 0.875rem;
+      list-style: none;
+      margin: 0.625rem 0;
+      cursor: pointer;
+      display: block;
+      &.active {
+        color: black;
+      }
+      &:hover {
+        color: black;
+      }
+      @include max-width(768px){
+        display: inline-block;
+        margin: 0 1rem 0 0;
+      }
+    }
+  }
+}

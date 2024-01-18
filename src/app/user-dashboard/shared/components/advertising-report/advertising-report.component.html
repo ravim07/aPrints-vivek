@@ -1,0 +1,80 @@
+<button mat-icon-button class="close-dialog" (click)="onClose()" matTooltip="Close this dialog"
+  aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title class="start-align">Advertising Summary</div>
+  <div class="text-below-title report">
+    <span class="item item1">
+      <span class="title"># of Payments</span>
+      <span class="number">{{adPaymentsSummary.summary.pageAdPaymentsCount}}</span>
+    </span>
+    <span class="item item2">
+      <span class="title">Total Raised</span>
+      <span class="number">$ {{adPaymentsSummary.summary.totalAmount | amount}}</span>
+    </span>
+  </div>
+  <div mat-dialog-content>
+    <div class="table-content no-max-height">
+      <table *ngIf="dataSource" class="table-element" mat-table [dataSource]="dataSource" matSort #TableSort="matSort"
+        matSortActive="name" matSortDirection="asc" matSortDisableClear>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class=""> Ad Type </th>
+          <td mat-cell *matCellDef="let row" class="report">
+            <ng-container>{{row.typeLiteral}}</ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class=""> funding amount </th>
+          <td mat-cell *matCellDef="let row" class="report">
+            <ng-container>{{row.amount > 0 ? (row.amount | currency:'USD':'symbol':'1.0-2') : '-'}}</ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sponsorName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class=""> name </th>
+          <td mat-cell *matCellDef="let row" class="report">
+            <ng-container>
+              {{row.advertiserName}} </ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sponsorEmail">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class=""> email </th>
+          <td mat-cell *matCellDef="let row" class="report">
+            <ng-container>
+              {{row.advertiserEmail}} </ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="mailingAddress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class=""> mailing address </th>
+          <td mat-cell *matCellDef="let row" class="report">
+            <ng-container>
+              {{row.mailingAddress}} </ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class=""> date </th>
+          <td mat-cell *matCellDef="let row" class="status">
+            {{row.createdAt | date:'MM/dd/yyyy'}}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div class="table-footer-buttons">
+        <button class="button-outline-dark" mat-button disableRipple (click)="downloadCsv()">
+          Download CSV
+        </button>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="center">
+    <button mat-button class="save done" (click)="onClose()">Done</button>
+  </div>
+</div>

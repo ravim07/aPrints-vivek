@@ -1,0 +1,25 @@
+<div class="flat-dialog-main">
+  <div *ngIf="!data.edit" mat-dialog-title>New Publication</div>
+  <div *ngIf="data.edit" mat-dialog-title>My Publication</div>
+  <div mat-dialog-content>
+    <form [formGroup]="newPubForm">
+      <mat-form-field>
+        <input matInput formControlName="name" placeholder="Publication Name" cdkFocusInitial>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="organization" placeholder="Organization Name">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Description" formControlName="description">
+        </textarea>
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="save" (click)="save()" [disabled]="!newPubForm.valid">
+      <ng-container *ngIf="!data.edit">Set up</ng-container>
+      <ng-container *ngIf="data.edit">Save</ng-container>
+    </button>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+  </div>
+</div>

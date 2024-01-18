@@ -1,0 +1,63 @@
+<ng-container *ngIf="loading">
+  <app-loading-animation-table></app-loading-animation-table>
+</ng-container>
+<div class="table-content">
+  <table *ngIf="dataSource else emptyTable" class="table-element"
+         mat-table
+         [dataSource]="dataSource"
+         matSort #TableSort="matSort"
+         matSortActive="createdAt"
+         matSortDirection="desc"
+         matSortDisableClear
+         style="table-layout: fixed">
+    <ng-container matColumnDef="bankName">
+      <th mat-header-cell *matHeaderCellDef>Bank Name</th>
+      <td mat-cell *matCellDef="let row">{{row.bankAccount.bank_name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let row">{{row.description}}</td>
+    </ng-container>
+    <ng-container matColumnDef="last4">
+      <th mat-header-cell *matHeaderCellDef>Bank Account</th>
+      <td mat-cell *matCellDef="let row">***{{row.bankAccount.last4}}</td>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let row"></td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
+      <td mat-cell *matCellDef="let row">{{row.amount}}</td>
+    </ng-container>
+    <ng-container matColumnDef="fee">
+      <th mat-header-cell *matHeaderCellDef>Fee</th>
+      <td mat-cell *matCellDef="let row">{{row.chargeFee}}</td>
+    </ng-container>
+    <ng-container matColumnDef="netAmount">
+      <th mat-header-cell *matHeaderCellDef>Net Amount</th>
+      <td mat-cell *matCellDef="let row">{{row.chargeAmount}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+  </table>
+</div>
+<ng-template #emptyTable>
+  <div class="empty-list">
+    <app-empty-list-placeholder></app-empty-list-placeholder>
+    <div class="description">
+      <span *ngIf="!stripeAccount">Any bank account linked yet</span>
+      <span *ngIf="stripeAccount">Any transfer made yet.</span>
+      <p *ngIf="stripeAccount?.status === 'pending'">
+        Bank Account information under review. You will receive an email notification once is validated.
+      </p>
+    </div>
+    <div class="actions">
+      <button *ngIf="!stripeAccount" mat-button disableRipple (click)="addBankAccount()">Add Bank Account</button>
+      <button *ngIf="stripeAccount && stripeAccount.status === 'verified'" mat-button disableRipple
+              (click)="transfersFunds()">Get Funds from aPrintis
+      </button>
+    </div>
+  </div>
+</ng-template>

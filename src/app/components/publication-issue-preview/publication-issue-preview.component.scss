@@ -1,0 +1,175 @@
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+:host {
+
+  .sidebar-button {
+    margin: 0 0 0.813rem 0.125rem;
+    color: #292929;
+    @include typography-lvl(2rem, normal, normal, 'Averta', normal);
+
+    .btn-side-action {
+      color: #292929;
+      width: 2rem;
+      height: 2rem;
+      display: block;
+      cursor: pointer;
+    }
+  }
+
+  .preview-container {
+    height: calc(80vh - 64px);
+    position: relative;
+
+    @include min-width(960px) {
+      height: calc(100vh - 64px);
+      display: flex;
+    }
+  }
+
+  .pdf-viewer {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+
+  .pdf-viewer-container {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    background-color: #515558;
+    position: relative;
+  }
+
+  .preview-issue-details {
+    max-width: 100%;
+    padding: 0.688rem 1.25rem 0;
+    background-color: #ffffff;
+    overflow: auto;
+    @include min-width(960px) {
+      width: 23.125rem;
+    }
+  }
+
+
+  .current-issue {
+    color: #333333;
+    @include typography-lvl(0.938rem, normal, normal, 'Averta', normal);
+
+    .issue-name {
+      @include typography-lvl(2.5rem, normal, bold, 'Averta', normal);
+    }
+
+    .related-publication {
+      color: rgba(#333333, 0.5);
+    }
+
+  }
+
+  .more-issues {
+    margin: 3rem 0 1rem 0;
+    @include typography-lvl(0.938rem, normal, 300, 'Averta', normal);
+    color: #333333;
+  }
+
+  .issues-related {
+    margin-top: 1rem;
+    border-top: solid 1px #e1e1e1;
+    max-height: 22rem;
+    overflow: auto;
+
+    .issue-item {
+      color: #333333;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      border-bottom: solid 1px #e1e1e1;
+      display: block;
+      @include typography-lvl(0.938rem, normal, normal, 'Averta', normal);
+    }
+
+    .issue-details {
+      margin-left: 1rem;
+    }
+  }
+
+  .issue-support {
+    height: 11.875rem;
+    margin: 1.125rem 0 0.625rem;
+    padding: 2.563rem 2.25rem 2.5rem 2.188rem;
+    background-color: #f8fdff;
+    text-align: center;
+    @include typography-lvl(1.25rem, normal, 300, 'Averta', normal);
+    color: #292929;
+
+    p {
+      margin: 0;
+    }
+
+    .mat-button {
+      margin-top: 1.188rem;
+    }
+  }
+
+  .contact-managing-editor {
+    color: #292929;
+    margin: 0.625rem 0 2rem;
+    text-align: center;
+    @include typography-lvl(0.75rem, normal, 300, 'Averta', normal);
+
+    a {
+      color: #292929;
+      text-decoration: none;
+    }
+
+    @include min-width(960px) {
+      text-align: left;
+    }
+  }
+
+
+  .sidebar-button {
+    display: none;
+    @include min-width(960px) {
+      display: block;
+    }
+  }
+
+  @include min-width(960px) {
+    .sidebar-close {
+      width: 2.5rem !important;
+      padding: 0.688rem 0.25rem 29.25rem;
+      position: relative;
+
+      .current-issue {
+        display: flex;
+        flex-direction: column;
+        writing-mode: vertical-lr;
+        position: relative;
+        width: 100%;
+        flex-wrap: wrap;
+        max-width: 100%;
+
+        .issue-name {
+          //position: absolute;
+          font-size: 1.25rem;
+        }
+
+        .issue-name, .related-publication {
+          margin: 0 auto;
+          transform: rotate(180deg);
+        }
+
+        .related-publication {
+          margin-top: 2rem;
+        }
+      }
+
+      .badge-pill,
+      .more-issues, .issues-related, .issue-support, .contact-managing-editor, .issue-creation {
+        display: none;
+      }
+    }
+  }
+}

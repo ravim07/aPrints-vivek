@@ -1,0 +1,16 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" class="open-menu">
+  <div class="publication-menu" matTooltip="Publication menu" aria-label="Publication menu">
+    <mat-icon>more_vert</mat-icon>
+  </div>
+</button>
+<mat-menu #menu="matMenu" xPosition="before" class="pub-menu-panel">
+  <button mat-menu-item (click)="sharePublicationLink()">
+    <span class="menu-button">Share</span>
+  </button>
+  <button mat-menu-item (click)="editPublication()" *ngIf="canEditPublication">
+    <span class="menu-button">Edit Publication</span>
+  </button>
+  <button mat-menu-item (click)="viewIssues()">
+    <span class="menu-button">View Issues</span>
+  </button>
+</mat-menu>

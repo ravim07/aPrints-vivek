@@ -1,0 +1,14 @@
+<div *ngIf="_showPopup">
+  <div id="modal-overlay" class="modal-fade {{popupClass}}">
+    <div class="modal900 modal-default">
+      <span class="modal-close" (click)="closePopup()">
+        <img class="close-w" src="{{assetsUrl}}/icons/close.png" />
+        <img class="close-b" src="{{assetsUrl}}/icons/close-black.png" />
+      </span>
+
+      <div class="form-wrapper">
+        <div #pdfViewer id="pdfViewer" class="pdfViewer"></div>
+      </div>
+    </div>
+  </div>
+</div>

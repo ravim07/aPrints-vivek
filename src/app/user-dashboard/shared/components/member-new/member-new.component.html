@@ -1,0 +1,29 @@
+<div class="flat-dialog-main">
+  <div *ngIf="!data.edit" mat-dialog-title>New Member</div>
+  <div *ngIf="data.edit" mat-dialog-title>Member details</div>
+  <div mat-dialog-content>
+    <form [formGroup]="newMemberForm">
+      <mat-form-field>
+        <input matInput formControlName="name" placeholder="Name" cdkFocusInitial>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="Email">
+      </mat-form-field>
+      <mat-form-field floatLabel="always">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" class="role-form-field" placeholder="Select a role" panelClass="role-select">
+          <mat-option class="option-text" *ngFor="let option of optionsRole" value="{{option.id}}">
+            {{option.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="save" (click)="save()" [disabled]="!newMemberForm.valid">
+      <ng-container *ngIf="!data.edit">Send invitation</ng-container>
+      <ng-container *ngIf="data.edit">Save</ng-container>
+    </button>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+  </div>
+</div>

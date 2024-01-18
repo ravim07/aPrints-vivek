@@ -1,0 +1,43 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+
+.issue-status {
+  @include flexbox();
+  justify-content: center;
+  align-items: center;
+  @include typography-lvl(0.9375rem, normal, normal, 'Averta', 0.26px);
+  color: #616161;
+
+  .mat-icon {
+    margin-left: 5px;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    color: #292929;
+
+    &.star {
+      color: #ffd137;
+    }
+
+    &.picture_as_pdf {
+      color: #e03f47;
+    }
+
+    &.feedback {
+      color: #fba575;
+    }
+
+    &.rate_review {
+      color: #5ba251;
+    }
+
+    &.print {
+      color: #9f3092;
+    }
+
+    &.local_shipping {
+      color: #5980a9;
+    }
+  }
+}

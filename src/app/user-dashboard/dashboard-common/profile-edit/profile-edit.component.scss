@@ -1,0 +1,23 @@
+@import "~scss/mixins/_responsive";
+.form-btn{
+  margin: 0 !important;
+  margin-top: 3rem !important;
+}
+.form-error-top{
+  top: 10px !important;
+  ul{
+    padding-inline-start: 1rem;
+  }
+}
+.lbl-mobile{
+  display: none;
+  @include max-width(992px) {
+    display: block;
+  }
+}
+.lbl-large{
+  display: block;
+  @include max-width(992px) {
+    display: none;
+  }
+}

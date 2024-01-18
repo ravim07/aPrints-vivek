@@ -1,0 +1,29 @@
+<button mat-icon-button class="close-dialog" (click)="onCancelClick()" matTooltip="Close this dialog"
+  aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main share-dialog-main">
+  <div mat-dialog-title>Share</div>
+  <div mat-dialog-content class="no-pad-right">
+    <mat-form-field class="no-padding-infix">
+      <label>Link</label>
+      <input #input class="font-smaller" matInput cdkFocusInitial readonly [value]="value">
+      <button mat-button class="copy-button" (click)="copy()">Copy</button>
+    </mat-form-field>
+    <form [formGroup]="communityInfo" *ngIf="canEditShare">
+      <mat-form-field>
+        <input matInput formControlName="title" placeholder="Title">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput rows="4" placeholder="Description" formControlName="description">
+        </textarea>
+      </mat-form-field>
+      <div mat-dialog-actions>
+        <button mat-button class="save" (click)="save()" [disabled]="!communityInfo.valid">
+          Save
+        </button>
+        <button mat-button (click)="onCancelClick()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

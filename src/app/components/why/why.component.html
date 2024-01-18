@@ -1,0 +1,26 @@
+<div class="main-wrapper">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <h1 class="why-title">
+          Not Your Ordinary Print Pub
+        </h1>
+        <section *ngFor="let contentItem of content">
+          <div class="image">
+            <img src="{{contentItem.img}}" alt="">
+          </div>
+          <div class="content">
+            <div class="content__icon">
+              <img src="{{contentItem.icon}}" alt="">
+            </div>
+            <div class="content__title">{{contentItem.title}}</div>
+            <div class="content__text">{{contentItem.text}}</div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <app-page-footer></app-page-footer>
+</div>

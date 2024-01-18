@@ -1,0 +1,152 @@
+<div class="main-wrapper">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="main-donate simple-page-form">
+    <div class="form-container {{formStatusClass}}">
+      <div class="row">
+        <div class="col flex no-justify">
+          <h1>You're subscribing to <span>{{publication.publicationName}}</span></h1>
+        </div>
+        <div class="social-media col-auto">
+          <a class="fb" href="https://www.facebook.com/aPrintis/" target="_blank"><div class="fb-icon"><img src="{{assetsUrl}}/fb.svg" alt="Facebook" loading="lazy"></div></a>
+          <a class="li" href="https://www.linkedin.com/company/aprintis" target="_blank"><div class="li-icon"><img src="{{assetsUrl}}/linkedin.svg" alt="LinkedIn" loading="lazy"></div></a>
+        </div>
+        <div class="col-auto go-back">
+          <a href="/publication/{{publication.id}}?open=subs">Back to Subscriptions</a>
+        </div>
+        <div class="col-lg-12 top"></div>
+        <div class="col-lg-12">
+          <div *ngIf="messageSent" class="alert-success-inline message-ok">
+            Subscription Complete: Thanks for your support!
+          </div>
+        </div>
+        <div class="form-col col-lg-8">
+          <form [formGroup]="subscriptionForm" (ngSubmit)="subscribe()">
+            <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+              <div>{{errorApi}}</div>
+            </div>
+            <div class="row row-lbl">
+              <div class="col-lg-12">
+                <span class="lbl">Shipping Info</span>
+              </div>
+            </div>
+            <div class="row row-form row-form-group group-name">
+              <div class="row-item col-lg-6">
+                <input placeholder="First Name *" formControlName="firstName" type="text" class="input-default input-s1">
+                <div *ngIf="formUtil.checkError(subscriptionForm.get('firstName'), 'required')" class="form-error form-error-default">
+                  First Name is required
+                </div>
+              </div>
+              <div class="row-item col-lg-6">
+                <input placeholder="Last Name *" formControlName="lastName" type="text" class="input-default input-s1">
+                <div *ngIf="formUtil.checkError(subscriptionForm.get('lastName'), 'required')" class="form-error form-error-default">
+                  Last Name is required
+                </div>
+              </div>
+            </div>
+            <div class="row row-form row-form-group group-email">
+              <div class="row-item col-lg-6">
+                <input placeholder="Email *" formControlName="email" type="text" class="input-default input-s1">
+                <div *ngIf="formUtil.checkError(subscriptionForm.get('email'), 'required')" class="form-error form-error-default">
+                  Email is required
+                </div>
+                <div *ngIf="formUtil.checkError(subscriptionForm.get('email'), 'email')" class="form-error form-error-default">
+                  Please enter a valid email address
+                </div>
+              </div>
+              <div class="row-item col-lg-6">
+                <input placeholder="Phone Number" formControlName="phoneNumber" type="text" class="input-default input-s1">
+              </div>
+            </div>
+            <div class="row row-form row-form-group group-address">
+              <div class="row-item col-lg-6">
+                <input placeholder="Address Line 1*" formControlName="address1" type="text" class="input-default input-s1">
+                <div *ngIf="formUtil.checkError(subscriptionForm.get('address1'), 'required')" class="form-error form-error-default">
+                  Address1 is required
+                </div>
+              </div>
+              <div class="row-item col-lg-6">
+                <input placeholder="Address Line 2*" formControlName="address2" type="text" class="input-default input-s1">
+                <div *ngIf="formUtil.checkError(subscriptionForm.get('address2'), 'required')" class="form-error form-error-default">
+                  Address2 is required
+                </div>
+              </div>
+            </div>
+            <div class="row row-form-group row-form group-state">
+              <div class="row-item col-lg-6">
+                <input placeholder="City *" formControlName="city" type="text" class="input-default input-s1">
+                <div *ngIf="formUtil.checkError(subscriptionForm.get('city'), 'required')" class="form-error form-error-default">
+                  City is required
+                </div>
+              </div>
+              <div class="row-item col-lg-6">
+                <mat-form-field class="select-default select-s1">
+                  <mat-select formControlName="state" placeholder="State *">
+                    <mat-option *ngFor="let state of states" value="{{state}}">{{state}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div *ngIf="formUtil.checkError(subscriptionForm.get('state'), 'required')" class="form-error form-error-default">
+                  State is required
+                </div>
+              </div>
+            </div>
+            <div class="row row-form-group row-form group-zip">
+              <div class="row-item col-lg-6">
+                <input placeholder="Zip *" formControlName="zip" type="text" class="input-default input-s1">
+                <div *ngIf="formUtil.checkError(subscriptionForm.get('zip'), 'required')" class="form-error form-error-default">
+                  Zip is required
+                </div>
+                <div *ngIf="formUtil.checkError(subscriptionForm.get('zip'), 'pattern')" class="form-error form-error-default">
+                  Zip Code is not valid
+                </div>
+              </div>
+            </div>
+            <div class="row row-lbl lbl-pad">
+                <div class="col-lg-12">
+                  <span class="lbl">Credit Card Info</span>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div id="card-element" class="stripe-elements"></div>
+              </div>
+            </div>
+            <!--
+            <div class="row">
+              <div class="col-lg-12">
+                <span class="lbl">Debit or Credit Card</span>
+              </div>
+            </div>
+            -->
+          </form>
+        </div>
+        <div class="summary-form col-lg-4">
+          <div class="row row-lbl lbl-pad">
+            <div class="col-lg-12">
+              <span class="lbl">Subscription Summary</span>
+            </div>
+          </div>
+          <div class="summary">
+            <!-- <span class="title">Contribution Summary</span> -->
+            <span class="name">{{subscriptionType.name}}</span>
+            <p>{{subscriptionType.content}}</p>
+            <div class="total">
+              <p>Subscription<span class="txt-r">${{subscriptionType.amount}}</span></p>
+              <p>Credit card processing fee<span class="txt-r">${{subscriptionType.chargeFee}}</span></p>
+            </div>
+            <div class="total">
+              <p>Total<span class="txt-r">${{subscriptionType.chargeAmount}}</span></p>
+            </div>
+            <div class="btn">
+              <button disableRipple (click)="subscribe()" [disabled]="disableSubmit"
+                class="no-focus button-turq-default btn-save" mat-button>
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <app-page-footer></app-page-footer>
+</div>

@@ -1,0 +1,46 @@
+@mixin flexbox() {
+  display: -webkit-box !important;
+  display: -moz-box !important;
+  display: -ms-flexbox !important;
+  display: -webkit-flex !important;
+  display: flex !important;
+}
+
+@mixin transition-delay($args) {
+  -webkit-transition-delay: $args;
+  -moz-transition-delay: $args;
+  -o-transition-delay: $args;
+  -ms-transition-delay: $args;
+  transition-delay: $args;
+}
+
+@mixin transition($args) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+@mixin setClass($value, $prop, $prefix) {
+  #{$prefix}.#{$prop}-#{$value} {
+    #{$prop} : #{$value+ 'px'};
+  }
+}
+
+
+@function rem($size) {
+  @return $size / 16px * 1rem;
+}
+
+@function reduceSize($size, $percentage: 100) {
+  @return #{($size * $percentage) / 100};
+}

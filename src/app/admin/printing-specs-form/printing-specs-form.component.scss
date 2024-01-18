@@ -1,0 +1,54 @@
+@import "~scss/mixins/_typography";
+@import "~scss/variables";
+@import "~scss/mixins/_utils";
+
+.radio-button-group {
+  display: flex;
+  margin-top: 15px;
+
+  .mat-radio-button + .mat-radio-button {
+    margin-left: 10px;
+  }
+}
+
+.lbl {
+  @include typography-lvl(0.9375rem, normal, 600, 'Montserrat', normal);
+  width: 100%;
+  display: block;
+}
+
+.group-spec {
+  margin-bottom: 1.188rem;
+  font-size: 0.8125rem;
+
+  .lbl-s {
+    font-size: 0.8125rem;
+    margin: 0;
+  }
+
+  .lbl-w {
+    width: unset;
+  }
+
+  .lbl-total {
+    background-color: #82E0AA;
+  }
+
+  .lbl-center {
+    text-align: center;
+    height: 44px;
+    line-height: 44px;
+  }
+
+  .total {
+    color: #484848;
+    @include typography-lvl(0.8125rem, normal, 600, 'Montserrat', normal);
+    border-radius: 0.3125rem;
+    padding: 0.845rem 1rem;
+    background: #eaeaea;
+
+    span {
+      color: $primary-color;
+    }
+  }
+}

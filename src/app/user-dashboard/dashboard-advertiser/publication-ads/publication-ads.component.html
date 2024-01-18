@@ -1,0 +1,121 @@
+<div [hidden]="loading" class="dash-main-content dash-main-content-no-margin dash-articles-issue">
+  <div class="dash-title-main-div">
+    <div class="dash-title-div">
+      <div class="dash-title-div-div">
+        <h3 class="dash-title w-sub">{{publication.name}}</h3>
+        <h4 class="dash-sub-title">Issue #{{issue.number}}: {{issue.name}}</h4>
+      </div>
+      <div class="share-button">
+        <app-share-button [publicationId]="publication.id"></app-share-button>
+      </div>
+    </div>
+  </div>
+  <div class="dash-content-default">
+    <div class="row">
+      <div class="col-lg-3 col-img">
+        <h5 class="dash-h5">Status</h5>
+        <h5 class="status">{{ statusString }}</h5>
+        <div class="pdf-placeholder" [hidden]="currentDraft"></div>
+        <div class="pdf-preview" [hidden]="!currentDraft">
+          <div>
+            <button class="button-orange button-orange-default no-focus pdf-viewer"
+              (click)="openPdf()" matTooltip="Open in PDF Viewer" mat-button>Open PDF
+            </button>
+            <button class="button-orange button-orange-default no-focus"
+                    (click)="downloadFile()" matTooltip="Download a copy" mat-button>Download
+            </button>
+            <a class="download-pdf-link" target="_blank" #downloadPdfLink></a>
+            <img *ngIf="currentDraft" src="{{currentDraft.thumbPublicUrl}}">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 table-wrapper">
+        <table class="table-default ad-resources-table">
+          <thead>
+          <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Updated</th>
+            <!--
+            <th>Status</th>
+            -->
+            <th class="hiddenx-xs th-actions"></th>
+          </tr>
+          </thead>
+          <tbody *ngIf="adResources.length > 0">
+          <tr *ngFor="let adResource of adResources">
+            <td>{{ adResource.title }}</td>
+            <td>{{ adResource.createdAt | date:'shortDate' }}</td>
+            <td>{{ adResource.updatedAt | timeAgo }}</td>
+            <!--
+            <td>{{ adResource.status | titlecase }}</td>
+            -->
+            <td class="link-action">
+              <a (click)="viewAdResource(adResource)">VIEW</a>
+              <a *ngIf="currentUser.id === adResource.advertiser?.id"
+                (click)="deleteAdResource(adResource.id, $event)">DELETE</a>
+            </td>
+          </tr>
+          </tbody>
+          <tbody *ngIf="adResources.length === 0">
+            <tr>
+              <td class="example">Example Title</td>
+              <td class="example">05/19/1955</td>
+              <td colspan="2" class="example">{{ 05/19/1955 | timeAgo }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div class="col col-md-10 text-right">
+        <button mat-button class="text-right button-dark-default"
+                type="button" matTooltip="Submit advertisement content"
+                (click)="createAdResourceIssue()">
+          Submit New Ad
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<app-pop-up [(showPopup)]="showAdResourcePopUp" (popupEvent)="onSaveAdResource()">
+  <div class="modal-header">
+    <div class="row">
+      <div class="col-6">
+        <div class="user">
+          <img class="profile-img" src="{{assetsUrl}}/profile.png" width="50" height="50"/>
+          <span class="username">{{currentUser.name}} {{currentUser.lastName}}</span>
+        </div>
+      </div>
+      <div class="col-6 text-right pub-date">
+        {{ publication.dateCreated | date: 'shortDate' }}
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal-body">
+    <app-ad-resource-form
+      *ngIf="showAdResourcePopUp"
+      [issueId]="issue.id"
+      [adResource]="currentAdResource">
+    </app-ad-resource-form>
+  </div>
+
+</app-pop-up>
+
+<app-pdf-viewer *ngIf="isBrowser" [showPopup]="showPopupPdfViewer" (popupEvent)="onPdfViewerPopupEvent($event)" [clickedCover]="clickedCover"></app-pdf-viewer>
+
+<ng-template #dialogConfirmAdResource>
+  <mat-dialog-content>
+    <p>Are you sure you want to remove this adResource?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button disableRipple [mat-dialog-close]="true" class="button-turq-default" mat-button>Yes</button>
+    <button disableRipple [mat-dialog-close]="false" class="button-turq-default" mat-button>No</button>
+  </mat-dialog-actions>
+</ng-template>
+

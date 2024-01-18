@@ -1,0 +1,36 @@
+<button mat-button class="user-notif" matTooltip="Notifications" [matMenuTriggerFor]="menu">
+  <mat-icon *ngIf="requests.length > 0" matBadgePosition="above after" [matBadge]="notifString" matBadgeSize="small">
+    notifications
+  </mat-icon>
+  <mat-icon *ngIf="requests.length === 0">
+    notifications
+  </mat-icon>
+</button>
+<mat-menu #menu="matMenu" xPosition="before" class="notifications-menu-panel">
+  <div class="title">notifications</div>
+  <div class="notifications-list">
+    <ng-container *ngIf="requests.length > 0">
+      <ng-container *ngFor="let request of requests">
+        <ng-container [ngTemplateOutlet]="notification" [ngTemplateOutletContext]="{request: request}">
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="requests.length === 0">
+      <div class="notifications-empty">
+        You don't have any notifications
+      </div>
+    </ng-container>
+    <!-- <button mat-button *ngIf="requests.length > 0" class="notificacions-view-all">View all</button> -->
+  </div>
+</mat-menu>
+<ng-template #notification let-request='request'>
+  <div class="notification-container" (click)="action(request)">
+    <div class="notification-avatar">
+      <app-profile-img [name]="request.userName" size="40" fontSize="20"></app-profile-img>
+    </div>
+    <div class="notification-content">
+      {{request.userName}}, requested access as <span class="role">{{request.role}}</span> to <span
+        class="pub-name">{{request.publicationName}}</span>
+    </div>
+  </div>
+</ng-template>

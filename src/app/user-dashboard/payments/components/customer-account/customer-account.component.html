@@ -1,0 +1,96 @@
+<div *ngIf="_showPopup">
+  <div id="modal-overlay" class="modal-fade {{popupClass}}">
+    <div class="modal900 modal-default">
+      <span class="modal-close" (click)="closePopup()">
+        <img class="close-w" src="{{assetsUrl}}/icons/close.png" />
+        <img class="close-b" src="{{assetsUrl}}/icons/close-black.png" />
+      </span>
+
+      <div class="form-wrapper">
+        <h3 class="dash-title w-sub">{{title}}</h3>
+        <!-- <h4 class="dash-sub-title">Issue: #{{issue.number}}</h4> -->
+        <div class="row status-boxes">
+          <div class="col-lg-6 sp-margin">
+            <div class="price-calculator"
+              [class.unlinked-pad]="bankAccountStatus === 'Unlinked'"
+              [class.unverified-pad]="bankAccountStatus === 'Unverified'"
+              [class.verified-pad]="bankAccountStatus === 'Verified'"
+            >
+              <h5 class="sub-title">Bank Account Status</h5>
+              <span *ngIf="_bankAccountInfo">{{customerAccount.name}}</span><br>
+              <span *ngIf="_bankAccountInfo">{{_bankAccountInfo.bankName}} ••••{{_bankAccountInfo.last4}}</span>
+              <span class="status" [class.red]="bankAccountStatus === 'Unlinked'" [class.yellow]="bankAccountStatus === 'Unverified'"
+                    [class.green]="bankAccountStatus === 'Verified'">
+                {{bankAccountStatus}}
+              </span>
+            </div>
+          </div>
+          <div class="col-lg-6 sp-margin">
+            <div *ngIf="bankAccountStatus === 'Unlinked'" class="price-calculator">
+              Verification is done via two small deposits into the bank account that we will automatically send.<br><br>
+              These deposits will take 1-2 business days to appear on your online statement.<br>
+            </div>
+            <div *ngIf="bankAccountStatus === 'Unverified'" class="price-calculator">
+              The statement description for these deposits will be AMTS: and then the values of the two microdeposits that were sent.<br><br>
+              You will need to relay the value of the two deposits to us to finish the verification process. There is a limit of 10 failed verification attempts<br>
+            </div>
+            <div *ngIf="bankAccountStatus === 'Verified'" class="price-calculator">
+              ACH payments take up to 5 business days to receive acknowledgment of their success or failure.<br><br>
+              Because of this, ACH payments take up to 7 business days to be reflected in your available balance.<br>
+            </div>
+            
+          </div>
+        </div>
+        <div *ngIf="!customerAccount" class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form">
+          <form [formGroup]="bankAccountInfoForm" (ngSubmit)="submit()" class="group-edit-issue-form">
+            <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+              <div>{{errorApi}}</div>
+            </div>
+            <app-bank-account-info #bankAccountInfo></app-bank-account-info>
+            <div class="row form-btn">
+              <div class="col-lg-10 form-col">
+                <button disableRipple type="submit" class="button-turq-default no-focus" mat-button>Add Bank Account to Deposit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="customerAccount && _bankAccountInfo && _bankAccountInfo.status !== 'verified'" class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form">
+          <form [formGroup]="verifyBankAccountForm" (ngSubmit)="submitVerification()" class="group-edit-issue-form">
+            <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+              <div>{{errorApi}}</div>
+            </div>
+            <app-verify-bank-account #verifyBankAccount></app-verify-bank-account>
+            <div class="row form-btn">
+              <div class="col-lg-10 form-col">
+                <button disableRipple type="submit" class="button-turq-default no-focus" mat-button>Verify deposit bank account</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="customerAccount && _bankAccountInfo && _bankAccountInfo.status === 'verified'" class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form">
+          <form [formGroup]="chargeAccountForm" (ngSubmit)="confirmTransferFunds($event)" class="group-edit-issue-form">
+            <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+              <div>{{errorApi}}</div>
+            </div>
+            <app-charge-account #chargeAccount></app-charge-account>
+            <div class="row form-btn">
+              <div class="col-lg-10 form-col">
+                <button disableRipple type="submit" class="button-turq-default no-focus" mat-button>Transfer to aPrintis</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dialogConfirmTransferFunds>
+  <mat-dialog-content>
+    <p>Are you sure you want to transfer this amount to aPrintis?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button disableRipple [mat-dialog-close]="true" (click)="submitCharge()" class="button-turq-default" mat-button>Yes</button>
+    <button disableRipple [mat-dialog-close]="false" class="button-turq-default" mat-button matDialogClose>No</button>
+  </mat-dialog-actions>
+</ng-template>

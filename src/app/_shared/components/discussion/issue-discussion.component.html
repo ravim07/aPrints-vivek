@@ -1,0 +1,186 @@
+<div class="comments-container">
+  <div class="comments-toolbox">
+    <div class="col form">
+      <form [formGroup]="commentForm" (submit)="saveComment()">
+        <div class="textarea">
+          <textarea formControlName="msg" [rows]="3" class="textarea-msg"></textarea>
+        </div>
+        <div class="but-panel">
+          <div class="button">
+            <button mat-button disableRipple matTooltip="Post Message"
+                    [ngClass]="{ 'button-turq-default': true, 'sending-text': sendingText}"
+                    [disabled]="sendingText || sendingImage">
+              <ng-container *ngIf="!sendingText">Submit</ng-container>
+              <mat-progress-spinner *ngIf="sendingText" class="progress-spinner" color="white" mode="indeterminate"
+                                    diameter="24" strokeWidth="3">
+              </mat-progress-spinner>
+            </button>
+          </div>
+          <div class="attachment">
+            <app-input-file-control (fileChanged)="inputFileChange($event)" [loading]="sendingImage"
+                                    matIcon="attach_file" matTooltip="Upload Image"
+                                    placeholder="Attachment"></app-input-file-control>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="comments-box-header">
+    <div *ngIf="!loading && comments" class="title">Latest comments</div>
+    <!-- <div class="filter">
+      <div class="label">Filter by</div>
+      <mat-form-field appearance="none">
+        <mat-select (selectionChange)="setFilter()" [(value)]="filterSelected" disableRipple>
+          <mat-option value="all">
+            All messages
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div> -->
+  </div>
+  <div class="comments-box">
+    <div *ngIf="!loading && comments" class="comments">
+      <ng-container *ngFor="let comment of comments; trackBy: trackByIdx;">
+        <!-- , 'comment-response': comment.email !== currentUser.email} -->
+        <div *ngIf="!!comment._attachments" [ngClass]="{'comment': true}">
+          <div class="text-content">
+            <ng-container [ngTemplateOutlet]="userContainer"
+                          [ngTemplateOutletContext]="{comment: comment, action: false}">
+            </ng-container>
+            <div *ngIf="comment.msg !== 'Attachment'" class="msg">{{ comment.msg }}</div>
+            <div *ngIf="comment._attachments.length > 0" class="attachments">
+              <ng-container *ngFor="let attachment of comment._attachments">
+                <div [ngClass]="{'item': true, 'image': attachment.thumbPublicUrl}">
+                  <div>
+                    <mat-icon *ngIf="!attachment.thumbPublicUrl">attachment</mat-icon>
+                    <a href="{{attachment.filePublicUrl}}" target="_blank">
+                      <img *ngIf="attachment.thumbPublicUrl" src="{{attachment.thumbPublicUrl}}" loading="lazy">
+                      <span *ngIf="!attachment.thumbPublicUrl">{{ attachment.name }}</span>
+                      <!-- <span>{{ attachment.name }}</span> -->
+                    </a>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="comment.originData && !comment.ignore" class="action {{comment.subType}}">
+          <div class="action-content">
+            <ng-container [ngTemplateOutlet]="userContainer"
+                          [ngTemplateOutletContext]="{comment: comment, action: true}">
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <!-- <cdk-virtual-scroll-viewport [style.height]="'46.8vh'" autosize>
+        <ng-container *cdkVirtualFor="let comment of comments; trackBy: trackByIdx;">
+          <div *ngIf="!!comment._attachments" [ngClass]="{'comment': true}">
+            <div class="text-content">
+              <ng-container [ngTemplateOutlet]="userContainer"
+                [ngTemplateOutletContext]="{comment: comment, action: false}">
+              </ng-container>
+              <div *ngIf="comment.msg !== 'Attachment'" class="msg">{{ comment.msg }}</div>
+              <div *ngIf="comment._attachments.length > 0" class="attachments">
+                <ng-container *ngFor="let attachment of comment._attachments">
+                  <div [ngClass]="{'item': true, 'image': attachment.thumbPublicUrl}">
+                    <div>
+                      <mat-icon *ngIf="!attachment.thumbPublicUrl">attachment</mat-icon>
+                      <a href="{{attachment.filePublicUrl}}" target="_blank">
+                        <img *ngIf="attachment.thumbPublicUrl" src="{{attachment.thumbPublicUrl}}" loading="lazy">
+                        <span *ngIf="!attachment.thumbPublicUrl">{{ attachment.name }}</span>
+                      </a>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="comment.originData && !comment.ignore" class="action {{comment.subType}}">
+            <div class="content">
+              <ng-container [ngTemplateOutlet]="userContainer"
+                [ngTemplateOutletContext]="{comment: comment, action: true}">
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </cdk-virtual-scroll-viewport> -->
+    </div>
+    <div *ngIf="loading" class="loading-container">
+      <mat-spinner></mat-spinner>
+      <div class="description">Loading timeline...</div>
+    </div>
+  </div>
+</div>
+<ng-template #userContainer let-comment='comment' let-action='action'>
+  <div [ngClass]="{'user': true, 'not-action': !action}" (click)="goToCommentsUrl(comment)">
+    <app-profile-img *ngIf="comment" [name]="comment.userData ? comment.userData.fullName : comment.name"
+                     [isAdmin]="comment.isAdmin" size="40" fontSize="20">
+    </app-profile-img>
+    <div class="text">
+      <div class="username">
+        <ng-container *ngIf="!comment.isAdmin">
+          {{ comment.userData ? comment.userData.fullName : comment.name }}
+        </ng-container>
+        <ng-container *ngIf="comment.isAdmin">aPrintis</ng-container>
+      </div>
+    </div>
+    <div class="icon">
+      <mat-icon>{{comment.icon}}</mat-icon>
+    </div>
+    <div *ngIf="comment.subType === 'submission'" class="action-desc">
+      <div class="action-msg">{{ comment.msg }}</div>
+    </div>
+    <div *ngIf="comment.subType === 'statusChange' || comment.subType === 'newIssue'" class="action-desc">
+      <div class="action-msg">{{comment.linkText ? comment.linkText : comment.msg}}</div>
+    </div>
+    <div *ngIf="comment.subType === 'admin-action' && comment.type !== 'sendFeedback'" class="action-desc">
+
+      <ng-container *ngIf="comment.linkText; else elseTemplate">
+        <div class="action-msg">{{comment.linkText}}</div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <div class="action-msg" [innerHTML]="comment.msg"></div>
+      </ng-template>
+
+    </div>
+    <div *ngIf="comment.subType === 'newMember' || comment.subType === 'newPayment'" class="action-desc">
+      <div class="action-msg">{{ comment.msg }}
+      </div>
+      <div>&nbsp;-&nbsp;{{ comment.amount | currency:'USD':'symbol':'1.0-2'}}</div>
+      <div *ngIf="comment.subscriptionTypeDetails">&nbsp;-&nbsp;{{ comment.subscriptionTypeDetails?.name }}</div>
+    </div>
+    <div *ngIf="comment.subType === 'admin-action' && comment.type === 'sendFeedback'" class="feedback-msg"
+         [innerHtml]="comment.msg"></div>
+    <!-- <div class="link-box">
+      <button mat-button *ngIf="comment.subType === 'submission'" matTooltip="View Submission"
+        [routerLink]="comment.redirectUrl">
+        {{ comment.linkText }}
+      </button>
+      <a *ngIf="comment.subType === 'statusChange'" matTooltip="Go to Status tab"
+        [routerLink]="[comment.redirectUrl]" [queryParams]="{tab: 'status'}" class="link">
+        {{ comment.linkText }}
+      </a>
+      <a *ngIf="comment.subType === 'newMember'" matTooltip="Go to members section"
+        [routerLink]="[comment.redirectUrl]" [queryParams]="{issueId: issueId}" class="link">
+        {{ comment.linkText }}
+      </a>
+      <a *ngIf="comment.subType === 'newPayment'" matTooltip="Go to report" [routerLink]="[comment.redirectUrl]"
+        [queryParams]="{issueId: issueId}" class="link">
+        {{ comment.linkText }}
+      </a>
+      <a *ngIf="comment.subType === 'admin-action'" matTooltip="Go to Status tab"
+        [routerLink]="[comment.redirectUrl]" [queryParams]="{tab: 'status'}" class="link">
+        {{ comment.linkText }}
+      </a>
+    </div> -->
+    <div class="time-ago">
+      <span *ngIf="comment.originData && comment.originData.issueName"
+            class="issue-name">{{comment.originData.issueName}}</span>
+      <span *ngIf="comment.originData && comment.originData.issueName">
+        | </span>
+      {{ comment.dateAdded | timeAgo }}</div>
+  </div>
+  <div class="comment-notes" *ngIf="comment.subType === 'admin-action' && comment.notes"
+       [innerHTML]="comment.notes">
+  </div>
+</ng-template>

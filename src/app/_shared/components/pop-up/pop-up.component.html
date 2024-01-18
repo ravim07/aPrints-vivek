@@ -1,0 +1,14 @@
+<div *ngIf="_showPopup">
+  <div id="modal-overlay" class="modal-fade {{popupClass}}">
+    <div class="{{popupSizeClass}} modal-default">
+      <span class="modal-close" (click)="closePopup()">
+        <img class="close-w" src="{{assetsUrl}}/icons/close.png"/>
+        <img class="close-b" src="{{assetsUrl}}/icons/close-black.png"/>
+      </span>
+
+      <ng-content select=".modal-header"></ng-content>
+      <ng-content select=".modal-body"></ng-content>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<app-onboarding-header appStickybits></app-onboarding-header>
+<main role="main">
+  <!-- <div class="roles-main-container">
+    <div class="header">
+      <div class="header-title">What’s Your Role?</div>
+    </div>
+    <div class="roles-content" *ngIf="!enableMobile">
+      <ng-container *ngFor="let role of roles" [ngTemplateOutlet]="roleContainer" [ngTemplateOutletContext]="role">
+      </ng-container>
+    </div>
+      <div class="roles-footer">
+      <div class="roles-footer-or-connector">or</div>
+      <div class="roles-footer-description">
+        <span>Support</span> your community publication with pride!
+      </div>
+      <div class="roles-footer-action">
+        <button mat-button class="roles-footer-action-button" (click)="fundraising()">
+          Find a publication
+        </button>
+      </div>
+    </div>
+    <mat-grid-list cols="4" rowHeight="200px" gutterSize="15px" *ngIf="enableMobile" class="roles-content">
+      <mat-grid-tile *ngFor="let role of roles" [colspan]="4" [rowspan]="1" (click)="callFunc(role.func)">
+        <ng-container [ngTemplateOutlet]="roleContainer" [ngTemplateOutletContext]="role">
+        </ng-container>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div> -->
+</main>
+
+<ng-template #roleContainer let-image="image" let-title="title" let-description="description"
+  let-actionCaption="actionCaption" let-func="func">
+  <div class="role-container">
+    <div class="icon-container">
+      <img src="{{ image }}" loading="lazy" />
+    </div>
+    <div class="content-container">
+      <div class="content-title">{{ title }}</div>
+      <div class="content-description">
+        {{ description }}
+      </div>
+    </div>
+    <div class="action-container">
+      <button class="role-action" mat-button (click)="callFunc(func)">
+        {{ actionCaption }}
+      </button>
+    </div>
+  </div>
+</ng-template>
+<section class="main">
+  <h1>
+    4 simple steps to create a magazine today
+  </h1>
+  <p>
+    Create a Magazine that your Community not only loves but also contributes to...
+  </p>
+  <div class="fix-steps">
+    <img src="{{assetsUrl}}/images/2023/fix-steps.png" alt="">
+    <div class="step-t">
+      <div>
+        Log in and enter publication specs.
+        <button class="go-button-on invert log-but" *ngIf="!(isAuthenticated$ | async)" mat-button
+          (click)="login()">Register/login</button>
+      </div>
+      <div>
+        Add/invite editors, contributors and sponsors.
+        <button class="go-button-on invert" disabled> Invite contributors</button>
+      </div>
+      <div>
+        Use aPrintis templates or own design to create PDF from your preferred graphics software.
+        <button class="go-button-on invert" disabled> Select Template</button>
+      </div>
+      <div>
+        Upload PDF and send to print after aPrintis review.
+        <button class="go-button-on invert" disabled> Upload</button>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="steps">
+      <div class="step step1">
+
+        <img src="../.{{assetsUrl}}/images/2023/step1.png" alt="">
+        <div>
+          <h3>Log in and enter publication specs.></h3>
+        </div>
+        <button class="go-button-on invert log-but" *ngIf="!(isAuthenticated$ | async)" mat-button (click)="login()"  >Register/login</button>
+      </div>
+      <div class="step step2">
+
+        <img class="hand" src="../.{{assetsUrl}}/images/2023/step2.png" alt="">
+        <div>
+          <h3>Add/invite editors, contributors and sponsors.>
+          </h3>
+        </div>
+        <button class="go-button-on invert" disabled> Invite contributors</button>
+      </div>
+      <div class="step step3">
+
+        <img class="mag" src="../.{{assetsUrl}}/images/2023/step3.png" alt="">
+        <div>
+          <h3>Use aPrintis templates or own design to create PDF from your preferred graphics software.>
+          </h3>
+        </div>
+        <button class="go-button-on invert" disabled> Select Template</button>
+      </div>
+      <div class="step step4">
+
+        <img class="plane" src="../.{{assetsUrl}}/images/2023/plane.png" alt="">
+        <div>
+          <h3>Upload PDF and send to print after aPrintis review.>
+          </h3>
+        </div>
+        <button class="go-button-on invert" disabled> Upload</button>
+      </div>
+    </div> -->
+</section>
+<section class="sect-div">
+  <div>
+    <div class="img-fixed-1"></div>
+    <div class="sect-text invert">
+      <h1>Editorial Staff</h1>
+      <p>Design, edit, run fund raising drivers </p>
+      <div class="go-button-on"> Edit your publication</div>
+    </div>
+  </div>
+  <div>
+    <div class="img-fixed-2"></div>
+
+    <div class="sect-text">
+      <h1>Writers</h1>
+      <p>Create article drafts online, iterate with graphic designers</p>
+      <div class="go-button-on">Submit an article </div>
+    </div>
+  </div>
+</section>
+
+<div class="sect-4">
+  <h1>
+    Need help getting started
+  </h1>
+  <p>
+    Here are some resources that will walk you through the process
+  </p>
+  <div class="cont-but">
+    <button class="go-button-on" style="background-color: #171717; "><a href="/how-to" target="_blank">How to
+        Video</a></button>
+    <button class="go-button-on"><a href="/faq" target="_blank">FAQ's</a></button>
+  </div>
+
+</div>
+<app-page-footer></app-page-footer>

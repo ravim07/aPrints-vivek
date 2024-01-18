@@ -1,0 +1,56 @@
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.main-container {
+  .sidenav-content {
+    background: rgba(0, 0, 0, 0);
+    border-right: 0;
+    display: inline-flex;
+    width: calc(100% - 108px);
+    flex-direction: row;
+    margin-top: 0;
+
+    .messages-container {
+      flex: 1;
+      display: inline-block;
+      padding: 0 0 2rem 2rem;
+      background: rgba(0, 0, 0, 0);
+      margin-top: 0.9375rem;
+
+
+      .header {
+        @include flexbox();
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        border-bottom: solid 2px #e1e1e1;
+        margin-bottom: 1.75rem;
+
+        h1 {
+          margin: 0;
+          @include typography-lvl(1.25rem, normal, 600, 'Averta', normal);
+        }
+
+        .table-header-buttons {
+          height: 100%;
+
+          button {
+            height: 100%;
+            margin: 0 0.5rem;
+            @include typography-lvl(0.937rem, normal, 600, 'Averta', normal);
+          }
+        }
+      }
+    }
+
+    .draft-upload-container {
+      flex-basis: 500px;
+      display: inline-block;
+      padding-top: 0.9375rem;
+      background: #fafafa;
+      box-shadow: inset 0px 10px 5px -5px rgba(0, 0, 0, 0.1) !important;
+    }
+  }
+}

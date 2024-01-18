@@ -1,0 +1,169 @@
+@import "~scss/mixins/_typography";
+@import "~scss/_variables";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+
+.stripe-elements {
+  border: 1px solid rgba(151, 151, 151, 0.36);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  line-height: normal;
+  font-weight: 400;
+  font-family: "Montserrat";
+  letter-spacing: normal;
+  padding: .714rem 1.125rem;
+  margin-bottom: 0.625rem;
+  margin-top: 0.875rem;
+}
+
+.main-donate {
+  min-height: 78vh;
+  .message-ok {
+    margin-bottom: 1rem;
+  }
+  &.simple-page-form {
+    .form-container {
+      width: 972px;
+      max-width: 972px;
+      margin-bottom: 4rem;
+      @include max-width(972px) {
+        width: 90%;
+      }
+    }
+    h1 {
+      font-weight: 400;
+      margin-bottom: 0;
+      span {
+        font-weight: 600;
+      }
+    }
+    .go-back{
+      align-self: center;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: end;
+      text-transform: uppercase;
+      a{
+        color: #0CC8CB;
+      }
+    }
+    .flex{
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+  }
+  .lbl-pad {
+    margin-top: 1rem;
+  }
+  .row-lbl {
+    .lbl {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+  }
+  .row-form {
+    .row-item {
+      padding-right: 0;
+      @include max-width(972px) {
+        padding-right: 15px;
+      }
+    }
+  }
+  .summary {
+    @include typography-lvl(1rem, normal, 400, 'Montserrat', normal);
+    background: #f9f9f9;
+    border-radius: 6px;
+    position: relative;
+    padding: 1rem;
+    margin-top: 34px;
+    .title {
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+      display: block;
+    }
+    .name {
+      text-transform: uppercase;
+      color: $primary-color;
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 0.8125rem;
+      font-weight: 300;
+      margin: 0 0 1.875rem;
+      padding: 0;
+    }
+    .total {
+      padding: 2rem 0 0;
+      border-top: 1px solid #dfdfdf;
+      p {
+        margin: 0 0 1.75rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        .txt-r {
+          float: right;
+        }
+      }
+    }
+    .btn {
+      .button-turq-default {
+        width: 100%;
+      }
+    }
+  }
+  @include min-width(992px) {
+    .form-col {
+      flex: 0 0 62.66666667%;
+      max-width: 62.66666667%;
+    }
+    .summary-form {
+      padding-left: 50px;
+      flex: 0 0 37.33333333%;
+      max-width: 37.33333333%;
+    }
+  }
+  .social-media{
+    @include flexbox();
+    // justify-content: center;
+    align-items: center;
+    text-align: center;
+    // justify-self: right;
+    height: 100%;
+    &.margin-top{margin-top: 1rem;}
+    a {
+      text-decoration: none !important;
+      color: white;
+      @include typography-lvl(1.1rem, 0.875rem, 400, 'Montserrat', normal);
+      &.li{
+        margin-left: 1rem;
+      }
+    }
+    // margin: 0 1rem;
+    div.fb-icon{background-color: #315aac;}
+    div.li-icon{background-color: #00A3E0;}
+    div.tw-icon{background-color: #2ba7db;}
+    div.instagram-icon{background-color: #b34596;}
+    div{
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      /* padding: 0 1.5rem; */
+      border-radius: 100%;
+      img{ height: 45%; width: auto; vertical-align: middle;}
+    }
+    @include max-width(490px){display: none;}
+  }
+  .top{
+    margin: 1rem;
+  }
+  .no-justify{
+    justify-content: flex-start !important;
+  }
+}

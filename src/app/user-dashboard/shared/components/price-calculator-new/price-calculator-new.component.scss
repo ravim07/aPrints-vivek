@@ -1,0 +1,144 @@
+@import "~scss/mixins/_typography";
+@import "~scss/_variables";
+@import "~scss/mixins/_utils";
+
+.price-calculator-wrapper {
+  @include flexbox();
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  #txt-custom-quote {
+    margin-top: 0.625rem;
+    @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', 0.26px);
+    color: #333333;
+
+    a {
+      font-family: Averta;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .mat-icon {
+      margin-right: 5px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+    }
+  }
+
+  .price-calculator {
+    width: 330px;
+    background-color: #f8fdff;
+    padding: 1.875rem;
+    @include typography-lvl(0.9375rem, normal, 400, 'AvertaLight', normal);
+
+    .ul,
+    .li {
+      margin: 0;
+      padding: 0;
+    }
+
+    .li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+
+      .amount {
+        @include typography-lvl(0.9375rem, normal, 600, 'Averta', normal);
+      }
+
+      .link-action {
+        font-size: 0.625rem;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-left: -10%;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      .input-small {
+        width: 60px;
+        margin-left: 10px;
+      }
+
+      .btns {
+        margin-left: 10px;
+
+        .link-action {
+          margin-right: 5px;
+        }
+      }
+
+      &.title {
+        @include typography-lvl(0.8125rem, normal, 400, 'AvertaLight', 0.22px);
+        opacity: 0.5;
+        color: #333333;
+        text-transform: uppercase;
+        padding-top: 0;
+      }
+
+      &.print {
+        flex-wrap: wrap;
+
+        .summary {
+          flex: 1 1 100%;
+          margin-block-end: 7px;
+          margin-block-start: 8px;
+          margin-inline-start: 0px;
+          padding-inline-start: 1.75rem;
+
+          li {
+            padding-left: 0.5rem;
+            @include typography-lvl(0.8125rem, normal, 400, 'AvertaLight', 0.22px);
+            opacity: 0.5;
+            color: #333333;
+          }
+        }
+      }
+
+      &.border-bottom {
+        border-bottom: solid 1px #e1e1e1;
+      }
+
+      &.border-bottom-thick {
+        border-bottom: solid 1px #e1e1e1;
+      }
+
+      &.total {
+        padding: 1rem 0 0;
+        color: #333333;
+        @include typography-lvl(0.8125rem, normal, 400, 'AvertaLight', 0.22px);
+
+        .total-txt {
+          opacity: 0.5;
+          text-transform: uppercase;
+        }
+
+        .amount {
+          font-size: 1.0625rem;
+          font-weight: 600;
+          flex-direction: column;
+          text-align: right;
+          font-family: Averta;
+          letter-spacing: 0.29px;
+
+          .tax-text {
+            padding-top: 0.5rem;
+            color: #484848;
+            font-weight: 400;
+            font-size: 0.8125rem;
+          }
+        }
+      }
+    }
+  }
+}

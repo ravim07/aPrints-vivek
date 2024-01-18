@@ -1,0 +1,141 @@
+<div class="main-wrapper">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="main-quote simple-page-form">
+    <div class="form-container {{formStatusClass}}">
+      <p class="q-req">Quote request!</p>
+      <h1 class="w-intro">Get the details you need to get started!</h1>
+      <p class="intro">Please provide us with information about your publication, and we’ll send you a personalized
+        quote within hours.</p>
+      <form [formGroup]="quoteForm" (ngSubmit)="saveQuote()">
+        <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+          <div>{{errorApi}}</div>
+        </div>
+        <div *ngIf="messageSent" class="alert-success-inline message-ok">
+          Your message has been successfully sent. We'll be in touch soon.
+        </div>
+        <div class="row row-form row-form-group group-publication">
+          <div class="row-item col-lg-6">
+            <input placeholder="Name of Publication/Publisher *" formControlName="publicationName" type="text"
+                   class="clean-input input-default input-s1">
+            <div *ngIf="formUtil.checkError(quoteForm.get('publicationName'), 'required')"
+                 class="form-error form-error-default">Name of Publication/Publisher is required
+            </div>
+          </div>
+          <div class="row-item col-lg-6">
+            <input placeholder="Contact email *" formControlName="email" type="text" class="clean-input input-default input-s1">
+            <div *ngIf="formUtil.checkError(quoteForm.get('email'), 'required')" class="form-error form-error-default">
+              Email is required
+            </div>
+            <div *ngIf="formUtil.checkError(quoteForm.get('email'), 'email')" class="form-error form-error-default">
+              Please enter a valid email address
+            </div>
+          </div>
+        </div>
+        <div class="row row-form row-form-group group-email">
+          <div class="row-item col-lg-6">
+            <mat-form-field class="clean-input select-default select-s1">
+              <mat-select formControlName="publicationType" placeholder="Type of publication">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let option of formOptions.publicationTypes" value="{{option}}">
+                  Type: {{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row-item col-lg-6">
+            <input placeholder="Phone Number" formControlName="phoneNumber" type="text" class="clean-input input-default input-s1">
+          </div>
+        </div>
+        <div class="row row-form row-form-group group-name">
+          <div class="row-item col-lg-6">
+            <input placeholder="Contact Name *" formControlName="fullName" type="text" class="clean-input input-default input-s1">
+            <div *ngIf="formUtil.checkError(quoteForm.get('fullName'), 'required')"
+                 class="form-error form-error-default">Name is required
+            </div>
+          </div>
+          <div formGroupName="printingPreferences" class="row-item col-lg-6">
+            <mat-form-field class="clean-input select-default select-s1">
+              <mat-select formControlName="trim" placeholder="Trim Size">
+                <mat-option *ngFor="let option of formOptions.trimSizes" value="{{option}}">Trim
+                  Size: {{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div formGroupName="printingPreferences" class="row row-form row-form-group">
+          <div class="row-item col-lg-6">
+            <mat-form-field class="clean-input select-default select-s1">
+              <mat-select formControlName="cover" placeholder="Cover">
+                <mat-option *ngFor="let option of formOptions.coverOptions" value="{{option}}">
+                  Cover: {{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row-item col-lg-6">
+            <mat-form-field class="clean-input select-default select-s1">
+              <mat-select formControlName="paperStock" placeholder="Paper Stock">
+                <mat-option *ngFor="let option of formOptions.paperStockOptions" value="{{option}}">Paper
+                  Stock: {{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div formGroupName="printingPreferences" class="row row-form row-form-group group-size">
+          <div class="row-item col-lg-6">
+            <mat-form-field class="clean-input select-default select-s1">
+              <mat-select formControlName="pageCount" placeholder="Page Count">
+                <mat-option *ngFor="let option of formOptions.pageCountOptions" value="{{option}}">Page
+                  Count: {{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="row-item col-lg-6">
+            <input placeholder="Circulation/Order Size *" formControlName="orderSize" type="text"
+                   class="clean-input input-default input-s1">
+            <div *ngIf="formUtil.checkError(printingPreferencesGroup.get('orderSize'), 'required')"
+                 class="form-error form-error-default">Circulation/Order Size is required
+            </div>
+          </div>
+        </div>
+        <div class="row row-form row-form-group">
+          <div class="row-item col-lg-6">
+            <mat-form-field class="clean-input select-default select-s1">
+              <mat-select formControlName="numberIssues" placeholder="Number of Issues per Year">
+                <mat-option *ngFor="let option of formOptions.issuesPerYearOptions" value="{{option}}">Number of Issues
+                  per Year: {{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div formGroupName="printingPreferences" class="row-item col-lg-6">
+            <mat-form-field class="clean-input select-default select-s1">
+              <mat-select formControlName="turnaround" placeholder="Turnaround">
+                <mat-option *ngFor="let option of formOptions.turnaroundOptions" value="{{option}}">
+                  Turnaround: {{option}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row row-form group-message">
+          <div class="col-lg-12">
+            <textarea
+              placeholder="Please tell us about any special requirement, distribution, turnaround times or other needs *"
+              formControlName="content" class="textarea-default textarea-s1"></textarea>
+          </div>
+        </div>
+        <div class="row row-form row-form-footer">
+          <p>Please note that we currently offer mostly standard formats - i.e.trim size: 8.5x11; cover-same as inside;
+            circulation/order size > 100 and 70# glossy stock, turnaround time - 7 calendar days
+            (often faster depending upon location, order size); Please tell us about your print requirements even if
+            they do not fit our currently offered options - we expect to expand our set of options soon.</p>
+        </div>
+        <div class="row row-btn">
+          <div class="col-lg-12 center">
+            <button disableRipple type="submit" class="no-focus button-turq-default btn-save b-button" mat-button>Submit Request
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+  <app-page-footer></app-page-footer>
+</div>

@@ -1,0 +1,78 @@
+<button mat-icon-button class="close-dialog" (click)="onCancelClick()" matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+
+<div class="flat-dialog-main">
+  <div mat-dialog-title>Choose an Ad Type</div>
+  <div class="advertising" mat-dialog-content>
+    <div class="content-form">
+      <div class="form">
+        <div class="container-fluid form-container">
+          <div class="row">
+            <div class="form-col col-lg-12">
+              <form [formGroup]="adTypeForm">
+                <div class="row row-form-group row-form group-state">
+                  <div class="row-item col-lg-6">
+                    <span class="lbl lbl-s">Ad Type</span>
+                    <mat-form-field class="select-default select-s1">
+                      <mat-select formControlName="adType" placeholder="Ad Type *">
+                        <mat-option *ngFor="let o of adTypes; index as i" value="{{o.value}}">{{o.literal}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="row-item col-lg-6">
+                    <span class="lbl lbl-s">Number of Issues</span>
+                    <mat-form-field class="select-default select-s1">
+                      <mat-select formControlName="numberOfIssues" placeholder="# of Issues *">
+                        <mat-option *ngFor="let o of numberOfIssues" value="{{o}}">{{o}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div *ngIf="selectedPageAdPricing" class="row form-btn">
+                  <div class="form-col">
+                    <button (click)="selectAdPricing(selectedPageAdPricing)" class="button-turq-default no-focus"
+                            mat-button>
+                      Next
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row table-row d-none d-sm-flex">
+            <table class="table-default">
+              <caption>This table shows the ad pricing cost</caption>
+              <thead>
+              <tr>
+                <th class="th-colspan"></th>
+                <th class="th-issue-colspan" [attr.colspan]="headerColumnSpan">Number Of Issues</th>
+              </tr>
+              <tr>
+                <th class="th-type" scope="col">Type</th>
+                <!-- <th class="th-description" scope="col">Description</th> -->
+                <th class="th-issues" scope="col" *ngFor="let column of columns;">{{column}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of tableData">
+                <td [matTooltip]="item.description">{{item.typeLiteral}}</td>
+                <!-- <td>{{item.description}}</td> -->
+                <td *ngFor="let column of columns;">
+                  <div
+                    [ngClass]="{'selectedAdType': selectedPageAdPricing &&
+                   selectedPageAdPricing.typeLiteral === item.typeLiteral &&
+                    selectedPageAdPricing.numberOfIssues === parseInt(column)}">
+                    ${{item[column]}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

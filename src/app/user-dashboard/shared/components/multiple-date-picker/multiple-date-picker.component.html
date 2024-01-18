@@ -1,0 +1,18 @@
+<div class="multiple-datepicker">
+  <div (click)="picker.open()" class="list input-default input-s1 {{showErrorRequired ? 'invalid' : ''}}">
+    <span ngClass="btn-date" (click)="deleteDate(i)" *ngFor="let ldate of listDates; let i = index">
+      {{ldate | date:'MM/dd/yyyy'}} <span class="delete"><img src="{{assetsUrl}}/icons/close-black.png" /></span>
+    </span>
+  </div>
+  <div *ngIf="showErrorRequired" class="form-error form-error-default">
+    Please enter at least one date
+  </div>
+  <div class="ctrl" (click)="picker.open()">
+    <span *ngIf="!noLabel" class="lbl">Add Date</span>
+    <mat-form-field class="mdatepicker">
+      <input [min]="minDate" matInput [matDatepicker]="picker" (dateInput)="addDate('input', $event)" cdkTextareaAutosize="false">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div>

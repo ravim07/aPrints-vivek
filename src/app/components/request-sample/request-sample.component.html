@@ -1,0 +1,95 @@
+<div class="main-wrapper">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="main-contact simple-page-form">
+    <div class="form-container {{formStatusClass}}">
+      <div class="request-header"><h1>Request a sample magazine</h1><h5>1-800-510-6596</h5></div>
+      <div class="request-desc">
+        <p>It’s different with Print. It is difficult to imagine how compelling a print product is until you hold a physical sample in your hand and flip through it to really envision what your publication could look like.</p>
+        <p>See one for yourself! We will mail you a magazine created by high school students. No frills. Just simple full color, 70# glossy stock</p>
+      </div>
+      <form [formGroup]="requestForm" (ngSubmit)="saveContact()">
+        <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+          <div>{{errorApi}}</div>
+        </div>
+        <div *ngIf="messageSent" class="alert-success-inline message-ok">
+          Your message has been successfully sent. We'll be in touch soon.
+        </div>
+        <div class="row row-form row-form-group group-name">
+          <div class="row-item col-lg-6">
+            <input placeholder="Full Name *" formControlName="fullName" type="text" class="input-default input-s1">
+            <div *ngIf="formUtil.checkError(requestForm.get('fullName'), 'required')" class="form-error form-error-default">
+              Full Name is required
+            </div>
+          </div>
+          <div class="row-item col-lg-6">
+            <input placeholder="Publication Name" formControlName="publicationName" type="text" class="input-default input-s1">
+          </div>
+        </div>
+        <div class="row row-form row-form-group group-email">
+          <div class="row-item col-lg-6">
+            <input placeholder="Email *" formControlName="email" type="text" class="input-default input-s1">
+            <div *ngIf="formUtil.checkError(requestForm.get('email'), 'required')" class="form-error form-error-default">
+              Email is required
+            </div>
+            <div *ngIf="formUtil.checkError(requestForm.get('email'), 'email')" class="form-error form-error-default">
+              Please enter a valid email address
+            </div>
+          </div>
+          <div class="row-item col-lg-6">
+            <input placeholder="Phone Number" formControlName="phoneNumber" type="text" class="input-default input-s1">
+          </div>
+        </div>
+        <div class="row row-form row-form-group group-address">
+          <div class="row-item col-lg-6">
+            <input placeholder="Address Line 1*" formControlName="address1" type="text" class="input-default input-s1">
+            <div *ngIf="formUtil.checkError(requestForm.get('address1'), 'required')" class="form-error form-error-default">
+              Address1 is required
+            </div>
+          </div>
+          <div class="row-item col-lg-6">
+            <input placeholder="Address Line 2*" formControlName="address2" type="text" class="input-default input-s1">
+            <div *ngIf="formUtil.checkError(requestForm.get('address2'), 'required')" class="form-error form-error-default">
+              Address2 is required
+            </div>
+          </div>
+        </div>
+        <div class="row row-form-group row-form group-state">
+          <div class="row-item col-lg-6">
+            <input placeholder="City *" formControlName="city" type="text" class="input-default input-s1">
+            <div *ngIf="formUtil.checkError(requestForm.get('city'), 'required')" class="form-error form-error-default">
+              City is required
+            </div>
+          </div>
+          <div class="row-item col-lg-6">
+            <mat-form-field class="select-default select-s1">
+              <mat-select formControlName="state" placeholder="State *">
+                <mat-option *ngFor="let state of states" value="{{state}}">{{state}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div *ngIf="formUtil.checkError(requestForm.get('state'), 'required')" class="form-error form-error-default">
+              State is required
+            </div>
+          </div>
+        </div>
+        <div class="row row-form-group row-form group-zip">
+          <div class="row-item col-lg-6">
+            <input placeholder="Zip *" formControlName="zip" type="text" class="input-default input-s1">
+            <div *ngIf="formUtil.checkError(requestForm.get('zip'), 'required')" class="form-error form-error-default">
+              Zip is required
+            </div>
+            <div *ngIf="formUtil.checkError(requestForm.get('zip'), 'pattern')" class="form-error form-error-default">
+              Zip Code is not valid
+            </div>
+          </div>
+        </div>
+        <div class="row row-btn">
+          <div class="col-lg-12">
+            <button disableRipple type="submit" class="no-focus button-turq-default btn-save" mat-button>Submit Form</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+  <app-page-footer></app-page-footer>
+</div>

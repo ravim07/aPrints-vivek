@@ -1,0 +1,89 @@
+<ng-container *ngIf="showForm;
+   then createAdResource; else viewAdResource">
+</ng-container>
+
+
+<div class="row" *ngIf="adResource.id">
+  <div class="col-4" *ngIf="adResource.id && adResource.advertiser?.id === currentUser.id">
+    <label class="lbl-default">Attachments</label>
+    <app-input-file-control [placeholder]="'Select file'"
+                            (fileChanged)="inputFileChange($event)"></app-input-file-control>
+  </div>
+
+  <div class="col-12">
+    <div class="attachment-list">
+      <div class="attachment" *ngFor="let image of attachments; let i = index">
+
+        <div class="preview">
+          <a *ngIf="image.format == 'pdf'" [href]=" image.src" target="_blank">
+            {{ image.url }}
+            <i class="material-icons">
+              picture_as_pdf
+            </i>
+          </a>
+          <img *ngIf="image.format != 'pdf'" [src]="image.thumb" (click)="showAttachment(i)"/>
+        </div>
+
+        <a
+          *ngIf="adResource.id && adResource.advertiser?.id === currentUser.id"
+          class="action-delete link-grey" (click)="deleteAttachment(image.id, $event)">
+          <i class="material-icons">close</i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<ng-template #createAdResource>
+  <form [formGroup]="adResourceForm" (submit)="saveAdResource()">
+    <div class="row">
+      <div class="col-4 form-col">
+        <label class="lbl-default">Title</label>
+        <input type="text" placeholder="Ad Title" formControlName="title" class="input-default input-s1">
+      </div>
+      <div class="col-12 form-col">
+        <textarea formControlName="resource" [rows]="7" placeholder="Write Ad Content"
+                  class="textarea-default textarea-s1"></textarea>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col text-right">
+        <button mat-button class="button-turq-default btn-save" disableRipple>{{ buttonText }}</button>
+        <!--<button *ngIf="adResource.id" mat-button class="btn-link btn-close" disableRipple (click)="closeForm()">
+          <i class="material-icons">close</i>
+        </button>-->
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+
+<ng-template #viewAdResource>
+  <h4 class="submenu-tit">
+    {{ adResource.title }}
+
+    <a class="edit-form-link link-grey" (click)="showEditForm()"
+       *ngIf="adResource.id && adResource.advertiser?.id === currentUser.id">
+      <i class="material-icons">
+        edit
+      </i>
+    </a>
+  </h4>
+  <textarea class="text-content textarea-default textarea-s1" disabled>
+    {{ adResource.resource }}
+  </textarea>
+</ng-template>
+
+<ng-template #dialogConfirmAttachmentDelete>
+  <mat-dialog-content>
+    <p>Are you sure you want to remove this attachment?</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button disableRipple [mat-dialog-close]="true" class="button-turq-default" mat-button>Yes</button>
+    <button disableRipple [mat-dialog-close]="false" class="button-turq-default" mat-button>No</button>
+  </mat-dialog-actions>
+</ng-template>

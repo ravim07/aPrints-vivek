@@ -1,0 +1,31 @@
+@import "../../../../../scss/mixins/responsive";
+@import "../../../../../scss/mixins/typography";
+@import "../../../../../scss/mixins/utils";
+@import "../../../../../scss/variables";
+
+.main-container {
+  flex: 1 1 auto !important;
+  @include flexbox();
+  flex-direction: column;
+  // background: #fafafa;
+
+  .sidenav-container {
+    // margin-top: 0.9375rem;
+    flex: 1 1 auto !important;
+    background: rgba(0, 0, 0, 0);
+  }
+
+  .mat-drawer-side {
+    border-right: 0;
+    margin-top: 0.9375rem;
+    z-index: 1 !important;
+  }
+
+  .sidenav-content {
+    background: #fafafa;
+    border-right: 0;
+    display: inline-flex;
+    width: calc(100% - 108px);
+    margin-top: 0.9375rem;
+  }
+}

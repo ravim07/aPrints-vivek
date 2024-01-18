@@ -1,0 +1,110 @@
+<div class="main-container">
+  <app-publication-header [publication]="publication" (triggerReload)="onPublicationHeaderEvent($event)">
+  </app-publication-header>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-issues-sidebar [publication]="publication"></app-issues-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+      <ng-container *ngIf="loading">
+        <app-loading-animation-table></app-loading-animation-table>
+      </ng-container>
+      <ng-container *ngIf="!loading">
+        <div class="header">
+          <h1>My Issues</h1>
+          <div class="table-header-buttons">
+            <button mat-button disableRipple (click)="newIssue()" appVisible [isVisible]="canCreateIssue">
+              Add New Issue
+            </button>
+          </div>
+        </div>
+        <div class="table-content issues-table">
+          <table *ngIf="dataSource && issues.length > 0" class="table-element" mat-table [dataSource]="dataSource"
+                 matSort #TableSort="matSort" matSortActive="createdAt" matSortDirection="desc" matSortStart="desc"
+                 matSortDisableClear>
+
+            <ng-container matColumnDef="cover">
+              <th mat-header-cell *matHeaderCellDef class="cover"></th>
+              <td mat-cell *matCellDef="let row; let showPlaceholder = false;" class="cover link">
+                <img *ngIf="row.cover" src="{{row.cover}}" alt="cover image">
+                <app-pdf-placeholder *ngIf="!row.cover" width="64.375" height="91"></app-pdf-placeholder>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="issues-name"> name</th>
+              <td mat-cell *matCellDef="let row" class="button">
+                <!-- <button routerLink="{{baseIssueLink}}{{row.id}}{{linkSuffix}}" mat-button>
+                {{row.name}}
+              </button> -->
+                <span>{{row.name}}</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="createdAt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="creation-date"> creation date</th>
+              <td mat-cell *matCellDef="let row" class="creation-date"> {{row.createdAt | date:'MM/dd/yyyy hh:mm'}}
+              </td>
+            </ng-container>
+
+            <!--<ng-container matColumnDef="totalSubmissions">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="submissions"> total submissions </th>
+              <td mat-cell *matCellDef="let row" class="bold total"> {{row.totalSubmissions}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalAdvertisements">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="advertisements"> total ads </th>
+              <td mat-cell *matCellDef="let row" class="bold total"> {{row.totalAdvertisements}} </td>
+            </ng-container>-->
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="status"> status</th>
+              <td mat-cell *matCellDef="let row" class="issues-status-td">
+                <div class="status-container">
+                  <app-issue-status [status]="row.status"></app-issue-status>
+                </div>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="public_url">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="public_url"> PUBLIC URL</th>
+              <td mat-cell *matCellDef="let row" class="public_url text-center">
+                <a class="btn-outline-dark" (click)="openIssueViewer(row,$event)" mat-button
+                   *ngIf="showViewerButtonValidStatus.includes(row.status)">
+                  <mat-icon>public</mat-icon>&nbsp;Viewer
+                </a>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="menu">
+              <th mat-header-cell *matHeaderCellDef class="menu-column"></th>
+              <td mat-cell *matCellDef="let row" class="menu" (click)="$event.stopPropagation();">
+                <app-issue-menu [publication]="publication" [issue]="row" (triggerReload)="onIssueMenuEvent($event)">
+                </app-issue-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+            <tr
+              mat-row *matRowDef="let row; columns: displayedColumns;" class="button-hover" (click)="rowClick(row)">
+            </tr>
+          </table>
+          <div *ngIf="!dataSource || issues.length === 0" class="empty-list">
+            <app-empty-list-placeholder></app-empty-list-placeholder>
+            <div class="description">No issues yet</div>
+            <div class="actions" appVisible [isVisible]="canCreateIssue">
+              <button mat-button disableRipple (click)="newIssue()">
+                Create new Issue
+              </button>
+            </div>
+          </div>
+        </div>
+        <mat-paginator #paginator *ngIf="issues.length > 10"
+                       [length]="issues.length"
+                       [pageSize]="10"
+                       [pageSizeOptions]="[10, 20, 40]" showFirstLastButtons>
+        </mat-paginator>
+      </ng-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

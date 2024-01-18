@@ -1,0 +1,89 @@
+<div class="main-container">
+  <app-publication-header [publication]="publication" context="issues" (triggerReload)="onEvent($event)">
+  </app-publication-header>
+  <app-issue-header [publication]="publication" [issue]="issue" [draft]="draft" (triggerReload)="onEvent($event)">
+  </app-issue-header>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-issue-sidebar [publication]="publication" [issue]="issue"></app-issue-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content-table">
+      <div [ngClass]="{'advertisements-container': true, 'with-upload-section': !canManageAdvertisers}">
+        <div class="header">
+          <h1>My Ads</h1>
+          <div class="table-header-buttons">
+            <button mat-button disableRipple (click)="newAd()">Add New Ad</button>
+          </div>
+        </div>
+        <div class="table-content">
+          <table *ngIf="dataSource && ads.length > 0" class="table-element" mat-table [dataSource]="dataSource"
+                 matSort #TableSort="matSort" matSortActive="updatedAt" matSortDirection="desc" matSortDisableClear>
+
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="advertisements-title"> title </th>
+              <td mat-cell *matCellDef="let row" class="button">
+                <span>{{row.title}}</span>
+              </td>
+            </ng-container>
+
+            <ng-container *ngIf="canManageAdvertisers" matColumnDef="author">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="advertisements-author"> author </th>
+              <td mat-cell *matCellDef="let row" class="author">
+                <app-profile-img [name]="row.author" size="40" fontSize="20">
+                </app-profile-img>
+                <div class="name">
+                  {{row.author}}
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="createdAt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="creation-date"> created </th>
+              <td mat-cell *matCellDef="let row" class="creation-date"> {{row.createdAt | date:'MM/dd/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="updatedAt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="creation-date"> last updated </th>
+              <td mat-cell *matCellDef="let row" class="creation-date"> {{row.updatedAt | timeAgo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="commentsNumber">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="advertisements-comments"> comments </th>
+              <td mat-cell *matCellDef="let row" class="advertisements-comments">
+                {{row.commentsNumber > 0 ? row.commentsNumber : '-'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="menu">
+              <th mat-header-cell *matHeaderCellDef class="menu-column"></th>
+              <td mat-cell *matCellDef="let row" class="menu" (click)="$event.stopPropagation()">
+                <button *ngIf="canAdvertise" mat-icon-button (click)="deleteArticle(row)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClick(row)">
+            </tr>
+          </table>
+          <div *ngIf="!dataSource || ads.length === 0" class="empty-list">
+            <app-empty-list-placeholder></app-empty-list-placeholder>
+            <div class="description">No ads yet</div>
+            <div class="actions">
+              <button mat-button disableRipple (click)="newAd()">
+                Create new Ad
+              </button>
+            </div>
+          </div>
+        </div>
+        <mat-paginator #paginator *ngIf="ads.length > 10" [pageSizeOptions]="[10, 20, 40]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+      <div *ngIf="!canManageAdvertisers" class="draft-upload-container">
+        <app-draft-upload-panel [publication]="publication" [issue]="issue" [draft]="draft">
+        </app-draft-upload-panel>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

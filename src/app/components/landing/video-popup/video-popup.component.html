@@ -1,0 +1,17 @@
+<div class="close-container">
+  <button mat-icon-button class="close-dialog" (click)="dialogRef.close()" matTooltip="Close this dialog"
+          aria-label="Close this dialog">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="content-container">
+  <iframe *ngIf="data.type === 'youtube'" #videoYoutube [src]="videoSrc" frameborder='0' allowfullscreen
+          allowTransparency="true"
+          background="transparent">
+  </iframe>
+
+  <video *ngIf="data.type === 'video'" preload="metadata" class="video-fluid w-100 h-100" autoplay playsinline controls
+         type='video/mp4' crossorigin>
+    <source [src]="videoSrc" type="video/mp4"/>
+  </video>
+</div>

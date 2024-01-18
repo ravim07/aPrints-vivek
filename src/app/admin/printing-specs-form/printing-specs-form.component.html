@@ -1,0 +1,83 @@
+<form [formGroup]="printingPrefsForm">
+  <div class="row no-gutters">
+
+    <div class="col-sm-6">
+      <div class="group-spec">
+        <span class="lbl lbl-s">Trim</span>
+        <mat-form-field>
+          <mat-select formControlName="trim">
+            <mat-option *ngFor="let option of printPrefsOptions.trim" value="{{option.id}}">
+              {{option.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="group-spec">
+        <span class="lbl lbl-s">Color</span>
+        <div class="mat-form-field ">
+          <mat-radio-group class="radio-button-group" formControlName="color">
+            <mat-radio-button disableRipple *ngFor="let option of printPrefsOptions.color" value="{{option.id}}">
+              {{option.value}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="group-spec">
+        <span class="lbl lbl-s">Inside Pages</span>
+        <mat-form-field class="std-padding-infix half-width">
+          <mat-select formControlName="insidePages">
+            <mat-option *ngFor="let option of printPrefsOptions.insidePages" value="{{option.id}}">
+              {{option.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="group-spec">
+        <span class="lbl lbl-s">Cover</span>
+        <mat-form-field>
+          <mat-select formControlName="cover">
+            <mat-option *ngFor="let option of printPrefsOptions.cover" value="{{option.id}}">
+              {{option.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="group-spec">
+        <span class="lbl lbl-s"># of Copies</span>
+        <mat-form-field>
+          <input matInput formControlName="numberOfCopies" type="number"/>
+<!--            <mat-option *ngFor="let option of printPrefsOptions.numberOfCopies" value="{{option.id}}">-->
+<!--              {{option.value}}</mat-option>-->
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="group-spec">
+        <span class="lbl lbl-s">Binding</span>
+        <mat-form-field>
+          <mat-select formControlName="binding">
+            <mat-option *ngFor="let option of printPrefsOptions.binding" value="{{option.id}}">
+              {{option.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button mat-button disableRipple class="button-turq-default btn-save no-focus" (click)="save()">Save</button>
+    </div>
+  </div>
+</form>
+

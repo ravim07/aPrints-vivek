@@ -1,0 +1,49 @@
+@import '~scss/mixins/_responsive';
+
+.main-quote {
+  min-height: 100vh;
+  background-color: #fff;
+  width: 45%;
+  margin: 5% 27% 5%;
+  padding: 3em 0;
+  box-shadow: 1px 2px 10px 1px gray;
+  @include max-width(1440px){
+
+    width: 60%;
+    margin: 5% 20% 5%;
+    padding: 3em;
+  }
+
+}
+.main-wrapper{
+  background-image: url(https://d1atm7a2stxxbt.cloudfront.net/images/2023/gaq-bg.png);
+  background-size: 120vw 60%;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: -3em;
+}
+.q-req{
+  text-align: center;
+}
+.w-intro{
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: bold;
+}
+.center{
+  display: flex;
+  justify-content: center;
+}
+.b-button{
+  border-radius: 0;
+  background-color: #000;
+  padding: 1em 0.5em;
+  font-weight: bold;
+  width: 35%;
+}
+.clean-input{
+  border-radius: 0;
+  box-shadow: #000 0px 2px;
+  border: none;
+  }
+.mat-form-field-wrapper{border: none;}

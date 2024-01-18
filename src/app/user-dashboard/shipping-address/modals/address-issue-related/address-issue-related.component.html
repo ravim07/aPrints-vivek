@@ -1,0 +1,75 @@
+<button mat-icon-button class="close-dialog" mat-dialog-close="" matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title class=" no-bottom-margin">Magazines sent to this Address</div>
+  <div mat-dialog-content>
+    <div class="table-content">
+      <table *ngIf="dataSource && issues?.length > 0" class="table-element" mat-table [dataSource]="dataSource"
+             matSort #TableSort="matSort" matSortActive="createdAt" matSortDirection="asc" matSortStart="asc"
+             matSortDisableClear>
+
+        <ng-container matColumnDef="cover">
+          <th mat-header-cell *matHeaderCellDef class="cover"></th>
+          <td mat-cell *matCellDef="let row; let showPlaceholder = false;" class="cover link">
+            <img *ngIf="row.cover" src="{{row.cover}}" alt="cover image">
+            <app-pdf-placeholder *ngIf="!row.cover" width="64.375" height="91"></app-pdf-placeholder>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="issues-name"> name</th>
+          <td mat-cell *matCellDef="let row" class="button">
+            <span>{{row.name}}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="creation-date"> creation date</th>
+          <td mat-cell *matCellDef="let row" class="creation-date"> {{row.createdAt | date:'MM/dd/yyyy hh:mm'}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="status"> status</th>
+          <td mat-cell *matCellDef="let row" class="issues-status-td">
+            <div class="status-container">
+              <app-issue-status [status]="row.status"></app-issue-status>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-button (click)="viewIssue(row)">
+              View Issue
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+        <tr
+          mat-row *matRowDef="let row; columns: displayedColumns;" class="button-hover">
+        </tr>
+      </table>
+      <div *ngIf="issues?.length === 0" class="empty-list">
+        <app-empty-list-placeholder></app-empty-list-placeholder>
+        <div class="description">No issues associated yet</div>
+      </div>
+
+      <mat-paginator #paginator
+                     *ngIf="issues?.length > 10"
+                     [pageSizeOptions]="[10, 25, 100]"
+                     [length]="issues?.length"
+                     [pageSize]="10"
+                     showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close="">
+      Close
+    </button>
+  </div>
+</div>

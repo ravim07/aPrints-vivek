@@ -1,0 +1,211 @@
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+@import "~scss/_variables";
+@import "~scss/mixins/_utils";
+
+.draft-upload-panel {
+  width: 100%;
+  padding: 0.5rem 2.5rem;
+  background: #fafafa;
+
+  .header {
+    @include flexbox();
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    &.more-padding {
+      padding: 0 1.42865vh;
+    }
+
+    .title {
+      @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+      color: #616161;
+    }
+
+    .download {
+
+      .divider {
+        height: 1.563rem;
+        opacity: 0.3;
+        @include typography-lvl(1.25rem, normal, 300, 'Averta', normal);
+        color: #333333;
+      }
+
+      button {
+        .mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+
+  .upload-drag-zone,
+  .draft-cover-zone,
+  .in-progress-zone {
+    width: 100%;
+    margin-top: 0.5rem;
+    @include flexbox();
+    justify-content: center;
+    align-items: center;
+
+    .inner-container {
+      width: 65%;
+
+      .text-pre-action {
+        @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+        text-align: center;
+        color: #616161;
+        margin-top: 1.125rem;
+        margin-bottom: 1.125rem;
+      }
+
+      .action {
+        height: 40px;
+        width: 100%;
+        border-radius: 2px;
+        border: solid 1px #333333;
+        @include typography-lvl(0.9375rem, normal, 600, 'Averta', 0.4px);
+        text-align: center;
+        color: #333333;
+
+        &:not(:first-of-type) {
+          margin-top: 1.125rem;
+        }
+      }
+    }
+  }
+
+  .upload-drag-zone,
+  .in-progress-zone {
+    height: 58.5vh;
+  }
+
+  .upload-drag-zone {
+    border: solid 1px #e1e1e1;
+    background-color: #ffffff;
+    border-style: dashed;
+
+    .inner-container {
+      .placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  .draft-cover-zone {
+    position: relative;
+
+    .inner-container {
+      background: rgba(243, 243, 243, 0.5);
+      padding: 0 1.42865vh;
+      opacity: 0;
+      position: absolute;
+      clear: both;
+      width: 100%;
+      height: 100%;
+      @include flexbox();
+      flex-direction: column;
+
+
+      .cancel-panel {
+        width: 100%;
+        @include flexbox();
+        justify-content: flex-end;
+
+        button {
+          .mat-icon {
+            font-size: 32px;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+          }
+        }
+      }
+
+      .action-panel {
+        align-self: center;
+        @include flexbox();
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        top: 42.5%;
+
+        .action {
+          width: 65%;
+        }
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .in-progress-zone {
+    border: solid 1px rgba(255, 209, 55, 0.3);
+    background-color: rgba(255, 209, 55, 0.1);
+
+    .progress {
+      height: 7px;
+      border-radius: 2px;
+      background-color: #ffffff;
+      margin-top: 1.25rem;
+
+      .progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background-color: $primary-color;
+      }
+    }
+
+    .progress-label {
+      @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+      text-align: center;
+      color: #616161;
+
+      span {
+        font-family: Averta;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .footer-button-panel {
+    @include flexbox();
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+
+    &.left-align {
+      justify-content: flex-start;
+    }
+
+    &.more-padding {
+      padding: 0 1.42865vh;
+    }
+
+    a {
+      @include typography-lvl(0.9375rem, normal, 600, 'Averta', normal);
+      text-align: center;
+      color: #616161;
+    }
+
+    .last-updated {
+      @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+      text-align: left;
+      color: #616161;
+    }
+  }
+}

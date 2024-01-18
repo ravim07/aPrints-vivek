@@ -1,0 +1,22 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" class="open-menu">
+  <div class="issue-menu" matTooltip="Issue menu" aria-label="Issue menu">
+    <mat-icon>more_vert</mat-icon>
+  </div>
+</button>
+<mat-menu #menu="matMenu" xPosition="before" class="issue-menu-panel">
+  <button mat-menu-item *ngIf="hasPublicationFlowPerms" (click)="issueDetails()">
+    <span class="menu-button">Details</span>
+  </button>
+  <button mat-menu-item (click)="goToSubmissions()" *ngIf="canViewContributions">
+    <span class="menu-button">View Submissions</span>
+  </button>
+  <button mat-menu-item (click)="goToAdvertisements()" *ngIf="canViewAdvertisements">
+    <span class="menu-button">View Ads</span>
+  </button>
+  <button mat-menu-item *ngIf="hasPublicationFlowPerms" (click)="goToPrintSpecs()">
+    <span class="menu-button">View Print Specs</span>
+  </button>
+  <!-- <button mat-menu-item (click)="deleteIssue()">
+    <span class="menu-button">Delete</span>
+  </button> -->
+</mat-menu>

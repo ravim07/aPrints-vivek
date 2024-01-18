@@ -1,0 +1,15 @@
+.share-dialog-main {
+  justify-content: flex-start !important;
+
+  .mat-dialog-title {
+    margin-bottom: 0;
+  }
+
+  .mat-dialog-content {
+    height: 100%;
+
+    .mat-form-field textarea {
+      height: 75px;
+    }
+  }
+}

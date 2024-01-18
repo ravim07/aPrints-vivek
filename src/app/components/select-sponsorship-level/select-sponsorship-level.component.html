@@ -1,0 +1,25 @@
+<button mat-icon-button class="close-dialog" (click)="onCancelClick()" matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title>Choose a Sponsorship Level</div>
+  <mat-dialog-content>
+    <div class="sponsorship">
+      <div class="row donation-levels">
+        <div *ngFor="let itemSummary of donations.summary.perLevel"
+             class="col-sm-4 donation-box {{itemSummary.donationLevel.isPublished() ? 'show' : 'disabled'}}">
+          <div class="donation-level">
+            <div><span class="name">{{itemSummary.donationLevel.name}}</span> <span
+              class="amount">${{itemSummary.donationLevel.amount}}</span></div>
+            <p>{{getSponsorshipContent(itemSummary.donationLevel.content)}}</p>
+            <div class="sponsors">{{itemSummary.sponsorsCount}} sponsors</div>
+          </div>
+          <div (click)="selectSponsorship( itemSummary.donationLevel)" class="donation-level-select">
+            <p>Select this Level</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

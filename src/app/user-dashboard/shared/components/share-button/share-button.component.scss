@@ -1,0 +1,43 @@
+@import "~scss/mixins/_responsive";
+.share-button-popover {
+  width: 370px;
+  @include max-width(420px) {
+    width: 100%;
+  }
+  input {
+    margin-top: 5px;
+    border-color: #ededed;
+  }
+  .btn {
+    text-align: right;
+  }
+  .modal-close {
+    position: absolute;
+    top: 0.4rem;
+    right: 1rem;
+    cursor: pointer;
+  }
+}
+
+.share-button{
+  button{
+    padding: 0.5rem;
+    ::ng-deep .mat-button-wrapper{
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      .mat-icon{
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+::ng-deep .mde-popover-content{
+  @include max-width(640px) {
+    margin-left: 14%;
+  }
+  @include max-width(480px) {
+    margin-left: 7%;
+  }
+}

@@ -1,0 +1,47 @@
+@import "~scss/variables";
+@import "~scss/mixins/_typography";
+
+.main-invitation {
+  .invitation-container {
+    max-width: 450px;
+    margin: 5rem auto;
+    h3 {
+      @include typography-lvl(1.5rem, normal, 600, 'Montserrat', normal);
+      margin: 0 0 2rem;
+      text-align: center;
+      padding: 0;
+      color: $title-color;
+    }
+    p {
+      @include typography-lvl(0.875rem, normal, 400, 'Montserrat', normal);
+      color: $font-color;
+      padding: 0;
+      margin: 0 0 1.5rem;
+      line-height: 1.15rem;
+    }
+  }
+}
+
+.main-join-publication {
+  .invitation-error {
+    min-width: 400px;
+    margin-top: -5rem;
+    .form-error-default {
+      text-align: center;
+      display: block;
+      font-size: 1rem;
+    }
+    .home-button {
+      margin-top: 3rem;
+      text-align: center;
+    }
+  }
+  .invitation-accept {
+    text-align: center;
+    p {
+      color: $primary-color;
+      font-size: 1rem;
+      margin-top: 0.25rem;
+    }
+  }
+}

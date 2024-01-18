@@ -1,0 +1,144 @@
+@import "~scss/_variables";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+
+.submenu-tit, .username, .time-ago {
+  color: $font-color;
+  @include typography-lvl(0.875rem, normal, 600, 'Montserrat', normal);
+}
+
+.time-ago {
+  margin-left: 5px;
+  font-size: 8px;
+  color: lighten($font-color, 30%);
+}
+
+.lbl-default {
+  font-weight: 600;
+}
+
+.comments-container {
+  margin: 30px 0 0;
+}
+
+.comments {
+
+  max-height: 500px;
+  overflow: auto;
+  margin-bottom: 20px;
+
+  .comment {
+    margin-bottom: 1.75rem;
+    .user {
+      @include flexbox();
+      align-items: center;
+      margin-bottom: 1rem;
+      .profile-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+      .username {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+.textarea-default{
+  resize: vertical;
+  min-height: 130px;
+}
+
+.text-content {
+  background-color: #f9f9f9;
+  padding: 20px 20px 20px 30px;
+  color: #484848;
+  border-radius: $form-border-radius;
+  @include typography-lvl(0.75rem, normal, 300, 'Montserrat', normal);
+  &.textarea-default.textarea-s1 {
+    padding: .845rem 1.125rem;
+    &:disabled {
+      border-color: #f9f9f9;
+      background: #f9f9f9;
+    }
+  }
+}
+
+.edit-form-link {
+  display: block;
+  float: right;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.btn-close {
+  margin-left: 5px;
+  padding: .25rem;
+}
+
+.attachment-list {
+  padding: 20px 0;
+  @include flexbox();
+  flex: 1;
+  flex-direction: row;
+  overflow: auto;
+  .attachment {
+    height: 100px;
+    position: relative;
+
+    .action-delete {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      background-color: $dashboard-dark-bg;
+      border-radius: 50%;
+      display: block;
+      color: #fff;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      padding: 2px 0;
+      text-align: center;
+      cursor: pointer;
+
+      i {
+        font-size: 1rem
+      }
+
+    }
+
+    .preview {
+      height: 100%;
+      width: 150px;
+      @include flexbox();
+      align-items: center;
+      cursor: pointer;
+      margin: 0 2px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .3);
+      }
+
+      a {
+        @include flexbox();
+        width: 100%;
+        color: $font-color;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        i {
+          font-size: 3rem;
+        }
+      }
+    }
+
+    img {
+      max-height: 100%;
+      width: 100%;
+    }
+  }
+}

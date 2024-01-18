@@ -1,0 +1,42 @@
+<div class="hero-text" #textContainer>
+  <div class="inner-container">
+    <div class="main-title">
+      <span class="accent">Creative expressions</span><br>
+      from all across <br>the country
+    </div>
+  </div>
+</div>
+
+
+
+<div class="active-magazine">
+  <img alt="magazine cover #{{this.activeBox}}"
+       src="{{assetsUrl + activeBox}}.png"
+       loading="lazy"/>
+
+
+  <div class="view-pdf-container">
+    <a class="view-pdf-button" mat-button (click)="this.openPdfViewer(this.activeBox)">View PDF</a>
+  </div>
+</div>
+
+
+<div class="slider-container">
+  <div class="slider" #sliderContainer>
+    <div class="slider-items" #sliderItems>
+      <div *ngFor="let img of assets" class="box-img slider-item"
+           (click)="changeActive(img)"
+           [class.active]="img === activeBox">
+        <img alt="magazine cover #{{img}}"
+             src="{{assetsUrl + img}}.png"
+             loading="lazy"/>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="call-to-action">
+  <button class="nav-get-started" (click)="clickGetStarted()" mat-button>
+    <div class="nav-get-started-text">Get Started</div>
+  </button>
+</div>

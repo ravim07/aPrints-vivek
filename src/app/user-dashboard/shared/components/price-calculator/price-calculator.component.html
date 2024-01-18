@@ -1,0 +1,53 @@
+<div class="price-calculator-wrapper">
+  <div *ngIf="formShippingError" id="form-error-shipping" class="form-error form-error-default">
+    Zip Code is not valid
+  </div>
+  <div *ngIf="showQuoteMessage" id="txt-custom-quote">
+    Custom <a (click)="goToGetQuote()">quote</a> can be provided
+  </div>
+  <div class="price-calculator">
+    <div class="ul">
+      <div class="li">
+        Print
+        <div *ngIf="prices.print" class="amount">${{prices.print}}</div>
+        <div *ngIf="!prices.print" class="amount">TBD</div>
+      </div>
+      <div class="li" *ngIf="showShipping == 'average'">
+        Average Shipping
+        <!--<div (click)="editShipping()" class="link-action">edit zip</div>-->
+        <!-- <div *ngIf="prices.shipping" class="amount">${{prices.shipping}}</div> -->
+        <div class="amount">TBD</div>
+      </div>
+      <div class="li" *ngIf="showShipping == 'edit-zip'">
+        Shipping <input type="text" (keydown.enter)="onKeydownZip($event)" [(ngModel)]="formShipping.zip"
+          class="input-default input-small" />
+        <div class="btns">
+          <div (click)="saveShippingForm()" class="link-action">save</div>
+          <div (click)="setViewShippingForm()" class="link-action">cancel</div>
+        </div>
+      </div>
+      <div class="li" *ngIf="showShipping == 'shipping-zip'">
+        Shipping
+        <!-- ({{_zipCode}}) <div (click)="editShipping()" class="link-action">edit zip</div> -->
+        <!-- <div *ngIf="prices.shipping" class="amount">${{prices.shipping}}</div> -->
+        <div class="amount">TBD</div>
+      </div>
+      <div class="li">
+        Sales Tax (if applicable)
+        <div *ngIf="prices.tax != null" class="amount">TBD</div>
+        <div *ngIf="prices.tax == null" class="amount">TBD</div>
+      </div>
+      <div class="li total">
+        <div class="total-txt">TOTAL</div>
+        <div class="amount">
+          <div *ngIf="prices.total">${{prices.print}}</div>
+          <div *ngIf="!prices.total">TBD</div>
+          <div *ngIf="!prices.tax && prices.total" class="tax-text">
+            +&nbsp;Sales Tax<br>
+            +&nbsp;Shipping
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

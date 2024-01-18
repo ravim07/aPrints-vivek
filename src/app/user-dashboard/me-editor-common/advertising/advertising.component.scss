@@ -1,0 +1,77 @@
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.main-container {
+
+  .sidenav-container {
+    // margin-top: 1rem;
+  }
+
+  .content {
+    .table-content {
+
+      .table-element {
+
+        .name-h {
+          width: 65%;
+        }
+
+        .amount-h,
+        .total-h {
+          min-width: 55px;
+          max-width: 55px;
+        }
+
+        .subscriptions-h {
+          min-width: 131px;
+          max-width: 131px;
+        }
+
+        td {
+          height: 68.5px;
+          text-align: start;
+          cursor: auto;
+          font-size: 0.9375rem;
+
+          &.mat-footer-cell {
+            height: 40px;
+            padding: 10px 0;
+            background-color: rgba(13, 212, 219, 0.2);
+            padding-right: 1.4rem;
+          }
+
+          &:first-of-type {
+            padding-left: 24px;
+          }
+
+          &.mat-footer-cell:not(.total-name) {
+            text-align: center;
+          }
+
+          &.amount,
+          &.subscriptions,
+          &.total {
+            text-align: center;
+          }
+
+          &.issues-value {
+            span.bold {
+              font-family: Averta;
+              font-weight: 600;
+            }
+          }
+        }
+
+        tr {
+          cursor: auto;
+        }
+
+        tr.mat-footer-row {
+          margin: 10px 0;
+        }
+      }
+    }
+  }
+}

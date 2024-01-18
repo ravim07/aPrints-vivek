@@ -1,0 +1,59 @@
+<div class="main-container">
+  <app-publication-header [publication]="publication" (triggerReload)="onPublicationHeaderEvent($event)">
+  </app-publication-header>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-issues-sidebar [publication]="publication"></app-issues-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content-mailing-prefs">
+      <div class="header">
+        <h1>Mailing Information</h1>
+      </div>
+      <div class="mailing-prefs">
+        <form [formGroup]="mailingAddressForm">
+          <mat-form-field>
+            <input matInput formControlName="addressedTo" placeholder="Addressed to">
+            <mat-error *ngIf="addressToInput.invalid">{{getErrorMessage(addressToInput, 'addressed To')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="phone" placeholder="Phone">
+            <mat-error *ngIf="phoneInput.invalid">{{getErrorMessage(phoneInput, 'phone number')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="address1" placeholder="Address 1">
+            <mat-error *ngIf="address1Input.invalid">{{getErrorMessage(address1Input, 'address')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="address2" placeholder="Address 2">
+            <mat-error *ngIf="address2Input.invalid">{{getErrorMessage(address2Input, 'address')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="city" placeholder="City">
+            <mat-error *ngIf="cityInput.invalid">{{getErrorMessage(cityInput, 'city name')}}</mat-error>
+          </mat-form-field>
+          <div class="city-zip">
+            <mat-form-field class="half-width">
+              <mat-label>State</mat-label>
+              <mat-select formControlName="state">
+                <mat-option *ngFor="let option of states | async" value="{{option}}">
+                  {{option}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="stateInput.invalid">{{getErrorMessage(stateInput, 'state')}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="half-width">
+              <input matInput formControlName="zip" placeholder="Zip">
+              <mat-error *ngIf="zipInput.invalid">{{getErrorMessage(zipInput, 'zip number')}}</mat-error>
+            </mat-form-field>
+          </div>
+        </form>
+        <div class="actions">
+          <button mat-button class="save" (click)="save()" [disabled]="!mailingAddressForm.valid">
+            Save
+          </button>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

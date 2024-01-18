@@ -1,0 +1,26 @@
+<div class="blog_container">
+  <a [href]="post.link" target="_blank" class="d-block">
+    <div class="feature_image_container" [style.background-image]="'url('+post.featured_media_url+')'">
+      <!--      <img [src]="post.featured_media_url" alt="Featured Image" class="feature_image">-->
+    </div>
+  </a>
+  <div class="post-details">
+    <div class="post_title">
+      <a [href]="post.link" target="_blank" [innerHTML]="post.title"></a>
+    </div>
+
+    <div class="post-metadata d-flex">
+      <div class="post_date">
+        <mat-icon>calendar_today</mat-icon>
+        {{post.date|date:'longDate'}}
+      </div>
+      <div class="post_author d-none d-lg-flex">
+        <mat-icon>person</mat-icon>
+        Vivek Garg
+      </div>
+    </div>
+
+    <div class="post-content d-none d-lg-block" [innerHTML]="post.excerpt"></div>
+  </div>
+
+</div>

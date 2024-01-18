@@ -1,0 +1,103 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+
+.issue-status-progress {
+  @include flexbox();
+  align-items: center;
+  flex-direction: column;
+  @include typography-lvl(0.9375rem, normal, normal, 'Averta', 0.26px);
+  color: #616161;
+
+  .status-container {
+
+    @include flexbox();
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 330px;
+
+    .separator {
+      @include typography-lvl(1.25rem, normal, normal, 'AvertaLight', normal);
+      text-align: center;
+      color: #e1e1e1;
+    }
+
+    .status {
+      @include flexbox();
+      justify-content: center;
+      align-items: center;
+
+      span {
+        @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+        color: #aeaeae;
+
+        &.done {
+          font-family: Averta;
+          color: #292929;
+        }
+
+        &.bold {
+          font-family: Averta;
+          font-weight: 600;
+          color: #292929;
+        }
+      }
+
+      .mat-icon {
+        font-size: 15px;
+        font-weight: bold;
+        width: 15px;
+        height: 15px;
+        line-height: 15px;
+        color: #292929;
+        margin-right: 5px;
+
+        &.done {
+          color: #ffd137;
+        }
+      }
+    }
+  }
+
+  .status-progress-bar {
+    margin-top: 7px;
+    height: 6px;
+    width: 100%;
+    border-radius: 3px;
+    background: #f1f1f1;
+
+    .progress {
+      height: 6px;
+      width: 0;
+      border-radius: 3px;
+      background: #ffd137;
+
+      &.step-0 {
+        width: 0;
+      }
+
+      &.step-1 {
+        width: 25%;
+      }
+
+      &.step-2 {
+        width: 42%;
+      }
+
+      &.step-3 {
+        width: 55%;
+      }
+
+      &.step-4 {
+        width: 65%;
+      }
+
+      &.step-5 {
+        width: 86%;
+      }
+
+      &.step-6 {
+        width: 100%;
+      }
+    }
+  }
+}

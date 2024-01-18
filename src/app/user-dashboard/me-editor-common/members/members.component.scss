@@ -1,0 +1,78 @@
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.main-container {
+  .content {
+    .table-content.table-content-members {
+      max-height: unset;
+      overflow: unset;
+
+      .table-element {
+
+        .members-name {
+          width: auto;
+          min-width: 380px;
+        }
+
+        .menu-column {
+          min-width: 40px;
+          max-width: 40px;
+          padding: 0;
+        }
+
+        td {
+          &.member-status {
+            @include typography-lvl(0.75rem, normal, 600, 'Averta', normal);
+            text-align: center;
+            color: #ffffff;
+            text-transform: capitalize;
+
+            .status-container {
+              width: 90px;
+              height: 21px;
+              @include flexbox();
+              justify-content: center;
+              align-items: center;
+              border-radius: 10px;
+
+              &.active {
+                background-color: #94c08d;
+              }
+
+              &.pending {
+                background-color: #ffdb62;
+              }
+
+              &.expired {
+                background-color: #b52e2e;
+              }
+
+              .mat-icon {
+                font-size: 14px;
+                width: 14px;
+                height: 14px;
+                line-height: 14px;
+                margin-right: 4px;
+              }
+            }
+          }
+
+          &.menu {
+            height: 89px;
+            padding: 0;
+            width: 40px;
+
+            .mat-icon {
+              font-size: 20px;
+              width: 20px;
+              height: 20px;
+              line-height: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

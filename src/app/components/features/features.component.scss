@@ -1,0 +1,381 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.container{
+  min-width: 100%;
+  padding: 0;
+  .row{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .col-lg-12, .col-md-12{
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.video-fluid{
+  width: 100%;
+}
+
+::ng-deep mat-tab-group {
+  .mat-tab-labels{
+    justify-content: center;
+    .mat-tab-label{
+      height: 84px !important;
+      padding: 0 12px !important;
+      margin: 0 7rem;
+      @include max-width(1200px){
+        height: 64px !important;
+        margin: 0 2.5rem;
+      }
+      @include max-width(768px){
+        height: 48px !important;
+        margin: 0;
+      }
+      &.mat-tab-label-active {
+        .mat-tab-label-content{
+          color: $primary-color !important;
+          font-weight: 600;
+          svg{
+            fill: $primary-color !important;
+          }
+        }
+      }
+    }    
+  }
+  .mat-tab-label-content {
+    @include typography-lvl(1.062rem, normal, 600, 'Montserrat', normal);
+    color: #1a1a1a;
+    svg{ margin-right: 12px; }
+    @include max-width(532px){
+      svg{ display: none; }
+      font-size: 0.9375rem;
+    }
+  }
+  .mat-tab-body.mat-tab-body-active {
+      overflow-x: hidden;
+      overflow-y: hidden;
+      .mat-tab-body-content {
+        overflow: hidden;
+        @include typography-lvl(1.062rem, normal, 500, 'Montserrat', normal);
+        color: #1a1a1a;
+      } 
+  }
+  &.mat-primary .mat-ink-bar {
+    background: $primary-color !important;
+  }
+}
+
+.mid-section{
+  width: 100%;
+  @include flexbox();
+  justify-content: center;
+  margin-top: 8.062rem;
+  @include max-width(1200px){
+    height: unset !important;
+    margin-top: 1rem !important;
+  }
+  &.gray-section{
+    padding: 2.5rem 0;
+    margin-top: 11.5rem;
+    background: #f8f8f8;
+    @include max-width(1200px){
+      margin-top: 1rem !important;
+    }
+  }
+  &.sect1{
+    // height: 365px;
+  }
+  &.sect2{
+    // height: 377px;
+  }
+  &.sect3{
+    // height: 285px;
+  }
+  &.sect4{
+    // height: 427px;
+  }
+  &.sect5{
+    // height: 403px;
+  }
+  &.sect6{
+    // height: 377px;
+  }
+  &.sect7{
+    // height: 427px;
+  }
+  &.sect8{
+    // height: 377px;
+  }
+  &.sect9{
+    // height: 445px;
+    margin-bottom: 8.062rem;
+    @include max-width(1200px){
+      margin-bottom: 1rem !important;
+    }
+  }
+  .inner-container{
+    @include flexbox();
+    width: 75%;
+    // margin-top: 8.125rem;
+    // margin-bottom: 8.125rem;
+    @include max-width(1200px){
+      width: 80%;
+      flex-direction: column-reverse !important;
+      padding: 5rem 0;
+    }    
+    .text{
+      width: 50%;
+      align-self: center;
+      @include max-width(1200px){
+        width: 100%;
+      }
+      .section-title {
+        color: #484848;
+        @include typography-lvl(2.25rem, normal, 600, 'Averta', normal);
+        span {
+          color: $primary-color;
+          div.mobile{display: none;}
+          div.full{display: block;}
+          @include max-width(620px){
+            div.mobile{display: block;}
+            div.full{display: none;}
+          }
+        }
+        @include max-width(1200px){
+          margin: 0 auto !important;
+          text-align: center;
+        }
+        .title-play-button{
+          vertical-align: middle;
+          border: solid 2px $primary-color;
+          padding: 0rem;
+          min-width: 40px;
+          border-radius: 3px;
+          background-color: #FFF !important;
+          color: $primary-color !important;
+          svg{
+            fill: $primary-color;
+          }
+        }
+      }
+      .section-content {
+        padding-top: 45px;
+        text-align: justify;
+        @include typography-lvl(1.062rem, 1.71, 500, 'Montserrat', 0.4px);
+        width: 95%;
+        @include max-width(1200px){
+          margin: 0 auto !important;
+        }
+        span{
+          color: #0CC8CB;
+          font-weight: 600;
+        }
+      }
+    }
+    .img{
+      display: inline-block;
+      box-sizing:border-box;
+      position: relative;
+      width: 50%;
+      @include max-width(1200px){
+        position: unset;
+        margin: 0 auto !important;
+        margin-bottom: 2rem !important;
+      }
+      img{
+        width:100%;
+        height: auto;
+        position: absolute;
+        object-fit: contain;
+        @include max-width(1200px){
+          position: unset;
+          margin: 0 auto !important;
+        }
+      }      
+    }
+    .img-1 {
+      width: 566px;
+      height: 427px;
+      @include min-width(1200px){
+        img{
+          top: -15%;
+        }
+      }
+    }
+    .img-2 {
+      width: 602px;
+      height: 344px;
+    }
+    .img-3 {
+      width: 539px;
+      height: 351px;
+    }
+    .img-4 {
+      width: 554px;
+      height: 431px;
+    }
+    .img-5 {
+      width: 746px;
+      height: 403px;
+    }
+    .img-6 {
+      width: 579px;
+      height: 377px;
+    }
+    .img-7 {
+      width: 539px;
+      height: 351px;
+    }
+    .img-8 {
+      width: 539px;
+      height: 351px;
+    }
+    .img{
+      @include max-width(1200px){
+        width: 75% !important;
+        height: auto !important;
+      }
+    }
+  }
+  .inner-container.img-left{
+    flex-direction: row-reverse;
+    .img{
+      margin-right: 6%;
+      img{top: -20%;}
+    }
+  }
+  .inner-container.img-right{
+    img{
+      margin-left: 6%;
+      img{top: -5%;}
+    }
+  }
+  .button{
+    @include flexbox();
+    justify-content: center;
+    margin-top: 64px;
+    .mat-button:first-child{
+      margin-right: 1rem;
+    }
+    .mat-button{
+      @include typography-lvl(1.312rem, normal, 600, 'Averta', 0.6px);
+      border: solid 2px $primary-color;
+      padding: 1.125rem 4.8rem;
+      border-radius: 3px;
+      color: #FFF;
+      background-color: $primary-color;
+      &.inverted {
+        background-color: #FFF !important;
+        color: $primary-color !important;
+      }
+      &.big-text{
+        padding: 1.125rem 3rem;
+      }
+      &.very-big-text{
+        padding: 1.125rem 2rem;
+      }
+      @include max-width(620px){
+        font-size: 1rem;
+        padding: 1.125rem 4rem;
+        &.big-text, &.very-big-text{
+          white-space: pre-wrap;
+        }
+      }
+      @include max-width(340px){
+        padding: 1.125rem 3rem;
+        &.big-text, &.very-big-text{
+          white-space: pre-wrap;
+        }
+      }
+    }
+    .play-button{
+      padding: 1rem;
+      svg{
+        fill: $primary-color;
+      }
+    }
+  }
+}
+
+.footer-section{
+  width: 100%;
+  @include flexbox();
+  justify-content: center;
+  margin-top: 11.5rem;
+  background: #f8f8f8;
+  @include max-width(1200px){
+    margin-top: 1rem !important;
+  }
+  .inner-container{
+    @include flexbox();
+    justify-content: center;
+    width: 75%;
+    margin-top: 8.125rem;
+    .text{
+      width: 100%;
+      .section-title {
+        text-align: center;
+        color: #484848;
+        @include typography-lvl(2.25rem, normal, 600, 'Averta', normal);
+        span { color: $primary-color; }
+      }
+      .section-content {
+        padding-top: 45px;
+        text-align: justify;
+        margin: 0 auto;
+        width: 43%;
+        @include max-width(1200px){
+          margin: 0 auto !important;
+          width: 95%;
+        }
+        @include typography-lvl(1.062rem, 1.71, 500, 'Montserrat', 0.4px);
+      }
+    }
+    .img{
+      width: 100%;
+      @include flexbox();
+      img{
+        height: 198px;
+        margin: 0 auto;
+        object-fit: contain;
+        @include max-width(1200px){
+          width: 100%;
+          margin: 0 auto !important;
+        }
+      }
+    }
+    .button-get-started{
+      margin: 65px 0;
+      @include flexbox();
+      justify-content: center;
+      .mat-button:first-child{
+        margin-right: 1rem;
+      }
+      .play-button{
+        padding: 1rem;
+        svg{
+          fill: #FFF;
+        }
+      }
+    }
+    .mat-button{
+      border: solid 2px $primary-color;
+      padding: 1.125rem 4.8rem;
+      border-radius: 3px;
+      color: #FFF;
+      background-color: $primary-color;
+      @include typography-lvl(1.312rem, normal, 600, 'Averta', 0.6px);
+      @include max-width(620px){
+        font-size: 1rem;
+        padding: 1.125rem 4rem;
+      }
+      @include max-width(340px){
+        padding: 1.125rem 3rem;
+      }
+    }
+  }
+}

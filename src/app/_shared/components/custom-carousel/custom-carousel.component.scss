@@ -1,0 +1,100 @@
+@import '~scss/mixins/_responsive';
+
+:host {
+  margin: 0 auto;
+  position: relative;
+  max-width: 100%;
+}
+
+.carousel-wrapper ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; 
+  align-items: center;
+}
+
+.carousel-wrapper {
+  overflow: visible; 
+  width: 100vw;
+  @include min-width(1440px) {
+    position: relative;
+    left: 29em;
+  }
+  @include max-width(1400px) {
+    position: relative;
+    left: 16em;
+  }
+}
+
+.carousel-inner {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; 
+  align-content: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;  
+}
+
+.carousel-indicators {
+  margin-top: 2.938rem;
+  overflow: hidden;
+}
+
+.carousel-indicators ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.indicator {
+  width: 0.438rem;
+  height: 0.438rem;
+  background-color: #0dd4db;
+  border-radius: 50%;
+  margin: 0 0.625rem;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background-color: #333333;
+  opacity: 0.1;
+}
+
+.carousel-container {
+  position: relative;
+  max-width: 100%;
+  z-index: 1;
+}
+
+.carousel-arrows {
+  font-size: 2.25rem;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #292929;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  margin-top: calc(2.25rem / 2);
+
+  .arrow-left, .arrow-right {
+    position: absolute;
+    width: 2.25rem;
+    text-align: center;
+    line-height: 2.25rem;
+  }
+
+  .arrow-right {
+    right: 0;
+  }
+}
+
+.carousel-arrows a {
+  cursor: pointer;
+}

@@ -1,0 +1,88 @@
+<!-- <div *ngIf="_showPopup">
+  <div id="modal-overlay" class="modal-fade {{popupClass}}">
+    <div class="modal900 modal-default">
+      <span class="modal-close" (click)="closePopup()">
+        <img class="close-w" src="{{assetsUrl}}/icons/close.png" />
+        <img class="close-b" src="{{assetsUrl}}/icons/close-black.png" />
+      </span>
+
+      <div class="form-wrapper">
+        <h3 class="dash-title w-sub">{{publication.name}}</h3>
+        <h4 class="dash-sub-title">Issue: #{{issue.number}}</h4>
+        <div class="row">
+          <div class="col-lg-6 sp-margin">
+            <div class="price-calculator">
+              <h5 class="sub-title">Print Specifications</h5>
+              <ul>
+                <li>
+                  Inside Pages
+                  <span class="print-prefs">{{issue.printingPreferences.insidePages}}</span>
+                </li>
+                <li>
+                  Number Of Copies
+                  <span class="print-prefs">{{issue.printingPreferences.numberOfCopies}}</span>
+                </li>
+                <li>
+                  Options
+                  <span class="print-prefs">{{issue.printingPreferences.color === 'bw' ? 'Black &amp; White' : 'Color'}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6 sp-margin">
+            <div class="price-calculator-wrapper">
+                <div class="price-calculator">
+                  <ul>
+                    <li>Price<span *ngIf="pricing.price" class="amount">${{pricing.price}}</span></li>
+                    <li *ngIf="pricing.shipping">
+                      Shipping
+                      <span class="amount">${{pricing.shipping}}</span>
+                    </li>
+                    <li *ngIf="pricing.tax !== 0">
+                      Sales Tax
+                      <span class="amount">Variable</span>
+                    </li>
+                    <li *ngIf="pricing.discount !== 0">
+                      Used from funds
+                      <span class="amount discount">${{pricing.discount}}</span>
+                    </li>
+                    <li>
+                      Credit Card Fee
+                      <span class="amount">${{(pricing.chargeFee) | number:'1.0-2'}}</span>
+                    </li>
+                    <li class="total">
+                      <span class="total-txt">TOTAL</span>
+                      <span class="amount">
+                        <span class="flat-amount-text">${{pricing.flatAmount}}</span>
+                      </span>
+                    </li>
+                    <li class="total total-no-border">
+                      <span class="total-txt">TOTAL WITH CC</span>
+                      <span class="amount">
+                        <span class="charge-amount-text">${{(pricing.chargeAmount) | number:'1.0-2'}}</span>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="form form-popup dash-form-layout-default {{formStatusClass}} form-edit-publication-form">
+          <form [formGroup]="paymentForm" (ngSubmit)="submitPayment()" class="group-edit-issue-form">
+            <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+              <div>{{errorApi}}</div>
+            </div>
+
+            <app-payment-info #paymentInfo [issueId]="issue.id" [isAdmin]="false"></app-payment-info>
+
+            <div class="row form-btn">
+              <div class="col-lg-10 form-col">
+                <button type="submit" class="button-turq-default no-focus btn-save" mat-button>Confirm</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

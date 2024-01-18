@@ -1,0 +1,70 @@
+{
+  "compileOnSave": false,
+
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true, 
+  },
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "user-dashboard/*": [
+        "app/user-dashboard/*"
+      ],
+      "_shared/*": [
+        "app/_shared/*"
+      ],
+      "_models": [
+        "app/_models"
+      ],
+      "_models/*": [
+        "app/_models/*"
+      ],
+      "_services/*": [
+        "app/_services/*"
+      ],
+      "_services": [
+        "app/_services"
+      ],
+      "admin/*": [
+        "app/admin/*"
+      ],
+      "auth": [
+        "app/auth"
+      ],
+      "auth/*": [
+        "app/auth/*"
+      ],
+      "components/*": [
+        "app/components/*"
+      ],
+      "utils/*": [
+        "utils/*"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "target": "es2015",
+    "module": "ESNext",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}

@@ -1,0 +1,22 @@
+<div class="cover-container">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="main-fixed main-invitation main-join-publication">
+    <div class="invitation-container">
+      <div class="invitation-error" *ngIf="error.show">
+        <h3>Oops!</h3>
+        <div class="form-error form-error-default">
+          Error: {{error.message}}
+          <br>
+          We will redirect you automatically to register.
+        </div>
+        <!-- <div class="home-button"><button (click)="goToRegister()" type="submit" class="button-turq-default no-focus btn-save" mat-button>Go To Register</button></div> -->
+      </div>
+      <div class="invitation-accept" *ngIf="acceptInvitation.showLoading">
+        <img src="{{assetsUrl}}/icons/loading.png" loading="lazy" />
+        <p>processing...</p>
+      </div>
+    </div>
+  </main>
+  <app-page-footer footerclass="fixed-footer"></app-page-footer>
+</div>

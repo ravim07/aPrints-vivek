@@ -1,0 +1,140 @@
+<div class="page-admin page-dashboard">
+  <mat-tab-group animationDuration="0ms" disableRipple>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div>Publications</div>
+      </ng-template>
+      <div class="tab-content">
+        <mat-form-field class="status-select float-r">
+          <mat-select placeholder="Status" [formControl]="statusFilter">
+            <mat-option *ngFor="let option of statusList" value="{{option.id}}">{{option.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="float-r">
+          <input matInput [formControl]="searchFilter" placeholder="Search">
+        </mat-form-field>
+        <div class="table-content">
+          <table *ngIf="dataSource" class="table-default" mat-table [dataSource]="dataSource" matSort
+            #TableOneSort="matSort" matSortActive="lastUpdated" matSortDirection="desc" matSortDisableClear>
+
+            <ng-container matColumnDef="publicationName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="pub-name-column"> Publication </th>
+              <td mat-cell *matCellDef="let row"> {{row.publicationName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="pub-name-column"> Issue name</th>
+              <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="deliveryDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="info-column"> Delivery Date </th>
+              <td mat-cell *matCellDef="let row"> {{row.deliveryDate | date:'MM/dd/yyyy'}} </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="organization">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Organization </th>
+              <td mat-cell *matCellDef="let row"> {{row.organization || row.organizationName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+              <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastUpdated">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="info-column"> Updated </th>
+              <td mat-cell *matCellDef="let row"> {{row.lastUpdated | timeAgo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="viewIssue">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="view-column"></th>
+              <td mat-cell *matCellDef="let row" class="link-action">
+                <a (click)="goToIssue(row.id)">view</a>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+        </div>
+        <mat-paginator #paginator [pageSizeOptions]="[25, 50, 75, 100]" showFirstLastButtons></mat-paginator>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div>Invoices</div>
+      </ng-template>
+      <div class="tab-content">
+        <mat-form-field class="status-select float-r">
+          <mat-select placeholder="Status" [formControl]="statusFilter2">
+            <mat-option *ngFor="let option of statusList2" value="{{option.id}}">{{option.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="float-r">
+          <input matInput [formControl]="searchFilter2" placeholder="Search">
+        </mat-form-field>
+        <div class="table-content">
+          <table *ngIf="dataSource2" class="table-default" mat-table [dataSource]="dataSource2" matSort
+            #TableTwoSort="matSort" matSortActive="numberId" matSortDirection="desc" matSortDisableClear>
+
+            <ng-container matColumnDef="numberId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="number-date"> Invoice # </th>
+              <td mat-cell *matCellDef="let row"> {{row.numberId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="publicationName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="pub-name-column"> Publication </th>
+              <td mat-cell *matCellDef="let row"> {{row.publicationName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="issueNumber">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="view-column"> Issue </th>
+              <td mat-cell *matCellDef="let row"> #{{row.issueNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dueDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="number-date"> Due Date </th>
+              <td mat-cell *matCellDef="let row"> {{row.dueDate | date:'MM/dd/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dueStatus">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="number-date"> Status </th>
+              <td mat-cell *matCellDef="let row">
+                <span *ngIf="row.status === 'open'" class="first-capital {{row.dueStatus}}">{{row.dueStatus}}</span>
+                <span *ngIf="row.status === 'paid'" class="first-capital {{row.status}}">{{row.status}}</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalDue">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="number-date"> Total Due </th>
+              <td mat-cell *matCellDef="let row"> ${{row.totalDue}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="viewIssue">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="view-column"></th>
+              <td mat-cell *matCellDef="let row" class="link-action">
+                <a (click)="goToIssue(row.issueId, 'invoice')">view</a>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="downloadInvoice">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="download-column"></th>
+              <td mat-cell *matCellDef="let row" class="link-action">
+                <a (click)="downloadInvoice(row.id)">download</a>
+                <a class="download-pdf-link" #downloadInvoiceLink></a>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;">
+            </tr>
+          </table>
+        </div>
+        <mat-paginator #paginator2 [pageSizeOptions]="[25, 50, 75, 100]" showFirstLastButtons></mat-paginator>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<admin-view-issue [issueId]="selectedIssueId" [showPopup]="showPopupIssue" [selectedTab]="selectedTab"
+  (popupEvent)="onPopupEvent($event)"></admin-view-issue>

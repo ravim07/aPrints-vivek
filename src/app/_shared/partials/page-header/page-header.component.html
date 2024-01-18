@@ -1,0 +1,20 @@
+<header class="header-inner {{headerclass}}">
+  <div class="inner">
+    <div class="logo">
+      <a href="/home"><img class="navbar-brand" src="{{assetsUrl}}/logov2.svg" alt="aPrintis" loading="lazy"/></a>
+    </div>
+    <nav class="nav">
+      <a class="nav-link nav-link-t1 hidden-po" href="/quote">Get a Quote</a>
+      <a class="nav-link nav-link-t1 hidden-po" href="/about">About</a>
+      <a *ngIf="!(isAuthenticated$ | async)" class="nav-link nav-link-t2" (click)="goToLogin()">Login</a>
+      <a *ngIf="(isAuthenticated$ | async) && !isAdmin" class="nav-link nav-link-t2" href="/dashboard">Hi, {{currentUser ? currentUser.name : ''}}</a>
+      <a *ngIf="(isAuthenticated$ | async) && isAdmin" class="nav-link nav-link-t2" href="/admin">Hi, {{currentUser ? currentUser.name : ''}}</a>
+      <!-- <a *ngIf="!(isAuthenticated$ | async)" class="nav-link nav-link-t2" href="/register">Register</a> -->
+      <a *ngIf="(isAuthenticated$ | async)" class="nav-link nav-link-t2" (click)="logout()">Logout</a>
+    </nav>
+  </div>
+</header>
+<!--
+<input [(ngModel)]="textQuery" />
+<app-search-popup [textQuery]="textQuery"></app-search-popup>
+-->

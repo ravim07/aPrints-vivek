@@ -1,0 +1,70 @@
+<button mat-icon-button class="close-dialog" (click)="onCancelClick()" matTooltip="Close this dialog"
+  aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title class="no-bottom-margin smaller">Confirm Print Specs</div>
+  <div *ngIf="!data.noWarning" class="description">
+    You are about to sent to review the PDF uploaded. Please, confirm the print specifications defined in <a>Print
+      Specs</a> page.
+  </div>
+  <div mat-dialog-content>
+    <form [formGroup]="printingPrefsForm">
+      <mat-form-field class="std-padding-infix">
+        <mat-label>Page Size</mat-label>
+        <mat-select formControlName="trim">
+          <mat-option *ngFor="let option of printPrefsOptions.trim" value="{{option.id}}">
+            {{option.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="copies-pages">
+        <mat-form-field class="std-padding-infix half-width">
+          <mat-label>Copies</mat-label>
+          <mat-select formControlName="numberOfCopies">
+            <mat-option *ngFor="let option of printPrefsOptions.numberOfCopies" value="{{option.id}}">
+              {{option.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="std-padding-infix half-width">
+          <mat-label>Number of pages</mat-label>
+          <mat-select formControlName="insidePages">
+            <mat-option *ngFor="let option of printPrefsOptions.insidePages" value="{{option.id}}">
+              {{option.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="mat-form-field std-padding-infix radio-button-group">
+        <label class="group-label">Color</label>
+        <mat-radio-group formControlName="color">
+          <mat-radio-button disableRipple *ngFor="let option of printPrefsOptions.color" value="{{option.id}}">
+            {{option.value}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <mat-form-field class="std-padding-infix">
+        <mat-label>Cover type</mat-label>
+        <mat-select formControlName="cover">
+          <mat-option *ngFor="let option of printPrefsOptions.cover" value="{{option.id}}">
+            {{option.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="std-padding-infix">
+        <mat-label>Binding page</mat-label>
+        <mat-select formControlName="binding">
+          <mat-option *ngFor="let option of printPrefsOptions.binding" value="{{option.id}}">
+            {{option.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="save" (click)="save()" [disabled]="!printingPrefsForm.valid">
+      Confirm
+    </button>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+  </div>
+</div>

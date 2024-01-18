@@ -1,0 +1,112 @@
+<div class="d-flex justify-content-between">
+  <div class="title">
+    <div class="lbl lbl-specs">
+      Shipping Addresses
+      <mat-icon *ngIf="issue.addressIds?.length" class="check-ok">check_circle</mat-icon>
+    </div>
+  </div>
+  <div class="">
+    <button mat-button class="btn-outline-dark mx-1" (click)="addShippingAddress()">Add Shipping Address</button>
+    <button *ngIf="issue.addressIds?.length" mat-button class="btn-outline-dark mx-1"
+            (click)="downloadAddressesInCSV()">Download Shipping Addresses
+    </button>
+  </div>
+</div>
+<div class="container-fluid" *ngIf="dataSource && addresses?.length">
+
+  <table [width]="'100%'"
+         class="table-element table-address" mat-table [dataSource]="dataSource"
+         matSort #tableSort="matSort" matSortActive="addressTo" matSortDirection="asc" matSortDisableClear>
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterSelectionToggle() : null"
+                      [checked]="selectionAddress.hasValue() && addresses.length === selectionAddress.selected.length"
+                      [indeterminate]="selectionAddress.hasValue() && addresses.length !== selectionAddress.selected.length">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selectionAddress.toggle(row.id) : null"
+                      [checked]="selectionAddress.isSelected(row.id)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="addressTo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Address To</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.firstName}}&nbsp;{{row.lastName}}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address1">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Address Line 1</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.address1}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="address2">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Address Line 2</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.address2}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.city}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.state}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="zip">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Zip</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.zip}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.phone}}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="editShippingAddress(row)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteShippingAddress(row.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+  </table>
+
+  <mat-paginator #paginator
+                 *ngIf="addresses?.length > 10"
+                 [pageSizeOptions]="[10, 25, 100]"
+                 [length]="addresses?.length"
+                 [pageSize]="10"
+                 showFirstLastButtons></mat-paginator>
+
+</div>
+<div class="row justify-content-center mt-4">
+  <div class="col-auto">
+    <button
+      *ngIf="addresses?.length && dataSource"
+      [disabled]="!(selectionAddress.changed | async)"
+      mat-button disableRipple class="button-turq-default btn-save no-focus" (click)="save()">Save
+    </button>
+  </div>
+</div>

@@ -1,0 +1,634 @@
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_carousel";
+@import "~scss/_variables";
+
+::ng-deep .video-dialog {
+  margin: 0 auto !important;
+
+  &.mat-dialog-container {
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: #ffffff;
+
+    mat-card {
+      padding: 2.5rem 2rem 3rem;
+    }
+
+    mat-card-header {
+      .mat-card-header-text {
+        margin: 0;
+      }
+    }
+  }
+}
+
+:host {
+  --dark: #292929;
+  --light-dark: #333333;
+  --white: #fff;
+  --yellow: #ffd137;
+  --aqua: #0dd4db;
+
+  @include carousel();
+
+  carousel::ng-deep {
+    .carousel-arrow-prev, .carousel-arrow-next {
+      color: var(--aqua);
+    }
+
+    .carousel-arrow-disabled {
+      display: none;
+    }
+
+    .carousel-dots {
+      cursor: auto;
+    }
+
+    .carousel-cells {
+      transform: translateX(0);
+    }
+
+    @include max-width(960px) {
+      .carousel-dots {
+        bottom: -2rem;
+      }
+    }
+
+    .carousel-arrow-prev {
+      left: 10px !important;
+    }
+
+    .carousel-arrow-next {
+      right: 10px !important;
+    }
+
+    @include min-width(1040px) {
+      .carousel-arrow-prev {
+        left: -2.5rem !important;
+      }
+
+      .carousel-arrow-next {
+        right: -2.5rem !important;
+      }
+    }
+  }
+
+  @include min-width(960px) {
+    app-landing-header::ng-deep {
+      .header-inner {
+        top: 0;
+        position: fixed;
+      }
+    }
+    .top-navbar {
+      position: sticky;
+      top: 4rem;
+    }
+    .main-wrapper {
+      padding-top: 4rem;
+    }
+  }
+
+  .text-warning {
+    color: var(--yellow);
+  }
+
+  .top-navbar {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
+    width: 100%;
+    z-index: 12;
+
+
+    &.is-sticky {
+      //top: 4rem;
+    }
+
+    .nav-item {
+
+      &.active {
+        .nav-link {
+          font-weight: 300;
+        }
+      }
+
+      .nav-link {
+        cursor: pointer;
+        text-decoration: none;
+        @include typography-lvl(0.938rem, 2.33, 600, 'Averta', normal);
+        color: var(--light-dark);
+        padding: 0;
+      }
+    }
+
+    @include min-width(960px) {
+      position: sticky;
+      .nav-item:not(:first-child) {
+        margin-left: 1.875rem;
+      }
+    }
+
+  }
+
+  .main-design {
+    padding-top: 3.125rem;
+  }
+
+  .page-header {
+    margin-top: 3.125rem;
+  }
+
+  .container {
+    @include min-width(1400px) {
+      max-width: 1320px;
+    }
+    @include min-width(1600px) {
+      max-width: 1520px;
+    }
+  }
+
+  .templates-carousel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    //margin-left: -1.25rem;
+    //margin-right: -1.25rem;
+
+    height: 26.438rem;
+    @include min-width(960px) {
+      height: 35rem;
+      margin-left: -1.25rem;
+      margin-right: -1.25rem;
+    }
+
+    @include min-width(1140px) {
+      height: 45.438rem;
+
+    }
+    @include min-width(1400px) {
+      height: 55.438rem;
+    }
+    /*  @include min-width(1600px) {
+        max-width: 1520px;
+      }*/
+  }
+
+  .templates-quantity {
+    @include typography-lvl(1rem, normal, 300, 'Averta', normal);
+    color: var(--light-dark);
+    margin-bottom: 1.562rem;
+  }
+
+  .template-item {
+    //width: 10rem;
+    max-width: 90%;
+    height: auto;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      object-fit: inherit;
+    }
+
+    @include min-width(960px) {
+      height: fit-content;
+      width: auto;
+      max-width: 20%;
+      max-height: 26.5rem;
+      margin: 0 1.25rem;
+      flex-grow: 1;
+
+
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .badge {
+      position: absolute;
+      top: 0.625rem;
+      right: 0.625rem;
+    }
+
+    .buttons {
+      display: none;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    &:hover {
+      img {
+        box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.5);
+        border: solid 0.8px #e1e1e1;
+        background-color: #e1e1e1;
+      }
+
+      .buttons {
+        display: flex;
+      }
+    }
+
+
+    .mat-button {
+      display: block;
+      color: var(--white);
+      margin-bottom: 0.3165rem;
+      width: 10.625rem;
+      max-width: 100%;
+      height: 2.5rem;
+      text-align: center;
+      @include typography-lvl(0.728rem, normal, 600, 'Averta', 0.07px);
+      line-height: 2.5rem;
+      padding: 0;
+    }
+
+  }
+
+  .magazines-templates {
+    margin-top: 3.125rem;
+
+    .nav-link {
+      color: var(--dark);
+      padding: 0 1.625rem 0 1.625rem;
+      border-radius: 3px;
+      text-decoration: none;
+      line-height: 2.5rem;
+      cursor: pointer;
+
+      margin: 0;
+      border: solid 1px var(--black);
+      @include typography-lvl(1em, 2.5rem, 600, 'Averta', normal);
+      text-align: center;
+
+      @include min-width(960px) {
+        margin: 0 0 0 3.187rem;
+      }
+
+      &.active {
+        border: solid 1px var(--dark);
+      }
+    }
+
+    .mat-divider {
+      margin-top: 0.688rem;
+      margin-bottom: 0.812rem;
+    }
+  }
+
+  .section-header {
+    margin: 0 auto;
+    max-width: 100%;
+    text-align: center;
+    @include typography-lvl(1.25rem, normal, 300, 'Averta', normal);
+    color: var(--light-dark);
+
+    .section-title {
+      @include typography-lvl(2.5rem, 1.5, bold, 'Averta', normal);
+      //margin: 0 24rem 0.063rem 24.063rem;
+      margin: 0 auto 1.25rem;
+      //text-align: center;
+      color: var(--dark);
+    }
+  }
+
+  .best-practices {
+    background-color: rgba(#f1fcff, 0.5);
+    padding: 3.25rem 0 2.813rem 0;
+
+    .best-practice {
+      width: 35.438rem;
+      max-width: 100%;
+      margin: 0 auto 2.5rem;
+
+      @include min-width(960px) {
+        display: flex;
+        &:nth-child(odd) {
+          flex-direction: row-reverse;
+        }
+      }
+    }
+
+    .practices-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 2.688rem;
+    }
+
+    .practice-image {
+      width: 13.125rem;
+      height: 16.875rem;
+      //margin: 2.5rem 1.25rem 2.5rem 8.375rem;
+      margin: 0 auto 2.5rem;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .practice-detail {
+      @include min-width(960px) {
+        flex: 1;
+        margin-left: 1.25rem;
+      }
+
+      @include typography-lvl(0.938rem, 1.67, 300, 'Averta', 0.26px);
+      color: var(--light-dark);
+
+      .practice-title {
+        margin: 0;
+        text-align: center;
+        @include typography-lvl(1.25rem, 1.1, bold, 'Averta', 0.35px);
+        @include min-width(960px) {
+          text-align: left;
+        }
+      }
+
+    }
+  }
+
+  .guidelines {
+    margin-top: 4rem;
+    margin-bottom: 6.25rem;
+
+    .section-header {
+      width: 48.688rem;;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+    }
+
+    .guide-item {
+      width: 25.688rem;
+      max-width: 100%;
+      margin-bottom: 2.5rem;
+      @include typography-lvl(1.25rem, 1.1, 300, 'Averta', 0.35px);
+      color: var(--light-dark);
+    }
+
+    .guide-list {
+      margin-top: 3.875rem;
+      margin-bottom: 0.625rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      @include min-width(1140px) {
+        justify-content: space-between;
+      }
+    }
+
+    .guide-item-header {
+      @include typography-lvl(1.25rem, normal, 600, 'Averta', normal);
+      text-align: center;
+
+      h4 {
+        margin: 1.25rem 0 1.375rem;
+      }
+    }
+  }
+
+  .extension-container {
+    display: flex;
+    background-color: var(--dark);
+    color: var(--white);
+    align-items: center;
+
+    padding-top: 2rem;
+
+
+    .section-header {
+      text-align: center;
+      width: 36.563rem;
+      max-width: 100%;
+    }
+
+    @include min-width(760px) {
+      padding-top: 0;
+      .section-header {
+        text-align: left;
+      }
+    }
+
+    .section-header .section-title {
+      color: var(--white);
+    }
+
+    .video-poster {
+      position: relative;
+      margin: 2rem auto 0;
+      @include transition(opacity 200ms ease-in-out);
+      width: 39.375rem;
+      max-width: 100%;
+      @include min-width(1140px) {
+        margin: 0 auto;
+      }
+      @include max-width(960px) {
+        width: 100%;
+        margin-bottom: 0;
+      }
+      @include min-width(960px) {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .video-poster-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      .video-text {
+        position: absolute;
+        color: #FFF;
+        z-index: 999;
+
+        .btn-play {
+          background: transparent;
+          padding: 0;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 4.688rem;
+          opacity: 0.5;
+
+          mat-icon {
+            font-size: 1em;
+            height: auto;
+            width: auto;
+          }
+        }
+
+        .text {
+          @include typography-lvl(1.25rem, normal, normal, 'Averta', normal);
+
+          @include max-width(960px) {
+            font-size: 0.9375rem;
+            line-height: normal;
+          }
+
+          span {
+            font-weight: 400;
+          }
+        }
+      }
+
+      &.show {
+        display: block;
+      }
+
+      .video-details {
+        width: 100%;
+        //height: 3.125rem;
+        @include typography-lvl(1.25rem, normal, 300, 'Averta', 0.35px);
+        color: #ffffff;
+        padding: 0.313rem 0;
+        background-color: var(--dark);
+        margin-bottom: 1.875rem;
+        @include min-width(960px) {
+          padding: 0.313rem 1.563rem 0.625rem 1.563rem;
+          position: absolute;
+          bottom: 0;
+        }
+
+        .title {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .collaboration-steps {
+    margin-top: 6.25rem;
+    margin-bottom: 6.75rem;
+
+    .section-header {
+      width: 46rem;
+    }
+
+    .steps {
+      margin: 3.375rem 0;
+      flex-direction: column;
+
+      @include min-width(960px) {
+        flex-wrap: wrap;
+        flex-direction: row;
+      }
+
+      .step-description {
+        width: 19.063rem;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+    }
+
+    .collaboration-step {
+      text-align: center;
+      @include typography-lvl(1.25rem, normal, 300, 'Averta', normal);
+      margin: 0;
+      margin-bottom: 1.5rem;
+      color: var(--light-dark);
+      @include min-width(960px) {
+        margin: 1.875rem 1.5rem 0 1.563rem;
+      }
+
+      .img-thumbnail {
+        max-width: 95%;
+      }
+    }
+
+    .collaboration-text {
+      margin-bottom: 1.125rem;
+      opacity: 0.5;
+      text-decoration: none;
+      color: var(--light-dark);
+      @include typography-lvl(1.25rem, normal, 300, 'Averta', normal);
+    }
+  }
+
+  .download-button {
+    width: 18.75rem;
+    max-width: 100%;
+    //height: 2.5rem;
+    white-space: inherit;
+    padding: 0.563rem 1.125rem 0.75rem 1.188rem;
+    border-radius: 2px;
+    background-color: var(--aqua);
+    margin: 2.5rem auto 0;
+    @include typography-lvl(0.938rem, normal, 600, 'Averta', 0.09);
+
+    @include min-width(960px) {
+      margin: 2.5rem 0 0;
+    }
+  }
+
+
+  .custom-list-style {
+    list-style: none;
+    position: relative;
+    padding-left: 2rem;
+
+    li {
+      margin-bottom: 0.938rem;
+    }
+
+    li:before {
+      content: "done";
+      color: #0dd4db;
+      font-size: 1.25rem;
+      line-height: 1.1;
+      font-weight: normal;
+      font-family: "Material Icons";
+      letter-spacing: 0.35px;
+      vertical-align: sub;
+      position: absolute;
+      left: 0;
+    }
+  }
+
+
+  .badge {
+    @at-root #{&}-edgy {
+      background-color: #f94f4f;
+    }
+
+    @at-root #{&}-modern {
+      background-color: #ffd137;
+    }
+
+    @at-root #{&}-alternative {
+      background-color: #35af1e;
+    }
+
+    @at-root #{&}-traditional {
+      background-color: #b31ec6;
+    }
+
+    @at-root #{&}-classic {
+      background-color: #333333;
+    }
+  }
+}

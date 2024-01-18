@@ -1,0 +1,38 @@
+<button mat-icon-button class="close-dialog" (click)="onClose()" matTooltip="Close this dialog"
+  aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title class="start-align half-bottom-margin">Ad Rate Sheet</div>
+  <div mat-dialog-content>
+    <div *ngIf="!loading" class="table-header-buttons">
+      <button mat-button disableRipple (click)="addDonationLevel()">Add New Ad Type</button>
+      <div class="form-container">
+        <form [formGroup]="columnsForm" class="form">
+          <span class="num-issues-label">Number of Issues</span>
+          <mat-form-field appeareance="outline" class="number-of-issues">
+            <input matInput formControlName="numberOfColumns" (change)="changeTable()"
+              matTooltip="Change here the maximum number of issues an advertiser can pay in advance">
+            <mat-error *ngIf="columnsForm.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <!-- <button type="submit" mat-button matTooltip="Add/remove columns from the matrix">Change</button> -->
+        </form>
+      </div>
+    </div>
+    <div *ngIf="!loading" class="table-content">
+      <ng2-smart-table #table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+        (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)">
+      </ng2-smart-table>
+    </div>
+  </div>
+  <div mat-dialog-actions class="center">
+    <button mat-button (click)="addSizeType()" disableRipple class="" matTooltip="Adds a new row to the matrix">
+      Add Ad Type
+    </button>
+    <button mat-button class="" (click)="onClose()">Close without saving</button>
+    <button mat-button (click)="saveMatrix()" disableRipple class="save"
+      matTooltip="Save current matrix. If you exit without saving, changes made will be lost">
+      Save Matrix
+    </button>
+  </div>
+</div>

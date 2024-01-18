@@ -1,0 +1,15 @@
+<header class="header-container {{headerclass}}">
+  <div class="inner-container">
+    <div class="logo-container">
+      <app-logo [printisColor]="printisColor"></app-logo>
+    </div>
+    <div class="actions-container">
+      <button *ngIf="!(isAuthenticated$ | async)" mat-button (click)="login()" class="login-action">
+        Already have an account?
+        <span>
+          Login
+        </span>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,27 @@
+@import "../scss/mixins/typography";
+
+.badge {
+
+  color: #ffffff;
+  line-height: 1.313rem;
+  //border-radius: 10px;
+  min-width: 8rem;
+  max-width: 100%;
+  @include typography-lvl(0.75rem, normal, 600, 'Averta', normal);
+
+  &-dark {
+    background-color: #333333;
+  }
+
+  &-purple {
+    background-color: #85478a;
+  }
+
+  &-primary {
+    background-color: #0dd4db;
+  }
+
+  &-danger {
+    background-color: #ffdb62;
+  }
+}

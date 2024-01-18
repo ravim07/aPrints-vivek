@@ -1,0 +1,7 @@
+@import "~scss/mixins/_typography";
+@import "~scss/_variables";
+
+.admin-dashboard {
+  @include typography-lvl(0.8125rem, normal, 400, 'Montserrat', normal);
+  color: $admin-font-color;
+}

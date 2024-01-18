@@ -1,0 +1,47 @@
+@import "~scss/_variables";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+
+:host {
+  z-index: 1000;
+}
+
+.header-container {
+  background: #fff;
+  height: 70px;
+  width: 100%;
+  top: 0;
+  position: sticky;
+  transform: translate3d(0, 0, 0);
+
+  .inner-container {
+    padding: 0px 5%;
+
+    @include for-phone-only {
+      padding: 0px $page-padding-phone;
+    }
+
+    @include flexbox();
+    justify-content: space-between;
+    align-items: center;
+
+    .logo-container {}
+
+    .actions-container {
+      height: 70px;
+
+      .login-action {
+        height: 100%;
+        @include typography-lvl(0.9375rem, normal, normal, 'AvertaLight', normal);
+        color: #292929;
+
+        span {
+          font-family: Montserrat;
+          font-weight: 600;
+          margin-left: 12px;
+        }
+      }
+    }
+  }
+}

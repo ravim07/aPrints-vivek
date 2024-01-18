@@ -1,0 +1,109 @@
+<div *ngIf="!loading" class="main-wrapper wrapper-publication">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="main-publication simple-page">
+    <div class="container-fluid">
+      <div class="row publication-content">
+
+        <div class="col-md-6 col-img"
+             *ngIf="publication?.issuesWithDrafts?.length && isBrowser; else previewDefaultImage">
+          <div class="previews-container">
+            <carousel [arrows]="publication?.issuesWithDrafts.length > 1" [autoplay]="false" [dots]="true" height="100%"
+                      [lightDOM]="true"
+                      [loop]="true"
+                      [cellsToShow]="1" cellWidth="100%">
+              <div class="carousel-cell" *ngFor="let item of publication.issuesWithDrafts">
+                <!--                <div class="custom-custom-carousel-item">-->
+                <div class="publication-preview">
+                  <div class="publication-button">
+                    <button class="button-outline-dark no-focus" (click)="openPdf(item)" mat-button>View PDF
+                    </button>
+                  </div>
+                  <div class="publication-image">
+                    <img src="{{item.coverImage.publicUrl}}" loading="lazy">
+                  </div>
+                </div>
+                <!--                </div>-->
+              </div>
+            </carousel>
+          </div>
+
+        </div>
+        <ng-template #previewDefaultImage>
+          <div class="col-md-6 col-img">
+            <div class="previews-container">
+              <div class="publication-preview">
+                <div class="publication-image">
+                  <img src="{{assetsUrl}}/coming-soon.png" loading="lazy">
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <div class="col-md-6 col-desc">
+          <div class="description-content">
+
+            <div class="">Hi there! Ready to <span class="accent">support</span> an awesome
+              publication?
+            </div>
+
+            <div class="grayed-title">Publication</div>
+
+            <div class="community-info-card">
+              <div class="community-info-card__title">{{publication?.publicationName}}</div>
+              <div class="community-info-card__description">{{publication?.description}}</div>
+
+
+              <div class="from-company" *ngIf="publication?.organization">from
+                <strong>{{publication?.organization}}</strong></div>
+
+              <span class="badge badge-pill badge-warning"># of Issues: {{publication?.publicationIssues?.length}}</span>
+
+            </div>
+
+            <div class="description" *ngIf="communityInfo">
+              <span class="font-weight-bold">{{communityInfo.title}}</span>
+              {{communityInfo.description}}
+            </div>
+
+            <mat-divider></mat-divider>
+
+
+            <div class="collaborate">
+              <p>These are the ways you can contribute</p>
+              <div class="{{publication?.description ? '' : 'btns-mg'}} buttons">
+                <button *ngIf="showSponsorshipBtn" (click)="activate('sponsor')"
+                        class="button-outline-dark no-focus" mat-button>
+                  <mat-icon>star_rate</mat-icon>
+                  Sponsor
+                </button>
+                <button *ngIf="showSubscriptionBtn" (click)="activate('subs')"
+                        class="button-outline-dark no-focus" mat-button>
+                  <mat-icon>contact_mail</mat-icon>
+                  Subscribe
+                </button>
+                <button *ngIf="showAdvertisingBtn" (click)="activate('ads')"
+                        class="button-outline-dark no-focus" mat-button>
+                  <mat-icon>business_center</mat-icon>
+                  Advertise
+                </button>
+                <!-- <button *ngIf="showContributingBtn" (click)="activate('contribute')" class="button-orange button-orange-default no-focus" mat-button>Contribute</button> -->
+              </div>
+            </div>
+
+
+            <div class="publication-contact">
+              Problems to see the content? <a [href]="'mailto:'+ publication?.managingEditorEmail">Contact Managing
+              Editor</a>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <app-page-footer class="footer-publication"></app-page-footer>
+
+</div>

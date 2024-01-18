@@ -1,0 +1,58 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+
+.modal-login {
+  .form {
+    position: relative;
+    .mat-button.button-turq {
+      width: 100%;
+      @include transition(opacity 0.2s ease-in-out);
+    }
+    &.form-inprogress-submit .button-turq {
+      opacity: 0.5;
+    }
+    .input-default.input-s1 {
+      margin-bottom: 0.875rem;
+    }
+    .mat-button.button-social {
+      width: 100%;
+      margin-bottom: 1.125rem;
+      font-size: 1rem;
+      line-height: 1.19rem;
+      &.button-face {
+        padding-left: 7.375rem;
+        .face-icon {
+          left: 5.438rem;
+        }
+      }
+      &.button-google { 
+        padding-left: 8.438rem;
+        .google-icon {
+          left: 6.563rem;
+        }
+      }
+    }
+    .mat-button.button-create {
+      margin-bottom: 0.875rem;
+    }
+    .form-error.form-error-default {
+      margin: 0;
+      position: relative;
+      top: -10px;
+      &.form-error-top {
+        position: absolute;
+        top: -20px;
+      }
+    }
+    .link-forgot {
+      margin: 5px 0;
+      display: inline-block;
+      text-decoration: none;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

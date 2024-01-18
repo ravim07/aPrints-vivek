@@ -1,0 +1,49 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+
+%flexbox-center {
+  @include flexbox();
+  justify-content: center;
+  align-items: center;
+}
+
+.user-menu-container.mat-button {
+  margin-right: 28px;
+
+  .user-menu {
+    @extend %flexbox-center;
+    height: 70px;
+
+    .welcome-text {
+      margin: 0 1rem;
+      @include typography-lvl(0.937rem, normal, 600, 'Montserrat', normal);
+      color: #292929;
+
+      @include max-width(500px) {
+        display: none;
+      }
+    }
+
+    // .profile-img{
+    //   margin: 0 1rem;
+    //   background: #d8d8d8;
+    //   height: 40px;
+    //   width: 40px;
+    //   border-radius: 50%;
+    //   @extend %flexbox-center;
+    //   .person-icon {
+    //     color: rgba($color: #292929, $alpha: 0.5);
+    //     svg {
+    //       fill: rgba($color: #292929, $alpha: 0.5);
+    //     }
+    //   }
+    // }
+  }
+}
+
+
+.user-menu-button {
+  @include typography-lvl(1.062rem, 2.06, normal, 'Averta', normal);
+  color: #333333;
+}

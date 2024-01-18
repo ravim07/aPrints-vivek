@@ -1,0 +1,20 @@
+@import "~scss/mixins/_typography";
+
+button {
+  @include typography-lvl(0.9375rem, normal, 400, 'Montserrat', 0.2px);
+
+  ::ng-deep .mat-icon {
+    color: rgb(168, 167, 168);
+  }
+}
+
+button:not(.mat-menu-item) {
+  margin-left: 0.5rem;
+}
+
+.config-menu {
+  background: #fff;
+  border-radius: 4px;
+  min-width: 106.5px !important;
+  margin: 0;
+}

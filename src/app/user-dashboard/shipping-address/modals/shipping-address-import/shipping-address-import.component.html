@@ -1,0 +1,32 @@
+<button mat-icon-button class="close-dialog" mat-dialog-close="" matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div mat-dialog-title class=" no-bottom-margin">Import Address</div>
+<!--  <div class="text-below-title">Multiple address? <a (click)="addViaCSV()">Import CSV</a></div>-->
+  <div mat-dialog-content>
+    <form >
+      <mat-form-field>
+        <input matInput placeholder="Email">
+      </mat-form-field>
+    </form>
+    <mat-card class="link-container">
+      <mat-form-field class="no-padding-infix" appearance="none">
+        <label>Link</label>
+        <input class="font-smaller" matInput readonly [value]="link">
+        <button mat-icon-button class="copy-icon" (click)="copyUrl()">
+          <mat-icon>
+            content_copy
+          </mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="save" (click)="save()">
+      Invite
+    </button>
+    <button mat-button mat-dialog-close type="button">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+diff --git a/node_modules/@angular/service-worker/ngsw-worker.js b/node_modules/@angular/service-worker/ngsw-worker.js
+index 0d185a8..c13a62a 100644
+--- a/node_modules/@angular/service-worker/ngsw-worker.js
++++ b/node_modules/@angular/service-worker/ngsw-worker.js
+@@ -1925,6 +1925,10 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ 'Content-Type': 'text/plain' }
+          */
+         onFetch(event) {
+             const req = event.request;
++            //PATCH to prevent caching certain kinds of requests
++            // - PUT requests which breaks files upload
++            // - requests with 'Range' header which breaks credentialed video irequests
++            if (req.method==="PUT" || !!req.headers.get('range')) return;
+             const scopeUrl = this.scope.registration.scope;
+             const requestUrlObj = this.adapter.parseUrl(req.url, scopeUrl);
+             if (req.headers.has('ngsw-bypass') || /[?&]ngsw-bypass(?:[=&]|$)/i.test(requestUrlObj.search)) {

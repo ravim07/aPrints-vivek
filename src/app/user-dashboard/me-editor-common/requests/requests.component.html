@@ -1,0 +1,37 @@
+<div [hidden]="loading" class="dash-main-content dash-requests">
+  <h3 class="dash-title">
+    Pending Requests
+  </h3>
+  <div class="dash-content-default">
+    <div class="row">
+      <div class="col-lg-11 table-wrapper">
+        <table class="table-default">
+          <thead>
+            <th>Full Name</th>
+            <th>Publication</th>
+            <th class="th-role">Role</th>
+            <th>Email</th>
+            <th class="hiddenx-xs th-actions"></th>
+          </thead>
+          <tbody *ngIf="requests.length > 0">
+            <tr *ngFor="let request of requests">
+              <td>{{request.userName}}</td>
+              <td>{{request.publicationName}}</td>
+              <td>{{role.getStrRole(request.requestType)}}</td>
+              <td>{{request.email}}</td>
+              <td class="th-actions">
+                <img class="icon-action" (click)="approveRequest(request.id)" src="{{assetsUrl}}/icons/approve.png" />
+                <img class="icon-action" (click)="denyRequest(request.id)" src="{{assetsUrl}}/icons/deny.png" />
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="requests.length == 0">
+            <tr>
+              <td colspan="5" style="text-align: center">No Results</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

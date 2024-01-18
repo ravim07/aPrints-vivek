@@ -1,0 +1,22 @@
+@import "~scss/_variables";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_responsive";
+
+.profile-img {
+  border-radius: 50%;
+  @include flexbox();
+  justify-content: center;
+  align-items: center;
+  @include typography-lvl(1.5rem, normal, 600, 'Averta', normal);
+  text-transform: capitalize;
+
+  img {
+    width: 100%;
+  }
+}
+
+.icon {
+  @include flexbox();
+  justify-content: center;
+}

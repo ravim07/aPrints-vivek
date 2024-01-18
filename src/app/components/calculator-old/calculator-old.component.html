@@ -1,0 +1,48 @@
+<mat-card class="calculator">
+  <mat-card-content>
+    <form [formGroup]="calcForm">
+      <mat-form-field class="input input-row1">
+        <mat-label>Options</mat-label>
+        <mat-select (selectionChange)="setPricing()" disableRipple panelClass="pages-dropdownlist" formControlName="color">
+          <mat-option *ngFor="let color of colorOpts" [value]="color.id">
+            {{ color.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="input input-row1 input-pages">
+        <mat-label>Pages</mat-label>
+        <mat-select (selectionChange)="setPricing()" disableRipple panelClass="pages-dropdownlist" formControlName="numPages">
+          <mat-option *ngFor="let number of numberPages" [value]="number.id">
+            {{ number.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="input input-row1 copies">
+        <mat-label>Copies</mat-label>
+        <mat-select (selectionChange)="setPricing()" disableRipple panelClass="pages-dropdownlist" formControlName="numCopies">
+          <mat-option *ngFor="let number of numberOfCopies" [value]="number.id">
+            {{ number.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="text-right input-row2 input input-total">
+        <mat-label>Total</mat-label>
+        <span class="total accent" matPrefix>$</span>
+        <input matInput formControlName="total" class="text-right total">
+        <span *ngIf="showCustomQuote" class="custom-quote">*</span>
+      </mat-form-field>
+      <mat-form-field class="text-right input-row2 input input-per-copy input-total">
+        <mat-label>Per Copy</mat-label>
+        <span class="per-copy accent" matPrefix>$</span>
+        <input matInput formControlName="perCopy" class="text-right per-copy">
+        <span *ngIf="showCustomQuote" class="custom-quote">*</span>
+      </mat-form-field>
+      <span class="sep"></span>
+    </form>
+  </mat-card-content>
+  <mat-card-footer class="footer">
+    <span *ngIf="showCustomQuote" class="custom-quote">* Custom <a routerLink="/quote">quote</a> can be provided</span>
+    8.5 x 11 in, 70 / 80 # glossy stock<br>
+    Shipping & tax not incl.
+  </mat-card-footer>
+</mat-card>

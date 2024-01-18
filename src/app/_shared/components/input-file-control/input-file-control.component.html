@@ -1,0 +1,11 @@
+<div class="input-default input-s1 click-cursor" (click)="handleClick()">
+  <span *ngIf="placeholder">{{ placeholder }}</span>
+  <input type="file" placeholder="Entry tile" #inputControl (change)="changeHandler($event)"
+    class="input-default input-s1">
+  <mat-icon [ngClass]="{'no-rotate': matIcon}" *ngIf="!showLoading">
+    {{matIcon ? matIcon : 'attachment'}}
+  </mat-icon>
+  <mat-progress-spinner *ngIf="showLoading" class="progress-spinner" color="white" mode="indeterminate" diameter="24"
+    strokeWidth="3">
+  </mat-progress-spinner>
+</div>

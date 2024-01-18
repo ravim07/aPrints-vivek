@@ -1,0 +1,401 @@
+<div class="main-wrapper">
+  <app-landing-header></app-landing-header>
+  <!--  <div #spacer></div>-->
+  <nav appStickybits class="top-navbar navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <!--      <span class="navbar-text">Templates</span>-->
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav m-0">
+          <li class="nav-item" [class.active]="activeSection == '#templates'">
+            <a (pageScrollFinish)="setActiveSection('#templates')"
+               pageScroll href="#templates"
+               class="nav-link ">Templates</a>
+          </li>
+          <!--<li class="nav-item" [class.active]="activeSection == '#bestPractices'">
+            <a (pageScrollFinish)="setActiveSection('#bestPractices')" pageScroll href="#bestPractices"
+               class="nav-link">Best
+              Practices</a>
+          </li>-->
+          <li class="nav-item" [class.active]="activeSection == '#guidelines'">
+            <a pageScroll href="#guidelines"
+               (pageScrollFinish)="setActiveSection('#guidelines')" class="nav-link">Guidelines</a>
+          </li>
+          <li class="nav-item" [class.active]="activeSection == '#adobeExtension'">
+            <a
+              pageScroll href="#adobeExtension"
+              (pageScrollFinish)="setActiveSection('#adobeExtension')" class="nav-link">Adobe InDesign Extension</a>
+          </li>
+          <li class="nav-item" [class.active]="activeSection == '#collaborate'">
+            <a
+              pageScroll href="#collaborate"
+              (pageScrollFinish)="setActiveSection('#collaborate')" class="nav-link">How do communities
+              collaborate?</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main role="main" class="main-design">
+    <div class="page-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <div class="section-header text-center">
+              <h2 class="section-title">Choose a Template to Showcase Your Content</h2>
+
+              <div class="section-text">
+                <p>
+                  Getting started with your magazine is as easy as downloading the design template of your choice from
+                  our extensive library of InDesign templates, importing it into your Adobe InDesign instance, and
+                  customizing it according to your needs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="magazines-templates" id="templates" #templates>
+      <div class="container">
+        <!--
+          <div class="magazines-menu">
+            <div class="nav justify-content-center">
+              <div class="nav-item">
+                <a (click)="filterTemplates('all')"
+                   [class.active]="activeFilter === 'all'" class="nav-link active">All</a></div>
+              <div class="nav-item">
+                <a (click)="filterTemplates('alternative')"
+                   [class.active]="activeFilter === 'alternative'" class="nav-link">Alternative</a></div>
+              <div class="nav-item">
+                <a (click)="filterTemplates('modern')"
+                   [class.active]="activeFilter === 'modern'" class="nav-link">Modern</a></div>
+              <div class="nav-item">
+                <a (click)="filterTemplates('classic')"
+                   [class.active]="activeFilter === 'classic'" class="nav-link">Classic</a></div>
+              <div class="nav-item">
+                <a (click)="filterTemplates('traditional')"
+                   [class.active]="activeFilter === 'traditional'" class="nav-link">Traditional</a></div>
+              <div class="nav-item">
+                <a (click)="filterTemplates('edgy')"
+                   [class.active]="activeFilter === 'edgy'" class="nav-link">Edgy</a></div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+
+          <div class="templates-quantity">
+            <span class="font-weight-bold">{{filteredTemplates?.length}}</span> Templates
+          </div>
+        -->
+        <div class="templates-carousel" #carouselContainer>
+          <carousel [class.d-none]="!isMobile"
+                    #carouselComponentMobile
+                    [lightDOM]="true"
+                    [arrows]="templatesPdfs.length > 1" [autoplay]="false" [dots]="true" height="100%"
+                    [cellsToScroll]="1"
+                    [cellsToShow]="1"
+          >
+            <div class="carousel-cell"
+                 *ngFor="let item of templatesPdfs">
+              <ng-container [ngTemplateOutlet]="carouselItem" [ngTemplateOutletContext]="{item: item}">
+              </ng-container>
+            </div>
+          </carousel>
+          <carousel [class.d-none]="isMobile"
+                    #carouselComponentDesktop
+                    [lightDOM]="true"
+                    [arrows]="templatesPdfs.length > 1" [autoplay]="false" [dots]="true" height="100%"
+                    [cellsToScroll]="1"
+                    [cellsToShow]="1"
+          >
+            <div class="carousel-cell d-flex flex-wrap justify-content-between"
+                 *ngFor="let item of carouselItems">
+              <ng-container
+                *ngFor="let templateItem of item"
+                [ngTemplateOutlet]="carouselItem" [ngTemplateOutletContext]="{item: templateItem}">
+              </ng-container>
+            </div>
+          </carousel>
+        </div>
+      </div>
+    </div>
+
+    <!--    <button (click)="scrollHack()">Scroll</button>-->
+    <!--
+        <div class="best-practices" id="bestPractices" #bestPractices>
+          <div class="container">
+            <div class="section-header">
+              <h2 class="section-title">What makes a great magazine?</h2>
+              <span class="badge badge-pill badge-warning">Best Practices</span>
+            </div>
+
+            <div class="practices-list">
+              <div class="best-practice">
+                <div class="practice-image">
+                  <img src="{{assetsUrl}}/design/pic-best-practice-1.jpg" alt="Best Practice 1">
+                </div>
+                <div class="practice-detail">
+                  <h3 class="practice-title">Best Practices 1</h3>
+                  <ul class="custom-list-style">
+                    <li>Benefit from aPrintis’s volume pricing designed specifically to make it possible for schools.</li>
+                    <li>It is a long established fact that a reader will be distracted by the readable content of a page
+                      when
+                      looking at its layout.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="best-practice">
+                <div class="practice-image">
+                  <img src="{{assetsUrl}}/design/pic-best-practice-2.jpg" alt="Best Practice 1">
+                </div>
+                <div class="practice-detail">
+                  <h3 class="practice-title">Best Practices 2</h3>
+                  <ul class="custom-list-style">
+                    <li>Benefit from aPrintis’s volume pricing designed specifically to make it possible for schools.</li>
+                    <li>It is a long established fact that a reader will be distracted by the readable content of a page
+                      when
+                      looking at its layout.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="best-practice">
+                <div class="practice-image">
+                  <img src="{{assetsUrl}}/design/pic-best-practice-3.jpg" alt="Best Practice 1">
+                </div>
+                <div class="practice-detail">
+                  <h3 class="practice-title">Best Practices 3</h3>
+                  <ul class="custom-list-style">
+                    <li>Benefit from aPrintis’s volume pricing designed specifically to make it possible for schools.</li>
+                    <li>It is a long established fact that a reader will be distracted by the readable content of a page
+                      when
+                      looking at its layout.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="best-practice">
+                <div class="practice-image">
+                  <img src="{{assetsUrl}}/design/pic-best-practice-4.jpg" alt="Best Practice 1">
+                </div>
+                <div class="practice-detail">
+                  <h3 class="practice-title">Best Practices 4</h3>
+                  <ul class="custom-list-style">
+                    <li>Benefit from aPrintis’s volume pricing designed specifically to make it possible for schools.</li>
+                    <li>It is a long established fact that a reader will be distracted by the readable content of a page
+                      when
+                      looking at its layout.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    -->
+
+    <div class="guidelines" id="guidelines" #guidelines>
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Print Ready Submission <span class="text-warning">Guidelines</span></h2>
+          <span>How do you ensure that the PDF that you submit is ready to print? Download guidelines below to do just that ...</span>
+        </div>
+
+        <!--
+                <div class="d-flex guide-list">
+                  <div class="guide-item">
+                    <div class="guide-item-header">
+                      <img src="{{assetsUrl}}/design/icon-text-fonts.svg" alt="Text Font">
+                      <h4>Text & Fonts</h4>
+                    </div>
+
+                    <ul class="custom-list-style">
+                      <li>Finally A Top Secret Way You Can Get Google Adwords Pay Per Clicks Free</li>
+                      <li>Low Cost Advertising</li>
+                      <li>Advertisers Embrace Rich Media Format</li>
+                    </ul>
+                  </div>
+
+                  <div class="guide-item">
+                    <div class="guide-item-header">
+                      <img src="{{assetsUrl}}/design/icon-margins.svg" alt="Text Font">
+                      <h4>Margings & Bleeds</h4>
+                    </div>
+
+                    <ul class="custom-list-style">
+                      <li>Research In Advertising</li>
+                      <li>Truck Side Advertising Isn T It Time</li>
+                      <li>How To Write Better Advertising Copy</li>
+                    </ul>
+                  </div>
+
+                  <div class="guide-item">
+                    <div class="guide-item-header">
+                      <img src="{{assetsUrl}}/design/icon-colors.svg" alt="Text Font">
+                      <h4>Colors</h4>
+                    </div>
+
+                    <ul class="custom-list-style">
+                      <li>Finally A Top Secret Way You Can Get Google Adwords Pay Per Clicks Free</li>
+                      <li>How To Write Better Advertising Copy</li>
+                      <li>Business Cards Does Your Business Information Stick</li>
+                    </ul>
+                  </div>
+
+                  <div class="guide-item">
+                    <div class="guide-item-header">
+                      <img src="{{assetsUrl}}/design/icon-photos-pics.svg" alt="Photos & Pics">
+                      <h4>Photos & Pics</h4>
+                    </div>
+
+                    <ul class="custom-list-style">
+                      <li>Finally A Top Secret Way You Can Get Google Adwords Pay Per Clicks Free</li>
+                      <li>Low Cost Advertising</li>
+                      <li>Advertisers Embrace Rich Media Format</li>
+                    </ul>
+                  </div>
+
+                  <div class="guide-item">
+                    <div class="guide-item-header">
+                      <img src="{{assetsUrl}}/design/icon-resolution.svg" alt="Images Resolution">
+                      <h4>Images Resolution</h4>
+                    </div>
+
+                    <ul class="custom-list-style">
+                      <li>Research In Advertising</li>
+                      <li>Truck Side Advertising Isn T It Time</li>
+                      <li>How To Write Better Advertising Copy</li>
+                    </ul>
+                  </div>
+
+                  <div class="guide-item">
+                    <div class="guide-item-header">
+                      <img src="{{assetsUrl}}/design/icon-exporting-pdf.svg" alt="Exporting to PDF">
+                      <h4>Exporting to PDF</h4>
+                    </div>
+
+                    <ul class="custom-list-style">
+                      <li>Finally A Top Secret Way You Can Get Google Adwords Pay Per Clicks Free</li>
+                      <li>How To Write Better Advertising Copy</li>
+                      <li>Business Cards Does Your Business Information Stick</li>
+                    </ul>
+                  </div>
+                </div>
+        -->
+
+        <div class="text-center">
+          <a mat-button class="button-turq download-button"
+             download
+             target="_blank"
+             href="{{assetsUrl}}/template-pdfs/Print_Ready_PDF_Submission_-_aPrintis.pdf">
+            Download Print Guidelines
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="extension-container" id="adobeExtension" #adobeExtension>
+      <div class="container d-flex align-items-center flex-wrap justify-content-between">
+        <div class="section-header">
+          <div>
+            <img src="{{assetsUrl}}/design/adobe.jpg" alt="">
+            <img src="{{assetsUrl}}/design/indesign.jpg" alt="">
+          </div>
+
+
+          <h2 class="section-title">Create & Collaborate with <span class="text-warning">Adobe InDesign Extension</span>
+          </h2>
+
+          <a mat-button class="button-turq download-button"
+             target="_blank"
+             href="https://exchange.adobe.com/creativecloud.details.101807.html">
+            Download Adobe InDesign Extension
+          </a>
+
+        </div>
+
+        <div class="video-poster">
+          <div class="video-poster-container">
+            <img src="{{assetsUrl}}/design/video-poster.jpg" alt="Collaboration on Content"
+                 loading="lazy" title="Collaboration on Content">
+            <div class="video-text">
+              <button class="btn-play" mat-button (click)="videoPopup()">
+                <mat-icon>play_circle_filled</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="video-details">
+            <div class="title">Collaborating on Content</div>
+            <div class="description">
+              How to crowd source articles from your community
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="collaboration-steps" id="collaborate" #collaborate>
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">How do <span class="text-warning">communities collaborate</span> to create
+            their magazine with
+            aPrintis?</h2>
+          <span class="font-weight-bold">3 easy steps</span> on how we help community members become published authors!
+        </div>
+
+        <div class="steps d-flex justify-content-center justify-content-lg-between">
+
+          <div class="collaboration-step">
+            <img src="{{assetsUrl}}/design/collab-screen-1.png" alt="" class="img-thumbnail">
+            <p class="step-description">Encourage members of your community to submit original articles using our
+              intuitive interface.</p>
+          </div>
+          <div class="collaboration-step">
+            <img src="{{assetsUrl}}/design/collab-screen-2.png" alt="" class="img-thumbnail">
+            <p class="step-description">Import articles with one click into the Adobe InDesign workflow to create the
+              layout.</p>
+          </div>
+          <div class="collaboration-step">
+            <img src="{{assetsUrl}}/design/collab-screen-3.png" alt="" class="img-thumbnail">
+            <p class="step-description">Collaborate with contributors and iterate on the design until it’s perfect!
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center">
+
+          <p><a routerLink="/onboarding" class="collaboration-text">Create your Community Magazine Now!</a></p>
+
+          <a mat-button class="button-turq download-button"
+             target="_blank"
+             href="https://exchange.adobe.com/creativecloud.details.101807.html">Download Adobe InDesign
+            Extension</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+  <app-page-footer></app-page-footer>
+  <app-intercom></app-intercom>
+</div>
+
+<ng-template #carouselItem let-item="item">
+  <div class="template-item {{item.category}}">
+    <!--<span class="badge badge-pill badge-{{item.category}}">
+      {{item.category | titlecase}}
+    </span>-->
+
+    <img [src]="pdfFolder + item.templateImage" alt="" *ngIf="item.templateImage">
+
+    <div class="buttons" *ngIf="item.templateImage">
+      <button (click)="openPdf(item.templatePreview)" mat-button class="button-turq rounded-0">View</button>
+      <a download [href]="pdfFolder + item.templateUrl" mat-button class="button-turq rounded-0" target="_blank">Download</a>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,145 @@
+@import "../../../../../scss/mixins/typography";
+@import "../../../../../scss/mixins/responsive";
+@import "../../../../../scss/variables";
+
+.status-boxes{
+  margin: 2rem -15px 2rem -15px;
+}
+.calc-col{
+  margin: 0 auto;
+}
+.unlinked-pad{
+  padding: 1.5rem 1.875rem !important;
+}
+.unverified-pad{
+  padding: 2.4rem 1.875rem !important;
+}
+.verified-pad{
+  padding: 1.9rem 1.875rem !important;
+}
+.price-calculator {
+  background: #f9f9f9;
+  padding: 1.25rem 1.875rem;
+  @include typography-lvl(0.75rem, normal, 400, 'Montserrat', normal);
+  ul, li {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    list-style: none;
+    padding-bottom: 0.875rem;
+    .print-prefs {
+      float: right;
+      font-size: 14px;
+      width: 100px;
+      display: block;
+    }
+  }
+  span.status{
+    margin-left: 1rem;
+    color: #FFF;
+    border-radius: 0.3125rem;
+    padding: 0.3rem 0.6rem 0.3rem 0.4rem;
+    font-weight: 600;
+  }
+  span.red{
+    background: red;
+  }
+  span.yellow{
+    background: orange;
+  }
+  span.green{
+    background: green;
+  }
+}
+.sp-margin{
+  @include max-width(1000px) {
+    margin: 1rem 2rem;
+  }
+}
+h5.sub-title {
+  @include typography-lvl(0.9375rem, normal, 400, 'Montserrat', normal);
+  margin: 0 0 1.18rem;
+  padding: 0;
+  color: $title-color;
+}
+.price-calculator-wrapper {
+  position: relative;
+  #form-error-shipping {
+    position: absolute;
+  }
+  #txt-custom-quote {
+    position: absolute;
+    @include typography-lvl(0.75rem, 0.875rem, 600, 'Montserrat', normal);
+    top: -20px;
+    a {
+      cursor: pointer;
+      color: $primary-color;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  .price-calculator {
+    background: #f9f9f9;
+    padding: 1.25rem 1.875rem;
+    @include typography-lvl(0.75rem, normal, 400, 'Montserrat', normal);
+    ul, li {
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      list-style: none;
+      padding-bottom: 0.875rem;
+      .amount {
+        float: right;
+        font-size: 14px;
+        width: 80px;
+        display: block;
+        &.discount{
+          color: green !important;
+        }
+      }
+      .link-action {
+        font-size: 0.625rem;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-left: 8px;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+      .input-small {
+        width: 60px;
+        margin-left: 10px;
+      }
+      .btns {
+        margin-left: 10px;
+        .link-action {
+          margin-right: 5px;
+        }
+      }
+      &.total {
+        border-top: 1px solid rgba(151, 151, 151, 0.19);
+        padding: 1.188rem 0 0;
+        .total-txt {
+          font-weight: 600;
+          font-size: 0.75rem;
+        }
+        .amount {
+          color: $primary-color;
+          font-weight: 600;
+          .tax-text {
+            color: #484848;
+            font-weight: 400;
+            font-size: 0.8125rem;
+          }
+        }
+      }
+      &.total-no-border {
+        border-top: none !important;
+      }
+    }
+  }
+}

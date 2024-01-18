@@ -1,0 +1,19 @@
+<button mat-icon-button class="close-dialog" mat-dialog-close matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <div class="dialog-wrapper">
+    <h3 class="dash-title text-center" mat-dialog-title>Password Confirmation</h3>
+    <mat-dialog-content>
+      <p>For security reasons, to be make sensitive changes like changing your email or password, we need to confirm
+        your password.</p>
+      <input type="password" autocomplete="new-password" [(ngModel)]="data.oldPwd" class="input-default input-s1"
+             placeholder="Please enter your current password">
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button class="save" disableRipple [mat-dialog-close]="data.oldPwd" color="primary" mat-button>Submit</button>
+      <!--    <button disableRipple class="button-turq-default" mat-button matDialogClose>Back</button>-->
+    </mat-dialog-actions>
+  </div>
+</div>

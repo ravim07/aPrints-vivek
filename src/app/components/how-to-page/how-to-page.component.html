@@ -1,0 +1,85 @@
+<div class="wrapper">
+  <app-landing-header></app-landing-header>
+
+  <div class="how-container">
+    <section class="text">
+      Self Publishing your Community Magazine
+      <p>
+        Content Collaboration, Fund Raising and More
+      </p>
+    </section>
+
+    <div class="gr">
+      <div class="d1"><img src="{{assetsUrl}}/images/2023/curl-arr.svg" alt=""> </div>
+      <div *ngFor="let video of videoTutorials" [ngClass]="{class:video.cl}">
+        <div class="gr-card"> <img src="{{assetsUrl}}/images/2023/gr-{{video.cl}}.png" alt="">
+          <div class="desc">
+            <h1>{{video.title}}</h1>
+            <p>{{video.description}}</p>
+            <div class="but" [ngStyle]="{background:video.bg, color:video.co}" (click)="videoPopup(video.videoData)">
+              Watch Video</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="gr">
+      <div class="d1"><img src="{{assetsUrl}}/images/2023/curl-arr.svg" alt=""> </div>
+      <div class="d2">
+        <div class="gr-card"> <img src="{{assetsUrl}}/images/2023/gr-c-2.png"alt="">
+          <div class="desc">
+            <h1>Getting Started</h1>
+            <p>How to set up your publication</p>
+            <div class="but" style="background-color:#D87F3D;"  (click)="videoPopup(video.videoData)" >Watch Video</div>
+          </div>
+        </div>
+      </div>
+      <div class="d3">
+        <div class="gr-card"> <img src="{{assetsUrl}}/images/2023/gr-c-3.png"alt="">  <div class="desc">
+            <h1>Forming your Editorial Staff
+            </h1>
+            <p>How to add new members to your editorial staff.</p>
+            <div class="but" style="background: #94C6BA;">Watch Video</div>
+          </div>
+        </div>
+      </div>
+      <div class="d4"><div class="gr-card"> <img src="{{assetsUrl}}/images/2023/gr-c-4.png"alt="">  <div class="desc">
+            <h1>Submitting Articles for Publishing</h1>
+            <p>How to submit articles to the publication.</p>
+            <div class="but" style="background: #E7E0C3;">Watch Video</div>
+          </div>
+        </div>
+      </div>
+      <div class="d5"><div class="gr-card"> <img src="{{assetsUrl}}/images/2023/gr-c-5.png"alt="">  <div class="desc">
+            <h1>Setting up Fund Raising
+            </h1>
+            <p>How to set up fund raising types and levels</p>
+            <div class="but" style="background: #414968;">Watch Video</div>
+          </div>
+        </div>
+      </div>
+      <div class="d6"><div class="gr-card"> <img src="{{assetsUrl}}/images/2023/gr-c-6.png"alt="">  <div class="desc">
+            <h1>Executing Fundraising Drives</h1>
+            <p>How to conduct fund raising drives for your publication
+            </p>
+            <div class="but" style="background: #AD9438;">Watch Video</div>
+          </div>
+        </div>
+      </div>
+    </div>  -->
+  </div>
+
+  <app-intercom></app-intercom>
+  <div class="sect-4">
+    <h1>We are reinventing community publishing</h1>
+    <p>
+      Discover how in the aPrintis blog
+    </p>
+    <button class="go-button"><a href="https://blog.aprintis.com/" target="_blank">Go There Now</a></button>
+  </div>
+  <div class="sect-5">
+  </div>
+
+  <app-page-footer></app-page-footer>
+
+</div>

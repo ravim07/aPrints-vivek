@@ -1,0 +1,326 @@
+@import "~scss/mixins/_utils";
+
+//Button
+.bnt-simple-link {
+  @include typography-lvl(0.75rem, normal, 400, 'Montserrat', normal);
+  color: $link-btn-simple-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.button-lg {
+  @include typography-lvl(1.125rem, 1.375rem, 600, 'Averta', 0.28px);
+  padding: 0.875rem 0px;
+}
+
+.mat-button.shadow {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.mat-button.button-dark-default {
+  @include typography-lvl(0.9375rem, normal, 400, 'Montserrat', 0.2px);
+  background: $dark-button-bg;
+  color: $dark-button-color;
+  padding: 0.8125rem 1.875rem;
+  border-radius: $form-border-radius;
+
+  &.no-focus {
+    .mat-button-focus-overlay, .mat-button-ripple {
+      display: none !important;
+    }
+
+    &:focus,
+    &:hover {
+      background: darken($dark-button-bg, 5%);
+    }
+  }
+}
+
+.mat-button.button-dark-default-disabled {
+  @include typography-lvl(0.9375rem, normal, 400, 'Montserrat', 0.2px);
+  background: $dark-button-bg;
+  color: $dark-button-color;
+  padding: 0.8125rem 1.875rem;
+  border-radius: $form-border-radius;
+  opacity: 0.8;
+
+  &.no-focus {
+    .mat-button-focus-overlay, .mat-button-ripple {
+      display: none !important;
+    }
+
+    &:focus,
+    &:hover {
+      background: darken($dark-button-bg, 5%);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.8;
+    color: $dark-button-color !important;
+
+    &:focus,
+    &:hover {
+      background: $dark-button-bg;
+      color: $dark-button-color;
+    }
+  }
+}
+
+.mat-button.button-orange {
+  background: $secondary-color;
+  color: #FFF;
+  font-size: 1rem;
+  padding: .375rem .75rem;
+  border-radius: $form-border-radius;
+
+  &.no-focus {
+    .mat-button-focus-overlay, .mat-button-ripple {
+      display: none !important;
+    }
+
+    &:focus,
+    &:hover {
+      background: darken($secondary-color, 5%);
+    }
+  }
+}
+
+.mat-button.button-orange-default {
+  @include typography-lvl(0.9375rem, normal, 400, 'Montserrat', 0.2px);
+  background: $secondary-color;
+  color: #FFF;
+  padding: 0.8125rem 1.875rem;
+  border-radius: $form-border-radius;
+
+  &.no-focus {
+    .mat-button-focus-overlay, .mat-button-ripple {
+      display: none !important;
+    }
+
+    &:focus,
+    &:hover {
+      background: darken($secondary-color, 5%);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    color: #FFF;
+
+    &:focus,
+    &:hover {
+      background: $secondary-color;
+    }
+  }
+}
+
+.mat-button.button-progress-default {
+  &:disabled {
+    position: relative;
+    @include typography-lvl(0.9375rem, normal, 400, 'Montserrat', 0.2px);
+    color: #FFF;
+    background-color: lighten($secondary-color, 10%);
+    padding: 0.8125rem 1.875rem;
+    border-radius: $form-border-radius;
+    overflow: hidden;
+    @include transition(width 1s linear);
+
+    .progress {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      width: 0%;
+      background-color: $secondary-color;
+      z-index: 50;
+    }
+
+    span {
+      z-index: 100;
+      display: inline-block;
+      position: relative;
+    }
+  }
+}
+
+.mat-button.button-turq {
+  background: $primary-color;
+  color: #FFF;
+  font-size: 1rem;
+  padding: .375rem .75rem;
+  border-radius: $form-border-radius;
+
+  &.no-focus {
+    @include transition(opacity 0.2s ease-in-out);
+
+    .mat-button-focus-overlay, .mat-button-ripple {
+      display: none !important;
+    }
+
+    &:focus,
+    &:hover {
+      background: darken($primary-color, 5%);
+    }
+  }
+}
+
+.mat-button.button-turq-default {
+  @include typography-lvl(0.9375rem, normal, 400, 'Montserrat', 0.2px);
+  background: $primary-color;
+  color: #FFF;
+  border-radius: $form-button-default-border-radius;
+  padding: 0.8125rem 1.875rem;
+
+  &.no-focus {
+    .mat-button-focus-overlay, .mat-button-ripple {
+      display: none !important;
+    }
+
+    &:focus,
+    &:hover {
+      background: darken($primary-color, 5%);
+    }
+
+    .form-inprogress-submit & {
+      opacity: 0.5;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    color: #FFF;
+
+    &:focus,
+    &:hover {
+      background: $primary-color;
+    }
+  }
+
+  &.btn-save {
+    width: 146px;
+  }
+}
+
+.mat-button.button-turq-rounded-lg {
+  background: $primary-color;
+  @include typography-lvl(0.875rem, normal, 400, 'Montserrat', normal);
+  border-radius: 1.75rem;
+  padding: 0.625rem 0.6875rem;
+}
+
+.mat-button.button-red-default {
+  @include typography-lvl(0.9375rem, normal, 400, 'Montserrat', 0.2px);
+  background: $remove-button-bg;
+  color: #FFF;
+  border-radius: $form-button-default-border-radius;
+  padding: 0.8125rem 1.875rem;
+
+  &.no-focus {
+    .mat-button-focus-overlay, .mat-button-ripple {
+      display: none !important;
+    }
+
+    &:focus,
+    &:hover {
+      background: darken($remove-button-bg, 5%);
+    }
+
+    .form-inprogress-submit & {
+      opacity: 0.5;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    color: #FFF;
+
+    &:focus,
+    &:hover {
+      background: $remove-button-bg;
+    }
+  }
+
+  &.btn-save {
+    width: 146px;
+  }
+}
+
+.mat-button.button-social {
+  width: 49%;
+  color: #FFF;
+  border-radius: $form-border-radius;
+  //padding: 1.063rem 0px;
+  @include typography-lvl(0.75rem, 0.875rem, 400, 'Montserrat', normal);
+  text-align: left;
+
+  .mat-button-wrapper {
+    display: flex;
+  }
+
+  &.button-face {
+    margin-right: 2%;
+    text-align: left;
+    background: #3159B6;
+    padding-left: 3.4rem;
+
+    .face-icon {
+      position: absolute;
+      left: 2.0rem;
+      top: 0.8125rem;
+    }
+  }
+
+  &.button-google {
+    background: #E94C6A;
+    padding-left: 3.6rem;
+
+    .google-icon {
+      position: absolute;
+      left: 1.9rem;
+      top: 0.8125rem;
+    }
+  }
+}
+
+.input-group-btn {
+  position: relative;
+  overflow: hidden;
+  @include flexbox();
+  align-items: center;
+
+  .input-default.input-s1 {
+    margin: 0;
+    padding-right: 95px;
+  }
+
+  span.btn {
+    width: 86px;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #979797;
+    border: 1px solid #979797;
+    height: 100%;
+    color: #FFF;
+    @include typography-lvl(0.9375rem, normal, 400, 'Averta', 0.2px);
+    border-radius: 0 $form-border-radius $form-border-radius 0;
+    cursor: pointer;
+    padding: 12px 5px 0;
+
+    &:hover {
+      background: darken(#979797, 5);
+    }
+  }
+}
+
+.mat-button.btn-outline-dark {
+  border-radius: 2px;
+  border: solid 1px #333333;
+  text-align: center;
+  @include typography-lvl(1rem, 2.5rem, 600, 'Averta', 0.43px);
+}

@@ -1,0 +1,35 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.loading__header__title {
+  @include typography-lvl(1.5rem, 1.5, bold, 'Averta', normal);
+  text-align: center;
+  color: #333333;
+}
+
+.loading__content {
+  // margin-top: 2.5rem;
+}
+
+.loading__content__animation-container {
+  width: 100%;
+  height: 100%;
+  @include flexbox();
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .mat-progress-spinner circle,
+  .mat-spinner circle {
+    stroke: $primary-color;
+  }
+
+  .loading__content__description {
+    margin: 2rem 0 0;
+    opacity: 0.5;
+    @include typography-lvl(1.0625rem, normal, normal, 'AvertaLight', normal);
+    text-align: center;
+    color: #292929;
+  }
+}

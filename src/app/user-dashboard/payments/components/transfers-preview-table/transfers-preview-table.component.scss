@@ -1,0 +1,139 @@
+@import "../../../../../scss/mixins/responsive";
+@import "../../../../../scss/variables";
+@import "../../../../../scss/mixins/typography";
+
+.preview-fundraising {
+  margin: 1rem 0 4rem 0 !important;
+  // margin-bottom: 4rem;
+  div.component-title{
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    div{
+      flex: 1;
+    }
+    div:not(:first-child) > h5.dash-h5{text-align: right;}
+    @include max-width(640px){
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      div{
+        margin: 0.5rem 0;
+      }
+      div:not(:first-child){
+        margin-bottom: 1rem;
+      }
+    }
+  }
+  h5.dash-h5 {
+    padding: 0;
+    margin: 0 0 1rem 0 !important;
+    @include max-width(640px){ margin: 0 !important;}
+    color: $title-color;
+    @include typography-lvl(1.125rem, normal, 400, 'Montserrat', normal);
+    .total, .net-total {
+      span {
+        font-weight: 600;
+        color: $primary-color;
+      }
+    }
+    .net-total{
+      margin-left: 1rem;
+    }
+  }
+  .table-wrapper {
+    padding: 0;
+    table {
+      margin-bottom: 1.5rem;
+    }
+    .th-action {
+      width: 40px;
+    }
+    .th-level {
+      width: 35%;
+      @include max-width(768px) {
+        width: 20%;
+      }
+    }
+    .edit-icon {
+      width: 19px;
+      height: 19px;
+    }
+    .example{
+      color: lightgray;
+    }
+    @include max-width(640px) {
+      table { width: 100%; border-collapse: collapse; border-spacing: 0; }
+
+      th, td { margin: 0; vertical-align: top; }
+      th { text-align: left; }
+
+      table { position: relative; width: 100%; display: flex; justify-content: center; }
+      thead { display: block; float: left;}
+      tbody { display: block; width: auto; position: relative; overflow-x: auto; white-space: nowrap; text-align: start !important; }
+      thead tr { display: block; }
+      th { display: block; text-align: right; padding: 0.875rem 0.5rem !important;}
+      tbody tr { display: inline-block; vertical-align: top; }
+      td { display: block;  text-align: center; font-size: 0.9rem;}
+
+    }
+  }
+  .row-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+      margin-left: 0.75rem;
+    }
+    .bank-status-tag{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span{
+        @include typography-lvl(0.9375rem, normal, 400, 'Montserrat', 0.2px);
+        color: #FFF;
+        border-radius: 0.3125rem;
+        padding: 0.5rem 1rem;
+      }
+      span.bg-verified{
+        background: green;
+      }
+      span.bg-unverified{
+        background: orange;
+      }
+      span.bg-unlinked{
+        background: red;
+      }
+    }
+    @include max-width(768px) {
+      .btn-view-report {
+        width: 100%;
+        margin: 0 0 0.5rem 0;
+      }
+    }
+    @include max-width(480px) {
+      flex-direction: column;
+      button{
+        margin: 0;
+        margin-top: 0.75rem;
+      }
+    }
+  }
+  .total-section{
+    padding: 0;
+    margin: 1.75rem 0 1.75rem 0;
+    color: $title-color;
+    @include typography-lvl(1.125rem, normal, 400, 'Montserrat', normal);
+    .total {
+      float: right;
+      border-radius: 0.3125rem;
+      padding: 0.5rem 1rem;
+      background: #eaeaea;
+      span {
+        font-weight: 600;
+        color: $primary-color;
+      }
+    }
+  }
+}

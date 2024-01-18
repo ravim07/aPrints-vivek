@@ -1,0 +1,178 @@
+<div class="main-container">
+  <app-publication-header [publication]="publication" context="issues" (triggerReload)="onEvent($event)">
+  </app-publication-header>
+  <app-issue-header [publication]="publication" [issue]="issue" [draft]="draft" (triggerReload)="onEvent($event)">
+  </app-issue-header>
+  <mat-sidenav-container class="sidenav-container" [hasBackdrop]="false">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-issue-sidebar [publication]="publication" [issue]="issue">
+      </app-issue-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content [ngClass]="{'sidenav-content': true, 'submission': true,'no-feedback': addEntry}">
+      <div class="editor-container">
+        <div class="header">
+          <div *ngIf="!loading" class="header__left-section">
+            <div class="back-button">
+              <button mat-icon-button (click)="closeEditor()">
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+            </div>
+            <ng-container *ngIf="!articleNameEdit">
+              <div class="article-title">
+                {{contribution.title ? contribution.title : 'New Article'}}
+              </div>
+              <button mat-icon-button (click)="editArticleTitle()">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </ng-container>
+            <ng-container *ngIf="articleNameEdit">
+              <form [formGroup]="articleTitleForm" (ngSubmit)="saveArticleTitle()">
+                <mat-form-field class="article-title-edit">
+                  <mat-label>Enter Article Title</mat-label>
+                  <input matInput #titleInput formControlName="title">
+                  <div matSuffix class="actions">
+                    <button type="submit" mat-icon-button>
+                      <mat-icon>done</mat-icon>
+                    </button>
+                  </div>
+                </mat-form-field>
+              </form>
+            </ng-container>
+          </div>
+
+          <div *ngIf="entry.id" class="header__right-section">
+            <div class="last-updated">{{entry.createdAt | timeAgo}}</div>
+            <div class="version-select">
+              <mat-form-field class="version-select-field" floatLabel="never">
+                <mat-select [(ngModel)]="articleEntry" (selectionChange)="switchVersion($event)">
+                  <mat-option *ngFor="let item of contribution.entries" [value]="item.id">
+                    {{item.versionStr}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="content-form">
+          <ckeditor #editor *ngIf="isBrowser" [editor]="Editor"
+                    [config]="editorConfig"
+                    [(ngModel)]="entry.article" (change)="onChange($event)"
+                    (ready)="onReady($event)">
+          </ckeditor>
+        </div>
+      </div>
+      <mat-toolbar [ngClass]="{'editor-actions': true, 'loading': (uploading | async)}">
+        <ng-container *ngIf="!(uploading | async)">
+          <button mat-button class="save" [disabled]="!canBeSaved" (click)="saveContribution()">
+            {{canBeSaved ? 'Save Article' : 'Saved'}}
+          </button>
+          <button mat-button class="cancel" (click)="closeEditor()">Cancel</button>
+        </ng-container>
+        <div *ngIf="(uploading | async)" class="progress-container">
+          <div class="progress-text">
+            <div *ngIf="showProgress" class="upload-wait">
+              <span *ngIf="(uploadProgress | async) < 100">Uploading assets, please wait...</span>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <mat-progress-bar *ngIf="showProgress && (uploadProgress | async) < 100" mode="determinate"
+                              [value]="uploadProgress | async"></mat-progress-bar>
+          </div>
+        </div>
+      </mat-toolbar>
+    </mat-sidenav-content>
+
+    <mat-sidenav #feedback *ngIf="!addEntry" mode="side" position="end" class="feedback-chat">
+      <div class="feedback-container">
+        <div class="feedback-container__header">
+          <div class="feedback-container__header__title">
+            Latest comments
+          </div>
+          <div class="feedback-container__header__toggle">
+            <button mat-icon-button (click)="feedback.toggle()">
+              <mat-icon>insert_comment</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="feedback-container__content">
+          <div class="feedback-msg-box">
+            <div *ngIf="!loading && contribution.allFeedback.length > 0" class="feedback-msgs">
+              <ng-container *ngFor="let feedback of contribution.allFeedback; trackBy: trackByIdx;">
+                <div class="feedback-msgs__item">
+                  <div class="feedback-msgs__item__content">
+                    <ng-container [ngTemplateOutlet]="userContainer" [ngTemplateOutletContext]="{feedback: feedback}">
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <div *ngIf="loading" class="loading-container">
+              <mat-spinner></mat-spinner>
+              <div class="description">Loading feedback...</div>
+            </div>
+          </div>
+        </div>
+        <div class="feedback-container__footer">
+          <div class="comments-toolbox">
+            <form [formGroup]="feedbackFormGroup" (submit)="addComment()">
+              <div class="form">
+                <mat-form-field class="textarea" appearance="outline" floatLabel="never">
+                  <input matInput formControlName="content" class="textarea-msg">
+                  <!-- <div matSuffix class="attachment">
+                    <app-input-file-control (fileChanged)="inputFileChange($event)" [loading]="sendingImage"
+                      matIcon="attach_file" matTooltip="Upload Image"></app-input-file-control>
+                  </div> -->
+                </mat-form-field>
+                <div class="button">
+                  <button mat-button disableRipple matTooltip="Add Comment"
+                          [ngClass]="{ 'button-turq-default': true, 'sending-text': sendingText}"
+                          [disabled]="sendingText || sendingImage">
+                    <ng-container *ngIf="!sendingText">Submit</ng-container>
+                    <mat-progress-spinner *ngIf="sendingText" class="progress-spinner" color="white"
+                                          mode="indeterminate" diameter="24" strokeWidth="3">
+                    </mat-progress-spinner>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>
+<ng-template #userContainer let-feedback='feedback'>
+  <app-profile-img *ngIf="feedback" [name]="feedback.userData ? feedback.userData.fullName : feedback.name"
+                   [isAdmin]="feedback.isAdmin" size="40" fontSize="20">
+  </app-profile-img>
+  <div class="feedback-msgs__item__content__main">
+    <div class="feedback-msgs__item__content__main__header">
+      <div class="feedback-msgs__item__content__main__header__username">
+        <ng-container *ngIf="!feedback.isAdmin">
+          {{ feedback.userData ? feedback.userData.fullName : feedback.name }}
+        </ng-container>
+        <ng-container *ngIf="feedback.isAdmin">aPrintis</ng-container>
+      </div>
+      <div class="feedback-msgs__item__content__main__header__time-ago">
+        <span *ngIf="feedback.versionStr" class="issue-name">{{feedback.versionStr}}</span>
+        <span *ngIf="feedback.versionStr"> | </span>
+        {{ feedback.dateAdded | timeAgo }}
+      </div>
+    </div>
+    <div class="feedback-msgs__item__content__main__content">
+      {{ feedback.msg }}
+      <a *ngIf="feedback.feedbackFile" class="pdf-link-anchor" href="javascript: void(0)"
+         matTooltip="Download Feedback PDF" (click)="downloadFile(feedback.feedbackFile.url)">
+        <div *ngIf="feedback.feedbackFile" class="feedback-msgs__item__content__main__content__file">
+          <div class="pdf-link-container">
+            <span>View PDF</span> from inDesign
+          </div>
+          <mat-icon>picture_as_pdf</mat-icon>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</ng-template>
+<a class="download-pdf-link" #downloadPdfLink></a>

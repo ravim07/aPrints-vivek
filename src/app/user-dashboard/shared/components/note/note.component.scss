@@ -1,0 +1,16 @@
+@import "~scss/_variables";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/mixins/_responsive";
+
+.note-card{
+  margin: 0.9375rem 0;
+  background: #f9f9f9;
+  .mat-card-title{
+    @include typography-lvl(0.875rem, normal, 600, 'Montserrat', normal);
+  }
+  p{
+    @include typography-lvl(0.75rem, normal, 400, 'Montserrat', normal);
+    text-align: justify;
+  }
+}

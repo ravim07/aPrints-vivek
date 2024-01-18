@@ -1,0 +1,48 @@
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+@import "~scss/_variables";
+@import "~scss/mixins/_utils";
+
+.header-main {
+  @include flexbox();
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.user-menu-panel {
+  margin-top: 0.75rem;
+  // margin-right: 2rem;
+  width: 180px;
+
+  .mat-menu-content {
+    button.mat-menu-item {
+      text-align: center;
+    }
+  }
+}
+
+.header-main-actions {
+  justify-self: flex-end;
+}
+
+.dash-header {
+  // margin: 0.625rem 0rem;
+  height: 70px;
+  width: 100%;
+  @include flexbox();
+  justify-content: space-between;
+  align-items: center;
+
+  .user-actions {
+    @include flexbox();
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 0 2.375rem;
+
+    @include max-width(442px) {
+      margin: 0;
+    }
+  }
+}

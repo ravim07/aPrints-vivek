@@ -1,0 +1,175 @@
+<div class="main-wrapper">
+  <app-landing-header></app-landing-header>
+  <app-intercom></app-intercom>
+  <main role="main" class="container">
+    <div class="dash-main-content dash-create-pub">
+      <h3 class="dash-title">Print Now - Magazines, Newsletters</h3>
+      <div class="form dash-form-layout-default {{formStatusClass}}">
+        <form autocomplete="off" [formGroup]="newPublicationForm" (ngSubmit)="createPublication()">
+          <div class="row row-pub-name">
+            <div class="col-lg-3 form-col">
+              <label for="pub-email" class="lbl-default">Email
+                <span class="req">*</span>
+              </label>
+              <input autocomplete="off" id="pub-email" type="text" formControlName="pub-email" class="input-default input-s1">
+              <div *ngIf="formUtil.checkError(newPublicationForm.get('pub-email'), 'required')"
+                class="form-error form-error-default">Email is required
+              </div>
+            </div>
+            <div class="col-lg-3 form-col">
+              <label for="pub-name" class="lbl-default">Publication Name
+                <span class="req">*</span>
+              </label>
+              <input autocomplete="off" id="pub-name" type="text" formControlName="pub-name" class="input-default input-s1">
+              <div *ngIf="formUtil.checkError(newPublicationForm.get('pub-name'), 'required')"
+                class="form-error form-error-default">Publication Name is required</div>
+            </div>
+            <div class="col-lg-3 form-col">
+              <label class="lbl-default">Delivery date(s)
+                <span class="req">*</span>
+              </label>
+              <app-ctrl-multiple-date-picker [listDates]="pubDates"
+                [showErrorRequired]="formSubmitted && pubDates.length == 0 ? true : false">
+              </app-ctrl-multiple-date-picker>
+            </div>
+          </div>
+          <div class="row row-org-name" formGroupName="mailingAddress">
+            <div class="col-lg-6 form-col">
+              <label class="lbl-default">Organization Name
+                <span class="req">*</span>
+              </label>
+              <input type="text" formControlName="organization" class="input-default input-s1">
+              <div *ngIf="formUtil.checkError(addressGroup.get('organization'), 'required')"
+                class="form-error form-error-default">Organization Name is required</div>
+            </div>
+          </div>
+
+          <div class="row row-description">
+            <div class="col-lg-6 form-col">
+              <label for="pub-name" class="lbl-default">Description</label>
+              <textarea type="text" formControlName="description" class="textarea-default textarea-s1"></textarea>
+            </div>
+          </div>
+
+          <div class="row row-description" formGroupName="printingPreferences">
+            <div class="col-lg-6 form-col form-col-title lbl-default">Print Specifications</div>
+            <div class="col-lg-6 form-col form-col-title form-title-price-calc lbl-default">
+              Price Calculator
+            </div>
+            <div class="col-lg-3 form-col">
+              <mat-form-field class="select-default select-s1">
+                <mat-select formControlName="trim" placeholder="Trim">
+                  <mat-option *ngFor="let option of printingPreferencesOptions.trim" value="{{option.id}}">Trim size:
+                    {{option.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="select-default select-s1">
+                <mat-select formControlName="insidePages" placeholder="Inside Pages">
+                  <mat-option *ngFor="let option of printingPreferencesOptions.insidePages" value="{{option.id}}">Number
+                    of pages: {{option.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!-- <mat-form-field class="select-default select-s1">
+                <mat-select formControlName="numberOfCopies" placeholder="# of Copies">
+                  <mat-option *ngFor="let option of printingPreferencesOptions.numberOfCopies" value="{{option.id}}">
+                    Number of copies: {{option.value}}</mat-option>
+                </mat-select>
+              </mat-form-field> -->
+              <div>
+                <input required type="number" formControlName="numberOfCopies" class="input-default input-s1"
+                  placeholder="# of copies" [matTooltip]="defaultPrintingPreferencesGroup.get('numberOfCopies').value + ' copies'" [matAutocomplete]="autoGroup">
+                <mat-autocomplete #autoGroup="matAutocomplete">
+                  <mat-optgroup class="select-default select-s1">
+                    <mat-option *ngFor="let option of printingPreferencesOptions.numberOfCopies" value="{{option.id}}">{{option.value}} copies</mat-option>
+                  </mat-optgroup>
+                </mat-autocomplete>
+              </div>
+            </div>
+            <div class="col-lg-3 form-col">
+              <mat-form-field class="select-default select-s1">
+                <mat-select formControlName="color" placeholder="Color">
+                  <mat-option *ngFor="let option of printingPreferencesOptions.color" value="{{option.id}}">Color
+                    options: {{option.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="select-default select-s1">
+                <mat-select formControlName="cover" placeholder="Cover">
+                  <mat-option *ngFor="let option of printingPreferencesOptions.cover" value="{{option.id}}">Cover type:
+                    {{option.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="select-default select-s1">
+                <mat-select formControlName="binding" placeholder="Binding">
+                  <mat-option *ngFor="let option of printingPreferencesOptions.binding" value="{{option.id}}">Binding
+                    type: {{option.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="form-col-price-calculator col-lg-4 form-col">
+              <app-price-calculator [numberOfCopies]="defaultPrintingPreferencesGroup.get('numberOfCopies').value"
+                [insidePages]="defaultPrintingPreferencesGroup.get('insidePages').value"
+                [color]="defaultPrintingPreferencesGroup.get('color').value" [zipCode]="addressGroup.get('zip').value">
+              </app-price-calculator>
+            </div>
+          </div>
+
+          <div class="row row-description">
+            <div class="col-lg-12 form-col form-col-title lbl-default">Mailing Address</div>
+          </div>
+
+          <div formGroupName="mailingAddress">
+            <div class="row">
+              <div class="col-lg-3 form-col">
+                <input type="text" formControlName="addressedTo" class="input-default input-s1"
+                  placeholder="Address to">
+              </div>
+              <div class="col-lg-3 form-col">
+                <input type="text" formControlName="phone" class="input-default input-s1" placeholder="Phone">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 form-col">
+                <input type="text" formControlName="address1" class="input-default input-s1" placeholder="Address 1">
+              </div>
+              <div class="col-lg-3 form-col">
+                <input type="text" formControlName="address2" class="input-default input-s1" placeholder="Address 2">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 form-col">
+                <input type="text" formControlName="city" class="input-default input-s1" placeholder="City">
+              </div>
+              <div class="col-lg-3 form-col">
+                <mat-form-field class="select-default select-s1">
+                  <mat-select formControlName="state" placeholder="State">
+                    <mat-option *ngFor="let state of states" value="{{state}}">{{state}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row row-zip">
+              <div class="col-lg-3 form-col">
+                <input type="text" formControlName="zip" class="input-default input-s1" placeholder="Zip">
+                <div *ngIf="formUtil.checkError(addressGroup.get('zip'), 'pattern')"
+                  class="form-error form-error-default">Zip Code is not valid</div>
+              </div>
+            </div>
+          </div>
+          
+          <div *ngIf="errorApi" class="form-error form-error-top form-error-default">
+            <div>
+              This email already exists. If this email is yours, click <a (click)="resetPassword()">here</a> to reset your password.
+            </div>
+          </div>
+
+          <div class="row form-btn">
+            <div class="offset-lg-5 col-lg-7 form-col">
+              <button type="submit" class="button-turq-default no-focus" mat-button>Next</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <app-page-footer></app-page-footer>
+</div>

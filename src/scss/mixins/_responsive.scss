@@ -1,0 +1,84 @@
+@mixin max-height($height) {
+  @media (max-height: $height) {
+    @content;
+  }
+}
+
+@mixin min-height($height) {
+  @media (min-height: $height) {
+    @content;
+  }
+}
+
+@mixin max-width($width) {
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin min-width($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin min-max-height($min, $max) {
+  @media (min-height: $min) and (max-height: $max) {
+    @content;
+  }
+}
+
+@mixin min-max-width($min, $max) {
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin for-phone-only {
+  @include max-width(599px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-only {
+  @include max-width(820px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-portrait-up {
+  @include min-width(600px) {
+    @content;
+  }
+}
+
+@mixin for-min-720 {
+  @include min-width(720px) {
+    @content;
+  }
+}
+
+@mixin for-max-1480 {
+  @include max-width(1480px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-landscape-up {
+  @include min-width(900px) {
+    @content;
+  }
+;
+}
+
+@mixin for-desktop-up {
+  @include min-width(1200px) {
+    @content;
+  }
+}
+
+@mixin for-big-desktop-up {
+  @include min-width(1800px) {
+    @content;
+  }
+}

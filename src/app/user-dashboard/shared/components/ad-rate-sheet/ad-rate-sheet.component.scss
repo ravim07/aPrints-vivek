@@ -1,0 +1,45 @@
+@import "~scss/mixins/_typography";
+
+.flat-dialog-main {
+  .form-container {
+    margin-left: 1rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .num-issues-label {
+        @include typography-lvl(1rem, normal, normal, 'Averta', normal);
+      }
+
+      .number-of-issues {
+        width: 60px !important;
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .table-content {
+    padding: 0 !important;
+    margin-bottom: 1rem;
+  }
+}
+
+.input-default::placeholder {
+  opacity: 0.2;
+}
+
+.ng2-smart-action:last-of-type,
+.ng2-smart-action:last-child {
+  display: block;
+}
+
+table-cell-view-mode {
+  @include typography-lvl(15/16 + rem, normal, normal, 'AvertaLight', normal);
+}

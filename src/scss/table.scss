@@ -1,0 +1,90 @@
+// Table
+.table-default {
+  table-layout: fixed;
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  border-radius: $table-border-radius;
+  overflow: hidden;
+  thead {
+    background: $table-header-bg;
+    th {
+      @include typography-lvl(0.85rem, normal, 600, 'Montserrat', 1px);
+      vertical-align: bottom;
+      text-align: left;
+      color: #FFF;
+      padding: 0.875rem 0;
+      border: none;
+    }
+    .first-col,
+    th {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
+  tbody {
+    tr {
+      background-color: $table-row-bg;
+      &:nth-of-type(odd) {
+        background-color: $table-row-bg-odd;
+      }
+    }
+    td {
+      word-wrap: break-word;
+      white-space: -o-pre-wrap; 
+      white-space: pre-wrap; 
+      white-space: -moz-pre-wrap; 
+      white-space: -pre-wrap; 
+      vertical-align: top;
+      @include typography-lvl(0.6875rem, normal, 400, 'Montserrat', 0.3px);
+      @include max-width(1280px) {
+        font-size: 0.625rem;
+      }
+      color: $table-font-color;
+      padding: 0.875rem 0.5rem;
+      line-height: 1rem;
+      &.link-action {
+        a {
+          cursor: pointer;
+          text-transform: uppercase;
+          font-weight: 600;
+          color: #484848;
+          text-decoration: underline;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+  .first-col {
+    padding-left: 2.4rem;
+    @include max-width(1480px) {
+      padding-left: 0.5rem;
+    }
+  }
+}
+
+// Paginator
+.default-paginator.mat-paginator {
+  @include typography-lvl(0.8125rem, normal, 400, 'Montserrat', normal);
+  .mat-paginator-page-size-select {
+    width: 60px;
+    margin: 0;
+    .mat-form-field-infix {
+      padding: 0.5rem 0.3125rem;
+    }
+  }
+  .mat-paginator-range-actions {
+    width: 230px;
+    @include max-width(768px) {
+      width: auto;
+    }
+  }
+
+  .mat-paginator-page-size {
+    @include max-width(768px) {
+      display: none;
+    }
+  }
+}

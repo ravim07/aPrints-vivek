@@ -1,0 +1,19 @@
+<div class="main-container">
+  <app-publication-header [publication]="publication" context="issues" (triggerReload)="onEvent($event)">
+  </app-publication-header>
+  <app-issue-header [publication]="publication" [issue]="issue" [draft]="draft" (triggerReload)="onEvent($event)">
+  </app-issue-header>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-issue-sidebar [publication]="publication" [issue]="issue">
+      </app-issue-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+<app-upload-file #uploadComponent [issue]="issue" [openDialog]="openDialogUploadFile"
+  (fileUploaderEvent)="onFileUploaderEvent($event)">
+</app-upload-file>

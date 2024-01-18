@@ -1,0 +1,11 @@
+@import "~scss/mixins/_utils";
+
+.mat-dialog-content{
+  text-align: justify;
+  @include flexbox();
+  flex-direction: column;
+}
+.mat-dialog-actions{
+  justify-content: center;
+  margin: 1rem 0 0 0;
+}

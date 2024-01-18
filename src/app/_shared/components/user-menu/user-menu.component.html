@@ -1,0 +1,17 @@
+<button mat-button class="user-menu-container" [matMenuTriggerFor]="menu">
+  <div class="user-menu" matTooltip="Profile" aria-label="Profile">
+    <div class="welcome-text">
+      Hi, {{currentUser ? currentUser.name : ''}}
+    </div>
+    <app-profile-img [name]="currentUser.name" size="40" fontSize="20">
+    </app-profile-img>
+  </div>
+</button>
+<mat-menu #menu="matMenu" xPosition="before" class="user-menu-panel">
+  <button mat-menu-item (click)="popupProfileEdit()">
+    <span class="user-menu-button">Profile</span>
+  </button>
+  <button mat-menu-item (click)="logout()">
+    <span class="user-menu-button">Logout</span>
+  </button>
+</mat-menu>

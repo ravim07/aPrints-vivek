@@ -1,0 +1,14 @@
+<div class="wr-new">
+  <div (click)="right()" class="chev2">
+    ‹
+  </div>
+  <div id="new-slider" class="new-slider">
+    <div *ngFor="let img of rows.main"  class="box-img" [ngStyle]="{'left.px': movement}">
+      <img class="point" src="{{assetsUrl + img}}.png"  (click)="openPdf(img )" alt="magazine cover #{{img}}"
+      loading="lazy" id="cover{{img}}"/>
+    </div>
+  </div>
+  <div (click)="left()" class="chev2" >
+    ›
+  </div>
+</div>

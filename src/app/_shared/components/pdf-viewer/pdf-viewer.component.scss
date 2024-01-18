@@ -1,0 +1,24 @@
+.pdfViewer {
+  height: 80vh;
+}
+
+.modal-default.modal900{
+  @media (max-width: 1000px){
+    margin: 6rem auto;
+  }
+}
+
+.modal-close {
+  @media (max-width: 1000px){
+    z-index: 1 !important;
+    background: rgba(0, 0, 0, 0.3);
+    .close-b {display: none;}
+    .close-w {display: block;}
+  }
+  @media (max-width: 490px){
+    z-index: 1 !important;
+    background: rgba(0, 0, 0, 0.3);
+    .close-b {display: none;}
+    .close-w {display: block;}
+  }
+}

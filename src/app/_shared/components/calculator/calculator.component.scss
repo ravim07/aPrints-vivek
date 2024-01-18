@@ -1,0 +1,366 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.calculator {
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 183px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 3.562rem 3rem 2rem;
+
+  .fields-container {
+    margin: 0 auto;
+
+    @include min-width(768px) {
+      //padding: 0 5rem;
+      padding: 0;
+    }
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .text-right.mat-form-field {
+    text-align: right;
+  }
+
+  .form-container {
+    //flex: 1;
+    margin: 0 auto;
+
+    @include min-width(768px) {
+      max-width: 500px;
+      //max-width: inherit;
+    }
+  }
+
+  form {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    justify-content: space-between;
+  }
+
+  .total-summary {
+    color: #c8c8c8;
+    text-align: left;
+    min-width: 9.188rem;
+    width: 100%;
+    border-radius: 3px;
+    //padding: 1.125rem 0.55rem;
+    padding: 1.125rem 2rem;
+
+    @include min-width(450px) {
+      margin: 0 auto 0.375rem;
+    }
+
+    @include min-width(768px) {
+      padding: 1.125rem 3rem;
+      width: auto;
+    }
+
+    @include min-width(992px) {
+      padding: 1.125rem 0 0;
+      width: auto;
+      max-width: inherit;
+    }
+
+    .total-content {
+      max-width: 250px;
+      margin: 0 auto;
+    }
+
+  }
+
+  .input {
+    @include typography-lvl(0.813rem, 0.813rem, 300, 'Averta', normal);
+    color: #777777;
+    display: block;
+    margin-bottom: 2rem;
+
+    @include min-width(768px) {
+      display: inline-block;
+      max-width: 160px;
+      margin-right: 1.26rem;
+      margin-bottom: inherit;
+    }
+
+    &.input-pages {
+      @include min-width(768px) {
+        max-width: 80px;
+      }
+    }
+
+    .mat-select,
+    input {
+      padding: 0;
+    }
+
+    .mat-form-field-label {
+      color: #777777;
+      opacity: 0.6;
+      @include typography-lvl(1.063rem, normal, 300, 'Averta', normal);
+    }
+
+    .mat-form-field-infix {
+      padding: 0;
+    }
+
+    .mat-select {
+      padding: 0.5rem 0.625rem;
+      margin-bottom: -1rem;
+
+      @include min-width(768px) {
+        padding: 0.5rem 0;
+      }
+
+
+      .mat-select-value {
+        color: #292929;
+        text-align: right;
+        padding-right: 1rem;
+        @include typography-lvl(1.5rem, normal, normal, 'Averta', normal);
+
+        @include min-width(1110px) {
+          text-align: left;
+          color: #c8c8c8;
+          font-size: 3.281rem;
+          font-weight: bold;
+          padding-right: 0;
+        }
+      }
+
+      .mat-select-arrow-wrapper {
+        .mat-select-arrow {
+          color: #333333;
+          border-left-width: 5px;
+          border-right-width: 5px;
+          border-top-width: 8px;
+          margin-top: 2px;
+        }
+      }
+    }
+
+    // &.color{
+    //   font-size: 2.812rem;
+    //   mat-select{
+    //     .mat-select-value{
+    //       font-size: 2.812rem;
+    //     }
+    //   }
+    // }
+    input {
+      @include typography-lvl(2.688rem, 2.688rem, bold, 'Averta', normal);
+      color: #c8c8c8;
+      padding: 0.5rem 0;
+      margin-bottom: -1rem;
+
+      @include max-width(768px) {
+        font-size: 1.563rem;
+      }
+    }
+
+    .mat-input-element.total,
+    .mat-input-element.per-copy {
+      color:black;
+      -webkit-text-fill-color:black;
+      @include typography-lvl(3.125rem, 4rem, 700, 'Averta', normal);
+
+      @include max-width(768px) {
+        font-size: 2.5rem;
+        padding: 0;
+        padding-bottom: 0.5rem;
+      }
+    }
+
+    // .mat-select + span{ top: -13.5px; }
+    .mat-input-element {
+      vertical-align: baseline;
+    }
+
+    .mat-form-field-underline {
+      bottom: -10px;
+    }
+
+    .mat-form-field-wrapper {
+      padding: 0;
+    }
+  }
+
+  .copies {
+    .mat-form-field-wrapper {
+      width: 90%;
+
+      @include max-width(768px) {
+        width: 100%;
+      }
+    }
+  }
+
+  .total.accent,
+  .per-copy.accent {
+    @include typography-lvl(2.25rem, 4rem, 700, 'Averta', normal);
+    color: black;
+
+    @include min-width(960px) {
+      @include typography-lvl(3.25rem, 4rem, 700, 'Averta', normal);
+    }
+  }
+
+  .input-total {
+    position: relative;
+    //min-width: 150px;
+
+    @include min-width(1110px) {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    span.custom-quote {
+      display: none;
+      top: 18px;
+      color: #DC143C;
+      font-size: 2rem;
+      position: absolute;
+      right: -12px;
+    }
+
+
+  }
+
+  .input-per-copy {
+
+    //margin-left: 3.25rem;
+    @include min-width(960px) {
+      margin-left: 0;
+    }
+  }
+
+
+  .input-total {
+    @include min-width(992px) {
+      //margin-top: 0;
+      margin-bottom: 0;
+      margin-right: 1.26rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .label {
+      font-size: 0.8125rem;
+      font-weight: 300;
+      color: #777777;
+      /*@include min-width(768px) {
+        font-size: 13px;
+      }*/
+      font-family: 'Averta';
+    }
+  }
+
+  .input-row2 {
+    @include min-width(768px) {
+      max-width: 144px;
+    }
+
+    .mat-form-field-label-wrapper {
+      margin-left: -1.625rem;
+
+      @include max-width(768px) {
+        margin-left: -1.4rem;
+      }
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+
+    @include max-width(840px) {
+      margin: 2rem 0;
+    }
+  }
+
+  .mat-card-content {
+    margin: 0.75rem 0 !important;
+
+    @include min-width(1110px) {
+      padding: 0 3rem;
+    }
+  }
+
+  .mat-card-title {
+    color: #333333;
+    text-align: center;
+    @include typography-lvl(1.875rem, 1, bold, 'Averta', normal);
+    margin: 2.438rem auto 2.75rem;
+    max-width: 16.25rem;
+
+    .accent {
+      color: #ffd137;
+      font-family: 'AvertaExtraBold';
+    }
+
+    @include min-width(768px) {
+      // padding-top: 1.062rem;
+      padding-left: 3.5%;
+      margin: 0;
+      max-width: inherit;
+      @include typography-lvl(1.25rem, normal, normal, 'Averta', normal);
+    }
+  }
+
+  .footer {
+    @include typography-lvl(0.688rem, 0.8rem, 300, 'Averta', normal);
+    color: #909090;
+    text-align: right;
+    margin: 0;
+    width: fit-content;
+    float: right;
+    margin: 12px 322px 0;
+
+    .custom-quote {
+      color: #DC143C;
+      display: block;
+      font-weight: 600;
+      position: relative;
+      top: -8px;
+
+      a {
+        color: #DC143C;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .divider-container {
+    position: relative;
+    padding: 2.969rem 0;
+  }
+
+  .total-footer {
+    @include typography-lvl(0.813rem, normal, 300, 'Averta', normal);
+
+    @include min-width(768px) {
+      @include typography-lvl(0.688rem, 0.8rem, 300, 'Averta', normal);
+    }
+
+    color: #909090;
+  }
+}
+
+.chose-other-option {
+  margin-top: 1rem;
+
+  a {
+    color: #909090;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,84 @@
+<button mat-icon-button class="close-dialog" (click)="close()"
+        matTooltip="Close this dialog"
+        aria-label="Close this dialog">
+  <mat-icon>close</mat-icon>
+</button>
+<div class="flat-dialog-main">
+  <form [formGroup]="shippingAddressForm" autocomplete="nope">
+    <div mat-dialog-title>
+      <span *ngIf="!editMode">New Shipping Address</span>
+      <span *ngIf="editMode">Update Shipping Address</span>
+    </div>
+    <div mat-dialog-content>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field>
+              <input matInput formControlName="firstName" placeholder="First Name">
+              <mat-error
+                *ngIf="shippingAddressForm.controls.firstName?.invalid">
+                {{getErrorMessage(shippingAddressForm.controls.firstName, 'First Name')}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <mat-form-field>
+              <input matInput formControlName="lastName" placeholder="Last Name">
+              <mat-error
+                *ngIf="shippingAddressForm.controls.lastName?.invalid">
+                {{getErrorMessage(shippingAddressForm.controls.lastName, 'Last Name')}}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-form-field>
+          <input matInput formControlName="phone" placeholder="Phone">
+          <mat-error
+            *ngIf="shippingAddressForm.controls.phone?.invalid">
+            {{getErrorMessage(shippingAddressForm.controls.phone, 'phone number')}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="address1" placeholder="Address 1">
+          <mat-error
+            *ngIf="shippingAddressForm.controls.address1?.invalid">
+            {{getErrorMessage(shippingAddressForm.controls.address1, 'address')}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="address2" placeholder="Address 2">
+          <mat-error
+            *ngIf="shippingAddressForm.controls.address2?.invalid">
+            {{getErrorMessage(shippingAddressForm.controls.address2, 'address')}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput formControlName="city" placeholder="City">
+          <mat-error
+            *ngIf="shippingAddressForm.controls.state?.invalid">
+            {{getErrorMessage(shippingAddressForm.controls.city, 'city name')}}</mat-error>
+        </mat-form-field>
+        <div class="city-zip">
+          <mat-form-field class="half-width">
+            <mat-label>State</mat-label>
+            <mat-select formControlName="state">
+              <mat-option *ngFor="let option of states | async" value="{{option}}">
+                {{option}}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="shippingAddressForm.controls.state?.invalid">{{getErrorMessage(shippingAddressForm.controls.state, 'state')}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="half-width">
+            <input matInput formControlName="zip" placeholder="Zip">
+            <mat-error
+              *ngIf="shippingAddressForm.controls.zip?.invalid">{{getErrorMessage(shippingAddressForm.controls.zip, 'zip number')}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button class="save" (click)="save()" [disabled]="shippingAddressForm.invalid">
+        Save
+      </button>
+      <button mat-button type="button" mat-dialog-close>
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

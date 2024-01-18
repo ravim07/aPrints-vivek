@@ -1,0 +1,84 @@
+<div class="main-container">
+  <app-publication-header [publication]="publication" context="issues" (triggerReload)="onEvent($event)">
+  </app-publication-header>
+  <app-issue-header [publication]="publication" [issue]="issue" [draft]="draft" (triggerReload)="onEvent($event)">
+  </app-issue-header>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav" [disableClose]="true">
+      <app-issue-sidebar [publication]="publication" [issue]="issue">
+      </app-issue-sidebar>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <div class="print-specs">
+        <div class="print-specs__title">Print Specifications</div>
+        <div class="print-specs__form-container">
+          <form [formGroup]="printingPrefsForm">
+            <mat-form-field class="std-padding-infix">
+              <mat-label>Page Size</mat-label>
+              <mat-select formControlName="trim">
+                <mat-option *ngFor="let option of printPrefsOptions.trim" value="{{option.id}}">
+                  {{option.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="std-padding-infix">
+              <mat-label>Copies</mat-label>
+              <!--<mat-select formControlName="numberOfCopies">
+                <mat-option *ngFor="let option of printPrefsOptions.numberOfCopies" value="{{option.id}}">
+                  {{option.value}}</mat-option>
+              </mat-select>-->
+              <input matInput formControlName="numberOfCopies" type="number"/>
+            </mat-form-field>
+            <mat-form-field class="std-padding-infix">
+              <mat-label>Number of pages</mat-label>
+              <mat-select formControlName="insidePages">
+                <mat-option *ngFor="let option of printPrefsOptions.insidePages" value="{{option.id}}">
+                  {{option.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="mat-form-field std-padding-infix radio-button-group">
+              <label class="group-label">Color</label>
+              <mat-radio-group formControlName="color">
+                <mat-radio-button disableRipple *ngFor="let option of printPrefsOptions.color" value="{{option.id}}">
+                  {{option.value}}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <mat-form-field class="std-padding-infix">
+              <mat-label>Cover type</mat-label>
+              <mat-select formControlName="cover">
+                <mat-option *ngFor="let option of printPrefsOptions.cover" value="{{option.id}}">
+                  {{option.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="std-padding-infix">
+              <mat-label>Binding page</mat-label>
+              <mat-select formControlName="binding">
+                <mat-option *ngFor="let option of printPrefsOptions.binding" value="{{option.id}}">
+                  {{option.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+          <div class="actions"
+            [matTooltip]="!canChangePrintSpecs ? 'You cannot change print specs after the draft has been sent for review' : 'Save Specs'">
+            <button mat-button class="save" (click)="save()"
+              [disabled]="!printingPrefsForm.valid || !canChangePrintSpecs">
+              Save
+            </button>
+          </div>
+        </div>
+        <div class="print-specs__calculator-container">
+          <app-price-calculator-new [numberOfCopies]="printingPrefsForm.get('numberOfCopies').value"
+            [insidePages]="printingPrefsForm.get('insidePages').value" [color]="printingPrefsForm.get('color').value"
+            [trim]="printingPrefsForm.get('trim').value" [binding]="printingPrefsForm.get('binding').value"
+            [cover]="printingPrefsForm.get('cover').value">
+          </app-price-calculator-new>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

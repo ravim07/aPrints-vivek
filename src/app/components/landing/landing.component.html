@@ -1,0 +1,513 @@
+<div class="wrapper">
+  <app-landing-header appStickybits></app-landing-header>
+  <app-intercom *ngIf="!isMobile"></app-intercom>
+  <div class="landing">
+    <section class="s1-w">
+      <div class="sect1">
+        <div class="sect1-1">
+          <div class="d1">
+            Stunning community <br>and school magazines <br> at <b>amazing prices</b>
+          </div>
+          <div class="d2">
+            You give us the content, and we’ll publish your magazine <br> with glossy, breathtaking quality.
+          </div>
+          <button class="f-go-button invert g-b d1-gb"> Find Your Price</button>
+          <p class="p2">
+            <b>
+              See examples
+              <a href="#" disabled>here</a>
+            </b>
+          </p>
+        </div>
+        <div class="sect1-2">
+          <img src="{{assetsUrl}}/images/2023/mag1.png" alt="">
+        </div>
+      </div>
+
+      <!--
+        <div class="sect-1-t">
+        <p class="p1">Stunning community and school magazines at <b>amazing prices</b></p>
+        <p class="p2">You give us the content, and we’ll publish your magazine with glossy, breathtaking quality.</p>
+        <button class="go-button invert g-b"> Find Your Price</button>
+        <p class="p2">
+            <b>
+              See examples
+              <a href="#" disabled>here</a>
+            </b>
+        </p>
+      </div>
+      <div>
+        <img src="{{assetsUrl}}/images/2023/mag1.png" alt="">
+      </div> -->
+    </section>
+    <section class="sect2">
+      <div class="f-grid-h">
+        <div class="f-pair">
+          <div class="f-p1"></div>
+          <div class="f-p2 flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h2>1 week delivery print magazines at amazing prices!</h2>
+                <p>Bring your ideas to life.</p>
+              </div>
+              <div class="flip-card-back">
+                <h2 class="b-h2">Benefit from aPrintis’s volume pricing designed specifically to make it possible for
+                  schools and small communities to publish compelling publications.</h2>
+                <button class="go-button transp"><a href="#">Request Pricing</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="f-pair">
+          <div class="f-p3">
+          </div>
+          <div class="f-p4 flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h2>Raise funds from your community in minutes.
+                </h2>
+                <p>Zero cost to you.</p>
+              </div>
+              <div class="flip-card-back">
+                <h2 class="b-h2">You don’t have to solely depend on ads to fund your magazine - your community can
+                  easily fund your magazine through the aPrintis platform.</h2>
+                <button class="go-button transp"><a href="/how-to">Learn More</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="f-pair">
+          <div class="f-p5 ">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h2 class="b-h2">Join thousands of schools and small community publishers like you.</h2>
+                <button class="go-button transp"><a href="/onboarding">Get Started</a></button>
+              </div>
+            </div>
+          </div>
+          <div class="p6"><img src="{{assetsUrl}}/images/2023/pgirl.png" alt=""></div>
+        </div>
+        <div class="f-pair">
+          <div class="f-p7 flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h2>Source content from your community.</h2>
+                <p>Simple tools that make collaboration easy.</p>
+              </div>
+              <div class="flip-card-back">
+                <h2 class="b-h2">Imagine how engaged your community would be if they could contribute articles to the
+                  magazine and be published authors! With aPrintis, they simply submit an article draft and leave the
+                  design to your editorial staff.</h2>
+                <button class="go-button transp"><a href="#">Learn More</a></button>
+              </div>
+            </div>
+          </div>
+          <div class="p8"><img src="{{assetsUrl}}/images/2023/pman.png" alt=""></div>
+        </div>
+      </div>
+
+      <!-- <div class="grid-h">
+        <div class="pair">
+          <div class="p1"></div>
+          <div class="p2 flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <h2>1 week delivery print magazines at amazing prices!</h2>
+                  <p>Bring your ideas to life.</p>
+                </div>
+                <div class="flip-card-back">
+                  <h2 class="b-h2">Benefit from aPrintis’s volume pricing designed specifically to make it possible for schools and small communities to publish compelling publications.</h2>
+                  <button class="go-button transp"><a href="#">Request Pricing</a></button>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="pair">
+          <div class="p3"></div>
+          <div class="p4 flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h2>Raise funds from your community in minutes.
+                </h2>
+                <p>Zero cost to you.</p>
+              </div>
+              <div class="flip-card-back">
+                <h2 class="b-h2">You don’t have to solely depend on ads to fund your magazine - your community can easily fund your magazine through the aPrintis platform.</h2>
+                <button class="go-button transp"><a href="/how-to">Learn More</a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pair">
+          <div class="p5 flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h2>Join thousands of schools and small community publishers like you.
+                </h2>
+
+              </div>
+              <div class="flip-card-back">
+                <h2 class="">Join thousands of schools and small community publishers like you.</h2>
+                <button class="go-button transp"><a href="/onboarding">Get Started</a></button>
+              </div>
+            </div>
+          </div>
+          <div class="p6"><img src="{{assetsUrl}}/images/2023/pgirl.png" alt=""></div>
+        </div>
+        <div class="pair">
+          <div class="p7 flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h2>Source content from your community.</h2>
+                <p>Simple tools that make collaboration easy.</p>
+              </div>
+              <div class="flip-card-back">
+                <h2 class="b-h2">Imagine how engaged your community would be if they could contribute articles to the magazine and be published authors! With aPrintis, they simply submit an article draft and leave the design to your editorial staff.</h2>
+                <button class="go-button transp"><a href="#">Learn More</a></button>
+              </div>
+            </div>
+          </div>
+          <div class="p8"><img src="{{assetsUrl}}/images/2023/pman.png" alt=""></div>
+        </div>
+      </div> -->
+    </section>
+    <section class="sect3">
+      <div class="sect-3-t">
+        <div class="sect-3-box">
+          <div class="s3b1">
+            Stunning quality
+          </div>
+          <div class="s3b2">
+            that you can <b class="b-aft">afford</b>
+          </div>
+        </div>
+
+        <div class="calculator c-calculator">
+          <app-calculator (requestCustomQuote)="router.navigate(['/quote'])"></app-calculator>
+        </div>
+      </div>
+      <div class="mag-stack-calc">
+        <img src="{{assetsUrl}}/images/2023/magstack2.png " alt="">
+      </div>
+    </section>
+
+
+
+    <section class="sect4">
+      <h1 class="s4-t">Need a magazine for your community?</h1>
+      <div class="s4">
+        <div class="s4-c s4-c-1">
+          <h1>High School Communication</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna <b>›</b> </p>
+        </div>
+        <div class="s4-c s4-c-2">
+          <h1>Non Profit
+            Organizations</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna <b>›</b> </p>
+        </div>
+        <div class="s4-c s4-c-3">
+          <h1>Religious Communities</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna <b>›</b> </p>
+        </div>
+        <div class="s4-c s4-c-4">
+          <h1>Business
+            Communication</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna <b>›</b> </p>
+        </div>
+        <div class="s4-c s4-c-5">
+          <h1>Clubs
+            <br>& Activities
+          </h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna <b>›</b> </p>
+        </div>
+        <div class="s4-c s4-c-6">
+          <h1>Regional
+            <br>Communities
+          </h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna <b>›</b></p>
+        </div>
+      </div>
+    </section>
+    <section class="sect5">
+      <div class="text-b">
+        <h1>Much more than just amazing prices for gorgeous print</h1>
+        <p>With aPrintis, the amazing prices at which you can print magazines or newsletters that make your community
+          stand out is just the beginning!
+          You can also raise funds for your magazine, get your community to directly engage with the magazine by
+          contributing articles as well as promote your magazine to your community - right from within the platform!</p>
+      </div>
+    </section>
+    <section class="sect6">
+      <section class="sect6-m">
+        <div class="fix-steps">
+          <p>New to magazine creation?</p>
+          <h1>4 simple steps to create one today</h1>
+          <img src="{{assetsUrl}}/images/2023/fix-steps.png" alt="">
+          <div class="step-t">
+            <div>
+              Log in and enter publication specs.
+            </div>
+            <div>
+              Add/invite editors, contributors and sponsors.
+            </div>
+            <div>
+              Use aPrintis templates or own design to create PDF from your preferred graphics software.
+            </div>
+            <div>
+              Upload PDF and send to print after aPrintis review.
+            </div>
+          </div>
+        </div>
+        <!-- <div class="steps">
+
+            <div class="step step1">
+              <img src="{{assetsUrl}}/images/2023/step1.png" alt="">
+              <div>
+                <h3>Log in and enter publication specs.</h3>
+              </div>
+            </div>
+            <div class="step step2">
+
+              <img class="hand" src="{{assetsUrl}}/images/2023/step2.png" alt="">
+              <div>
+                <h3>Add/invite editors, contributors and sponsors.
+                </h3>
+              </div>
+            </div>
+            <div class="step step3">
+
+              <img class="mag" src="{{assetsUrl}}/images/2023/step3.png" alt="">
+              <div>
+                <h3>Use aPrintis templates or own design to create PDF from your preferred graphics software.
+                </h3>
+              </div>
+            </div>
+            <div class="step step4">
+
+              <img class="plane" src="{{assetsUrl}}/images/2023/plane.png" alt="">
+              <div>
+                <h3>Upload PDF and send to print after aPrintis review.
+                </h3>
+              </div>
+            </div>
+          </div> -->
+        <div class="fix-but">
+          <button class="f-go-button invert"> <a href="/onboarding">Start Now</a> </button>
+          <button class="f-go-button"> <a href="/quote">Get a quote</a></button>
+        </div>
+      </section>
+
+    </section>
+    <section class="sect7">
+       <div class="s7-t">
+        <h1>
+          Creative expressions from all across the country
+        </h1> 
+          <p>
+            Click on a cover to take a look inside.. 
+          </p>
+        </div>
+      <section class="hero-section d-none d-lg-block">
+        <app-hero-v2 #heroComp [sections]="sections" (clickedCover)="openPdf($event)"></app-hero-v2>
+      </section>
+      <section class="hero-section d-lg-none">
+        <app-hero-mobile #heroComp [sections]="sections" (clickedCover)="openPdf($event)"></app-hero-mobile>
+      </section>
+  
+
+    </section>
+    <section class="sect8">
+      <div class="s8-1">
+        <div class="v-t-1">
+          <h1>
+            Why a printed magazine?
+          </h1>
+          <p>
+            Click to hear from High School students about
+          </p>
+          <b>
+            why school magazines are so awesome!
+          </b>
+        </div>
+        <div class="v-t-2">
+          <ul>
+            <li>
+              <p>
+                Get a breather from intense competition online
+              </p>
+            </li>
+            <li>
+              <p>
+                Enjoy full attention of your reader
+              </p>
+            </li>
+            <li>
+              <p>
+                Make your school or community stand out!
+              </p>
+            </li>
+            <li>
+              <p>
+                Share effectively within your community
+              </p>
+            </li>
+            <li>
+              <p>
+                Enjoy as keepsakes for years
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <svg class="currArrow2" xmlns="http://www.w3.org/2000/svg" width="370" height="340" viewBox="0 0 376 338"
+        fill="none">
+        <path
+          d="M374 322L352.5 336.5M374 322L352.5 306M374 322C194 327.538 115.654 225.009 190.5 183C236 157.462 264.26 168.5 273 183C281.74 197.5 265.354 228.441 230.5 243C112 292.5 24.5188 143.351 103.744 96.9072C135.5 78.2913 164.842 74.3329 178.59 98.7878C192.339 123.243 164.446 151.558 140.961 163.635C94.7196 187.415 40.343 166.663 14.1295 131.59C-12.0839 96.5172 3.16917 40.8099 65.9235 1.63744"
+          stroke="black" stroke-width="2" />
+      </svg>
+      <section class="video">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="video-poster">
+                <div class="video-poster-container">
+                  <img src="{{assetsUrl}}/images/2023/laptop.png" alt="aPrintis Youtube video" loading="lazy"
+                    title="aPrintis Youtube video">
+                  <!-- <img src="{{ assetsUrl }}/how-to/video-poster.jpg" alt="aPrintis Youtube video" loading="lazy"
+                    title="aPrintis Youtube video" /> -->
+                  <div class="video-text">
+                    <button class="btn-play d-lg-none" (click)="videoPopup()" mat-button>
+                      <mat-icon>play_circle_outline</mat-icon>
+                      Watch Video
+                    </button>
+                    <button class="btn-play d-none d-lg-block" (click)="videoPopup()" mat-button>
+                      <mat-icon>play_circle_filled</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </section>
+
+    <section class="sect9">
+
+
+      <div class="photo-and-reviews-container fix-box-sizing d-lg-flex align-items-lg-center">
+
+        <div class="reviews-container">
+          <div class="p-0">
+            <div class="reviews">
+              <div class="reviews-shadow-title">Our clients love their magazine</div>
+              <app-carousel #reviewCarousel [delay]="reviewDelay" [autoInit]="false">
+                <ng-container *ngFor="let item of reviews$ | async">
+                  <ng-container *appCarouselItem>
+                    <div class="carousel-item">
+                      <div class="carousel-item-quote-open">
+                        <p class="op-Q">
+                          “
+                        </p>
+                        <!-- <img class="d-lg-none" src="{{ assetsUrl }}/quote-sm-open-dark.svg" alt='"' loading="lazy"
+                        title="" />
+                      <img class="d-none d-lg-block" src="{{ assetsUrl }}/quote-open-dark.svg" alt='"' loading="lazy"
+                        title="" /> -->
+                      </div>
+                      <div class="carousel-item-comment" (click)="popup(item)"
+                        [innerHTML]="item.comment | truncateText: 180:283"></div>
+                      <div class="carousel-item-quote-close">
+                        <img class="d-lg-none" src="{{ assetsUrl }}/quote-sm-close-dark.svg" alt='"' loading="lazy"
+                          title="" />
+                        <img class="d-none d-lg-block" src="{{ assetsUrl }}/quote-close-dark.svg" alt='"' loading="lazy"
+                          title="" />
+                      </div>
+                      <span class="carousel-item-footer">
+                        <strong>{{ item.fullname }} |</strong>
+                        {{ item.profession }} at {{ item.organization }} ,
+                        {{ item.location }}</span>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </app-carousel>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+    <section class="sect10">
+      <div class="sect-4">
+        <h1 class="sh1">We are reinventing community publishing</h1>
+        <p class="sp">Discover how in the aPrintis blog</p>
+        <button class="go-button"><a href="https://blog.aprintis.com/" target="_blank">Go There Now</a></button>
+      </div>
+      <div class="sect-5">
+
+      </div>
+    </section>
+  </div>
+  <app-page-footer></app-page-footer>
+  <!--<app-new-pdf-viewer *ngIf="isBrowser && showPopupPdfViewer"
+                      [lightBox]="true"
+                      [showPopup]="showPopupPdfViewer"
+                      (viewerEvent)="onPdfViewerPopupEvent($event)"
+                      (closePopupEvent)="showPopupPdfViewer = false"
+                      [pdfDocument]="{downloadUrl: clickedCover, fileUrl: clickedCover}"></app-new-pdf-viewer>-->
+</div>
+
+<ng-template #carouselItem let-item="item" let-width="width">
+  <ng-container *ngIf="item.type === 'basic'" [ngTemplateOutlet]="basicTopBanner"
+    [ngTemplateOutletContext]="{item: item, width: width}">
+  </ng-container>
+  <ng-container *ngIf="item.type === 'composite'" [ngTemplateOutlet]="compositeTopBanner"
+    [ngTemplateOutletContext]="{item: item, width: width}">
+  </ng-container>
+</ng-template>
+
+<ng-template #basicTopBanner let-item="item" let-width="width">
+  <div class="basic-box" [ngStyle]="{'width.px': width}">
+    <div class="left-image">
+      <img src="{{ item.image }}" alt="Top image" loading="lazy" />
+    </div>
+    <div class="right-text" [ngStyle]="{
+        'background-image':
+          width <= 992 ? 'url(' + item.image + ')' : ''
+      }">
+      <span class="section-text">
+        {{ item.caption }}
+      </span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #compositeTopBanner let-item="item" let-width="width">
+  <div class="basic-box" [ngStyle]="{'width.px': width}">
+    <div class="left-text" [ngStyle]="{
+        'background-image':
+          width <= 992 ? 'url(' + item.image + ')' : ''
+      }">
+      <div class="caption-box">
+        <div class="icon">
+          <img src="{{item.icon}}" alt="Icon">
+        </div>
+        <div class="caption">
+          {{ item.caption }}
+        </div>
+        <div class="small-caption">
+          <span>{{ item.smallCaption.accented }}</span> {{item.smallCaption.normal}}
+        </div>
+      </div>
+    </div>
+    <div class="right-image">
+      <img src="{{ item.image }}" alt="Top image" loading="lazy" />
+    </div>

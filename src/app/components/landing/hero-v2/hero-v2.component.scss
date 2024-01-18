@@ -1,0 +1,207 @@
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+$item-width: 210px;
+$item-height: 270px;
+
+$item-mobile-width: 141.33px;
+$item-mobile-height: 182.01px;
+
+@keyframes moveSlideshow {
+  0% {
+    @include transform(translate3d(0, 0, 0));
+  }
+  100% {
+    @include transform(translate3d(-50%, 0, 0));
+  }
+}
+
+@keyframes moveSlideshowReverse {
+  0% {
+    @include transform(translate3d(0, 0, 0));
+  }
+  100% {
+    @include transform(translate3d(50%, 0, 0));
+  }
+}
+
+.hero-comp {
+  position: relative;
+
+  .hero-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-row {
+    position: relative;
+    @include flexbox();
+    width: 100%;
+    overflow: hidden;
+
+    .hero-row-container {
+      width: 100%;
+      @include flexbox();
+    }
+
+    .hero-row-animation {
+      animation: moveSlideshow 32s linear 3s;
+    }
+
+    .box-img {
+      overflow: hidden;
+      flex: 0 0 $item-width;
+      width: $item-width;
+      height: $item-height;
+      @include max-width(840px) {
+        flex: 0 0 $item-mobile-width;
+        width: $item-mobile-width;
+        height: $item-mobile-height;
+      }
+
+      img {
+        width: 100%;
+        height: inherit;
+
+        &:not(.hide) {
+          @include transition(all 0.2s linear);
+          cursor: pointer;
+        }
+
+        // @include max-width(500px) {
+        //   opacity: 0;
+        // }
+
+      }
+
+      img.hide {
+        opacity: 0;
+      }
+
+      &:hover {
+        img:not(.hide) {
+          @include transform(scale(1.1, 1.1));
+        }
+      }
+    }
+
+  }
+
+  .hero-text {
+    text-align: center;
+    overflow: hidden;
+    background: #FFF;
+    padding: 2.5rem;
+    @include flexbox();
+    align-items: center;
+    justify-content: center;
+    @include max-width(840px) {
+      height: calc(#{$item-mobile-height} * 3);
+    }
+    @include max-width(500px) {
+      height: calc(#{$item-mobile-height} * 2);
+      top: $item-mobile-height;
+      width: 100%;
+    }
+
+    @include min-width(840px) {
+      position: absolute;
+      top: 0;
+    }
+
+    .inner-container {
+      width: fit-content;
+      @include flexbox();
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      .grayed-title {
+        @include typography-lvl(0.9375rem, auto, 200, 'Averta', normal);
+      }
+
+      .main-title {
+        margin: 0 0 1.438rem;
+        @include typography-lvl(1.75rem, 1.75rem, 300, 'Montserrat', normal);
+        text-align: center;
+        max-width: 28rem;
+
+        .accent {
+          color: #ffd137;
+          font-weight: 800;
+        }
+
+        .bold {
+          font-weight: bold;
+        }
+
+        @include max-width(600px) {
+          font-size: 2rem;
+        }
+      }
+
+      .call-to-action {
+        width: 100%
+      }
+
+      .nav-get-started {
+        padding: 0.75rem 2rem;
+        border-radius: 3px;
+        background-color: #0dd4db;
+        color: #ffffff;
+        @include typography-lvl(0.938rem, normal, 600, 'Averta', 0.09px);
+        text-align: center;
+        width: 13.313rem;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+.new-slider{
+  display: flex;
+  width: 42em;
+  overflow:scroll;
+  justify-content: space-between;
+  *{
+    margin: 0 5px;
+  } 
+}
+.new-slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.new-slider {
+  
+  .box-img{
+    position: relative;
+    left: 1em;
+  }
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.wr-new{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chev2{
+  font-size: 80px;
+  color:#AD9438;
+  cursor: pointer;
+  margin-top: -32px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}   
+.point{
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */}
+.box-img{
+  transition: all 0.5s;
+}

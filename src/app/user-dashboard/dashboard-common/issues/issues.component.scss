@@ -1,0 +1,93 @@
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_utils";
+@import "~scss/_variables";
+
+.main-container {
+  .content {
+    .table-content.issues-table {
+      overflow: auto;
+      max-height: calc(100vh - 290px);
+
+      .table-element {
+
+        .total {
+          min-width: 145px;
+          max-width: 145px;
+        }
+
+        .issues-name {
+          width: auto;
+          min-width: 355px;
+          padding-left: 1.4rem;
+        }
+
+        .menu-column {
+          width: 64px;
+        }
+
+        th.public_url {
+          .mat-sort-header-container {
+            justify-content: center;
+          }
+        }
+
+        td {
+          height: 128px;
+
+          &.total {
+            text-align: right;
+            padding-right: 2.5rem;
+          }
+
+          &.creation-date {
+            color: #616161;
+          }
+
+          &.issues-status-td {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 0.9375rem;
+            letter-spacing: 0.26px;
+            color: #616161;
+
+            .status-container {
+              @include flexbox();
+              justify-content: center;
+              align-items: center;
+              height: 30px;
+              border-radius: 21.5px;
+              background-color: rgba(255, 209, 55, 0.1);
+              width: fit-content;
+              padding: 0 1rem;
+            }
+          }
+
+          &.public_url {
+            .btn-outline-dark {
+              //padding: 0.375rem 0.875rem 0.25rem 0.688rem;
+              border-radius: 2px;
+              line-height: 1.875rem;
+
+              font-size: 0.938rem;
+              font-weight: 600;
+              letter-spacing: 0.4px;
+              text-align: center;
+              color: #292929;
+
+              .mat-button-wrapper {
+                display: flex;
+                align-items: center;
+
+                .mat-icon {
+                  font-size: 1.25rem;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

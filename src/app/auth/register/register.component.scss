@@ -1,0 +1,211 @@
+@import "~scss/_variables";
+@import "~scss/mixins/_typography";
+@import "~scss/mixins/_responsive";
+@import "~scss/mixins/_utils";
+
+.cover-container {
+  margin: 0px auto;
+  width: 100% !important;
+  height: 100% !important;
+  flex-direction: column !important;
+  @include flexbox();
+  box-sizing: border-box;
+  *, ::after, ::before {
+      box-sizing: border-box;
+  }
+  .main-p {
+      width: 50%;
+      float: left;
+      height: 90.5vh;
+      @include for-tablet-only {
+        width: 100%;
+        float: none;
+      }
+      &.main-left {
+        @include flexbox();
+        justify-content: center;
+        align-items: center; 
+        @include for-tablet-only {
+          display: none !important;
+        }
+        .content-text {
+          text-align: center;
+          @include typography-lvl(1.5rem, 2rem, 400, 'Montserrat', normal);
+          strong {
+            @include typography-lvl(1.5rem, 2rem, 600, 'Montserrat', normal);
+          }
+          .context-text-title{
+            padding: 0 2.5rem;
+          }
+          .sep {
+            height: 3px;	
+            width: 102px;	
+            background-color: $primary-color;
+            margin: 12px auto;
+          }
+          // .img {
+          //   max-width: 73%;
+          // }
+          .reviews{
+            @include flexbox();
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            // background: linear-gradient(0.25turn, $primary-color, #1352c1);
+            color: black;
+            padding: 3.5rem 0.5rem;
+            .carousel-item{
+              padding: 0 1rem;
+              width: 40vw;
+              text-align: justify;
+              // text-align: center;
+              @include typography-lvl(1.2rem, 1.5, normal, 'Montserrat', 0.2px);
+              @include max-width(1110px) {
+                font-size: 1rem;
+              }
+              @include max-width(640px) {
+                font-size: 1rem;
+              }        
+              .carousel-item-quote-open{
+                display: inline-block;
+                padding-right: 10px;
+              }
+              .carousel-item-quote-close{
+                display: inline-block;
+                padding-left: 10px;
+              }
+              .carousel-item-footer{
+                display: block;
+                @include typography-lvl(1rem, 1.5, 300, 'Montserrat', 0.1px);
+                padding-top: 1.2rem;
+                @include max-width(1110px) { font-size: 0.9rem; }
+                @include max-width(640px) { font-size: 0.7rem; }
+              }
+            }
+          }
+        }
+        & .col-img {
+          flex: 0 0 250px;
+          max-width: 250px;
+          .button-orange-default,
+          .button-progress-default,
+          .button-dark-default-disabled {
+            width: 100%;
+            margin: 0.6875rem 0 0.5625rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            &.pdf-viewer{
+              top: 30%;
+              @include max-width(1400px){top: 25%;}
+              @include max-width(992px){top: 40%;}
+              @include max-width(480px){top: 35%;}
+            }
+          }
+          .link {
+            text-align: center;
+            a {
+              display: inline-block;
+              margin-bottom: 0.5rem;
+              @include max-width(992px) {
+                display: block;
+              }
+            }
+          }
+          .pdf-placeholder{
+            text-align: center;
+            span{
+              position: relative;
+              top: 75%;
+              color: lightgray;
+              @include typography-lvl(0.6875rem, normal, 400, 'Montserrat', normal);
+            }
+          }
+          .preview-desc{
+            font-size: 1rem;
+            line-height: 1.3rem;
+            font-weight: 400;
+            font-family: "Montserrat";
+            letter-spacing: normal;
+            text-align: center;
+          }
+          .pdf-preview{
+            min-height: unset;
+          }
+        }
+      }
+      &.main-right {
+        background: $primary-color-bg;
+        @include flexbox();
+        justify-content: center;
+        align-items: center; 
+        .invitation-intro {
+          @include typography-lvl(1rem, 1.3rem, 400, 'Montserrat', normal);
+          color: #FFF;
+          text-align: center;
+        }
+        .link-login {
+          margin-top: 0.25rem;
+          color: #FFF;
+          @include typography-lvl(0.8125rem, normal, 400, 'Montserrat', normal);
+          a {
+            color: #FFF;
+            text-decoration: underline;
+            cursor: pointer;
+            &:hover {
+              text-decoration: none;
+            }
+          }
+        }
+        .content-form {
+          @include for-tablet-only {
+            margin-top: 0;
+            &.from-invitation {
+              margin-top: 0;
+            }
+          }
+          @include for-phone-only {
+            margin-top: 0;
+            &.from-invitation {
+              margin-top: 0;
+            }
+          }
+          .form {
+            width: 35%;
+            margin: 0px auto;
+            position: relative;
+            min-width: 270px;
+            @include for-tablet-only {
+              width: 40%;
+              max-width: 320px;
+            }
+            @include for-phone-only {
+              width: 85%;
+            }
+            .form-error-default {
+              margin-top: 0rem;
+              position: relative;
+              top: -7px;
+              &.form-error-top {
+                position: absolute;
+                top: -30px;
+              }
+            }
+            &.form-inprogress-submit .button-orange {
+              opacity: 0.8;
+            }
+          }
+          .input-default {
+            border: none;
+          }
+          .button-orange {
+            width: 100%;
+            @include transition(opacity 0.2s ease-in-out);
+          }
+          .form-text-default {
+            color: #FFF;
+          }
+        }
+      }
+  }
+}
